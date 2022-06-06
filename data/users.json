@@ -1,0 +1,23 @@
+[
+  {
+    "_id": {
+      "$oid": "628385eb1dc6fa1a0cd84c38"
+    },
+    "username": "admin",
+    "password": "sha256$hGe8OvjC6l0bHtkt$a50768939de35723798e1b1c6b66d532a3075da58c7fb8dee9893366b09e613f"
+  },
+  {
+    "_id": {
+      "$oid": "628387db1dc6fa1a0cd84c42"
+    },
+    "username": "admin2",
+    "password": "sha256$fEMbnLtKqUeO7eN5$999a6ca28430c020829819e50146e319f68ed069e2813bfe2585c40eef015962"
+  },
+  {
+    "_id": {
+      "$oid": "628398901dc6fa1a0cd84c4a"
+    },
+    "username": "admin3",
+    "password": "sha256$CvH02Ps6VPr5spSS$6485604a1abdb3d86144678854df4a245dc5935f6f0b6691b6076aa243b32fa4"
+  }
+]
