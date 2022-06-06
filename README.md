@@ -1,6 +1,6 @@
-# A simple python template
+# A simple file storage console
 
-My python template
+A safety file storage (basic)
 
 <table>
   <tr>
@@ -21,12 +21,42 @@ python -m venv .venv
 
 ### 1.2. Activate environment:
 
+Windows:
+
 ```console
 .venv\Scripts\activate
+```
+
+Linux:
+
+```bash
+source .venv/bin/activate
 ```
 
 ### 1.3. Install libs:
 
 ```console
 pip install -r requirements.txt
+```
+
+### 1.4. Export PYTHONPATH (Important):
+
+Change directory to project folder:
+
+Windows:
+
+```console
+set PYTHONPATH=%cd%
+```
+
+Linux:
+
+```bash
+export PYTHONPATH=$(pwd)
+```
+
+## 2. Start app:
+
+```console
+python main.py
 ```
