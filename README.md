@@ -13,33 +13,21 @@ A safety file storage (basic)
 
 ## 1. Installation:
 
-### 1.1. Install environment:
+> NOTE: Requires `poetry` installed. [Guide](https://python-poetry.org/docs/master/#installation)
 
-```console
-python -m venv .venv
-```
-
-### 1.2. Activate environment:
-
-Windows:
-
-```console
-.venv\Scripts\activate
-```
-
-Linux:
+### 1.1. Install dependencies:
 
 ```bash
-source .venv/bin/activate
+poetry install
 ```
 
-### 1.3. Install libs:
+### 1.2. Activate virtual environment:
 
-```console
-pip install -r requirements.txt
+```bash
+poetry shell
 ```
 
-### 1.4. Export PYTHONPATH (Important):
+### 1.3. Export PYTHONPATH (Important):
 
 Change directory to project folder:
 
@@ -57,6 +45,14 @@ export PYTHONPATH=$(pwd)
 
 ## 2. Start app:
 
+> NOTE: Run in virtual environment
+
 ```console
-python main.py
+python app.py
+```
+
+OR
+
+```console
+poe dev
 ```

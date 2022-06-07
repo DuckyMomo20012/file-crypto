@@ -1,5 +1,0 @@
-environs==9.5.0
-mongoengine==0.24.1
-pymongo[srv]==4.1.1
-requests==2.27.1
-textual==0.1.18
