@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "file-crypto"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+
+[tool.poe.tasks]
+dev = "python app.py"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+environs = "^9.5.0"
+mongoengine = "^0.24.1"
+requests = "^2.27.1"
+textual = "^0.1.18"
+pymongo = {extras = ["srv"], version = "^4.1.1"}
+
+[tool.poetry.dev-dependencies]
+poethepoet = "^0.13.1"
+black = {version = "^22.3.0", allow-prereleases = true}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
