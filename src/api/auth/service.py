@@ -1,4 +1,4 @@
-from src.auth.model import User
+from schema import User
 
 
 def getOneUser(username):
