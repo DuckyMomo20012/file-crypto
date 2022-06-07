@@ -7,7 +7,7 @@ from textual.widget import Widget
 from rich.panel import Panel
 import json
 
-from src.auth.service import getOneUser
+from src.api.auth.service import getOneUser
 
 
 env = Env()
