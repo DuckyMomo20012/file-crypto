@@ -8,7 +8,7 @@ authors = ["Your Name <you@example.com>"]
 dev = "python app.py"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 environs = "^9.5.0"
 mongoengine = "^0.24.1"
 requests = "^2.27.1"
