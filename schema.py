@@ -1,7 +1,4 @@
-from ctypes import sizeof
-import email
 import mongoengine as me
-from requests import session
 
 
 class User(me.Document):
@@ -18,7 +15,7 @@ class User(me.Document):
 class FileCrypto(me.Document):
     name = me.StringField()
     path = me.StringField()
-    content = me.BinaryField()
+    content = me.FileField()
     size = me.IntField()
     sessionKey = me.StringField()
     meta = {"collection": "files"}
@@ -26,13 +23,13 @@ class FileCrypto(me.Document):
 class SignedFile(me.Document):
     name = me.StringField()
     path = me.StringField()
-    content = me.BinaryField()
+    content = me.FileField()
     size = me.IntField()
-    meta = {"collection": "filesignatures"}
+    meta = {"collection": "signed_files"}
 
 class SignFile(me.Document):
     name = me.StringField()
     path = me.StringField()
-    content = me.BinaryField()
+    content = me.FileField()
     size = me.IntField()
-    meta = {"collection": "signfiles"}
+    meta = {"collection": "sign_files"}
