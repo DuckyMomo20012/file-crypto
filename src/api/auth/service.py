@@ -1,8 +1,8 @@
 from schema import User
 
 
-def getOneUser(username):
-    return User.objects(username=username).first()
+def getOneUser(email):
+    return User.objects(email=email).first()
 
 def getAllUsers():
     return User.objects()
@@ -12,8 +12,8 @@ def addUser(email, name, dateOfBirth, phone, address, password, publicKey, priva
     user.save()
     return user
 
-def updateUser(username, email, name, dateOfBirth, phone, address, password, publicKey, privateKey):
-    user = User.objects(username=username).first()
+def updateUser(email, name, dateOfBirth, phone, address, password, publicKey, privateKey):
+    user = User.objects(email=email).first()
     user.email = email
     user.name = name
     user.dateOfBirth = dateOfBirth
@@ -25,8 +25,8 @@ def updateUser(username, email, name, dateOfBirth, phone, address, password, pub
     user.save()
     return user
 
-def updatePassword(username, password):
-    user = User.objects(username=username).first()
+def updatePassword(email, password):
+    user = User.objects(email=emial).first()
     user.password = password
     user.save()
     return user
