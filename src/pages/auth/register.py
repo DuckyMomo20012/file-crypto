@@ -1,33 +1,53 @@
 import pytermgui as ptg
+from src.helpers.index import switchPage
 
 
-def Register(manager: ptg.WindowManager) -> ptg.Window:
+def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
+    modal.close()
+    switchPage(window, window.manager.routes["login"]())
+
+
+def Register() -> ptg.Window:
 
     emailField = ptg.InputField()
     passwordField = ptg.InputField()
+    passwordField.styles["value"] = "invisible"
     confirmPasswordField = ptg.InputField()
-
-    print(emailField.chars)
+    confirmPasswordField.styles["value"] = "invisible"
 
     def handleSubmitClick() -> None:
 
         # TODO: Implement register logic
+        # TODO: Validate email, password and confirm password
         email = emailField.value
         password = passwordField.value
         confirmPassword = confirmPasswordField.value
 
         if password == confirmPassword:
-            alertModal = manager.alert(
+            alertModal = window.manager.alert(
                 "Register successful!",
-                ptg.Button("OK", lambda *_: manager.remove(alertModal)),
+                ptg.Button(
+                    "OK", lambda *_: handleSuccessModalClose(window, alertModal)
+                ),
             )
         else:
-            alertModal = manager.alert(
+            alertModal = window.manager.alert(
                 "Register failed!",
-                ptg.Button("OK", lambda *_: manager.remove(alertModal)),
+                ptg.Button("OK", lambda *_: alertModal.close()),
             )
 
     window = ptg.Window(
+        "",
+        ptg.Splitter(
+            ptg.Label("Already have an account?", size_policy=ptg.SizePolicy.STATIC),
+            ptg.Button(
+                "Sign in",
+                lambda *_: switchPage(window, window.manager.routes["login"]()),
+                parent_align=ptg.HorizontalAlignment.LEFT,
+            ),
+            chars={"separator": " "},
+            parent_align=ptg.HorizontalAlignment.CENTER,
+        ),
         "",
         ptg.Label("Email", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(emailField),
@@ -43,4 +63,9 @@ def Register(manager: ptg.WindowManager) -> ptg.Window:
     window.vertical_align = ptg.VerticalAlignment.TOP
     window.center()
 
-    return window
+    return {
+        "layout": None,
+        "windows": [
+            {"window": window, "assign": ""},
+        ],
+    }
