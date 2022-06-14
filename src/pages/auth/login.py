@@ -62,9 +62,10 @@ def Login() -> ptg.Window:
     )
 
     window.set_title(title="Login")
-    window.overflow = ptg.Overflow.SCROLL
+    window.overflow = ptg.Overflow.RESIZE
     window.vertical_align = ptg.VerticalAlignment.TOP
     window.center()
+    window.is_noresize = True
 
     return {
         "layout": None,

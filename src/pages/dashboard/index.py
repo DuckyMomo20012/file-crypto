@@ -20,32 +20,10 @@ def getFiles():
     }
 
 
-# TODO: Implement upload logic
-def uploadFile(window, modal, filePathField):
-    window.manager.toast(f"Uploading {filePathField}...")
-    # Open file from filePathField and upload it to the server
-
-    modal.close()
-
-
 def DashBoard() -> None:
     def handleUploadClick():
 
-        filePathField = ptg.InputField()
-
-        # TODO: Move this to a page
-        uploadModal = navBar.manager.alert(
-            "File path",
-            ptg.Container(filePathField),
-            ptg.Splitter(
-                ptg.Button("Cancel", lambda *_: uploadModal.close()),
-                ptg.Button(
-                    "Upload",
-                    lambda *_: uploadFile(navBar, uploadModal, filePathField.value),
-                ),
-            ),
-            is_noresize=True,
-        )
+        drawWindow(navBar.manager, navBar.manager.routes["dashboard/upload_file"]())
 
     files = getFiles()
 

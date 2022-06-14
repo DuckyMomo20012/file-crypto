@@ -39,11 +39,12 @@ def ChangePassword():
 
         else:
             alertModal = window.manager.alert(
-                "Old password is incorrect or new password is invalid!",
+                ptg.Label(
+                    "Old password is incorrect or new password is invalid!",
+                    size_policy=ptg.SizePolicy.STATIC,
+                ),
                 ptg.Button("OK", lambda *_: alertModal.close()),
             )
-
-        pass
 
     window = ptg.Window(
         "",
@@ -64,6 +65,7 @@ def ChangePassword():
     )
 
     window.set_title(title="Change password")
+    window.overflow = ptg.Overflow.RESIZE
     window.center()
     window.is_noresize = True
     window.is_modal = True
