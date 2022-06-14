@@ -46,7 +46,7 @@ def Login() -> ptg.Window:
             ),
             ptg.Button(
                 "Sign up",
-                lambda *_: switchPage(window, window.manager.routes["register"]()),
+                lambda *_: switchPage(window, window.manager.routes["auth/register"]()),
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
             chars={"separator": " "},
@@ -57,6 +57,7 @@ def Login() -> ptg.Window:
         ptg.Container(emailField),
         ptg.Label("Password", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(passwordField),
+        "",
         ptg.Button("Login", lambda *_: handleSubmitClick()),
     )
 

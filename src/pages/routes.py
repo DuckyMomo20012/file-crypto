@@ -1,10 +1,12 @@
-import src.pages.auth.login as login
-import src.pages.auth.register as register
-import src.pages.dashboard.index as dashboard
+from src.pages.auth import *
+from src.pages.dashboard import *
 
 
 routes = {
-    "login": login.Login,
-    "register": register.Register,
-    "dashboard": dashboard.DashBoard,
+    "auth/login": Login,
+    "auth/register": Register,
+    "auth/logout": Logout,
+    "dashboard": DashBoard,
+    "dashboard/settings": Settings,
+    "dashboard/settings/change_password": ChangePassword,
 }

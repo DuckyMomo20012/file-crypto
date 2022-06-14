@@ -2,6 +2,8 @@ import pytermgui as ptg
 
 from src.components.layouts.AppShell import AppShell
 
+from src.helpers.index import drawWindow
+
 # TODO: Implement this function to fetch data from the database and return
 # format like this
 # NOTE: Any suggestions for a better way to do this?
@@ -20,9 +22,9 @@ def getFiles():
 
 # TODO: Implement upload logic
 def uploadFile(window, modal, filePathField):
+    window.manager.toast(f"Uploading {filePathField}...")
     # Open file from filePathField and upload it to the server
 
-    window.manager.toast(f"Uploading {filePathField}...")
     modal.close()
 
 
@@ -31,6 +33,7 @@ def DashBoard() -> None:
 
         filePathField = ptg.InputField()
 
+        # TODO: Move this to a page
         uploadModal = navBar.manager.alert(
             "File path",
             ptg.Container(filePathField),
@@ -49,7 +52,6 @@ def DashBoard() -> None:
     header = ptg.Window(
         "Dashboard",
         box="EMPTY",
-        is_persistant=True,
     )
 
     body = ptg.Window("Empty body")
@@ -85,10 +87,22 @@ def DashBoard() -> None:
     navBar.is_noresize = True
     navBar.vertical_align = ptg.VerticalAlignment.TOP
     navBar.overflow = ptg.Overflow.SCROLL
+
+    hamburger = ptg.Window(
+        ptg.Button(
+            "⚙️ ",
+            lambda *_: drawWindow(
+                hamburger.manager, hamburger.manager.routes["dashboard/settings"]()
+            ),
+        ),
+        box="EMPTY",
+    )
+
     return {
         "layout": AppShell(),
         "windows": [
             {"window": header, "assign": "header"},
+            {"window": hamburger, "assign": "hamburger"},
             {"window": body, "assign": "body"},
             {"window": navBar, "assign": "nav_bar"},
         ],

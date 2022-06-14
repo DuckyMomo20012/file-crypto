@@ -11,7 +11,10 @@ with ptg.WindowManager() as manager:
 
     manager.routes = routes
 
+    # Add navigation history stack
+    manager.navigation = []
+
     # drawWindow(manager, manager.routes["dashboard"]())
-    drawWindow(manager, manager.routes["login"]())
+    drawWindow(manager, manager.routes["auth/login"]())
 
     manager.run()
