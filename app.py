@@ -16,7 +16,8 @@ env.read_env()
 
 connect(host=env.str("MONGODB_HOST"))
 
-user = getOneUser(username="admin")
+user = getOneUser(email="admin")
+
 # print(json.loads(user.to_json()))
 
 
@@ -26,7 +27,7 @@ class Hover(Widget):
 
     def render(self) -> Panel:
         return Panel(
-            f"Hello user: [b]{user.username}[/b]",
+            f"Hello user: [b]{user.email}[/b]",
             style=("on blue" if self.mouse_over else ""),
         )
 
