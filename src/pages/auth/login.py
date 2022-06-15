@@ -4,7 +4,7 @@ from src.helpers.index import switchPage
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
     modal.close()
-    switchPage(window, window.manager.routes["dashboard"]())
+    switchPage(window.manager, window.manager.routes["dashboard"]())
 
 
 def Login() -> ptg.Window:
@@ -46,7 +46,9 @@ def Login() -> ptg.Window:
             ),
             ptg.Button(
                 "Sign up",
-                lambda *_: switchPage(window, window.manager.routes["auth/register"]()),
+                lambda *_: switchPage(
+                    window.manager, window.manager.routes["auth/register"]()
+                ),
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
             chars={"separator": " "},

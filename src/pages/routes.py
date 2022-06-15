@@ -10,4 +10,5 @@ routes = {
     "dashboard/settings": Settings,
     "dashboard/settings/change_password": ChangePassword,
     "dashboard/upload_file": UploadFile,
+    "dashboard/file_preview": FilePreview,
 }

@@ -1,6 +1,6 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage, clearNavigation, drawWindow
+from src.helpers.index import goToPrevPage, clearNavigation, drawPage
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
@@ -8,7 +8,7 @@ def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
 
     window.manager.toast("Logging out...")
     clearNavigation(window.manager)
-    drawWindow(window.manager, window.manager.routes["auth/login"]())
+    drawPage(window.manager, window.manager.routes["auth/login"]())
 
 
 def ChangePassword():

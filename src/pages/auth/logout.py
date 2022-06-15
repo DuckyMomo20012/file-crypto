@@ -1,6 +1,6 @@
 import pytermgui as ptg
 
-from src.helpers.index import clearNavigation, drawWindow, goToPrevPage
+from src.helpers.index import clearNavigation, drawPage, goToPrevPage
 
 
 def Logout():
@@ -9,7 +9,7 @@ def Logout():
         # TODO: Implement logout logic
 
         clearNavigation(window.manager)
-        drawWindow(window.manager, window.manager.routes["auth/login"]())
+        drawPage(window.manager, window.manager.routes["auth/login"]())
 
     window = ptg.Window(
         "",

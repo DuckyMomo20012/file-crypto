@@ -1,8 +1,9 @@
 import pytermgui as ptg
 
-from src.components.layouts.AppShell import AppShell
+from functools import partial
 
-from src.helpers.index import drawWindow
+from src.components.layouts.AppShell import AppShell
+from src.helpers.index import drawPage, exitApp, switchCurrPageWindowSlot
 
 # TODO: Implement this function to fetch data from the database and return
 # format like this
@@ -13,17 +14,42 @@ def getFiles():
     # DD-MM-YYYY, with a "-" or "/" as a separator
     return {
         "2020-01-01": ["file1", "file2", "file3"],
-        "2020-01-02": ["file1", "file2", "file3"],
-        "2020-01-03": ["file1", "file2", "file3"],
-        "2020-01-04": ["file1", "file2", "file3"],
-        "2020-01-05": ["file1", "file2", "file3"],
+        "2020-01-02": ["file4", "file5", "file6"],
+        "2020-01-03": ["file7", "file8", "file9"],
+        "2020-01-04": ["file10", "file11", "file12"],
+        "2020-01-05": ["file13", "file14", "file15"],
     }
 
 
 def DashBoard() -> None:
+    # from app import manager as super_manager
+
     def handleUploadClick():
 
-        drawWindow(navBar.manager, navBar.manager.routes["dashboard/upload_file"]())
+        drawPage(navBar.manager, navBar.manager.routes["dashboard/upload_file"]())
+
+    # NOTE: A little hack to bind the fileName to the switchCurrPageWindowSlot
+    # function and to avoid late binding problem, otherwise we will ONLY get the
+    # last fileName in the list. E.g: file3, file6, file9,...
+    def handleButtonClick(*args, fileName):
+
+        return switchCurrPageWindowSlot(
+            manager=navBar.manager,
+            currAssign=("body"),
+            newWindow=navBar.manager.routes["dashboard/file_preview"](fileName),
+        )
+
+    def handleExitClick():
+
+        exitModal = exitBar.manager.alert(
+            "",
+            "Do you really want to logout?",
+            "",
+            ptg.Splitter(
+                ptg.Button("Yes", lambda *_: exitApp(hamburger.manager)),
+                ptg.Button("No", lambda *_: exitModal.close()),
+            ),
+        )
 
     files = getFiles()
 
@@ -48,8 +74,9 @@ def DashBoard() -> None:
             ptg.Collapsible(
                 dates,
                 *[
-                    ptg.Label(
-                        fileName, parent_align=ptg.HorizontalAlignment.LEFT, padding=1
+                    ptg.Button(
+                        label=fileName,
+                        onclick=partial(handleButtonClick, fileName=fileName),
                     )
                     for fileName in files[dates]
                 ],
@@ -69,9 +96,17 @@ def DashBoard() -> None:
     hamburger = ptg.Window(
         ptg.Button(
             "⚙️ ",
-            lambda *_: drawWindow(
+            lambda *_: drawPage(
                 hamburger.manager, hamburger.manager.routes["dashboard/settings"]()
             ),
+        ),
+        box="EMPTY",
+    )
+
+    exitBar = ptg.Window(
+        ptg.Button(
+            "Exit",
+            lambda *_: handleExitClick(),
         ),
         box="EMPTY",
     )
@@ -81,6 +116,7 @@ def DashBoard() -> None:
         "windows": [
             {"window": header, "assign": "header"},
             {"window": hamburger, "assign": "hamburger"},
+            {"window": exitBar, "assign": "exit"},
             {"window": body, "assign": "body"},
             {"window": navBar, "assign": "nav_bar"},
         ],
