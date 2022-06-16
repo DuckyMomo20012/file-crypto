@@ -59,10 +59,20 @@ def DashBoard() -> None:
     )
 
     navBar = ptg.Window(
-        ptg.Button(
-            "Upload",
-            lambda *_: handleUploadClick(),
-            parent_align=ptg.HorizontalAlignment.CENTER,
+        ptg.Splitter(
+            ptg.Button(
+                "Upload",
+                lambda *_: handleUploadClick(),
+                parent_align=ptg.HorizontalAlignment.CENTER,
+            ),
+            ptg.Button(
+                "Download shared file",
+                lambda *_: drawPage(
+                    navBar.manager,
+                    navBar.manager.routes["dashboard/download_shared_file"](),
+                ),
+                parent_align=ptg.HorizontalAlignment.CENTER,
+            ),
         ),
         "",
         *[
@@ -84,7 +94,7 @@ def DashBoard() -> None:
         ],
     )
     navBar.is_static = True
-    navBar.is_noresize = True
+    # navBar.is_noresize = True
     navBar.vertical_align = ptg.VerticalAlignment.TOP
     navBar.overflow = ptg.Overflow.SCROLL
 

@@ -5,6 +5,7 @@ from .settings.your_information.index import YourInformation
 from .settings.your_information.edit.index import EditInformation
 from .upload_file import UploadFile
 from .file_preview.index import FilePreview
+from .download_shared_file import DownloadSharedFile
 
 __all__ = [
     "DashBoard",
@@ -14,4 +15,5 @@ __all__ = [
     "EditInformation",
     "UploadFile",
     "FilePreview",
+    "DownloadSharedFile",
 ]

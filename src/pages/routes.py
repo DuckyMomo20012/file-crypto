@@ -13,4 +13,5 @@ routes = {
     "dashboard/settings/your_information/edit": EditInformation,
     "dashboard/upload_file": UploadFile,
     "dashboard/file_preview": FilePreview,
+    "dashboard/download_shared_file": DownloadSharedFile,
 }
