@@ -26,7 +26,7 @@ def updateUser(email, name, dateOfBirth, phone, address, password, publicKey, pr
     return user
 
 def updatePassword(email, password):
-    user = User.objects(email=emial).first()
+    user = User.objects(email=email).first()
     user.password = password
     user.save()
     return user

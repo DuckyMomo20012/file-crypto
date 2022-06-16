@@ -12,8 +12,9 @@ python = "^3.9"
 environs = "^9.5.0"
 mongoengine = "^0.24.1"
 requests = "^2.27.1"
-textual = "^0.1.18"
 pymongo = {extras = ["srv"], version = "^4.1.1"}
+pytermgui = "^6.3.0"
+PyYAML = "^6.0"
 
 [tool.poetry.dev-dependencies]
 poethepoet = "^0.13.1"
