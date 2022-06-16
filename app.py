@@ -1,8 +1,15 @@
+from environs import Env
+from mongoengine import connect
 import pytermgui as ptg
 
 from src.pages.routes import routes
-
 from src.helpers.index import drawPage
+
+env = Env()
+# Read .env into os.environ
+env.read_env()
+
+connect(host=env.str("MONGODB_HOST"))
 
 with ptg.WindowManager() as manager:
     ptg.boxes.ROUNDED.set_chars_of(ptg.Container)
