@@ -1,6 +1,8 @@
 import pytermgui as ptg
 
+from src.helpers.index import switchCurrPageWindowSlot
 
+# TODO: Implement download functionality
 def downloadFile(fileName):
     pass
 
@@ -11,13 +13,21 @@ def FilePreview(fileName: str):
         ptg.Splitter(
             ptg.Label(fileName, parent_align=ptg.HorizontalAlignment.LEFT),
             ptg.Button(
-                "Close", lambda *_: None, parent_align=ptg.HorizontalAlignment.RIGHT
+                "Download",
+                lambda *_: downloadFile(fileName),
+            ),
+            ptg.Button(
+                "Close",
+                lambda *_: switchCurrPageWindowSlot(
+                    window.manager,
+                    "body",
+                    clear=True,
+                ),
+                parent_align=ptg.HorizontalAlignment.RIGHT,
             ),
         ),
     )
 
-    window.is_static = True
-    window.is_noresize = True
     window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {

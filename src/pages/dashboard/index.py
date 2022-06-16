@@ -35,7 +35,7 @@ def DashBoard() -> None:
 
         return switchCurrPageWindowSlot(
             manager=navBar.manager,
-            currAssign=("body"),
+            targetAssign=("body"),
             newWindow=navBar.manager.routes["dashboard/file_preview"](fileName),
         )
 
@@ -57,11 +57,6 @@ def DashBoard() -> None:
         "Dashboard",
         box="EMPTY",
     )
-
-    body = ptg.Window("Empty body")
-    body.is_static = True
-    body.is_noresize = True
-    body.vertical_align = ptg.VerticalAlignment.TOP
 
     navBar = ptg.Window(
         ptg.Button(
@@ -117,7 +112,6 @@ def DashBoard() -> None:
             {"window": header, "assign": "header"},
             {"window": hamburger, "assign": "hamburger"},
             {"window": exitBar, "assign": "exit"},
-            {"window": body, "assign": "body"},
             {"window": navBar, "assign": "nav_bar"},
         ],
     }

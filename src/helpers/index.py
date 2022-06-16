@@ -9,10 +9,13 @@ def switchPage(manager, newPage: Any) -> None:
 
 def switchCurrPageWindowSlot(
     manager: ptg.WindowManager,
-    currAssign: str,
-    newWindow: ptg.Window | Any,
+    targetAssign: str,
+    newWindow: ptg.Window | Any | None = None,
     clear=True,
+    isAdd=False,
 ):
+    # NOTE: Temporary set "clear" default to True and isAdd to False due to bug in pytermgui
+    # BUG: pytermgui doesn't close window completely. Need more research
 
     if len(manager.navigation) > 0:
         # We build new page based on previous page, then we remove assigned slots
@@ -22,7 +25,7 @@ def switchCurrPageWindowSlot(
         # Loop to find the "slot" to replace, maybe many windows are
         # assigned to the same slot
         swapSlots = [
-            slot for slot in newPage["windows"] if str(slot["assign"]) == currAssign
+            slot for slot in newPage["windows"] if str(slot["assign"]) == targetAssign
         ]
 
         # Then we remove all windows assigned to the this slot if clear is True
@@ -32,15 +35,15 @@ def switchCurrPageWindowSlot(
                 manager.remove(window=slot["window"], autostop=False)
                 newPage["windows"].remove(slot)
 
-        else:
+        elif isAdd == False:
             # If clear is False, we just remove the last window in the list
             manager.remove(window=swapSlots[-1]["window"], autostop=False)
             newPage["windows"].remove(swapSlots[-1])
 
         # Then we add the new window to the slot
         if isinstance(newWindow, ptg.Window):
-            newPage["windows"].append(newWindow)
-        else:
+            newPage["windows"].append({"window": newWindow, "assign": targetAssign})
+        elif newWindow is not None:
             newPage["windows"].extend(newWindow["windows"])
 
         # NOTE: manager won't redraw the same window instance, so only the
