@@ -1,5 +1,5 @@
 from schema import User
 
 
-def getOneUser(username):
-    return User.objects(username=username).first()
+def getOneUser(email):
+    return User.objects(email=email).first()

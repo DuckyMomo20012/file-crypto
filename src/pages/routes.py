@@ -9,6 +9,8 @@ routes = {
     "dashboard": DashBoard,
     "dashboard/settings": Settings,
     "dashboard/settings/change_password": ChangePassword,
+    "dashboard/settings/your_information": YourInformation,
+    "dashboard/settings/your_information/edit": EditInformation,
     "dashboard/upload_file": UploadFile,
     "dashboard/file_preview": FilePreview,
 }

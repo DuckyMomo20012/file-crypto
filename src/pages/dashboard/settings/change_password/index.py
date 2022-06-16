@@ -65,6 +65,7 @@ def ChangePassword():
     )
 
     window.set_title(title="Change password")
+    # NOTE: overflow RESIZE doesn't play animation when window is opened.
     window.overflow = ptg.Overflow.RESIZE
     window.center()
     window.is_noresize = True

@@ -7,6 +7,13 @@ def Settings():
     window = ptg.Window(
         "",
         ptg.Button(
+            "Your information",
+            lambda *_: drawPage(
+                window.manager,
+                window.manager.routes["dashboard/settings/your_information"](),
+            ),
+        ),
+        ptg.Button(
             "Change password",
             lambda *_: drawPage(
                 window.manager,
