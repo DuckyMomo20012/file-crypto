@@ -13,11 +13,11 @@ def getFiles():
     # NOTE: Date can have different formats, but recommend using YYYY-MM-DD or
     # DD-MM-YYYY, with a "-" or "/" as a separator
     return {
-        "2020-01-01": ["file1", "file2", "file3"],
-        "2020-01-02": ["file4", "file5", "file6"],
-        "2020-01-03": ["file7", "file8", "file9"],
-        "2020-01-04": ["file10", "file11", "file12"],
-        "2020-01-05": ["file13", "file14", "file15"],
+        "2020-01-01": ["app.py", "app.py", "app.py"],
+        "2020-01-02": ["app.py", "app.py", "app.py"],
+        "2020-01-03": ["app.py", "app.py", "app.py"],
+        "2020-01-04": ["app.py", "app.py", "app.py"],
+        "2020-01-05": ["app.py", "app.py", "app.py"],
     }
 
 
