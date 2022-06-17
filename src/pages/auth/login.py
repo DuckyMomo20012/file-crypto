@@ -1,6 +1,7 @@
 import pytermgui as ptg
 from src.helpers.index import switchPage
 from src.helpers.form_validation import requiredField
+from src.helpers.form_validation import emailField as emailFieldValidator
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
@@ -24,12 +25,15 @@ def Login() -> ptg.Window:
         if not requiredField(window.manager, passwordField, label="Password"):
             return
 
+        if not emailFieldValidator(window.manager, emailField, label="Email"):
+            return
+
         # TODO: Implement login logic
         # TODO: Validate email and password
         email = emailField.value
         password = passwordField.value
 
-        if email == "admin" and password == "admin":
+        if email == "admin@gmail.com" and password == "admin":
             alertModal = window.manager.alert(
                 "Login successful!",
                 "",

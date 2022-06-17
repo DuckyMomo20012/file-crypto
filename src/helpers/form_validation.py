@@ -47,3 +47,18 @@ def folderField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
         return False
 
     return True
+
+
+def emailField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
+    # NOTE: Ref: https://stackoverflow.com/a/66809700/12512981
+    import re
+
+    email_format = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+    email = field.value
+
+    if not re.match(email_format, email, re.IGNORECASE):
+        errorMsg = f"{label} field is not a valid email address"
+        manager.routes["errors/form_validation_error"](manager, errorMsg)
+        return False
+
+    return True

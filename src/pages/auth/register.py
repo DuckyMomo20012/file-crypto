@@ -1,6 +1,7 @@
 import pytermgui as ptg
 from src.helpers.index import switchPage
 from src.helpers.form_validation import requiredField
+from src.helpers.form_validation import emailField as emailFieldValidator
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
@@ -25,6 +26,9 @@ def Register() -> ptg.Window:
         if not requiredField(
             window.manager, confirmPasswordField, label="Confirm password"
         ):
+            return
+
+        if not emailFieldValidator(window.manager, emailField, label="Email"):
             return
 
         # TODO: Implement register logic
