@@ -1,5 +1,5 @@
 import pytermgui as ptg
-from src.helpers.index import switchPage
+from src.helpers.index import switchPage, exitApp
 from src.helpers.form_validation import requiredField
 from src.helpers.form_validation import emailField as emailFieldValidator
 
@@ -74,7 +74,10 @@ def Register():
         ptg.Label("Confirm password", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(confirmPasswordField),
         "",
-        ptg.Button("Register", lambda *_: handleSubmitClick()),
+        ptg.Splitter(
+            ptg.Button("Register", lambda *_: handleSubmitClick()),
+            ptg.Button("Exit", lambda *_: exitApp(window.manager)),
+        ),
     )
 
     window.set_title(title="Register")

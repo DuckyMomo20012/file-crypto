@@ -1,5 +1,5 @@
 import pytermgui as ptg
-from src.helpers.index import switchPage
+from src.helpers.index import switchPage, exitApp
 from src.helpers.form_validation import requiredField
 from src.helpers.form_validation import emailField as emailFieldValidator
 
@@ -72,7 +72,10 @@ def Login():
         ptg.Label("Password", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(passwordField),
         "",
-        ptg.Button("Login", lambda *_: handleSubmitClick()),
+        ptg.Splitter(
+            ptg.Button("Login", lambda *_: handleSubmitClick()),
+            ptg.Button("Exit", lambda *_: exitApp(window.manager)),
+        ),
     )
 
     window.set_title(title="Login")
