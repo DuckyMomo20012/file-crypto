@@ -6,6 +6,8 @@ from .settings.your_information.edit.index import EditInformation
 from .upload_file import UploadFile
 from .file_preview.index import FilePreview
 from .download_shared_file import DownloadSharedFile
+from .sign_file import SignFile
+from .verify_signed_file import VerifySignedFile
 
 __all__ = [
     "DashBoard",
@@ -16,4 +18,6 @@ __all__ = [
     "UploadFile",
     "FilePreview",
     "DownloadSharedFile",
+    "SignFile",
+    "VerifySignedFile",
 ]

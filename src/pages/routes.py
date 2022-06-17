@@ -14,4 +14,6 @@ routes = {
     "dashboard/upload_file": UploadFile,
     "dashboard/file_preview": FilePreview,
     "dashboard/download_shared_file": DownloadSharedFile,
+    "dashboard/sign_file": SignFile,
+    "dashboard/verify_signed_file": VerifySignedFile,
 }

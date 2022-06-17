@@ -74,6 +74,25 @@ def DashBoard() -> None:
                 parent_align=ptg.HorizontalAlignment.CENTER,
             ),
         ),
+        ptg.Splitter(
+            ptg.Button(
+                "Sign file",
+                lambda *_: drawPage(
+                    navBar.manager, navBar.manager.routes["dashboard/sign_file"]()
+                ),
+                parent_align=ptg.HorizontalAlignment.CENTER,
+            ),
+            ptg.Button(
+                "Verify signed file",
+                lambda *_: drawPage(
+                    navBar.manager,
+                    navBar.manager.routes["dashboard/verify_signed_file"](),
+                ),
+                parent_align=ptg.HorizontalAlignment.CENTER,
+            ),
+        ),
+        "",
+        "My files",
         "",
         *[
             ptg.Collapsible(
