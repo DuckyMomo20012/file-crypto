@@ -22,3 +22,28 @@ def verify_password(plain_text_password, mixed_hashed_password):
         return True
     else:
         return False
+
+
+def generateUserKeys(passphrase):
+    from Crypto.PublicKey import RSA
+
+    # Generate RSA private and public key pair 2048 bits long
+    key = RSA.generate(2048)
+
+    # Use user password as passphrase to encrypt private key
+
+    # NOTE: Ref:
+    # https://pycryptodome.readthedocs.io/en/latest/src/io/pkcs8.html#module-Crypto.IO.PKCS8
+
+    # 1. A "16" byte AES key is derived from the passphrase using
+    #    Crypto.Protocol.KDF.scrypt() with 8 bytes salt.
+    # READ more: https://github.com/Legrandin/pycryptodome/blob/master/lib/Crypto/IO/_PBES.py#L239
+    # 2. The private key is encrypted using CBC.
+    # 3. The encrypted key is encoded according to PKCS#8.
+    privateKey = key.export_key(
+        passphrase=passphrase, pkcs=8, protection="scryptAndAES128-CBC"
+    )
+
+    publicKey = key.publickey().export_key()
+
+    return privateKey, publicKey

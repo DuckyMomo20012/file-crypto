@@ -5,7 +5,7 @@ from src.helpers.form_validation import emailField as emailFieldValidator
 
 from src.api.auth.service import getOneUser, addUser
 
-from src.helpers.cryptography import hash_password
+from src.helpers.cryptography import hash_password, generateUserKeys
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
@@ -53,8 +53,16 @@ def Register():
                 )
                 return
 
+            # NOTE: Should we use plain password as passphrase or hashed password?
+            privateKey, publicKey = generateUserKeys(password)
+
             # Add new user to database
-            addUser(email, hash_password(password))
+            addUser(
+                email,
+                hash_password(password),
+                publicKey=publicKey,
+                privateKey=privateKey,
+            )
 
             alertModal = window.manager.alert(
                 "Register successful!",
