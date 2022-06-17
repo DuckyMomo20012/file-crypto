@@ -3,6 +3,12 @@ import pytermgui as ptg
 from src.helpers.index import goToPrevPage, clearNavigation, drawPage
 from src.helpers.form_validation import requiredField
 
+import config
+
+from src.api.auth.service import getOneUser, updateUserManyFields, updatePassword
+
+from src.helpers.cryptography import updatePassphrase, verify_password, hash_password
+
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
     modal.close()
@@ -35,22 +41,49 @@ def ChangePassword():
         newPassword = newPasswordField.value
         confirmNewPassword = confirmNewPasswordField.value
 
+        user = getOneUser(config.session.email)
+
         # TODO: Check if old password is correct and new password is valid and
         # match with confirm new password
 
-        if oldPassword == "admin" and newPassword == confirmNewPassword:
-            alertModal = window.manager.alert(
-                "Password changed successfully!",
-                "",
-                ptg.Button(
-                    "OK", lambda *_: handleSuccessModalClose(window, alertModal)
-                ),
-            )
+        if newPassword == confirmNewPassword:
+
+            if verify_password(oldPassword, user.password):
+
+                # Update privateKey and publicKey
+                newPrivateKey, newPublicKey = updatePassphrase(
+                    user.privateKey, oldPassword, newPassword
+                )
+
+                # Update password
+
+                updateUserManyFields(
+                    email=config.session.email,
+                    privateKey=newPrivateKey,
+                    publicKey=newPublicKey,
+                )
+
+                updatePassword(config.session.email, hash_password(newPassword))
+
+                alertModal = window.manager.alert(
+                    "Password changed successfully!",
+                    "",
+                    ptg.Button(
+                        "OK", lambda *_: handleSuccessModalClose(window, alertModal)
+                    ),
+                )
+
+            else:
+                alertModal = window.manager.alert(
+                    "Old password is incorrect!",
+                    "",
+                    ptg.Button("OK", lambda *_: alertModal.close()),
+                )
 
         else:
             alertModal = window.manager.alert(
                 ptg.Label(
-                    "Old password is incorrect or new password is invalid!",
+                    "New password and confirm new password do not match!",
                     size_policy=ptg.SizePolicy.STATIC,
                 ),
                 "",

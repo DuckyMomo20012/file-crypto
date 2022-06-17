@@ -8,8 +8,8 @@ class User(me.Document):
     phone = me.StringField()
     address = me.StringField()
     password = me.StringField()
-    publicKey = me.StringField()
-    privateKey = me.StringField()
+    publicKey = me.BinaryField()
+    privateKey = me.BinaryField()
     meta = {"collection": "users"}
 
 

@@ -3,7 +3,7 @@ import pytermgui as ptg
 from src.helpers.index import goToPrevPage
 from src.helpers.form_validation import requiredField
 
-from src.api.auth.service import updateUser
+from src.api.auth.service import updateUserOneField
 
 import config
 
@@ -24,7 +24,7 @@ def EditInformation(label: str, oldValue: Any, fieldName: str):
 
         window.manager.toast("Updating information...")
 
-        updateUser(config.session.email, fieldName, newValue)
+        updateUserOneField(config.session.email, fieldName, newValue)
 
         # NOTE: We go back to two pages, close settings page, so when user open
         # settings again, it will show the updated information.

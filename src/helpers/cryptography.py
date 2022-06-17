@@ -47,3 +47,20 @@ def generateUserKeys(passphrase):
     publicKey = key.publickey().export_key()
 
     return privateKey, publicKey
+
+
+def updatePassphrase(privateKey, oldPassphrase: str, newPassphrase: str):
+    from Crypto.PublicKey import RSA
+
+    # First, we import the private key with the old passphrase
+    key = RSA.import_key(privateKey, passphrase=oldPassphrase)
+
+    # Then we encrypt private key with the new passphrase
+    newPrivateKey = key.export_key(
+        passphrase=newPassphrase, pkcs=8, protection="scryptAndAES128-CBC"
+    )
+
+    # And export new public key
+    newPublicKey = key.publickey().export_key()
+
+    return newPrivateKey, newPublicKey

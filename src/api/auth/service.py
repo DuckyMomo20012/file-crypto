@@ -37,7 +37,27 @@ def addUser(
     return user
 
 
-def updateUser(
+def updateUserManyFields(
+    email,
+    name="",
+    dateOfBirth=datetime.date(1900, 1, 1),
+    phone="",
+    address="",
+    publicKey="",
+    privateKey="",
+):
+    user = User.objects(email=email).first()
+    user.name = name
+    user.dateOfBirth = dateOfBirth
+    user.phone = phone
+    user.address = address
+    user.publicKey = publicKey
+    user.privateKey = privateKey
+    user.save()
+    return user
+
+
+def updateUserOneField(
     email: str,
     fieldName: str,
     newValue: str,
