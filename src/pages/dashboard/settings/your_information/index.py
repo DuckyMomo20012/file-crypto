@@ -12,21 +12,9 @@ def YourInformation():
 
     window = ptg.Window(
         "",
-        ptg.Splitter(
-            ptg.Label(
-                f"Email: {user.email}",
-                parent_align=ptg.HorizontalAlignment.LEFT,
-            ),
-            ptg.Button(
-                "Edit",
-                lambda *_: drawPage(
-                    window.manager,
-                    window.manager.routes["dashboard/settings/your_information/edit"](
-                        "Email", user.email, "email"
-                    ),
-                ),
-            ),
-            chars={"separator": ""},
+        ptg.Label(
+            f"Email: {user.email}",
+            parent_align=ptg.HorizontalAlignment.LEFT,
         ),
         ptg.Splitter(
             ptg.Label(
