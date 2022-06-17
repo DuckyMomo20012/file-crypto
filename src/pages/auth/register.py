@@ -26,6 +26,7 @@ def Register() -> ptg.Window:
         if password == confirmPassword:
             alertModal = window.manager.alert(
                 "Register successful!",
+                "",
                 ptg.Button(
                     "OK", lambda *_: handleSuccessModalClose(window, alertModal)
                 ),
@@ -33,6 +34,7 @@ def Register() -> ptg.Window:
         else:
             alertModal = window.manager.alert(
                 "Register failed!",
+                "",
                 ptg.Button("OK", lambda *_: alertModal.close()),
             )
 

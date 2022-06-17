@@ -26,6 +26,7 @@ def Login() -> ptg.Window:
         if email == "admin" and password == "admin":
             alertModal = window.manager.alert(
                 "Login successful!",
+                "",
                 ptg.Button(
                     "OK", lambda *_: handleSuccessModalClose(window, alertModal)
                 ),
@@ -34,6 +35,7 @@ def Login() -> ptg.Window:
         else:
             alertModal = window.manager.alert(
                 "Login failed!",
+                "",
                 ptg.Button("OK", lambda *_: alertModal.close()),
             )
 

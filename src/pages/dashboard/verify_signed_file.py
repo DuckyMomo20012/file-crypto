@@ -20,12 +20,14 @@ def VerifySignedFile():
             alertModal = window.manager.alert(
                 "Signature verified",
                 f"User {emailUser} signed file",
+                "",
                 ptg.Button("OK", lambda *_: alertModal.close()),
             )
         else:
             alertModal = window.manager.alert(
                 "Signature verification failed",
                 "Unknown user signed file",
+                "",
                 ptg.Button("OK", lambda *_: alertModal.close()),
             )
 
