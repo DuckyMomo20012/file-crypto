@@ -1,5 +1,7 @@
 from schema import User
 
+import datetime
+
 
 def getOneUser(email):
     return User.objects(email=email).first()
@@ -9,14 +11,25 @@ def getAllUsers():
     return User.objects()
 
 
-def addUser(email, name, dateOfBirth, phone, address, password, publicKey, privateKey):
+def addUser(
+    email,
+    password,
+    name="",
+    dateOfBirth=datetime.date(1900, 1, 1),
+    phone="",
+    address="",
+    publicKey="",
+    privateKey="",
+):
+    name = email
+
     user = User(
         email=email,
+        password=password,
         name=name,
         dateOfBirth=dateOfBirth,
         phone=phone,
         address=address,
-        password=password,
         publicKey=publicKey,
         privateKey=privateKey,
     )
@@ -25,17 +38,12 @@ def addUser(email, name, dateOfBirth, phone, address, password, publicKey, priva
 
 
 def updateUser(
-    email, name, dateOfBirth, phone, address, password, publicKey, privateKey
+    email: str,
+    fieldName: str,
+    newValue: str,
 ):
     user = User.objects(email=email).first()
-    user.email = email
-    user.name = name
-    user.dateOfBirth = dateOfBirth
-    user.phone = phone
-    user.address = address
-    user.password = password
-    user.publicKey = publicKey
-    user.privateKey = privateKey
+    user[fieldName] = newValue
     user.save()
     return user
 

@@ -1,11 +1,14 @@
 import pytermgui as ptg
 from src.helpers.index import goToPrevPage, drawPage
+
 from src.api.auth.service import getOneUser
+
+import config
 
 
 def YourInformation():
 
-    user = getOneUser("email@mail.com")
+    user = getOneUser(config.session.email)
 
     dob = user.dateOfBirth.strftime("%m/%d/%Y")
 

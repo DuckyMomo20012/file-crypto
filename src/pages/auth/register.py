@@ -3,6 +3,10 @@ from src.helpers.index import switchPage, exitApp
 from src.helpers.form_validation import requiredField
 from src.helpers.form_validation import emailField as emailFieldValidator
 
+from src.api.auth.service import getOneUser, addUser
+
+from src.helpers.cryptography import hash_password
+
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
     modal.close()
@@ -38,6 +42,20 @@ def Register():
         confirmPassword = confirmPasswordField.value
 
         if password == confirmPassword:
+
+            user = getOneUser(email)
+
+            if user:
+                alertModal = window.manager.alert(
+                    "User already exists!",
+                    "",
+                    ptg.Button("OK", lambda *_: alertModal.close()),
+                )
+                return
+
+            # Add new user to database
+            addUser(email, hash_password(password))
+
             alertModal = window.manager.alert(
                 "Register successful!",
                 "",
@@ -47,10 +65,11 @@ def Register():
             )
         else:
             alertModal = window.manager.alert(
-                "Register failed!",
+                "Password and confirm password do not match!",
                 "",
                 ptg.Button("OK", lambda *_: alertModal.close()),
             )
+            return
 
     window = ptg.Window(
         "",
