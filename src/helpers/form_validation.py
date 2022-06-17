@@ -26,3 +26,24 @@ def fileField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
         return False
 
     return True
+
+
+def folderField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
+    from pathlib import Path
+
+    filePath = Path(field.value)
+
+    # NOTE: This function supports both absolute and relative folder paths
+    # E.g:
+    # - src/pages/
+    # - ./
+    # - ../
+    # - ./../
+    # - /home/alice/Desktop/file-crypto
+    # - /home/alice/Desktop/file-crypto/
+    if not filePath.is_dir():
+        errorMsg = f"{label} field is not a valid folder path"
+        manager.routes["errors/form_validation_error"](manager, errorMsg)
+        return False
+
+    return True

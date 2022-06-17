@@ -1,7 +1,7 @@
 import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField
+from src.helpers.form_validation import requiredField, folderField
 
 
 def DownloadSharedFile():
@@ -16,6 +16,11 @@ def DownloadSharedFile():
         if not requiredField(window.manager, fileNameField, label="File name"):
             return
         if not requiredField(
+            window.manager, saveFolderPathField, label="Save folder path"
+        ):
+            return
+
+        if not folderField(
             window.manager, saveFolderPathField, label="Save folder path"
         ):
             return
