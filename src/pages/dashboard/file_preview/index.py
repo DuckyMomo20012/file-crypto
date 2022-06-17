@@ -1,10 +1,6 @@
 import pytermgui as ptg
 
-from src.helpers.index import switchCurrPageWindowSlot
-
-# TODO: Implement download functionality
-def downloadFile(fileName):
-    pass
+from src.helpers.index import drawPage, switchCurrPageWindowSlot
 
 
 def FilePreview(fileName: str):
@@ -14,7 +10,12 @@ def FilePreview(fileName: str):
             ptg.Label(fileName, parent_align=ptg.HorizontalAlignment.LEFT),
             ptg.Button(
                 "Download",
-                lambda *_: downloadFile(fileName),
+                lambda *_: drawPage(
+                    window.manager,
+                    window.manager.routes["dashboard/file_preview/download_file"](
+                        fileName
+                    ),
+                ),
             ),
             ptg.Button(
                 "Close",
