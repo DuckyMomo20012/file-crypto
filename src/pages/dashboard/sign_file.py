@@ -5,33 +5,33 @@ from src.helpers.form_validation import requiredField
 
 
 def SignFile():
-    fileLocationField = ptg.InputField()
-    saveLocationField = ptg.InputField()
+    filePathField = ptg.InputField()
+    saveFolderPathField = ptg.InputField()
 
     # TODO: Implement sign file logic
     def handleSignClick():
-        if not requiredField(window.manager, fileLocationField, label="File location"):
+        if not requiredField(window.manager, filePathField, label="File path"):
             return
         if not requiredField(
-            window.manager, saveLocationField, label="Save folder location"
+            window.manager, saveFolderPathField, label="Save folder path"
         ):
             return
 
         # NOTE: Remember to check if this is a valid folder & file directory
-        fileLocation = fileLocationField.value
-        saveLocation = saveLocationField.value
+        filePath = filePathField.value
+        saveFolderPath = saveFolderPathField.value
 
-        window.manager.toast(f"Downloading {fileLocation}...")
+        window.manager.toast(f"Downloading {filePath}...")
         # ...
 
         goToPrevPage(window.manager)
 
     window = ptg.Window(
         "",
-        ptg.Label("File location", parent_align=ptg.HorizontalAlignment.LEFT),
-        ptg.Container(fileLocationField),
-        ptg.Label("Save folder location", parent_align=ptg.HorizontalAlignment.LEFT),
-        ptg.Container(saveLocationField),
+        ptg.Label("File path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Container(filePathField),
+        ptg.Label("Save folder path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(
             ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),

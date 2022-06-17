@@ -1,17 +1,23 @@
 import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
+from src.helpers.form_validation import requiredField
 
 
 def DownloadFile(fileName: str):
-    saveLocationField = ptg.InputField()
+    saveFolderPathField = ptg.InputField()
 
     # TODO: Implement download file logic
     def handleDownloadClick():
+        if not requiredField(
+            window.manager, saveFolderPathField, label="Save folder path"
+        ):
+            return
+
         # fileName = ...
 
         # NOTE: Remember to check if this is a valid folder directory
-        saveLocation = saveLocationField.value
+        saveFolderPath = saveFolderPathField.value
 
         window.manager.toast(f"Downloading {fileName}...")
         # ...
@@ -20,8 +26,8 @@ def DownloadFile(fileName: str):
 
     window = ptg.Window(
         "",
-        ptg.Label("Save folder location", parent_align=ptg.HorizontalAlignment.LEFT),
-        ptg.Container(saveLocationField),
+        ptg.Label("Save folder path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(
             ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),

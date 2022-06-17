@@ -5,23 +5,23 @@ from src.helpers.form_validation import requiredField
 
 
 def VerifySignedFile():
-    fileLocationField = ptg.InputField()
-    signatureLocationField = ptg.InputField()
+    filePathField = ptg.InputField()
+    signaturePathField = ptg.InputField()
 
     # TODO: Implement verify signed file logic
     def handleVerifyClick():
-        if not requiredField(window.manager, fileLocationField, label="File location"):
+        if not requiredField(window.manager, filePathField, label="File path"):
             return
         if not requiredField(
-            window.manager, signatureLocationField, label="Signature file location"
+            window.manager, signaturePathField, label="Signature file path"
         ):
             return
 
         # NOTE: Remember to check if this is a valid file directory
-        fileLocation = fileLocationField.value
-        signatureLocation = signatureLocationField.value
+        filePath = filePathField.value
+        signaturePath = signaturePathField.value
 
-        window.manager.toast(f"Verifying {fileLocation}...")
+        window.manager.toast(f"Verifying {filePath}...")
 
         if True:
             emailUser = "example@gmail.com"
@@ -41,10 +41,10 @@ def VerifySignedFile():
 
     window = ptg.Window(
         "",
-        ptg.Label("File location", parent_align=ptg.HorizontalAlignment.LEFT),
-        ptg.Container(fileLocationField),
-        ptg.Label("Signature file location", parent_align=ptg.HorizontalAlignment.LEFT),
-        ptg.Container(signatureLocationField),
+        ptg.Label("File path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Container(filePathField),
+        ptg.Label("Signature file path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Container(signaturePathField),
         "",
         ptg.Splitter(
             ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),

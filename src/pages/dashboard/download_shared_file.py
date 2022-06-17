@@ -7,7 +7,7 @@ from src.helpers.form_validation import requiredField
 def DownloadSharedFile():
     ownerEmailField = ptg.InputField()
     fileNameField = ptg.InputField()
-    saveLocationField = ptg.InputField()
+    saveFolderPathField = ptg.InputField()
 
     # TODO: Implement download shared file logic
     def handleDownloadClick():
@@ -16,7 +16,7 @@ def DownloadSharedFile():
         if not requiredField(window.manager, fileNameField, label="File name"):
             return
         if not requiredField(
-            window.manager, saveLocationField, label="Save folder location"
+            window.manager, saveFolderPathField, label="Save folder path"
         ):
             return
 
@@ -24,7 +24,7 @@ def DownloadSharedFile():
         fileName = fileNameField.value
 
         # NOTE: Remember to check if this is a valid folder directory
-        saveLocation = saveLocationField.value
+        saveFolderPath = saveFolderPathField.value
 
         window.manager.toast(f"Downloading {fileName}...")
         # ...
@@ -37,8 +37,8 @@ def DownloadSharedFile():
         ptg.Container(ownerEmailField),
         ptg.Label("File name", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(fileNameField),
-        ptg.Label("Save folder location", parent_align=ptg.HorizontalAlignment.LEFT),
-        ptg.Container(saveLocationField),
+        ptg.Label("Save folder path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(
             ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
