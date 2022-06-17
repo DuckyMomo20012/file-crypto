@@ -9,7 +9,7 @@ def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
     switchPage(window.manager, window.manager.routes["auth/login"]())
 
 
-def Register() -> ptg.Window:
+def Register():
 
     emailField = ptg.InputField()
     passwordField = ptg.InputField()

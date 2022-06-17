@@ -1,4 +1,3 @@
-from cProfile import label
 import pytermgui as ptg
 from src.helpers.index import goToPrevPage, drawPage
 from src.api.auth.service import getOneUser

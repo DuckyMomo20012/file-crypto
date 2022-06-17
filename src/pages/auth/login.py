@@ -9,7 +9,7 @@ def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
     switchPage(window.manager, window.manager.routes["dashboard"]())
 
 
-def Login() -> ptg.Window:
+def Login():
 
     # NOTE: When we use manager.add in app.py, manager it will assign window.manager to
     # itself, so we can access window.manager here.
