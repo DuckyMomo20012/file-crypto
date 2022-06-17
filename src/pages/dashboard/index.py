@@ -59,11 +59,40 @@ def DashBoard() -> None:
     )
 
     navBar = ptg.Window(
-        ptg.Button(
-            "Upload",
-            lambda *_: handleUploadClick(),
-            parent_align=ptg.HorizontalAlignment.CENTER,
+        ptg.Splitter(
+            ptg.Button(
+                "Upload",
+                lambda *_: handleUploadClick(),
+                parent_align=ptg.HorizontalAlignment.CENTER,
+            ),
+            ptg.Button(
+                "Download shared file",
+                lambda *_: drawPage(
+                    navBar.manager,
+                    navBar.manager.routes["dashboard/download_shared_file"](),
+                ),
+                parent_align=ptg.HorizontalAlignment.CENTER,
+            ),
         ),
+        ptg.Splitter(
+            ptg.Button(
+                "Sign file",
+                lambda *_: drawPage(
+                    navBar.manager, navBar.manager.routes["dashboard/sign_file"]()
+                ),
+                parent_align=ptg.HorizontalAlignment.CENTER,
+            ),
+            ptg.Button(
+                "Verify signed file",
+                lambda *_: drawPage(
+                    navBar.manager,
+                    navBar.manager.routes["dashboard/verify_signed_file"](),
+                ),
+                parent_align=ptg.HorizontalAlignment.CENTER,
+            ),
+        ),
+        "",
+        "My files",
         "",
         *[
             ptg.Collapsible(
@@ -84,7 +113,7 @@ def DashBoard() -> None:
         ],
     )
     navBar.is_static = True
-    navBar.is_noresize = True
+    # navBar.is_noresize = True
     navBar.vertical_align = ptg.VerticalAlignment.TOP
     navBar.overflow = ptg.Overflow.SCROLL
 

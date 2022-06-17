@@ -1,5 +1,7 @@
 import pytermgui as ptg
 from src.helpers.index import switchPage
+from src.helpers.form_validation import requiredField
+from src.helpers.form_validation import emailField as emailFieldValidator
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
@@ -7,7 +9,7 @@ def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
     switchPage(window.manager, window.manager.routes["dashboard"]())
 
 
-def Login() -> ptg.Window:
+def Login():
 
     # NOTE: When we use manager.add in app.py, manager it will assign window.manager to
     # itself, so we can access window.manager here.
@@ -18,14 +20,23 @@ def Login() -> ptg.Window:
 
     def handleSubmitClick() -> None:
 
+        if not requiredField(window.manager, emailField, label="Email"):
+            return
+        if not requiredField(window.manager, passwordField, label="Password"):
+            return
+
+        if not emailFieldValidator(window.manager, emailField, label="Email"):
+            return
+
         # TODO: Implement login logic
         # TODO: Validate email and password
         email = emailField.value
         password = passwordField.value
 
-        if email == "admin" and password == "admin":
+        if email == "admin@gmail.com" and password == "admin":
             alertModal = window.manager.alert(
                 "Login successful!",
+                "",
                 ptg.Button(
                     "OK", lambda *_: handleSuccessModalClose(window, alertModal)
                 ),
@@ -34,6 +45,7 @@ def Login() -> ptg.Window:
         else:
             alertModal = window.manager.alert(
                 "Login failed!",
+                "",
                 ptg.Button("OK", lambda *_: alertModal.close()),
             )
 

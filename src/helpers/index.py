@@ -51,15 +51,16 @@ def switchCurrPageWindowSlot(
         drawPage(manager, newPage)
 
 
-def drawPage(manager: ptg.WindowManager, newPage) -> None:
+def drawPage(manager: ptg.WindowManager, newPage: Any | None) -> None:
 
-    # Append new page to navigation stack
-    manager.navigation.append(newPage)
+    if newPage is not None:
+        # Append new page to navigation stack
+        manager.navigation.append(newPage)
 
-    if newPage["layout"] is not None:
-        manager.layout = newPage["layout"]
-    for window in newPage["windows"]:
-        manager.add(window=window["window"], assign=window["assign"])
+        if newPage["layout"] is not None:
+            manager.layout = newPage["layout"]
+        for window in newPage["windows"]:
+            manager.add(window=window["window"], assign=window["assign"])
 
 
 def goToPrevPage(manager: ptg.WindowManager) -> None:

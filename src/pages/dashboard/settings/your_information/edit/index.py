@@ -1,6 +1,7 @@
 from typing import Any
 import pytermgui as ptg
 from src.helpers.index import goToPrevPage
+from src.helpers.form_validation import requiredField
 
 
 def EditInformation(label: str, oldValue: Any, fieldName: str):
@@ -9,6 +10,8 @@ def EditInformation(label: str, oldValue: Any, fieldName: str):
 
     # TODO: Implement edit functionality
     def handleConfirmClick():
+        if not requiredField(window.manager, inputField, label=f"New {label.lower()}"):
+            return
 
         # NOTE: use fieldName is used to edit user information easily. E.g:
         # user['fieldName'] = inputField.value

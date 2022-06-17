@@ -1,5 +1,7 @@
 import pytermgui as ptg
 from src.helpers.index import switchPage
+from src.helpers.form_validation import requiredField
+from src.helpers.form_validation import emailField as emailFieldValidator
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
@@ -7,7 +9,7 @@ def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
     switchPage(window.manager, window.manager.routes["auth/login"]())
 
 
-def Register() -> ptg.Window:
+def Register():
 
     emailField = ptg.InputField()
     passwordField = ptg.InputField()
@@ -16,6 +18,18 @@ def Register() -> ptg.Window:
     confirmPasswordField.styles["value"] = "invisible"
 
     def handleSubmitClick() -> None:
+
+        if not requiredField(window.manager, emailField, label="Email"):
+            return
+        if not requiredField(window.manager, passwordField, label="Password"):
+            return
+        if not requiredField(
+            window.manager, confirmPasswordField, label="Confirm password"
+        ):
+            return
+
+        if not emailFieldValidator(window.manager, emailField, label="Email"):
+            return
 
         # TODO: Implement register logic
         # TODO: Validate email, password and confirm password
@@ -26,6 +40,7 @@ def Register() -> ptg.Window:
         if password == confirmPassword:
             alertModal = window.manager.alert(
                 "Register successful!",
+                "",
                 ptg.Button(
                     "OK", lambda *_: handleSuccessModalClose(window, alertModal)
                 ),
@@ -33,6 +48,7 @@ def Register() -> ptg.Window:
         else:
             alertModal = window.manager.alert(
                 "Register failed!",
+                "",
                 ptg.Button("OK", lambda *_: alertModal.close()),
             )
 

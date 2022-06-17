@@ -1,5 +1,6 @@
 from src.pages.auth import *
 from src.pages.dashboard import *
+from src.pages.errors import *
 
 
 routes = {
@@ -13,4 +14,9 @@ routes = {
     "dashboard/settings/your_information/edit": EditInformation,
     "dashboard/upload_file": UploadFile,
     "dashboard/file_preview": FilePreview,
+    "dashboard/file_preview/download_file": DownloadFile,
+    "dashboard/download_shared_file": DownloadSharedFile,
+    "dashboard/sign_file": SignFile,
+    "dashboard/verify_signed_file": VerifySignedFile,
+    "errors/form_validation_error": FormValidationError,
 }
