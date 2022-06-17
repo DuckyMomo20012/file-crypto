@@ -1,5 +1,6 @@
 import pytermgui as ptg
 from src.helpers.index import switchPage
+from src.helpers.form_validation import requiredField
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
@@ -17,6 +18,11 @@ def Login() -> ptg.Window:
     passwordField.styles["value"] = "invisible"
 
     def handleSubmitClick() -> None:
+
+        if not requiredField(window.manager, emailField, label="Email"):
+            return
+        if not requiredField(window.manager, passwordField, label="Password"):
+            return
 
         # TODO: Implement login logic
         # TODO: Validate email and password

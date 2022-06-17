@@ -1,6 +1,7 @@
 import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
+from src.helpers.form_validation import requiredField
 
 
 def VerifySignedFile():
@@ -9,6 +10,13 @@ def VerifySignedFile():
 
     # TODO: Implement verify signed file logic
     def handleVerifyClick():
+        if not requiredField(window.manager, fileLocationField, label="File location"):
+            return
+        if not requiredField(
+            window.manager, signatureLocationField, label="Signature file location"
+        ):
+            return
+
         # NOTE: Remember to check if this is a valid file directory
         fileLocation = fileLocationField.value
         signatureLocation = signatureLocationField.value

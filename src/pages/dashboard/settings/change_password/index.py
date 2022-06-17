@@ -1,6 +1,7 @@
 import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage, clearNavigation, drawPage
+from src.helpers.form_validation import requiredField
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
@@ -21,6 +22,14 @@ def ChangePassword():
     confirmNewPasswordField.styles["value"] = "invisible"
 
     def handleConfirmClick() -> None:
+        if not requiredField(window.manager, oldPasswordField, label="Old password"):
+            return
+        if not requiredField(window.manager, newPasswordField, label="New password"):
+            return
+        if not requiredField(
+            window.manager, confirmNewPasswordField, label="Confirm new password"
+        ):
+            return
 
         oldPassword = oldPasswordField.value
         newPassword = newPasswordField.value

@@ -1,6 +1,7 @@
 import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
+from src.helpers.form_validation import requiredField
 
 
 def DownloadSharedFile():
@@ -10,6 +11,15 @@ def DownloadSharedFile():
 
     # TODO: Implement download shared file logic
     def handleDownloadClick():
+        if not requiredField(window.manager, ownerEmailField, label="Owner email"):
+            return
+        if not requiredField(window.manager, fileNameField, label="File name"):
+            return
+        if not requiredField(
+            window.manager, saveLocationField, label="Save folder location"
+        ):
+            return
+
         ownerEmail = ownerEmailField.value
         fileName = fileNameField.value
 
