@@ -2,11 +2,16 @@ import pytermgui as ptg
 
 from src.helpers.index import clearNavigation, drawPage, goToPrevPage
 
+import config
+
 
 def Logout():
     def handleLogoutClick():
         window.manager.toast("Logging out...")
         # TODO: Implement logout logic
+
+        # We simply reset the current session and go back to the login page
+        config.session = {}
 
         clearNavigation(window.manager)
         drawPage(window.manager, window.manager.routes["auth/login"]())
