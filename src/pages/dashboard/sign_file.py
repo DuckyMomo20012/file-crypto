@@ -1,7 +1,7 @@
 import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField
+from src.helpers.form_validation import requiredField, fileField
 
 
 def SignFile():
@@ -15,6 +15,9 @@ def SignFile():
         if not requiredField(
             window.manager, saveFolderPathField, label="Save folder path"
         ):
+            return
+
+        if not fileField(window.manager, filePathField, label="File path"):
             return
 
         # NOTE: Remember to check if this is a valid folder & file directory

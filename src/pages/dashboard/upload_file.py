@@ -1,7 +1,7 @@
 import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField
+from src.helpers.form_validation import requiredField, fileField
 
 
 def UploadFile():
@@ -10,6 +10,9 @@ def UploadFile():
 
     def handleUploadClick():
         if not requiredField(window.manager, filePathField, label="File path"):
+            return
+
+        if not fileField(window.manager, filePathField, label="File path"):
             return
 
         filePath = filePathField.value

@@ -1,7 +1,7 @@
 import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField
+from src.helpers.form_validation import requiredField, fileField
 
 
 def VerifySignedFile():
@@ -13,6 +13,13 @@ def VerifySignedFile():
         if not requiredField(window.manager, filePathField, label="File path"):
             return
         if not requiredField(
+            window.manager, signaturePathField, label="Signature file path"
+        ):
+            return
+
+        if not fileField(window.manager, filePathField, label="File path"):
+            return
+        if not fileField(
             window.manager, signaturePathField, label="Signature file path"
         ):
             return
