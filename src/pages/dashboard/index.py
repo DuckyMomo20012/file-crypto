@@ -13,11 +13,31 @@ def getFiles():
     # NOTE: Date can have different formats, but recommend using YYYY-MM-DD or
     # DD-MM-YYYY, with a "-" or "/" as a separator
     return {
-        "2020-01-01": ["app.py", "app.py", "app.py"],
-        "2020-01-02": ["app.py", "app.py", "app.py"],
-        "2020-01-03": ["app.py", "app.py", "app.py"],
-        "2020-01-04": ["app.py", "app.py", "app.py"],
-        "2020-01-05": ["app.py", "app.py", "app.py"],
+        "2020-01-01": [
+            {"name": "app.py", "content": "Hello World"},
+            {"name": "app.py", "content": "Hello World"},
+            {"name": "app.py", "content": "Hello World"},
+        ],
+        "2020-01-02": [
+            {"name": "app.py", "content": "Hello World"},
+            {"name": "app.py", "content": "Hello World"},
+            {"name": "app.py", "content": "Hello World"},
+        ],
+        "2020-01-03": [
+            {"name": "app.py", "content": "Hello World"},
+            {"name": "app.py", "content": "Hello World"},
+            {"name": "app.py", "content": "Hello World"},
+        ],
+        "2020-01-04": [
+            {"name": "app.py", "content": "Hello World"},
+            {"name": "app.py", "content": "Hello World"},
+            {"name": "app.py", "content": "Hello World"},
+        ],
+        "2020-01-05": [
+            {"name": "app.py", "content": "Hello World"},
+            {"name": "app.py", "content": "Hello World"},
+            {"name": "app.py", "content": "Hello World"},
+        ],
     }
 
 
@@ -31,12 +51,14 @@ def DashBoard() -> None:
     # NOTE: A little hack to bind the fileName to the switchCurrPageWindowSlot
     # function and to avoid late binding problem, otherwise we will ONLY get the
     # last fileName in the list. E.g: file3, file6, file9,...
-    def handleButtonClick(*args, fileName):
+    def handleButtonClick(*args, fileName, fileContent):
 
         return switchCurrPageWindowSlot(
             manager=navBar.manager,
             targetAssign=("body"),
-            newWindow=navBar.manager.routes["dashboard/file_preview"](fileName),
+            newWindow=navBar.manager.routes["dashboard/file_preview"](
+                fileName=fileName, fileContent=fileContent
+            ),
         )
 
     def handleExitClick():
@@ -99,10 +121,14 @@ def DashBoard() -> None:
                 dates,
                 *[
                     ptg.Button(
-                        label=fileName,
-                        onclick=partial(handleButtonClick, fileName=fileName),
+                        label=file["name"],
+                        onclick=partial(
+                            handleButtonClick,
+                            fileName=file["name"],
+                            fileContent=file["content"],
+                        ),
                     )
-                    for fileName in files[dates]
+                    for file in files[dates]
                 ],
                 parent_align=ptg.HorizontalAlignment.LEFT,
                 size_policy=ptg.SizePolicy.STATIC,

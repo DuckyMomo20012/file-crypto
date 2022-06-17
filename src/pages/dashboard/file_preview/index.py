@@ -1,13 +1,9 @@
 import pytermgui as ptg
 
 from src.helpers.index import drawPage, switchCurrPageWindowSlot
-from src.helpers.file import readFile
 
 
-def FilePreview(fileName: str):
-
-    # FIXME: Read file from database instead of reading it from local disk
-    fileContent = readFile(fileName)
+def FilePreview(fileName: str, fileContent: str):
 
     contentField = ptg.InputField(fileContent, multiline=True)
 
