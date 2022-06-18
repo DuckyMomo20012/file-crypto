@@ -64,3 +64,52 @@ def updatePassphrase(privateKey, oldPassphrase: str, newPassphrase: str):
     newPublicKey = key.publickey().export_key()
 
     return newPrivateKey, newPublicKey
+
+
+def signFile(privateKey: bytes, filePath: str, passphrase: str) -> bytes:
+
+    from Crypto.Signature import pss
+    from Crypto.Hash import SHA256
+    from Crypto.PublicKey import RSA
+
+    from src.helpers.file import readFile
+
+    # NOTE: Ref: https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
+
+    # Read file
+    fileContent = readFile(filePath, mode="rb")
+
+    # Hash file content
+    fileContentHash = SHA256.new(fileContent)
+
+    # Sign file content
+    key = RSA.import_key(privateKey, passphrase=passphrase)
+    signature = pss.new(key).sign(fileContentHash)
+
+    return signature
+
+
+def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> None:
+
+    from Crypto.Signature import pss
+    from Crypto.Hash import SHA256
+    from Crypto.PublicKey import RSA
+
+    from src.helpers.file import readFile
+
+    # NOTE: Ref: https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
+
+    # Read file
+    fileContent = readFile(filePath, mode="rb")
+
+    # Hash file content
+    fileContentHash = SHA256.new(fileContent)
+
+    # Read signature
+    signature = readFile(signaturePath, mode="rb")
+
+    # Verify signature
+    key = RSA.import_key(publicKey)
+
+    # This will raise an exception if the signature is invalid
+    pss.new(key).verify(fileContentHash, signature)
