@@ -72,7 +72,9 @@ def DecryptFile():
         ptg.Container(filePathField),
         ptg.Label("Your password", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(passwordField),
-        ptg.Label("Save folder path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Label(
+            "Save folder path (optional)", parent_align=ptg.HorizontalAlignment.LEFT
+        ),
         ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(

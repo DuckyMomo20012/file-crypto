@@ -65,7 +65,9 @@ def EncryptFile():
         ptg.Container(filePathField),
         ptg.Label("Receiver email", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(receiverEmailField),
-        ptg.Label("Save folder path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Label(
+            "Save folder path (optional)", parent_align=ptg.HorizontalAlignment.LEFT
+        ),
         ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(
