@@ -3,7 +3,7 @@ from Crypto.Hash import SHA256
 from Crypto.Random import get_random_bytes
 
 
-def hash_password(plain_text_password):
+def hash_password(plain_text_password: str) -> bytes:
 
     salt = get_random_bytes(32)
 
@@ -16,7 +16,7 @@ def hash_password(plain_text_password):
     return mixed_hashed_pw
 
 
-def verify_password(plain_text_password, mixed_hashed_password):
+def verify_password(plain_text_password: str, mixed_hashed_password: bytes) -> bool:
 
     salt = mixed_hashed_password[:32]
 
@@ -32,7 +32,7 @@ def verify_password(plain_text_password, mixed_hashed_password):
         return False
 
 
-def generateUserKeys(passphrase):
+def generateUserKeys(passphrase: str):
     from Crypto.PublicKey import RSA
 
     # Generate RSA private and public key pair 2048 bits long
@@ -57,7 +57,9 @@ def generateUserKeys(passphrase):
     return privateKey, publicKey
 
 
-def updatePassphrase(privateKey, oldPassphrase: str, newPassphrase: str):
+def updatePassphrase(
+    privateKey: bytes, oldPassphrase: str, newPassphrase: str
+) -> tuple[bytes]:
     from Crypto.PublicKey import RSA
 
     # First, we import the private key with the old passphrase
@@ -128,13 +130,13 @@ def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> bool
         return False
 
 
-def encryptFile(publicKey: bytes, filePath: str) -> None:
+def encryptFile(publicKey: bytes, filePath: str, outPutExt: str = ".bin") -> None:
 
     from Crypto.PublicKey import RSA
     from Crypto.Random import get_random_bytes
     from Crypto.Cipher import AES, PKCS1_OAEP
 
-    from src.helpers.file import readFile, writeFile
+    from src.helpers.file import readFile
 
     # Read file
     fileContent = readFile(filePath, mode="rb")
@@ -157,11 +159,13 @@ def encryptFile(publicKey: bytes, filePath: str) -> None:
     # Combine encrypted session key and encrypted file content
 
     # Write encrypted file
-    fileOut = open(filePath + ".bin", "wb")
+    fileOut = open(filePath + outPutExt, "wb")
     [fileOut.write(x) for x in (encryptedSessionKey, cipherAES.nonce, tag, cipherText)]
 
 
-def decryptFile(privateKey: bytes, filePath: str, passphrase: str) -> None:
+def decryptFile(
+    privateKey: bytes, filePath: str, passphrase: str, outPutExt: str = ".txt"
+) -> None:
 
     from Crypto.PublicKey import RSA
     from Crypto.Cipher import AES, PKCS1_OAEP
@@ -192,4 +196,4 @@ def decryptFile(privateKey: bytes, filePath: str, passphrase: str) -> None:
     decryptedFileContent = cipherAES.decrypt_and_verify(cipherText, tag)
 
     # Write decrypted file
-    writeFile(filePath + ".txt", decryptedFileContent.decode("utf-8"))
+    writeFile(filePath + outPutExt, decryptedFileContent.decode("utf-8"))
