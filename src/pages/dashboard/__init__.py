@@ -9,6 +9,8 @@ from .file_preview.download_file import DownloadFile
 from .download_shared_file import DownloadSharedFile
 from .sign_file import SignFile
 from .verify_signed_file import VerifySignedFile
+from .encrypt_file import EncryptFile
+from .decrypt_file import DecryptFile
 
 __all__ = [
     "DashBoard",
@@ -22,4 +24,6 @@ __all__ = [
     "DownloadSharedFile",
     "SignFile",
     "VerifySignedFile",
+    "EncryptFile",
+    "DecryptFile",
 ]

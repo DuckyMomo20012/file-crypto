@@ -126,3 +126,70 @@ def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> bool
         return True
     except (ValueError, TypeError):
         return False
+
+
+def encryptFile(publicKey: bytes, filePath: str) -> None:
+
+    from Crypto.PublicKey import RSA
+    from Crypto.Random import get_random_bytes
+    from Crypto.Cipher import AES, PKCS1_OAEP
+
+    from src.helpers.file import readFile, writeFile
+
+    # Read file
+    fileContent = readFile(filePath, mode="rb")
+
+    # NOTE: Ref:
+    # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa
+
+    # Generate session key
+    sessionKey = get_random_bytes(16)
+
+    # Encrypt session key with RSA public key
+    key = RSA.import_key(publicKey)
+    cipherRSA = PKCS1_OAEP.new(key)
+    encryptedSessionKey = cipherRSA.encrypt(sessionKey)
+
+    # Encrypt file content
+    cipherAES = AES.new(sessionKey, AES.MODE_EAX)
+    cipherText, tag = cipherAES.encrypt_and_digest(fileContent)
+
+    # Combine encrypted session key and encrypted file content
+
+    # Write encrypted file
+    fileOut = open(filePath + ".bin", "wb")
+    [fileOut.write(x) for x in (encryptedSessionKey, cipherAES.nonce, tag, cipherText)]
+
+
+def decryptFile(privateKey: bytes, filePath: str, passphrase: str) -> None:
+
+    from Crypto.PublicKey import RSA
+    from Crypto.Cipher import AES, PKCS1_OAEP
+
+    from src.helpers.file import writeFile
+
+    # Read file
+    fileIn = open(filePath, "rb")
+
+    # NOTE: Ref:
+    # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa
+
+    # Decrypt session key with RSA private key
+    key = RSA.import_key(privateKey, passphrase=passphrase)
+    cipherRSA = PKCS1_OAEP.new(key)
+
+    # Separate encrypted session key, nonce, tag and encrypted file content
+    encryptedSessionKey, nonce, tag, cipherText = [
+        fileIn.read(x) for x in (key.size_in_bytes(), 16, 16, -1)
+    ]
+    try:
+        sessionKey = cipherRSA.decrypt(encryptedSessionKey)
+    except (ValueError, TypeError):
+        return None
+
+    # Decrypt file content
+    cipherAES = AES.new(sessionKey, AES.MODE_EAX, nonce)
+    decryptedFileContent = cipherAES.decrypt_and_verify(cipherText, tag)
+
+    # Write decrypted file
+    writeFile(filePath + ".txt", decryptedFileContent.decode("utf-8"))

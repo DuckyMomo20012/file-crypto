@@ -113,6 +113,23 @@ def DashBoard() -> None:
                 parent_align=ptg.HorizontalAlignment.CENTER,
             ),
         ),
+        ptg.Splitter(
+            ptg.Button(
+                "Encrypt file",
+                lambda *_: drawPage(
+                    navBar.manager, navBar.manager.routes["dashboard/encrypt_file"]()
+                ),
+                parent_align=ptg.HorizontalAlignment.CENTER,
+            ),
+            ptg.Button(
+                "Decrypt file",
+                lambda *_: drawPage(
+                    navBar.manager,
+                    navBar.manager.routes["dashboard/decrypt_file"](),
+                ),
+                parent_align=ptg.HorizontalAlignment.CENTER,
+            ),
+        ),
         "",
         "My files",
         "",

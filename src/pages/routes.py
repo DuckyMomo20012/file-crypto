@@ -18,5 +18,7 @@ routes = {
     "dashboard/download_shared_file": DownloadSharedFile,
     "dashboard/sign_file": SignFile,
     "dashboard/verify_signed_file": VerifySignedFile,
+    "dashboard/encrypt_file": EncryptFile,
+    "dashboard/decrypt_file": DecryptFile,
     "errors/form_validation_error": FormValidationError,
 }
