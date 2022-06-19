@@ -130,11 +130,15 @@ def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> bool
         return False
 
 
-def encryptFile(publicKey: bytes, filePath: str, outPutExt: str = ".bin") -> bool:
+def encryptFile(
+    publicKey: bytes, filePath: str, folderPath: str = ".", outPutExt: str = ".bin"
+) -> bool:
 
     from Crypto.PublicKey import RSA
     from Crypto.Random import get_random_bytes
     from Crypto.Cipher import AES, PKCS1_OAEP
+
+    from pathlib import Path
 
     from src.helpers.file import readFile
 
@@ -158,7 +162,9 @@ def encryptFile(publicKey: bytes, filePath: str, outPutExt: str = ".bin") -> boo
         cipherText, tag = cipherAES.encrypt_and_digest(fileContent)
 
         # Write encrypted file
-        fileOut = open(filePath + outPutExt, "wb")
+        fileNameOut = Path(filePath + outPutExt).name
+
+        fileOut = open(Path(folderPath).joinpath(fileNameOut), "wb")
         # Combine encrypted session key and encrypted file content
         [
             fileOut.write(x)
@@ -172,13 +178,17 @@ def encryptFile(publicKey: bytes, filePath: str, outPutExt: str = ".bin") -> boo
 
 
 def decryptFile(
-    privateKey: bytes, filePath: str, passphrase: str, outPutExt: str = ".txt"
+    privateKey: bytes,
+    filePath: str,
+    passphrase: str,
+    folderPath: str = ".",
+    outPutExt: str = ".txt",
 ) -> bool:
 
     from Crypto.PublicKey import RSA
     from Crypto.Cipher import AES, PKCS1_OAEP
 
-    from src.helpers.file import writeFile
+    from src.helpers.file import writeFileToFolder
 
     # Read file
     fileIn = open(filePath, "rb")
@@ -202,7 +212,9 @@ def decryptFile(
         decryptedFileContent = cipherAES.decrypt_and_verify(cipherText, tag)
 
         # Write decrypted file
-        writeFile(filePath + outPutExt, decryptedFileContent.decode("utf-8"))
+        writeFileToFolder(
+            filePath + outPutExt, folderPath, decryptedFileContent.decode("utf-8")
+        )
 
         return True
 

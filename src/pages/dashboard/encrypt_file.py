@@ -1,7 +1,7 @@
 import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField, fileField
+from src.helpers.form_validation import requiredField, fileField, folderField
 
 from src.api.auth.service import getOneUser
 
@@ -11,6 +11,7 @@ from src.helpers.cryptography import encryptFile
 def EncryptFile():
     filePathField = ptg.InputField()
     receiverEmailField = ptg.InputField()
+    saveFolderPathField = ptg.InputField()
 
     # TODO: Implement sign file logic
     def handleEncryptClick():
@@ -20,9 +21,15 @@ def EncryptFile():
         if not fileField(window.manager, filePathField, label="File path"):
             return
 
+        if not folderField(
+            window.manager, saveFolderPathField, label="Save folder path"
+        ):
+            return
+
         # NOTE: Remember to check if this is a valid folder & file directory
         filePath = filePathField.value
         receiverEmail = receiverEmailField.value
+        saveFolderPath = saveFolderPathField.value
 
         receiver = getOneUser(receiverEmail)
 
@@ -36,7 +43,7 @@ def EncryptFile():
             return
 
         # Encrypt file
-        if encryptFile(receiver.publicKey, filePath):
+        if encryptFile(receiver.publicKey, filePath, folderPath=saveFolderPath):
             alertModal = window.manager.alert(
                 "File encrypted successfully!",
                 "",
@@ -58,6 +65,8 @@ def EncryptFile():
         ptg.Container(filePathField),
         ptg.Label("Receiver email", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(receiverEmailField),
+        ptg.Label("Save folder path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(
             ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),

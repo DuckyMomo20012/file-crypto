@@ -1,7 +1,7 @@
 import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField, fileField
+from src.helpers.form_validation import requiredField, fileField, folderField
 
 import config
 
@@ -14,6 +14,7 @@ def DecryptFile():
     filePathField = ptg.InputField()
     passwordField = ptg.InputField()
     passwordField.styles["value"] = "invisible"
+    saveFolderPathField = ptg.InputField()
 
     # TODO: Implement sign file logic
     def handleDecryptClick():
@@ -25,9 +26,15 @@ def DecryptFile():
         if not fileField(window.manager, filePathField, label="Encrypted file path"):
             return
 
+        if not folderField(
+            window.manager, saveFolderPathField, label="Save folder path"
+        ):
+            return
+
         # NOTE: Remember to check if this is a valid folder & file directory
         filePath = filePathField.value
         password = passwordField.value
+        saveFolderPath = saveFolderPathField.value
 
         user = getOneUser(config.session.email)
 
@@ -41,7 +48,9 @@ def DecryptFile():
             return
 
         # Decrypt file
-        if decryptFile(user.privateKey, filePath, passphrase=password):
+        if decryptFile(
+            user.privateKey, filePath, passphrase=password, folderPath=saveFolderPath
+        ):
             alertModal = window.manager.alert(
                 "File decrypted successfully!",
                 "",
@@ -63,6 +72,8 @@ def DecryptFile():
         ptg.Container(filePathField),
         ptg.Label("Your password", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(passwordField),
+        ptg.Label("Save folder path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(
             ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
