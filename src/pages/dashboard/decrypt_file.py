@@ -41,7 +41,18 @@ def DecryptFile():
             return
 
         # Decrypt file
-        decryptFile(user.privateKey, filePath, passphrase=password)
+        if decryptFile(user.privateKey, filePath, passphrase=password):
+            alertModal = window.manager.alert(
+                "File decrypted successfully!",
+                "",
+                ptg.Button("OK", lambda *_: alertModal.close()),
+            )
+        else:
+            alertModal = window.manager.alert(
+                "File decryption failed or user does not have permission!",
+                "",
+                ptg.Button("OK", lambda *_: alertModal.close()),
+            )
 
         # Go to previous page
         goToPrevPage(window.manager)

@@ -36,7 +36,18 @@ def EncryptFile():
             return
 
         # Encrypt file
-        encryptFile(receiver.publicKey, filePath)
+        if encryptFile(receiver.publicKey, filePath):
+            alertModal = window.manager.alert(
+                "File encrypted successfully!",
+                "",
+                ptg.Button("OK", lambda *_: alertModal.close()),
+            )
+        else:
+            alertModal = window.manager.alert(
+                "File encryption failed!",
+                "",
+                ptg.Button("OK", lambda *_: alertModal.close()),
+            )
 
         # Go to previous page
         goToPrevPage(window.manager)
