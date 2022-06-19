@@ -41,7 +41,7 @@ def Login():
 
         user = getOneUser(email)
 
-        if verify_password(password, user.password):
+        if user and verify_password(password, user.password):
             alertModal = window.manager.alert(
                 "Login successful!",
                 "",
