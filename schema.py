@@ -7,7 +7,7 @@ class User(me.Document):
     dateOfBirth = me.DateTimeField()
     phone = me.StringField()
     address = me.StringField()
-    password = me.StringField()
+    password = me.BinaryField()
     publicKey = me.BinaryField()
     privateKey = me.BinaryField()
     meta = {"collection": "users"}
