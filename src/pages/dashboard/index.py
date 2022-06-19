@@ -96,40 +96,6 @@ def DashBoard() -> None:
                 parent_align=ptg.HorizontalAlignment.CENTER,
             ),
         ),
-        ptg.Splitter(
-            ptg.Button(
-                "Sign file",
-                lambda *_: drawPage(
-                    navBar.manager, navBar.manager.routes["dashboard/sign_file"]()
-                ),
-                parent_align=ptg.HorizontalAlignment.CENTER,
-            ),
-            ptg.Button(
-                "Verify signed file",
-                lambda *_: drawPage(
-                    navBar.manager,
-                    navBar.manager.routes["dashboard/verify_signed_file"](),
-                ),
-                parent_align=ptg.HorizontalAlignment.CENTER,
-            ),
-        ),
-        ptg.Splitter(
-            ptg.Button(
-                "Encrypt file",
-                lambda *_: drawPage(
-                    navBar.manager, navBar.manager.routes["dashboard/encrypt_file"]()
-                ),
-                parent_align=ptg.HorizontalAlignment.CENTER,
-            ),
-            ptg.Button(
-                "Decrypt file",
-                lambda *_: drawPage(
-                    navBar.manager,
-                    navBar.manager.routes["dashboard/decrypt_file"](),
-                ),
-                parent_align=ptg.HorizontalAlignment.CENTER,
-            ),
-        ),
         "",
         "My files",
         "",
@@ -161,11 +127,20 @@ def DashBoard() -> None:
     navBar.overflow = ptg.Overflow.SCROLL
 
     hamburger = ptg.Window(
-        ptg.Button(
-            "⚙️ ",
-            lambda *_: drawPage(
-                hamburger.manager, hamburger.manager.routes["dashboard/settings"]()
+        ptg.Splitter(
+            ptg.Button(
+                "⚙️ ",
+                lambda *_: drawPage(
+                    hamburger.manager, hamburger.manager.routes["dashboard/settings"]()
+                ),
             ),
+            ptg.Button(
+                "🧰",
+                lambda *_: drawPage(
+                    hamburger.manager, hamburger.manager.routes["dashboard/tools"]()
+                ),
+            ),
+            chars={"separator": ""},
         ),
         box="EMPTY",
     )

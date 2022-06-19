@@ -7,10 +7,11 @@ from .upload_file import UploadFile
 from .file_preview.index import FilePreview
 from .file_preview.download_file import DownloadFile
 from .download_shared_file import DownloadSharedFile
-from .sign_file import SignFile
-from .verify_signed_file import VerifySignedFile
-from .encrypt_file import EncryptFile
-from .decrypt_file import DecryptFile
+from .tools.index import Tools
+from .tools.sign_file import SignFile
+from .tools.verify_signed_file import VerifySignedFile
+from .tools.encrypt_file import EncryptFile
+from .tools.decrypt_file import DecryptFile
 
 __all__ = [
     "DashBoard",
@@ -22,6 +23,7 @@ __all__ = [
     "FilePreview",
     "DownloadFile",
     "DownloadSharedFile",
+    "Tools",
     "SignFile",
     "VerifySignedFile",
     "EncryptFile",
