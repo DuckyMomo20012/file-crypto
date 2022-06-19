@@ -89,7 +89,7 @@ def signFile(privateKey: bytes, filePath: str, passphrase: str) -> bytes:
     return signature
 
 
-def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> None:
+def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> bool:
 
     from Crypto.Signature import pss
     from Crypto.Hash import SHA256
@@ -112,4 +112,9 @@ def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> None
     key = RSA.import_key(publicKey)
 
     # This will raise an exception if the signature is invalid
-    pss.new(key).verify(fileContentHash, signature)
+    try:
+        pss.new(key).verify(fileContentHash, signature)
+
+        return True
+    except (ValueError, TypeError):
+        return False

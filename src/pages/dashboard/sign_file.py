@@ -69,7 +69,7 @@ def SignFile():
         ptg.Container(filePathField),
         ptg.Label("Save folder path", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(saveFolderPathField),
-        ptg.Label("Password", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Label("Your password", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(passwordField),
         "",
         ptg.Splitter(
@@ -81,7 +81,7 @@ def SignFile():
         ),
     )
 
-    window.set_title("Sign you file")
+    window.set_title("Sign your file")
     window.overflow = ptg.Overflow.RESIZE
     window.center()
     window.is_noresize = True

@@ -35,24 +35,26 @@ def VerifySignedFile():
         # Verify signature
         window.manager.toast(f"Verifying {filePath}...")
 
+        verified = False
         for user in getAllUsers():
-            try:
-                verifySignature(user.publicKey, filePath, signaturePath)
+            if verifySignature(user.publicKey, filePath, signaturePath):
 
-                alertModal = window.manager.alert(
+                verifiedModal = window.manager.alert(
                     "Signature verified",
                     f"User {user.email} signed file",
                     "",
-                    ptg.Button("OK", lambda *_: alertModal.close()),
+                    ptg.Button("OK", lambda *_: verifiedModal.close()),
                 )
+                verified = True
+                break
 
-            except (ValueError, TypeError):
-                alertModal = window.manager.alert(
-                    "Signature verification failed",
-                    "Unknown user signed file",
-                    "",
-                    ptg.Button("OK", lambda *_: alertModal.close()),
-                )
+        if not verified:
+            unverifiedModal = window.manager.alert(
+                "Signature verification failed",
+                "Unknown user signed file",
+                "",
+                ptg.Button("OK", lambda *_: unverifiedModal.close()),
+            )
 
     window = ptg.Window(
         "",
