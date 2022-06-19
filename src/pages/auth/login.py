@@ -3,6 +3,12 @@ from src.helpers.index import switchPage, exitApp
 from src.helpers.form_validation import requiredField
 from src.helpers.form_validation import emailField as emailFieldValidator
 
+from src.api.auth.service import getOneUser
+
+from src.helpers.cryptography import verify_password
+
+import config
+
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
     modal.close()
@@ -33,7 +39,9 @@ def Login():
         email = emailField.value
         password = passwordField.value
 
-        if email == "admin@gmail.com" and password == "admin":
+        user = getOneUser(email)
+
+        if user and verify_password(password, user.password):
             alertModal = window.manager.alert(
                 "Login successful!",
                 "",
@@ -41,6 +49,9 @@ def Login():
                     "OK", lambda *_: handleSuccessModalClose(window, alertModal)
                 ),
             )
+
+            # NOTE: We store user to session here
+            config.session = user
 
         else:
             alertModal = window.manager.alert(

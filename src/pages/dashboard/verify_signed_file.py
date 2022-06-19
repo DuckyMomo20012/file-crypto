@@ -3,6 +3,10 @@ import pytermgui as ptg
 from src.helpers.index import goToPrevPage
 from src.helpers.form_validation import requiredField, fileField
 
+from src.api.auth.service import getAllUsers
+
+from src.helpers.cryptography import verifySignature
+
 
 def VerifySignedFile():
     filePathField = ptg.InputField()
@@ -28,22 +32,28 @@ def VerifySignedFile():
         filePath = filePathField.value
         signaturePath = signaturePathField.value
 
+        # Verify signature
         window.manager.toast(f"Verifying {filePath}...")
 
-        if True:
-            emailUser = "example@gmail.com"
-            alertModal = window.manager.alert(
-                "Signature verified",
-                f"User {emailUser} signed file",
-                "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
-            )
-        else:
-            alertModal = window.manager.alert(
+        verified = False
+        for user in getAllUsers():
+            if verifySignature(user.publicKey, filePath, signaturePath):
+
+                verifiedModal = window.manager.alert(
+                    "Signature verified",
+                    f"User {user.email} signed file",
+                    "",
+                    ptg.Button("OK", lambda *_: verifiedModal.close()),
+                )
+                verified = True
+                break
+
+        if not verified:
+            unverifiedModal = window.manager.alert(
                 "Signature verification failed",
                 "Unknown user signed file",
                 "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
+                ptg.Button("OK", lambda *_: unverifiedModal.close()),
             )
 
     window = ptg.Window(

@@ -7,24 +7,23 @@ import config
 
 from src.api.auth.service import getOneUser
 
-from src.helpers.cryptography import signFile, verify_password
-from src.helpers.file import writeFileToFolder
+from src.helpers.cryptography import verify_password, decryptFile
 
 
-def SignFile():
+def DecryptFile():
     filePathField = ptg.InputField()
     passwordField = ptg.InputField()
     passwordField.styles["value"] = "invisible"
     saveFolderPathField = ptg.InputField()
 
     # TODO: Implement sign file logic
-    def handleSignClick():
-        if not requiredField(window.manager, filePathField, label="File path"):
-            return
-        if not requiredField(window.manager, passwordField, label="Password"):
+    def handleDecryptClick():
+        if not requiredField(
+            window.manager, filePathField, label="Encrypted file path"
+        ):
             return
 
-        if not fileField(window.manager, filePathField, label="File path"):
+        if not fileField(window.manager, filePathField, label="Encrypted file path"):
             return
 
         if not folderField(
@@ -48,20 +47,28 @@ def SignFile():
             )
             return
 
-        window.manager.toast(f"Signing file {filePath}...")
-
-        # Sign file
-        signature = signFile(user.privateKey, filePath, passphrase=password)
-
-        # Write signature to file
-        writeFileToFolder(filePath + ".sig", saveFolderPath, signature, mode="wb")
+        # Decrypt file
+        if decryptFile(
+            user.privateKey, filePath, passphrase=password, folderPath=saveFolderPath
+        ):
+            alertModal = window.manager.alert(
+                "File decrypted successfully!",
+                "",
+                ptg.Button("OK", lambda *_: alertModal.close()),
+            )
+        else:
+            alertModal = window.manager.alert(
+                "File decryption failed or user does not have permission!",
+                "",
+                ptg.Button("OK", lambda *_: alertModal.close()),
+            )
 
         # Go to previous page
         goToPrevPage(window.manager)
 
     window = ptg.Window(
         "",
-        ptg.Label("File path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Label("Encrypted file path", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(filePathField),
         ptg.Label("Your password", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(passwordField),
@@ -73,13 +80,13 @@ def SignFile():
         ptg.Splitter(
             ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button(
-                "Sign file",
-                lambda *_: handleSignClick(),
+                "Decrypt file",
+                lambda *_: handleDecryptClick(),
             ),
         ),
     )
 
-    window.set_title("Sign your file")
+    window.set_title("Decrypt your file")
     window.overflow = ptg.Overflow.RESIZE
     window.center()
     window.is_noresize = True

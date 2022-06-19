@@ -1,0 +1,2 @@
+# Declare global variables
+session = {}

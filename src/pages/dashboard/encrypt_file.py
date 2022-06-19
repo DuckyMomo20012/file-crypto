@@ -3,25 +3,19 @@ import pytermgui as ptg
 from src.helpers.index import goToPrevPage
 from src.helpers.form_validation import requiredField, fileField, folderField
 
-import config
-
 from src.api.auth.service import getOneUser
 
-from src.helpers.cryptography import signFile, verify_password
-from src.helpers.file import writeFileToFolder
+from src.helpers.cryptography import encryptFile
 
 
-def SignFile():
+def EncryptFile():
     filePathField = ptg.InputField()
-    passwordField = ptg.InputField()
-    passwordField.styles["value"] = "invisible"
+    receiverEmailField = ptg.InputField()
     saveFolderPathField = ptg.InputField()
 
     # TODO: Implement sign file logic
-    def handleSignClick():
+    def handleEncryptClick():
         if not requiredField(window.manager, filePathField, label="File path"):
-            return
-        if not requiredField(window.manager, passwordField, label="Password"):
             return
 
         if not fileField(window.manager, filePathField, label="File path"):
@@ -34,27 +28,33 @@ def SignFile():
 
         # NOTE: Remember to check if this is a valid folder & file directory
         filePath = filePathField.value
-        password = passwordField.value
+        receiverEmail = receiverEmailField.value
         saveFolderPath = saveFolderPathField.value
 
-        user = getOneUser(config.session.email)
+        receiver = getOneUser(receiverEmail)
 
-        # Verify password to make sure the passphrase is correct
-        if not verify_password(password, user.password):
+        # Verify receiver email is exist
+        if not receiver:
             alertModal = window.manager.alert(
-                "Password is incorrect!",
+                "Receiver email is not exist!",
                 "",
                 ptg.Button("OK", lambda *_: alertModal.close()),
             )
             return
 
-        window.manager.toast(f"Signing file {filePath}...")
-
-        # Sign file
-        signature = signFile(user.privateKey, filePath, passphrase=password)
-
-        # Write signature to file
-        writeFileToFolder(filePath + ".sig", saveFolderPath, signature, mode="wb")
+        # Encrypt file
+        if encryptFile(receiver.publicKey, filePath, folderPath=saveFolderPath):
+            alertModal = window.manager.alert(
+                "File encrypted successfully!",
+                "",
+                ptg.Button("OK", lambda *_: alertModal.close()),
+            )
+        else:
+            alertModal = window.manager.alert(
+                "File encryption failed!",
+                "",
+                ptg.Button("OK", lambda *_: alertModal.close()),
+            )
 
         # Go to previous page
         goToPrevPage(window.manager)
@@ -63,8 +63,8 @@ def SignFile():
         "",
         ptg.Label("File path", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(filePathField),
-        ptg.Label("Your password", parent_align=ptg.HorizontalAlignment.LEFT),
-        ptg.Container(passwordField),
+        ptg.Label("Receiver email", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Container(receiverEmailField),
         ptg.Label(
             "Save folder path (optional)", parent_align=ptg.HorizontalAlignment.LEFT
         ),
@@ -73,13 +73,13 @@ def SignFile():
         ptg.Splitter(
             ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button(
-                "Sign file",
-                lambda *_: handleSignClick(),
+                "Encrypt file",
+                lambda *_: handleEncryptClick(),
             ),
         ),
     )
 
-    window.set_title("Sign your file")
+    window.set_title("Encrypt your file")
     window.overflow = ptg.Overflow.RESIZE
     window.center()
     window.is_noresize = True

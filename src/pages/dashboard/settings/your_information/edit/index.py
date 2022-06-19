@@ -3,6 +3,10 @@ import pytermgui as ptg
 from src.helpers.index import goToPrevPage
 from src.helpers.form_validation import requiredField
 
+from src.api.auth.service import updateUserOneField
+
+import config
+
 
 def EditInformation(label: str, oldValue: Any, fieldName: str):
 
@@ -17,6 +21,15 @@ def EditInformation(label: str, oldValue: Any, fieldName: str):
         # user['fieldName'] = inputField.value
 
         newValue = inputField.value
+
+        window.manager.toast("Updating information...")
+
+        updateUserOneField(config.session.email, fieldName, newValue)
+
+        # NOTE: We go back to two pages, close settings page, so when user open
+        # settings again, it will show the updated information.
+        goToPrevPage(window.manager)
+        goToPrevPage(window.manager)
 
     window = ptg.Window(
         "",
