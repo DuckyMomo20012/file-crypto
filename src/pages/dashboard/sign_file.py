@@ -13,17 +13,13 @@ from src.helpers.file import writeFileToFolder
 
 def SignFile():
     filePathField = ptg.InputField()
-    saveFolderPathField = ptg.InputField()
     passwordField = ptg.InputField()
     passwordField.styles["value"] = "invisible"
+    saveFolderPathField = ptg.InputField()
 
     # TODO: Implement sign file logic
     def handleSignClick():
         if not requiredField(window.manager, filePathField, label="File path"):
-            return
-        if not requiredField(
-            window.manager, saveFolderPathField, label="Save folder path"
-        ):
             return
         if not requiredField(window.manager, passwordField, label="Password"):
             return
@@ -38,8 +34,8 @@ def SignFile():
 
         # NOTE: Remember to check if this is a valid folder & file directory
         filePath = filePathField.value
-        saveFolderPath = saveFolderPathField.value
         password = passwordField.value
+        saveFolderPath = saveFolderPathField.value
 
         user = getOneUser(config.session.email)
 
@@ -67,10 +63,10 @@ def SignFile():
         "",
         ptg.Label("File path", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(filePathField),
-        ptg.Label("Save folder path", parent_align=ptg.HorizontalAlignment.LEFT),
-        ptg.Container(saveFolderPathField),
         ptg.Label("Your password", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(passwordField),
+        ptg.Label("Save folder path", parent_align=ptg.HorizontalAlignment.LEFT),
+        ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(
             ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
