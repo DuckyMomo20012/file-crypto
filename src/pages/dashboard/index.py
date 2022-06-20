@@ -5,40 +5,35 @@ from functools import partial
 from src.components.layouts.AppShell import AppShell
 from src.helpers.index import drawPage, exitApp, switchCurrPageWindowSlot
 
+from src.api.file_crypto.service import getAllFiles
+
 # TODO: Implement this function to fetch data from the database and return
 # format like this
 # NOTE: Any suggestions for a better way to do this?
 def getFiles():
 
+    files = getAllFiles()
+
+    returnedFiles = {}
+
+    for file in files:
+        # NOTE: We can read file metadata from the database using file.metadata.
+        # E.g: fileField.upload_date, fileField.length, fileField.chunkSize, etc.
+        date = file.cipher.upload_date.strftime("%Y-%m-%d")
+        if date not in returnedFiles:
+            returnedFiles[date] = []
+        returnedFiles[date].append({"name": file.name})
+
     # NOTE: Date can have different formats, but recommend using YYYY-MM-DD or
     # DD-MM-YYYY, with a "-" or "/" as a separator
-    return {
-        "2020-01-01": [
-            {"name": "app.py", "content": "Hello World"},
-            {"name": "app.py", "content": "Hello World"},
-            {"name": "app.py", "content": "Hello World"},
-        ],
-        "2020-01-02": [
-            {"name": "app.py", "content": "Hello World"},
-            {"name": "app.py", "content": "Hello World"},
-            {"name": "app.py", "content": "Hello World"},
-        ],
-        "2020-01-03": [
-            {"name": "app.py", "content": "Hello World"},
-            {"name": "app.py", "content": "Hello World"},
-            {"name": "app.py", "content": "Hello World"},
-        ],
-        "2020-01-04": [
-            {"name": "app.py", "content": "Hello World"},
-            {"name": "app.py", "content": "Hello World"},
-            {"name": "app.py", "content": "Hello World"},
-        ],
-        "2020-01-05": [
-            {"name": "app.py", "content": "Hello World"},
-            {"name": "app.py", "content": "Hello World"},
-            {"name": "app.py", "content": "Hello World"},
-        ],
-    }
+    # return {
+    #     "2020-01-01": [
+    #         {"name": "app.py"},
+    #         {"name": "app.py"},
+    #         {"name": "app.py"},
+    #     ],
+    # }
+    return returnedFiles
 
 
 def DashBoard() -> None:
@@ -51,13 +46,13 @@ def DashBoard() -> None:
     # NOTE: A little hack to bind the fileName to the switchCurrPageWindowSlot
     # function and to avoid late binding problem, otherwise we will ONLY get the
     # last fileName in the list. E.g: file3, file6, file9,...
-    def handleButtonClick(*args, fileName, fileContent):
+    def handleButtonClick(*args, fileName):
 
         return switchCurrPageWindowSlot(
             manager=navBar.manager,
             targetAssign=("body"),
             newWindow=navBar.manager.routes["dashboard/file_preview"](
-                fileName=fileName, fileContent=fileContent
+                fileName=fileName
             ),
         )
 
@@ -108,7 +103,6 @@ def DashBoard() -> None:
                         onclick=partial(
                             handleButtonClick,
                             fileName=file["name"],
-                            fileContent=file["content"],
                         ),
                     )
                     for file in files[dates]

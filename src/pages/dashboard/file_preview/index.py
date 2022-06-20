@@ -2,12 +2,31 @@ import pytermgui as ptg
 
 from src.helpers.index import drawPage, switchCurrPageWindowSlot
 
-from src.api.file_crypto.service import deleteFile
+import config
+
+from src.api.auth.service import getOneUser
+from src.api.file_crypto.service import deleteFile, getOneFile
+
+from src.helpers.cryptography import decryptData
 
 
-def FilePreview(fileName: str, fileContent: str):
+def FilePreview(fileName: str):
 
-    contentField = ptg.InputField(fileContent, multiline=True)
+    user = getOneUser(config.session.email)
+
+    file = getOneFile(fileName)
+
+    decryptedData = decryptData(
+        privateKey=user.privateKey,
+        # FIXME: Hardcoded passphrase for testing
+        passphrase="admin",
+        encryptedSessionKey=file.sessionKey,
+        nonce=file.nonce,
+        tag=file.tag,
+        cipherText=file.cipher.read(),
+    )
+
+    contentField = ptg.InputField(decryptedData, multiline=True)
 
     def handleDeleteClick():
         def handleConfirmDeleteClick():
