@@ -6,7 +6,7 @@ from src.components import SuccessModal, ErrorModal
 
 import config
 
-from src.api.auth.service import getOneUser, updateUserManyFields, updatePassword
+from src.api.auth.service import getOneUser, updateUserKeys, updateUserPassword
 
 from src.helpers.cryptography import updatePassphrase, verify_password, hash_password
 
@@ -57,13 +57,13 @@ def ChangePassword():
 
                 # Update password
 
-                updateUserManyFields(
+                updateUserKeys(
                     email=config.session.email,
-                    privateKey=newPrivateKey,
                     publicKey=newPublicKey,
+                    privateKey=newPrivateKey,
                 )
 
-                updatePassword(config.session.email, hash_password(newPassword))
+                updateUserPassword(config.session.email, hash_password(newPassword))
 
                 SuccessModal(
                     window.manager,
