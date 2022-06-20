@@ -9,10 +9,9 @@ def getAllFiles():
     return FileCrypto.objects()
 
 
-def uploadFile(name, size, sessionKey, nonce, tag, cipher):
+def uploadFile(name, sessionKey, nonce, tag, cipher):
     file = FileCrypto(
         name=name,
-        size=size,
         sessionKey=sessionKey,
         nonce=nonce,
         tag=tag,

@@ -41,7 +41,6 @@ def UploadFile():
 
             uploadFile(
                 name=filePath,
-                size=len(fileContent),
                 sessionKey=encryptedSessionKey,
                 nonce=nonce,
                 tag=tag,

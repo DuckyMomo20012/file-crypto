@@ -15,8 +15,6 @@ class User(me.Document):
 
 class FileCrypto(me.Document):
     name = me.StringField()
-    size = me.IntField()
-    # path = me.StringField()
     sessionKey = me.BinaryField()
     nonce = me.BinaryField()
     tag = me.BinaryField()
