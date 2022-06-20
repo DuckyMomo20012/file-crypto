@@ -89,7 +89,7 @@ def Login():
         ),
     )
 
-    window.set_title(title="Login")
+    window.set_title(title="[window__title]Login")
     window.overflow = ptg.Overflow.RESIZE
     window.vertical_align = ptg.VerticalAlignment.TOP
     window.center()

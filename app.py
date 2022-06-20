@@ -12,8 +12,10 @@ env.read_env()
 connect(host=env.str("MONGODB_HOST"))
 
 with ptg.WindowManager() as manager:
-    ptg.boxes.ROUNDED.set_chars_of(ptg.Container)
-    ptg.boxes.ROUNDED.set_chars_of(ptg.Window)
+    styles = open("styles.yaml").read()
+
+    loader = ptg.YamlLoader()
+    loader.load(styles)
 
     manager.routes = routes
 

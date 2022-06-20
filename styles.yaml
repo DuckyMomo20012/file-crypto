@@ -1,0 +1,65 @@
+markup:
+  nord0: "#2e3440"
+  nord1: "#3b4252"
+  nord2: "#434c5e"
+  nord3: "#4c566a"
+  nord4: "#d8dee9"
+  nord5: "#e5e9f0"
+  nord6: "#eceff4"
+  nord7: "#8fbcbb"
+  nord8: "#88c0d0"
+  nord9: "#81a1c1"
+  nord10: "#5e81ac"
+  nord11: "#bf616a"
+  nord12: "#d08770"
+  nord13: "#ebcb8b"
+  nord14: "#a3be8c"
+  nord15: "#b48ead"
+  body: "nord4"
+  button: "nord15 bold"
+  button--highlight: "@#b48ead nord4 bold"
+  window__title: "nord14 bold"
+  window__border: "nord3"
+  window__title--error: "nord11 bold"
+  window__border--error: "nord11"
+  window__corner--error: "nord11"
+  window__title--success: "nord14 bold"
+  window__border--success: "nord14"
+  window__corner--success: "nord14"
+
+config:
+  Window:
+    styles:
+      border: &border-style "window__border"
+      corner: *border-style
+    chars:
+      border: ["│ ", "─", " │", "─"]
+      corner: ["╭", "╮", "╯", "╰"]
+
+  Label:
+    styles:
+      value: "[body]{item}"
+
+  Button:
+    styles:
+      label: "[button]{item}"
+      highlight: "[button--highlight]{item}"
+    chars:
+      delimiter: ["[ ", " ]"]
+
+  Splitter:
+    chars:
+      separator: ""
+
+  Container:
+    styles:
+      border: "[nord5]{item}"
+      corner: "[nord5]{item}"
+    chars:
+      border: ["│ ", "─", " │", "─"]
+      corner: ["╭", "╮", "╯", "╰"]
+
+  InputField:
+    styles:
+      value: "nord8"
+      cursor: "[nord13 inverse]{item}"
