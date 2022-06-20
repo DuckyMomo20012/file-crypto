@@ -2,6 +2,16 @@ import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
 from src.helpers.form_validation import requiredField, fileField
+from src.components import SuccessModal, ErrorModal
+
+import config
+
+from src.helpers.file import readFile
+
+from src.api.auth.service import getOneUser
+from src.api.file_crypto.service import uploadFile
+
+from src.helpers.cryptography import encryptData
 
 
 def UploadFile():
@@ -19,6 +29,29 @@ def UploadFile():
         window.manager.toast(f"Uploading {filePath}...")
 
         # TODO: Implement upload logic
+
+        user = getOneUser(config.session.email)
+
+        fileContent = readFile(filePath, mode="rb")
+
+        encryptedData = encryptData(user.publicKey, fileContent)
+
+        if encryptData:
+            encryptedSessionKey, nonce, tag, cipherText = encryptedData
+
+            uploadFile(
+                name=filePath,
+                size=len(fileContent),
+                sessionKey=encryptedSessionKey,
+                nonce=nonce,
+                tag=tag,
+                cipher=cipherText,
+            )
+
+            SuccessModal(window.manager, "File uploaded successfully!")
+
+        else:
+            ErrorModal(window.manager, "Error uploading file!")
 
         goToPrevPage(window.manager)
 

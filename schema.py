@@ -15,10 +15,12 @@ class User(me.Document):
 
 class FileCrypto(me.Document):
     name = me.StringField()
-    path = me.StringField()
-    content = me.FileField()
     size = me.IntField()
-    sessionKey = me.StringField()
+    # path = me.StringField()
+    sessionKey = me.BinaryField()
+    nonce = me.BinaryField()
+    tag = me.BinaryField()
+    cipher = me.FileField()
     meta = {"collection": "files"}
 
 

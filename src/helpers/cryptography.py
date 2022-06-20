@@ -220,3 +220,65 @@ def decryptFile(
 
     except (ValueError, TypeError):
         return False
+
+
+def encryptData(
+    publicKey: bytes, content: bytes
+) -> tuple[bytes, bytes, bytes, bytes] | None:
+
+    from Crypto.PublicKey import RSA
+    from Crypto.Random import get_random_bytes
+    from Crypto.Cipher import AES, PKCS1_OAEP
+
+    # NOTE: Ref:
+    # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa
+
+    # Generate session key
+    sessionKey = get_random_bytes(16)
+
+    try:
+        # Encrypt session key with RSA public key
+        key = RSA.import_key(publicKey)
+        cipherRSA = PKCS1_OAEP.new(key)
+        encryptedSessionKey = cipherRSA.encrypt(sessionKey)
+
+        # Encrypt file content
+        cipherAES = AES.new(sessionKey, AES.MODE_EAX)
+        cipherText, tag = cipherAES.encrypt_and_digest(content)
+
+        return (encryptedSessionKey, cipherAES.nonce, tag, cipherText)
+
+    except (ValueError, TypeError):
+        return None
+
+
+def decryptData(
+    privateKey: bytes,
+    passphrase: str,
+    encryptedSessionKey: bytes,
+    nonce: bytes,
+    tag: bytes,
+    cipherText: bytes,
+) -> bytes | None:
+
+    from Crypto.PublicKey import RSA
+    from Crypto.Cipher import AES, PKCS1_OAEP
+
+    # NOTE: Ref:
+    # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa
+
+    try:
+        # Decrypt session key with RSA private key
+        key = RSA.import_key(privateKey, passphrase=passphrase)
+        cipherRSA = PKCS1_OAEP.new(key)
+
+        sessionKey = cipherRSA.decrypt(encryptedSessionKey)
+
+        # Decrypt file content
+        cipherAES = AES.new(sessionKey, AES.MODE_EAX, nonce)
+        decryptedFileContent = cipherAES.decrypt_and_verify(cipherText, tag)
+
+        return decryptedFileContent.decode("utf-8")
+
+    except (ValueError, TypeError):
+        return None
