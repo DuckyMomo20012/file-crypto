@@ -10,7 +10,7 @@ from src.api.file_crypto.service import deleteFile, getOneFile
 from src.helpers.cryptography import decryptData
 
 
-def FilePreview(fileName: str):
+def FilePreview(fileName: str, passphrase: str):
 
     user = getOneUser(config.session.email)
 
@@ -19,14 +19,16 @@ def FilePreview(fileName: str):
     decryptedData = decryptData(
         privateKey=user.privateKey,
         # FIXME: Hardcoded passphrase for testing
-        passphrase="admin",
+        passphrase=passphrase,
         encryptedSessionKey=file.sessionKey,
         nonce=file.nonce,
         tag=file.tag,
         cipherText=file.cipher.read(),
     )
 
-    contentField = ptg.InputField(decryptedData, multiline=True)
+    fileContent = decryptedData if decryptedData is not None else ""
+
+    contentField = ptg.InputField(fileContent, multiline=True)
 
     def handleDeleteClick():
         def handleConfirmDeleteClick():

@@ -50,8 +50,8 @@ def DashBoard() -> None:
 
         return switchCurrPageWindowSlot(
             manager=navBar.manager,
-            targetAssign=("body"),
-            newWindow=navBar.manager.routes["dashboard/file_preview"](
+            targetAssign="body",
+            newWindow=navBar.manager.routes["dashboard/file_preview/password_prompt"](
                 fileName=fileName
             ),
         )
