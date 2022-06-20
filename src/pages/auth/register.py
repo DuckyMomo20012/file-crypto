@@ -2,15 +2,11 @@ import pytermgui as ptg
 from src.helpers.index import switchPage, exitApp
 from src.helpers.form_validation import requiredField
 from src.helpers.form_validation import emailField as emailFieldValidator
+from src.components import SuccessModal, ErrorModal
 
 from src.api.auth.service import getOneUser, addUser
 
 from src.helpers.cryptography import hash_password, generateUserKeys
-
-
-def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
-    modal.close()
-    switchPage(window.manager, window.manager.routes["auth/login"]())
 
 
 def Register():
@@ -46,11 +42,7 @@ def Register():
             user = getOneUser(email)
 
             if user:
-                alertModal = window.manager.alert(
-                    "User already exists!",
-                    "",
-                    ptg.Button("OK", lambda *_: alertModal.close()),
-                )
+                ErrorModal(window.manager, "Email already exists")
                 return
 
             # NOTE: Should we use plain password as passphrase or hashed password?
@@ -64,19 +56,15 @@ def Register():
                 privateKey=privateKey,
             )
 
-            alertModal = window.manager.alert(
+            SuccessModal(
+                window.manager,
                 "Register successful!",
-                "",
-                ptg.Button(
-                    "OK", lambda *_: handleSuccessModalClose(window, alertModal)
+                onclick=lambda *_: switchPage(
+                    window.manager, window.manager.routes["auth/login"]()
                 ),
             )
         else:
-            alertModal = window.manager.alert(
-                "Password and confirm password do not match!",
-                "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
-            )
+            ErrorModal(window.manager, "Password and confirm password do not match!")
             return
 
     window = ptg.Window(
@@ -90,7 +78,6 @@ def Register():
                 ),
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
-            chars={"separator": " "},
             parent_align=ptg.HorizontalAlignment.CENTER,
         ),
         "",

@@ -68,8 +68,16 @@ def updateUserOneField(
     return user
 
 
-def updatePassword(email, password):
+def updateUserPassword(email, password):
     user = User.objects(email=email).first()
     user.password = password
+    user.save()
+    return user
+
+
+def updateUserKeys(email, publicKey, privateKey):
+    user = User.objects(email=email).first()
+    user.publicKey = publicKey
+    user.privateKey = privateKey
     user.save()
     return user

@@ -2,20 +2,20 @@ import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage, clearNavigation, drawPage
 from src.helpers.form_validation import requiredField
+from src.components import SuccessModal, ErrorModal
 
 import config
 
-from src.api.auth.service import getOneUser, updateUserManyFields, updatePassword
+from src.api.auth.service import getOneUser, updateUserKeys, updateUserPassword
 
 from src.helpers.cryptography import updatePassphrase, verify_password, hash_password
 
 
-def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
-    modal.close()
+def handleSuccessModalClose(manager: ptg.WindowManager) -> None:
 
-    window.manager.toast("Logging out...")
-    clearNavigation(window.manager)
-    drawPage(window.manager, window.manager.routes["auth/login"]())
+    manager.toast("Logging out...")
+    clearNavigation(manager)
+    drawPage(manager, manager.routes["auth/login"]())
 
 
 def ChangePassword():
@@ -57,37 +57,26 @@ def ChangePassword():
 
                 # Update password
 
-                updateUserManyFields(
+                updateUserKeys(
                     email=config.session.email,
-                    privateKey=newPrivateKey,
                     publicKey=newPublicKey,
+                    privateKey=newPrivateKey,
                 )
 
-                updatePassword(config.session.email, hash_password(newPassword))
+                updateUserPassword(config.session.email, hash_password(newPassword))
 
-                alertModal = window.manager.alert(
-                    "Password changed successfully!",
-                    "",
-                    ptg.Button(
-                        "OK", lambda *_: handleSuccessModalClose(window, alertModal)
-                    ),
+                SuccessModal(
+                    window.manager,
+                    "Password changed successfully",
+                    onclick=lambda *_: handleSuccessModalClose(window.manager),
                 )
 
             else:
-                alertModal = window.manager.alert(
-                    "Old password is incorrect!",
-                    "",
-                    ptg.Button("OK", lambda *_: alertModal.close()),
-                )
+                ErrorModal(window.manager, "Old password is incorrect")
 
         else:
-            alertModal = window.manager.alert(
-                ptg.Label(
-                    "New password and confirm new password do not match!",
-                    size_policy=ptg.SizePolicy.STATIC,
-                ),
-                "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
+            ErrorModal(
+                window.manager, "New password and confirm new password do not match"
             )
 
     window = ptg.Window(

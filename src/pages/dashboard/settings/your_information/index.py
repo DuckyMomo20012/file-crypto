@@ -32,7 +32,6 @@ def YourInformation():
                     ),
                 ),
             ),
-            chars={"separator": ""},
         ),
         ptg.Splitter(
             ptg.Label(
@@ -48,7 +47,6 @@ def YourInformation():
                     ),
                 ),
             ),
-            chars={"separator": ""},
         ),
         ptg.Splitter(
             ptg.Label(
@@ -64,7 +62,6 @@ def YourInformation():
                     ),
                 ),
             ),
-            chars={"separator": ""},
         ),
         ptg.Splitter(
             ptg.Label(
@@ -80,7 +77,6 @@ def YourInformation():
                     ),
                 ),
             ),
-            chars={"separator": ""},
         ),
         ptg.Button("Back", lambda *_: goToPrevPage(window.manager)),
     )

@@ -2,6 +2,7 @@ import pytermgui as ptg
 from src.helpers.index import switchPage, exitApp
 from src.helpers.form_validation import requiredField
 from src.helpers.form_validation import emailField as emailFieldValidator
+from src.components import SuccessModal, ErrorModal
 
 from src.api.auth.service import getOneUser
 
@@ -42,11 +43,11 @@ def Login():
         user = getOneUser(email)
 
         if user and verify_password(password, user.password):
-            alertModal = window.manager.alert(
+            SuccessModal(
+                window.manager,
                 "Login successful!",
-                "",
-                ptg.Button(
-                    "OK", lambda *_: handleSuccessModalClose(window, alertModal)
+                onclick=lambda *_: switchPage(
+                    window.manager, window.manager.routes["dashboard"]()
                 ),
             )
 
@@ -54,11 +55,7 @@ def Login():
             config.session = user
 
         else:
-            alertModal = window.manager.alert(
-                "Login failed!",
-                "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
-            )
+            ErrorModal(window.manager, "Invalid email or password")
 
     window = ptg.Window(
         "",
@@ -74,7 +71,6 @@ def Login():
                 ),
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
-            chars={"separator": " "},
             parent_align=ptg.HorizontalAlignment.CENTER,
         ),
         "",
@@ -89,7 +85,7 @@ def Login():
         ),
     )
 
-    window.set_title(title="Login")
+    window.set_title(title="[window__title]Login")
     window.overflow = ptg.Overflow.RESIZE
     window.vertical_align = ptg.VerticalAlignment.TOP
     window.center()
