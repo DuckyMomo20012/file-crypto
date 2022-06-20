@@ -60,11 +60,11 @@ def EncryptFile():
         ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button(
                 "Encrypt file",
                 lambda *_: handleEncryptClick(),
             ),
+            ptg.Button("Close", lambda *_: goToPrevPage(window.manager)),
         ),
     )
 

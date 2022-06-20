@@ -70,11 +70,11 @@ def DecryptFile():
         ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button(
                 "Decrypt file",
                 lambda *_: handleDecryptClick(),
             ),
+            ptg.Button("Close", lambda *_: goToPrevPage(window.manager)),
         ),
     )
 

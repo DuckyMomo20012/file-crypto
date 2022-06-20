@@ -68,11 +68,11 @@ def SignFile():
         ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button(
                 "Sign file",
                 lambda *_: handleSignClick(),
             ),
+            ptg.Button("Close", lambda *_: goToPrevPage(window.manager)),
         ),
     )
 

@@ -51,6 +51,9 @@ def VerifySignedFile():
                 window.manager, "Signature verification failed.\nUnknown user signed"
             )
 
+        # Go to previous page
+        goToPrevPage(window.manager)
+
     window = ptg.Window(
         "",
         ptg.Label("File path", parent_align=ptg.HorizontalAlignment.LEFT),
@@ -59,11 +62,11 @@ def VerifySignedFile():
         ptg.Container(signaturePathField),
         "",
         ptg.Splitter(
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button(
                 "Verify",
                 lambda *_: handleVerifyClick(),
             ),
+            ptg.Button("Close", lambda *_: goToPrevPage(window.manager)),
         ),
     )
 
