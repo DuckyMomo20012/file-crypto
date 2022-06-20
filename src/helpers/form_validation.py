@@ -1,10 +1,12 @@
 import pytermgui as ptg
 
+from src.components.modules import ErrorModal
+
 
 def requiredField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
     if len(field.value) == 0:
         errorMsg = f"{label} field is required"
-        manager.routes["errors/form_validation_error"](manager, errorMsg)
+        ErrorModal(manager, errorMsg)
         return False
 
     return True
@@ -22,7 +24,7 @@ def fileField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
     # - /home/alice/Desktop/file-crypto/app.py
     if not filePath.is_file():
         errorMsg = f"{label} field is not a valid file path"
-        manager.routes["errors/form_validation_error"](manager, errorMsg)
+        ErrorModal(manager, errorMsg)
         return False
 
     return True
@@ -43,7 +45,7 @@ def folderField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
     # - /home/alice/Desktop/file-crypto/
     if not filePath.is_dir():
         errorMsg = f"{label} field is not a valid folder path"
-        manager.routes["errors/form_validation_error"](manager, errorMsg)
+        ErrorModal(manager, errorMsg)
         return False
 
     return True
@@ -58,7 +60,7 @@ def emailField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
 
     if not re.match(email_format, email, re.IGNORECASE):
         errorMsg = f"{label} field is not a valid email address"
-        manager.routes["errors/form_validation_error"](manager, errorMsg)
+        ErrorModal(manager, errorMsg)
         return False
 
     return True

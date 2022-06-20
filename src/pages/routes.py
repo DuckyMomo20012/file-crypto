@@ -1,6 +1,5 @@
 from src.pages.auth import *
 from src.pages.dashboard import *
-from src.pages.errors import *
 
 
 routes = {
@@ -21,5 +20,4 @@ routes = {
     "dashboard/tools/verify_signed_file": VerifySignedFile,
     "dashboard/tools/encrypt_file": EncryptFile,
     "dashboard/tools/decrypt_file": DecryptFile,
-    "errors/form_validation_error": FormValidationError,
 }
