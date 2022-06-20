@@ -2,7 +2,7 @@ import pytermgui as ptg
 from src.helpers.index import switchPage, exitApp
 from src.helpers.form_validation import requiredField
 from src.helpers.form_validation import emailField as emailFieldValidator
-from src.components.modules import SuccessModal, ErrorModal
+from src.components import SuccessModal, ErrorModal
 
 from src.api.auth.service import getOneUser
 

@@ -2,6 +2,7 @@ import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
 from src.helpers.form_validation import requiredField, fileField, folderField
+from src.components import SuccessModal, ErrorModal
 
 import config
 
@@ -40,27 +41,18 @@ def DecryptFile():
 
         # Verify password to make sure the passphrase is correct
         if not verify_password(password, user.password):
-            alertModal = window.manager.alert(
-                "Password is incorrect!",
-                "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
-            )
+            ErrorModal(window.manager, "Invalid password")
             return
 
         # Decrypt file
         if decryptFile(
             user.privateKey, filePath, passphrase=password, folderPath=saveFolderPath
         ):
-            alertModal = window.manager.alert(
-                "File decrypted successfully!",
-                "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
-            )
+            SuccessModal(window.manager, "File decrypted successfully")
         else:
-            alertModal = window.manager.alert(
-                "File decryption failed or user does not have permission!",
-                "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
+            ErrorModal(
+                window.manager,
+                "Failed to decrypt file or user does not have permission!",
             )
 
         # Go to previous page

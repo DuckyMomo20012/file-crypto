@@ -2,6 +2,7 @@ import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
 from src.helpers.form_validation import requiredField, fileField, folderField
+from src.components import ErrorModal
 
 import config
 
@@ -41,11 +42,7 @@ def SignFile():
 
         # Verify password to make sure the passphrase is correct
         if not verify_password(password, user.password):
-            alertModal = window.manager.alert(
-                "Password is incorrect!",
-                "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
-            )
+            ErrorModal(window.manager, "Invalid password")
             return
 
         window.manager.toast(f"Signing file {filePath}...")

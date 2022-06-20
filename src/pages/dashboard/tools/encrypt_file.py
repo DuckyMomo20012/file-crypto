@@ -2,6 +2,7 @@ import pytermgui as ptg
 
 from src.helpers.index import goToPrevPage
 from src.helpers.form_validation import requiredField, fileField, folderField
+from src.components import SuccessModal, ErrorModal
 
 from src.api.auth.service import getOneUser
 
@@ -35,26 +36,14 @@ def EncryptFile():
 
         # Verify receiver email is exist
         if not receiver:
-            alertModal = window.manager.alert(
-                "Receiver email is not exist!",
-                "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
-            )
+            ErrorModal(window.manager, "Receiver email does not exist")
             return
 
         # Encrypt file
         if encryptFile(receiver.publicKey, filePath, folderPath=saveFolderPath):
-            alertModal = window.manager.alert(
-                "File encrypted successfully!",
-                "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
-            )
+            SuccessModal(window.manager, "File encrypted successfully")
         else:
-            alertModal = window.manager.alert(
-                "File encryption failed!",
-                "",
-                ptg.Button("OK", lambda *_: alertModal.close()),
-            )
+            ErrorModal(window.manager, "Failed to encrypt file")
 
         # Go to previous page
         goToPrevPage(window.manager)
