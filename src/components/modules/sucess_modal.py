@@ -1,7 +1,17 @@
 import pytermgui as ptg
 
+from typing import Any, Callable, Optional
 
-def SuccessModal(manager: ptg.WindowManager, msg: str) -> None:
+
+def SuccessModal(
+    manager: ptg.WindowManager,
+    msg: str,
+    onclick: Optional[Callable[[ptg.Button], Any]] = None,
+) -> None:
+    def handleClick() -> None:
+        if onclick is not None:
+            onclick()
+        successModal.close()
 
     successModal = manager.alert(
         ptg.Label(
@@ -9,7 +19,7 @@ def SuccessModal(manager: ptg.WindowManager, msg: str) -> None:
             size_policy=ptg.SizePolicy.STATIC,
         ),
         "",
-        ptg.Button("OK", lambda *_: successModal.close()),
+        ptg.Button("OK", lambda *_: handleClick()),
     )
     successModal.styles["border"] = "[window__border--success]{item}"
     successModal.styles["corner"] = "[window__corner--success]{item}"

@@ -1,7 +1,17 @@
 import pytermgui as ptg
 
+from typing import Any, Callable, Optional
 
-def ErrorModal(manager: ptg.WindowManager, msg: str) -> None:
+
+def ErrorModal(
+    manager: ptg.WindowManager,
+    msg: str,
+    onclick: Optional[Callable[[ptg.Button], Any]] = None,
+) -> None:
+    def handleClick() -> None:
+        if onclick is not None:
+            onclick()
+        errorModal.close()
 
     errorModal = manager.alert(
         ptg.Label(
@@ -9,7 +19,7 @@ def ErrorModal(manager: ptg.WindowManager, msg: str) -> None:
             size_policy=ptg.SizePolicy.STATIC,
         ),
         "",
-        ptg.Button("OK", lambda *_: errorModal.close()),
+        ptg.Button("OK", lambda *_: handleClick()),
     )
     errorModal.styles["border"] = "[window__border--error]{item}"
     errorModal.styles["corner"] = "[window__corner--error]{item}"
