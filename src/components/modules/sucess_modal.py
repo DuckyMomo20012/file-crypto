@@ -22,7 +22,10 @@ def SuccessModal(
         ptg.Button("OK", lambda *_: handleClick()),
     )
     successModal.styles["border"] = "[window__border--success]{item}"
+    successModal.styles["border_focused"] = "[window__border--success]{item}"
     successModal.styles["corner"] = "[window__corner--success]{item}"
+    successModal.styles["corner_focused"] = "[window__corner--success]{item}"
     successModal.set_title("[window__title--success]Success")
+    successModal.overflow = ptg.Overflow.RESIZE
 
     return None

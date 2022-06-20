@@ -140,7 +140,6 @@ def DashBoard() -> None:
                     hamburger.manager, hamburger.manager.routes["dashboard/tools"]()
                 ),
             ),
-            chars={"separator": ""},
         ),
         box="EMPTY",
     )

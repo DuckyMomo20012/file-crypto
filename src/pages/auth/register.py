@@ -78,7 +78,6 @@ def Register():
                 ),
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
-            chars={"separator": " "},
             parent_align=ptg.HorizontalAlignment.CENTER,
         ),
         "",

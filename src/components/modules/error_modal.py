@@ -22,7 +22,10 @@ def ErrorModal(
         ptg.Button("OK", lambda *_: handleClick()),
     )
     errorModal.styles["border"] = "[window__border--error]{item}"
+    errorModal.styles["border_focused"] = "[window__border--error]{item}"
     errorModal.styles["corner"] = "[window__corner--error]{item}"
+    errorModal.styles["corner_focused"] = "[window__corner--error]{item}"
     errorModal.set_title("[window__title--error]Error")
+    errorModal.overflow = ptg.Overflow.RESIZE
 
     return None

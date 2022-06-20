@@ -19,7 +19,7 @@ markup:
   button: "nord15 bold"
   button--highlight: "@#b48ead nord4 bold"
   window__title: "nord14 bold"
-  window__border: "nord3"
+  window__border: "nord10"
   window__title--error: "nord11 bold"
   window__border--error: "nord11"
   window__corner--error: "nord11"
@@ -30,7 +30,7 @@ markup:
 config:
   Window:
     styles:
-      border: &border-style "window__border"
+      border: &border-style "[window__border]{item}"
       corner: *border-style
     chars:
       border: ["│ ", "─", " │", "─"]
@@ -49,7 +49,7 @@ config:
 
   Splitter:
     chars:
-      separator: ""
+      separator: " "
 
   Container:
     styles:
@@ -61,5 +61,5 @@ config:
 
   InputField:
     styles:
-      value: "nord8"
+      value: "[nord8]{item}"
       cursor: "[nord13 inverse]{item}"
