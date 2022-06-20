@@ -1,11 +1,11 @@
 import pytermgui as ptg
 
 
-def ErrorModal(manager: ptg.WindowManager, errorMsg: str) -> None:
+def ErrorModal(manager: ptg.WindowManager, msg: str) -> None:
 
     errorModal = manager.alert(
         ptg.Label(
-            errorMsg,
+            msg,
             size_policy=ptg.SizePolicy.STATIC,
         ),
         "",
