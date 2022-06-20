@@ -23,6 +23,8 @@ def DecryptFile():
             window.manager, filePathField, label="Encrypted file path"
         ):
             return
+        if not requiredField(window.manager, passwordField, label="Your password"):
+            return
 
         if not fileField(window.manager, filePathField, label="Encrypted file path"):
             return
