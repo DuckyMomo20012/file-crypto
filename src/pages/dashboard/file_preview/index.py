@@ -2,10 +2,34 @@ import pytermgui as ptg
 
 from src.helpers.index import drawPage, switchCurrPageWindowSlot
 
+from src.api.file_crypto.service import deleteFile
+
 
 def FilePreview(fileName: str, fileContent: str):
 
     contentField = ptg.InputField(fileContent, multiline=True)
+
+    def handleDeleteClick():
+        def handleConfirmDeleteClick():
+            deleteModal.close()
+            try:
+                deleteFile(fileName)
+            except AttributeError:
+                pass
+            finally:
+                # BUG: Don't go back to previous page this time 😅 Help wanted 😭
+                # goToPrevPage(window.manager)
+                handleCloseClick()
+
+        deleteModal = window.manager.alert(
+            "",
+            "Do you really want to delete this file?",
+            "",
+            ptg.Splitter(
+                ptg.Button("Yes", lambda *_: handleConfirmDeleteClick()),
+                ptg.Button("No", lambda *_: deleteModal.close()),
+            ),
+        )
 
     # TODO: Implement this function to encrypt the file content and then update
     # file on the database
@@ -43,6 +67,7 @@ def FilePreview(fileName: str, fileContent: str):
     window = ptg.Window(
         ptg.Splitter(
             ptg.Label(fileName, parent_align=ptg.HorizontalAlignment.LEFT),
+            ptg.Button("Delete", lambda *_: handleDeleteClick()),
             ptg.Button("Save", lambda *_: handleSaveClick()),
             ptg.Button(
                 "Download",

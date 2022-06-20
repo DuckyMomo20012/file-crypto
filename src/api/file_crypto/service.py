@@ -20,3 +20,9 @@ def uploadFile(name, size, sessionKey, nonce, tag, cipher):
     )
     file.save()
     return file
+
+
+def deleteFile(filename):
+    file = getOneFile(filename)
+    file.delete()
+    return file
