@@ -1,4 +1,4 @@
-from .index import DashBoard
+from .dashboard import DashBoard
 from .settings.index import Settings
 from .settings.change_password import ChangePassword
 from .settings.your_information.index import YourInformation
