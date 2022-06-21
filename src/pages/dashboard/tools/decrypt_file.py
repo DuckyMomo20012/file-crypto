@@ -48,7 +48,11 @@ def DecryptFile():
 
         # Decrypt file
         if decryptFile(
-            user.privateKey, filePath, passphrase=password, folderPath=saveFolderPath
+            user.privateKey,
+            filePath,
+            passphrase=password,
+            folderPath=saveFolderPath,
+            outPutExt="",
         ):
             SuccessModal(window.manager, "File decrypted successfully")
         else:

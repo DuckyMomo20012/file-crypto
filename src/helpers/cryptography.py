@@ -130,6 +130,8 @@ def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> bool
         return False
 
 
+# NOTE: encryptFile should ALWAYS use '.bin' as output file extension, because
+# when we decrypt file, last extension will be removed.
 def encryptFile(
     publicKey: bytes, filePath: str, folderPath: str = ".", outPutExt: str = ".bin"
 ) -> bool:
@@ -190,6 +192,8 @@ def decryptFile(
 
     from src.helpers.file import writeFileToFolder
 
+    from pathlib import Path
+
     # Read file
     fileIn = open(filePath, "rb")
 
@@ -211,9 +215,12 @@ def decryptFile(
         cipherAES = AES.new(sessionKey, AES.MODE_EAX, nonce)
         decryptedFileContent = cipherAES.decrypt_and_verify(cipherText, tag)
 
+        # We remove last (.bin) extension from file path
+        realFilePath = filePath.replace(Path(filePath).suffix, "")
+
         # Write decrypted file
         writeFileToFolder(
-            filePath + outPutExt, folderPath, decryptedFileContent.decode("utf-8")
+            realFilePath + outPutExt, folderPath, decryptedFileContent.decode("utf-8")
         )
 
         return True
