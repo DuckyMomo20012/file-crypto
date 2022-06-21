@@ -1,6 +1,7 @@
 import pytermgui as ptg
 
 from src.helpers.index import drawPage, switchCurrPageWindowSlot
+from src.components import ConfirmModal
 
 import session
 
@@ -35,7 +36,6 @@ def FilePreview(fileName: str, passphrase: str):
 
     def handleDeleteClick():
         def handleConfirmDeleteClick():
-            deleteModal.close()
             try:
                 deleteFile(user.email, fileName)
             except AttributeError:
@@ -48,14 +48,11 @@ def FilePreview(fileName: str, passphrase: str):
                 # And redraw the dashboard page
                 drawPage(window.manager, window.manager.routes["dashboard"]())
 
-        deleteModal = window.manager.alert(
-            "",
-            "Do you really want to delete this file?",
-            "",
-            ptg.Splitter(
-                ptg.Button("Yes", lambda *_: handleConfirmDeleteClick()),
-                ptg.Button("No", lambda *_: deleteModal.close()),
-            ),
+        ConfirmModal(
+            window.manager,
+            "Are you sure you want to delete this file?",
+            confirmOnClick=lambda *_: handleConfirmDeleteClick(),
+            cancelOnClick=lambda *_: None,
         )
 
     # TODO: Implement this function to encrypt the file content and then update
