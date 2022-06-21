@@ -4,7 +4,7 @@ from .settings.change_password import ChangePassword
 from .settings.your_information.index import YourInformation
 from .settings.your_information.edit.index import EditInformation
 from .upload_file import UploadFile
-from .file_preview.index import FilePreview
+from .file_preview.file_preview import FilePreview
 from .file_preview.download_file import DownloadFile
 from .file_preview.password_prompt import PasswordPrompt
 from .download_shared_file import DownloadSharedFile
