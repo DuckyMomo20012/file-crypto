@@ -1,5 +1,5 @@
 from .dashboard import DashBoard
-from .settings.index import Settings
+from .settings.settings import Settings
 from .settings.change_password import ChangePassword
 from .settings.your_information.index import YourInformation
 from .settings.your_information.edit.index import EditInformation
