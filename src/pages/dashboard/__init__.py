@@ -8,7 +8,7 @@ from .file_preview.index import FilePreview
 from .file_preview.download_file import DownloadFile
 from .file_preview.password_prompt import PasswordPrompt
 from .download_shared_file import DownloadSharedFile
-from .tools.index import Tools
+from .tools.tools import Tools
 from .tools.sign_file import SignFile
 from .tools.verify_signed_file import VerifySignedFile
 from .tools.encrypt_file import EncryptFile
