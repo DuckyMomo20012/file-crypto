@@ -64,3 +64,19 @@ def emailField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
         return False
 
     return True
+
+
+def dateField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
+    # NOTE: Ref: https://stackoverflow.com/a/37045601/12512981
+    from datetime import datetime
+
+    try:
+        dateString = field.value
+
+        if dateString != datetime.strptime(dateString, "%Y-%m-%d").strftime("%Y-%m-%d"):
+            raise ValueError
+        return True
+    except ValueError:
+        errorMsg = f"{label} field is not a valid date"
+        ErrorModal(manager, errorMsg)
+        return False

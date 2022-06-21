@@ -10,7 +10,7 @@ def YourInformation():
 
     user = getOneUser(session.user.email)
 
-    dob = user.dateOfBirth.strftime("%m/%d/%Y")
+    dob = user.dateOfBirth.strftime("%Y-%m-%d")
 
     window = ptg.Window(
         "",
@@ -43,7 +43,10 @@ def YourInformation():
                 lambda *_: drawPage(
                     window.manager,
                     window.manager.routes["dashboard/settings/your_information/edit"](
-                        label="Date of birth", oldValue=dob, fieldName="dateOfBirth"
+                        label="Date of birth",
+                        oldValue=dob,
+                        fieldName="dateOfBirth",
+                        validator="dateField",
                     ),
                 ),
             ),
