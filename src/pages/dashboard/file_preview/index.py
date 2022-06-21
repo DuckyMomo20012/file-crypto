@@ -5,9 +5,9 @@ from src.helpers.index import drawPage, switchCurrPageWindowSlot
 import config
 
 from src.api.auth.service import getOneUser
-from src.api.file_crypto.service import deleteFile, getOneFile
+from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
 
-from src.helpers.cryptography import decryptData
+from src.helpers.cryptography import encryptData, decryptData
 
 
 def FilePreview(fileName: str, passphrase: str):
@@ -15,6 +15,9 @@ def FilePreview(fileName: str, passphrase: str):
     user = getOneUser(config.session.email)
 
     file = getOneFile(fileName)
+
+    if file is None:
+        return None
 
     decryptedData = decryptData(
         privateKey=user.privateKey,
@@ -71,7 +74,19 @@ def FilePreview(fileName: str, passphrase: str):
             window.manager.toast("File edited. Saving file...")
             # TODO: Update file on the database
 
-            # ...
+            encryptedData = encryptData(
+                user.publicKey, contentField.value.encode("utf-8")
+            )
+
+            if encryptedData:
+                encryptedSessionKey, nonce, tag, cipherText = encryptedData
+
+                updateFile(fileName, encryptedSessionKey, nonce, tag, cipherText)
+
+                window.manager.toast("File saved successfully!")
+
+            else:
+                window.manager.toast("Failed to save file!")
 
             handleCloseClick()
         else:

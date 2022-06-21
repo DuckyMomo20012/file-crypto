@@ -36,7 +36,7 @@ def UploadFile():
 
         encryptedData = encryptData(user.publicKey, fileContent)
 
-        if encryptData:
+        if encryptedData:
             encryptedSessionKey, nonce, tag, cipherText = encryptedData
 
             uploadFile(

@@ -25,3 +25,13 @@ def deleteFile(filename):
     file = getOneFile(filename)
     file.delete()
     return file
+
+
+def updateFile(filename, sessionKey, nonce, tag, cipher):
+    file = getOneFile(filename)
+    file.sessionKey = sessionKey
+    file.nonce = nonce
+    file.tag = tag
+    file.cipher.replace(cipher)
+    file.save()
+    return file
