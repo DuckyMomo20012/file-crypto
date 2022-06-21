@@ -4,7 +4,7 @@ from src.helpers.index import goToPrevPage
 from src.helpers.form_validation import requiredField, folderField
 from src.components import SuccessModal, ErrorModal
 
-import config
+import session
 
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import getOneFile
@@ -35,7 +35,7 @@ def DownloadFile(fileName: str):
         password = passwordField.value
         saveFolderPath = saveFolderPathField.value
 
-        user = getOneUser(config.session.email)
+        user = getOneUser(session.user.email)
 
         if not verify_password(password, user.password):
             ErrorModal(window.manager, "Invalid password")
@@ -43,7 +43,7 @@ def DownloadFile(fileName: str):
 
         window.manager.toast(f"Downloading {fileName}...")
 
-        file = getOneFile(fileName)
+        file = getOneFile(user.email, fileName)
 
         decryptedData = decryptData(
             privateKey=user.privateKey,

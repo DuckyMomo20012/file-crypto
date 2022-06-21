@@ -19,6 +19,7 @@ class FileCrypto(me.Document):
     nonce = me.BinaryField()
     tag = me.BinaryField()
     cipher = me.FileField()
+    emailUser = me.StringField()
     meta = {"collection": "files"}
 
 

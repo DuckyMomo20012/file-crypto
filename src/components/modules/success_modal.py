@@ -27,5 +27,6 @@ def SuccessModal(
     successModal.styles["corner_focused"] = "[window__corner--success]{item}"
     successModal.set_title("[window__title--success]Success")
     successModal.overflow = ptg.Overflow.RESIZE
+    successModal.is_noresize = True
 
     return None

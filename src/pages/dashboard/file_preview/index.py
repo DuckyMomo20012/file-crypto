@@ -1,8 +1,9 @@
 import pytermgui as ptg
 
 from src.helpers.index import drawPage, switchCurrPageWindowSlot
+from src.components import ConfirmModal
 
-import config
+import session
 
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
@@ -12,9 +13,9 @@ from src.helpers.cryptography import encryptData, decryptData
 
 def FilePreview(fileName: str, passphrase: str):
 
-    user = getOneUser(config.session.email)
+    user = getOneUser(session.user.email)
 
-    file = getOneFile(fileName)
+    file = getOneFile(user.email, fileName)
 
     if file is None:
         return None
@@ -35,9 +36,8 @@ def FilePreview(fileName: str, passphrase: str):
 
     def handleDeleteClick():
         def handleConfirmDeleteClick():
-            deleteModal.close()
             try:
-                deleteFile(fileName)
+                deleteFile(user.email, fileName)
             except AttributeError:
                 pass
             finally:
@@ -48,14 +48,11 @@ def FilePreview(fileName: str, passphrase: str):
                 # And redraw the dashboard page
                 drawPage(window.manager, window.manager.routes["dashboard"]())
 
-        deleteModal = window.manager.alert(
-            "",
-            "Do you really want to delete this file?",
-            "",
-            ptg.Splitter(
-                ptg.Button("Yes", lambda *_: handleConfirmDeleteClick()),
-                ptg.Button("No", lambda *_: deleteModal.close()),
-            ),
+        ConfirmModal(
+            window.manager,
+            "Are you sure you want to delete this file?",
+            confirmOnClick=lambda *_: handleConfirmDeleteClick(),
+            cancelOnClick=lambda *_: None,
         )
 
     # TODO: Implement this function to encrypt the file content and then update
@@ -84,7 +81,9 @@ def FilePreview(fileName: str, passphrase: str):
             if encryptedData:
                 encryptedSessionKey, nonce, tag, cipherText = encryptedData
 
-                updateFile(fileName, encryptedSessionKey, nonce, tag, cipherText)
+                updateFile(
+                    user.email, fileName, encryptedSessionKey, nonce, tag, cipherText
+                )
 
                 window.manager.toast("File saved successfully!")
 

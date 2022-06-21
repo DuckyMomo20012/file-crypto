@@ -2,7 +2,7 @@ import pytermgui as ptg
 
 from src.helpers.index import clearNavigation, drawPage, goToPrevPage
 
-import config
+import session
 
 
 def Logout():
@@ -11,7 +11,7 @@ def Logout():
         # TODO: Implement logout logic
 
         # We simply reset the current session and go back to the login page
-        config.session = {}
+        session.user = None
 
         clearNavigation(window.manager)
         drawPage(window.manager, window.manager.routes["auth/login"]())

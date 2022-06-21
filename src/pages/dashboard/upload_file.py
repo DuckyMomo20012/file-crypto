@@ -4,7 +4,7 @@ from src.helpers.index import drawPage, goToPrevPage, switchCurrPageWindowSlot
 from src.helpers.form_validation import requiredField, fileField
 from src.components import SuccessModal, ErrorModal
 
-import config
+import session
 
 from src.helpers.file import readFile
 
@@ -30,7 +30,7 @@ def UploadFile():
 
         # TODO: Implement upload logic
 
-        user = getOneUser(config.session.email)
+        user = getOneUser(session.user.email)
 
         fileContent = readFile(filePath, mode="rb")
 
@@ -45,6 +45,7 @@ def UploadFile():
                 nonce=nonce,
                 tag=tag,
                 cipher=cipherText,
+                emailUser=user.email,
             )
 
             SuccessModal(window.manager, "File uploaded successfully!")

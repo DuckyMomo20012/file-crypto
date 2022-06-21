@@ -4,7 +4,7 @@ from src.helpers.index import goToPrevPage
 from src.helpers.form_validation import requiredField, fileField, folderField
 from src.components import ErrorModal
 
-import config
+import session
 
 from src.api.auth.service import getOneUser
 
@@ -38,7 +38,7 @@ def SignFile():
         password = passwordField.value
         saveFolderPath = saveFolderPathField.value
 
-        user = getOneUser(config.session.email)
+        user = getOneUser(session.user.email)
 
         # Verify password to make sure the passphrase is correct
         if not verify_password(password, user.password):

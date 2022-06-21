@@ -8,7 +8,7 @@ from src.api.auth.service import getOneUser
 
 from src.helpers.cryptography import verify_password
 
-import config
+import session
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
@@ -52,7 +52,7 @@ def Login():
             )
 
             # NOTE: We store user to session here
-            config.session = user
+            session.user = user
 
         else:
             ErrorModal(window.manager, "Invalid email or password")

@@ -1,14 +1,16 @@
 from typing import Any
 import pytermgui as ptg
 from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField
+from src.helpers.form_validation import *
 
 from src.api.auth.service import updateUserOneField
 
-import config
+import session
+
+from datetime import datetime
 
 
-def EditInformation(label: str, oldValue: Any, fieldName: str):
+def EditInformation(label: str, oldValue: Any, fieldName: str, validator: str = ""):
 
     inputField = ptg.InputField()
 
@@ -22,9 +24,15 @@ def EditInformation(label: str, oldValue: Any, fieldName: str):
 
         newValue = inputField.value
 
+        if validator == "dateField":
+            if not dateField(window.manager, inputField, label=f"New {label.lower()}"):
+                return
+
+            newValue = datetime.strptime(inputField.value, "%Y-%m-%d")
+
         window.manager.toast("Updating information...")
 
-        updateUserOneField(config.session.email, fieldName, newValue)
+        updateUserOneField(session.user.email, fieldName, newValue)
 
         # NOTE: We go back to two pages, close settings page, so when user open
         # settings again, it will show the updated information.

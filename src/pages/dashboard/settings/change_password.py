@@ -4,7 +4,7 @@ from src.helpers.index import goToPrevPage, clearNavigation, drawPage
 from src.helpers.form_validation import requiredField
 from src.components import SuccessModal, ErrorModal
 
-import config
+import session
 
 from src.api.auth.service import getOneUser, updateUserKeys, updateUserPassword
 
@@ -41,7 +41,7 @@ def ChangePassword():
         newPassword = newPasswordField.value
         confirmNewPassword = confirmNewPasswordField.value
 
-        user = getOneUser(config.session.email)
+        user = getOneUser(session.user.email)
 
         # TODO: Check if old password is correct and new password is valid and
         # match with confirm new password
@@ -58,12 +58,12 @@ def ChangePassword():
                 # Update password
 
                 updateUserKeys(
-                    email=config.session.email,
+                    email=session.user.email,
                     publicKey=newPublicKey,
                     privateKey=newPrivateKey,
                 )
 
-                updateUserPassword(config.session.email, hash_password(newPassword))
+                updateUserPassword(session.user.email, hash_password(newPassword))
 
                 SuccessModal(
                     window.manager,

@@ -1,4 +1,5 @@
 from .error_modal import ErrorModal
-from .sucess_modal import SuccessModal
+from .success_modal import SuccessModal
+from .confirm_modal import ConfirmModal
 
-__all__ = ["ErrorModal", "SuccessModal"]
+__all__ = ["ErrorModal", "SuccessModal", "ConfirmModal"]
