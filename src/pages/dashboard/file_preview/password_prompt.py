@@ -1,14 +1,11 @@
 import pytermgui as ptg
 
-from src.helpers.index import switchCurrPageWindowSlot
-from src.helpers.form_validation import requiredField
-from src.components import ErrorModal
-
 import session
-
 from src.api.auth.service import getOneUser
-
+from src.components import ErrorModal
 from src.helpers.cryptography import verify_password
+from src.helpers.form_validation import requiredField
+from src.helpers.index import switchCurrPageWindowSlot
 
 
 def PasswordPrompt(fileName: str):

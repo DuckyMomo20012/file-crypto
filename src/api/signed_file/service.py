@@ -1,5 +1,6 @@
 from schema import SignedFile
 
+
 def getOneFileSignature(filename):
     return SignedFile.objects(name=filename).first()
 

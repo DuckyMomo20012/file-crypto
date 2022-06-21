@@ -1,12 +1,10 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField, fileField
-from src.components import SuccessModal, ErrorModal
-
 from src.api.auth.service import getAllUsers
-
+from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import verifySignature
+from src.helpers.form_validation import fileField, requiredField
+from src.helpers.index import goToPrevPage
 
 
 def VerifySignedFile():

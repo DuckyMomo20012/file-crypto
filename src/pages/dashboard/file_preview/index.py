@@ -1,14 +1,11 @@
 import pytermgui as ptg
 
-from src.helpers.index import drawPage, switchCurrPageWindowSlot
-from src.components import ConfirmModal
-
 import session
-
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
-
-from src.helpers.cryptography import encryptData, decryptData
+from src.components import ConfirmModal
+from src.helpers.cryptography import decryptData, encryptData
+from src.helpers.index import drawPage, switchCurrPageWindowSlot
 
 
 def FilePreview(fileName: str, passphrase: str):

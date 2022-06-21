@@ -1,14 +1,12 @@
 import pytermgui as ptg
-from src.helpers.index import switchPage, exitApp
-from src.helpers.form_validation import requiredField
-from src.helpers.form_validation import emailField as emailFieldValidator
-from src.components import SuccessModal, ErrorModal
-
-from src.api.auth.service import getOneUser
-
-from src.helpers.cryptography import verify_password
 
 import session
+from src.api.auth.service import getOneUser
+from src.components import ErrorModal, SuccessModal
+from src.helpers.cryptography import verify_password
+from src.helpers.form_validation import emailField as emailFieldValidator
+from src.helpers.form_validation import requiredField
+from src.helpers.index import exitApp, switchPage
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:

@@ -1,16 +1,14 @@
-import pytermgui as ptg
-
 from functools import partial
 
-import session
+import pytermgui as ptg
 
+import session
+from src.api.auth.service import getOneUser
+from src.api.file_crypto.service import getAllFiles
+from src.components import ConfirmModal
 from src.components.layouts.AppShell import AppShell
 from src.helpers.index import drawPage, exitApp, switchCurrPageWindowSlot
-from src.components import ConfirmModal
 
-from src.api.auth.service import getOneUser
-
-from src.api.file_crypto.service import getAllFiles
 
 # TODO: Implement this function to fetch data from the database and return
 # format like this

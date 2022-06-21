@@ -1,14 +1,12 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage, clearNavigation, drawPage
-from src.helpers.form_validation import requiredField
-from src.components import SuccessModal, ErrorModal
-
 import session
-
 from src.api.auth.service import getOneUser, updateUserKeys, updateUserPassword
-
-from src.helpers.cryptography import updatePassphrase, verify_password, hash_password
+from src.components import ErrorModal, SuccessModal
+from src.helpers.cryptography import (hash_password, updatePassphrase,
+                                      verify_password)
+from src.helpers.form_validation import requiredField
+from src.helpers.index import clearNavigation, drawPage, goToPrevPage
 
 
 def handleSuccessModalClose(manager: ptg.WindowManager) -> None:

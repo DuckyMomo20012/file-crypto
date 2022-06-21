@@ -1,17 +1,13 @@
 import pytermgui as ptg
 
-from src.helpers.index import drawPage, goToPrevPage, switchCurrPageWindowSlot
-from src.helpers.form_validation import requiredField, fileField
-from src.components import SuccessModal, ErrorModal
-
 import session
-
-from src.helpers.file import readFile
-
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import uploadFileNoDuplicate
-
+from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import encryptData
+from src.helpers.file import readFile
+from src.helpers.form_validation import fileField, requiredField
+from src.helpers.index import drawPage, goToPrevPage, switchCurrPageWindowSlot
 
 
 def UploadFile():

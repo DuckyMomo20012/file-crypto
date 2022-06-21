@@ -1,6 +1,6 @@
-import pytermgui as ptg
-
 from typing import Any, Callable, Optional
+
+import pytermgui as ptg
 
 
 def ConfirmModal(

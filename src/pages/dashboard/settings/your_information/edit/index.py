@@ -1,13 +1,12 @@
+from datetime import datetime
 from typing import Any
-import pytermgui as ptg
-from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import *
 
-from src.api.auth.service import updateUserOneField
+import pytermgui as ptg
 
 import session
-
-from datetime import datetime
+from src.api.auth.service import updateUserOneField
+from src.helpers.form_validation import *
+from src.helpers.index import goToPrevPage
 
 
 def EditInformation(label: str, oldValue: Any, fieldName: str, validator: str = ""):

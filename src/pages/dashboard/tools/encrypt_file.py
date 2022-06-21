@@ -1,12 +1,10 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField, fileField, folderField
-from src.components import SuccessModal, ErrorModal
-
 from src.api.auth.service import getOneUser
-
+from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import encryptFile
+from src.helpers.form_validation import fileField, folderField, requiredField
+from src.helpers.index import goToPrevPage
 
 
 def EncryptFile():
