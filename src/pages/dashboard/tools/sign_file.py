@@ -22,7 +22,7 @@ def SignFile():
     def handleSignClick():
         if not requiredField(window.manager, filePathField, label="File path"):
             return
-        if not requiredField(window.manager, passwordField, label="Password"):
+        if not requiredField(window.manager, passwordField, label="Your password"):
             return
 
         if not fileField(window.manager, filePathField, label="File path"):

@@ -2,10 +2,61 @@ import pytermgui as ptg
 
 from src.helpers.index import drawPage, switchCurrPageWindowSlot
 
+import config
 
-def FilePreview(fileName: str, fileContent: str):
+from src.api.auth.service import getOneUser
+from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
+
+from src.helpers.cryptography import encryptData, decryptData
+
+
+def FilePreview(fileName: str, passphrase: str):
+
+    user = getOneUser(config.session.email)
+
+    file = getOneFile(fileName)
+
+    if file is None:
+        return None
+
+    decryptedData = decryptData(
+        privateKey=user.privateKey,
+        # FIXME: Hardcoded passphrase for testing
+        passphrase=passphrase,
+        encryptedSessionKey=file.sessionKey,
+        nonce=file.nonce,
+        tag=file.tag,
+        cipherText=file.cipher.read(),
+    )
+
+    fileContent = decryptedData if decryptedData is not None else ""
 
     contentField = ptg.InputField(fileContent, multiline=True)
+
+    def handleDeleteClick():
+        def handleConfirmDeleteClick():
+            deleteModal.close()
+            try:
+                deleteFile(fileName)
+            except AttributeError:
+                pass
+            finally:
+                # Close the file preview window by swapping with empty window
+                handleCloseClick()
+                # Clear nav bar window
+                switchCurrPageWindowSlot(window.manager, "nav_bar", clear=True)
+                # And redraw the dashboard page
+                drawPage(window.manager, window.manager.routes["dashboard"]())
+
+        deleteModal = window.manager.alert(
+            "",
+            "Do you really want to delete this file?",
+            "",
+            ptg.Splitter(
+                ptg.Button("Yes", lambda *_: handleConfirmDeleteClick()),
+                ptg.Button("No", lambda *_: deleteModal.close()),
+            ),
+        )
 
     # TODO: Implement this function to encrypt the file content and then update
     # file on the database
@@ -26,7 +77,19 @@ def FilePreview(fileName: str, fileContent: str):
             window.manager.toast("File edited. Saving file...")
             # TODO: Update file on the database
 
-            # ...
+            encryptedData = encryptData(
+                user.publicKey, contentField.value.encode("utf-8")
+            )
+
+            if encryptedData:
+                encryptedSessionKey, nonce, tag, cipherText = encryptedData
+
+                updateFile(fileName, encryptedSessionKey, nonce, tag, cipherText)
+
+                window.manager.toast("File saved successfully!")
+
+            else:
+                window.manager.toast("Failed to save file!")
 
             handleCloseClick()
         else:
@@ -43,6 +106,7 @@ def FilePreview(fileName: str, fileContent: str):
     window = ptg.Window(
         ptg.Splitter(
             ptg.Label(fileName, parent_align=ptg.HorizontalAlignment.LEFT),
+            ptg.Button("Delete", lambda *_: handleDeleteClick()),
             ptg.Button("Save", lambda *_: handleSaveClick()),
             ptg.Button(
                 "Download",

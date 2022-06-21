@@ -14,6 +14,7 @@ routes = {
     "dashboard/upload_file": UploadFile,
     "dashboard/file_preview": FilePreview,
     "dashboard/file_preview/download_file": DownloadFile,
+    "dashboard/file_preview/password_prompt": PasswordPrompt,
     "dashboard/download_shared_file": DownloadSharedFile,
     "dashboard/tools": Tools,
     "dashboard/tools/sign_file": SignFile,

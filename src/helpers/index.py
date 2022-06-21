@@ -43,12 +43,15 @@ def switchCurrPageWindowSlot(
         # Then we add the new window to the slot
         if isinstance(newWindow, ptg.Window):
             newPage["windows"].append({"window": newWindow, "assign": targetAssign})
+
+            manager.add(window=newWindow, assign=targetAssign)
         elif newWindow is not None:
             newPage["windows"].extend(newWindow["windows"])
 
-        # NOTE: manager won't redraw the same window instance, so only the
-        # newWindow is drawn
-        drawPage(manager, newPage)
+            for window in newWindow["windows"]:
+                manager.add(window=window["window"], assign=window["assign"])
+
+        manager.navigation[-1] = newPage
 
 
 def drawPage(manager: ptg.WindowManager, newPage: Any | None) -> None:

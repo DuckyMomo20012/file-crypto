@@ -6,6 +6,7 @@ from .settings.your_information.edit.index import EditInformation
 from .upload_file import UploadFile
 from .file_preview.index import FilePreview
 from .file_preview.download_file import DownloadFile
+from .file_preview.password_prompt import PasswordPrompt
 from .download_shared_file import DownloadSharedFile
 from .tools.index import Tools
 from .tools.sign_file import SignFile
@@ -22,6 +23,7 @@ __all__ = [
     "UploadFile",
     "FilePreview",
     "DownloadFile",
+    "PasswordPrompt",
     "DownloadSharedFile",
     "Tools",
     "SignFile",

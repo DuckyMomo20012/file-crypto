@@ -1,7 +1,17 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage
+from src.helpers.index import drawPage, goToPrevPage, switchCurrPageWindowSlot
 from src.helpers.form_validation import requiredField, fileField
+from src.components import SuccessModal, ErrorModal
+
+import config
+
+from src.helpers.file import readFile
+
+from src.api.auth.service import getOneUser
+from src.api.file_crypto.service import uploadFileNoDuplicate
+
+from src.helpers.cryptography import encryptData
 
 
 def UploadFile():
@@ -20,7 +30,34 @@ def UploadFile():
 
         # TODO: Implement upload logic
 
+        user = getOneUser(config.session.email)
+
+        fileContent = readFile(filePath, mode="rb")
+
+        encryptedData = encryptData(user.publicKey, fileContent)
+
+        if encryptedData:
+            encryptedSessionKey, nonce, tag, cipherText = encryptedData
+
+            uploadFileNoDuplicate(
+                name=filePath,
+                sessionKey=encryptedSessionKey,
+                nonce=nonce,
+                tag=tag,
+                cipher=cipherText,
+            )
+
+            SuccessModal(window.manager, "File uploaded successfully!")
+
+        else:
+            ErrorModal(window.manager, "Error uploading file!")
+
+        # Close the upload file window
         goToPrevPage(window.manager)
+        # Clear nav bar window
+        switchCurrPageWindowSlot(window.manager, "nav_bar", clear=True)
+        # And redraw the dashboard page
+        drawPage(window.manager, window.manager.routes["dashboard"]())
 
     window = ptg.Window(
         "",
