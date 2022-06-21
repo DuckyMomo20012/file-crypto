@@ -2,7 +2,7 @@ from .dashboard import DashBoard
 from .settings.settings import Settings
 from .settings.change_password import ChangePassword
 from .settings.your_information.your_information import YourInformation
-from .settings.your_information.edit.index import EditInformation
+from .settings.your_information.edit.edit import EditInformation
 from .upload_file import UploadFile
 from .file_preview.file_preview import FilePreview
 from .file_preview.download_file import DownloadFile
