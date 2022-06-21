@@ -6,6 +6,7 @@ import session
 
 from src.components.layouts.AppShell import AppShell
 from src.helpers.index import drawPage, exitApp, switchCurrPageWindowSlot
+from src.components import ConfirmModal
 
 from src.api.auth.service import getOneUser
 
@@ -64,14 +65,11 @@ def DashBoard() -> None:
 
     def handleExitClick():
 
-        exitModal = exitBar.manager.alert(
-            "",
-            "Do you really want to logout?",
-            "",
-            ptg.Splitter(
-                ptg.Button("Yes", lambda *_: exitApp(hamburger.manager)),
-                ptg.Button("No", lambda *_: exitModal.close()),
-            ),
+        ConfirmModal(
+            exitBar.manager,
+            "Are you sure you want to exit?",
+            confirmOnClick=lambda *_: exitApp(hamburger.manager),
+            cancelOnClick=lambda *_: None,
         )
 
     files = getFiles()

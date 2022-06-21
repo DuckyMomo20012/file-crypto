@@ -26,6 +26,9 @@ markup:
   window__title--success: "nord14 bold"
   window__border--success: "nord14"
   window__corner--success: "nord14"
+  window__title--warning: "nord13 bold"
+  window__border--warning: "nord13"
+  window__corner--warning: "nord13"
 
 config:
   Window:
