@@ -45,6 +45,7 @@ def UploadFile():
                 nonce=nonce,
                 tag=tag,
                 cipher=cipherText,
+                emailUser=user.email,
             )
 
             SuccessModal(window.manager, "File uploaded successfully!")

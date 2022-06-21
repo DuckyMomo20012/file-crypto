@@ -2,8 +2,12 @@ import pytermgui as ptg
 
 from functools import partial
 
+import config
+
 from src.components.layouts.AppShell import AppShell
 from src.helpers.index import drawPage, exitApp, switchCurrPageWindowSlot
+
+from src.api.auth.service import getOneUser
 
 from src.api.file_crypto.service import getAllFiles
 
@@ -12,7 +16,9 @@ from src.api.file_crypto.service import getAllFiles
 # NOTE: Any suggestions for a better way to do this?
 def getFiles():
 
-    files = getAllFiles()
+    user = getOneUser(config.session.email)
+
+    files = getAllFiles(user.email)
 
     returnedFiles = {}
 

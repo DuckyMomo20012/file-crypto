@@ -14,7 +14,7 @@ def FilePreview(fileName: str, passphrase: str):
 
     user = getOneUser(config.session.email)
 
-    file = getOneFile(fileName)
+    file = getOneFile(user.email, fileName)
 
     if file is None:
         return None
@@ -37,7 +37,7 @@ def FilePreview(fileName: str, passphrase: str):
         def handleConfirmDeleteClick():
             deleteModal.close()
             try:
-                deleteFile(fileName)
+                deleteFile(user.email, fileName)
             except AttributeError:
                 pass
             finally:
@@ -84,7 +84,9 @@ def FilePreview(fileName: str, passphrase: str):
             if encryptedData:
                 encryptedSessionKey, nonce, tag, cipherText = encryptedData
 
-                updateFile(fileName, encryptedSessionKey, nonce, tag, cipherText)
+                updateFile(
+                    user.email, fileName, encryptedSessionKey, nonce, tag, cipherText
+                )
 
                 window.manager.toast("File saved successfully!")
 

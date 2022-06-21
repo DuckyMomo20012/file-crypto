@@ -43,7 +43,7 @@ def DownloadFile(fileName: str):
 
         window.manager.toast(f"Downloading {fileName}...")
 
-        file = getOneFile(fileName)
+        file = getOneFile(user.email, fileName)
 
         decryptedData = decryptData(
             privateKey=user.privateKey,
