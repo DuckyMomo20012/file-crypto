@@ -2,7 +2,7 @@ import pytermgui as ptg
 
 from src.helpers.index import drawPage, switchCurrPageWindowSlot
 
-import config
+import session
 
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
@@ -12,7 +12,7 @@ from src.helpers.cryptography import encryptData, decryptData
 
 def FilePreview(fileName: str, passphrase: str):
 
-    user = getOneUser(config.session.email)
+    user = getOneUser(session.user.email)
 
     file = getOneFile(user.email, fileName)
 

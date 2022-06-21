@@ -3,12 +3,12 @@ from src.helpers.index import goToPrevPage, drawPage
 
 from src.api.auth.service import getOneUser
 
-import config
+import session
 
 
 def YourInformation():
 
-    user = getOneUser(config.session.email)
+    user = getOneUser(session.user.email)
 
     dob = user.dateOfBirth.strftime("%m/%d/%Y")
 

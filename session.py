@@ -1,2 +1,2 @@
 # Declare global variables
-session = {}
+user = None

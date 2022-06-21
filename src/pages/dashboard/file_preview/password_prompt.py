@@ -4,7 +4,7 @@ from src.helpers.index import switchCurrPageWindowSlot
 from src.helpers.form_validation import requiredField
 from src.components import ErrorModal
 
-import config
+import session
 
 from src.api.auth.service import getOneUser
 
@@ -21,7 +21,7 @@ def PasswordPrompt(fileName: str):
 
         password = passwordField.value
 
-        user = getOneUser(config.session.email)
+        user = getOneUser(session.user.email)
 
         # Verify password to make sure the passphrase is correct
         if not verify_password(password, user.password):

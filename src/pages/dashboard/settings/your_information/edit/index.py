@@ -5,7 +5,7 @@ from src.helpers.form_validation import requiredField
 
 from src.api.auth.service import updateUserOneField
 
-import config
+import session
 
 
 def EditInformation(label: str, oldValue: Any, fieldName: str):
@@ -24,7 +24,7 @@ def EditInformation(label: str, oldValue: Any, fieldName: str):
 
         window.manager.toast("Updating information...")
 
-        updateUserOneField(config.session.email, fieldName, newValue)
+        updateUserOneField(session.user.email, fieldName, newValue)
 
         # NOTE: We go back to two pages, close settings page, so when user open
         # settings again, it will show the updated information.
