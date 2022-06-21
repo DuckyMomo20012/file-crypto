@@ -41,9 +41,12 @@ def FilePreview(fileName: str, passphrase: str):
             except AttributeError:
                 pass
             finally:
-                # BUG: Don't go back to previous page this time 😅 Help wanted 😭
-                # goToPrevPage(window.manager)
+                # Close the file preview window by swapping with empty window
                 handleCloseClick()
+                # Clear nav bar window
+                switchCurrPageWindowSlot(window.manager, "nav_bar")
+                # And redraw the dashboard page
+                drawPage(window.manager, window.manager.routes["dashboard"]())
 
         deleteModal = window.manager.alert(
             "",

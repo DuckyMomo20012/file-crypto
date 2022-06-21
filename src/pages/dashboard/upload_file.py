@@ -1,6 +1,6 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage
+from src.helpers.index import drawPage, goToPrevPage, switchCurrPageWindowSlot
 from src.helpers.form_validation import requiredField, fileField
 from src.components import SuccessModal, ErrorModal
 
@@ -52,7 +52,12 @@ def UploadFile():
         else:
             ErrorModal(window.manager, "Error uploading file!")
 
+        # Close the upload file window
         goToPrevPage(window.manager)
+        # Clear nav bar window
+        switchCurrPageWindowSlot(window.manager, "nav_bar")
+        # And redraw the dashboard page
+        drawPage(window.manager, window.manager.routes["dashboard"]())
 
     window = ptg.Window(
         "",
