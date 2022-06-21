@@ -57,7 +57,7 @@ def PasswordPrompt(fileName: str):
         ),
     )
 
-    window.set_title("Open file")
+    window.set_title(f"Open file {fileName}")
     window.overflow = ptg.Overflow.RESIZE
     window.center()
     window.is_noresize = True

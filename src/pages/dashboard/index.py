@@ -82,14 +82,14 @@ def DashBoard() -> None:
                 lambda *_: handleUploadClick(),
                 parent_align=ptg.HorizontalAlignment.CENTER,
             ),
-            ptg.Button(
-                "Download shared file",
-                lambda *_: drawPage(
-                    navBar.manager,
-                    navBar.manager.routes["dashboard/download_shared_file"](),
-                ),
-                parent_align=ptg.HorizontalAlignment.CENTER,
-            ),
+            # ptg.Button(
+            #     "Download shared file",
+            #     lambda *_: drawPage(
+            #         navBar.manager,
+            #         navBar.manager.routes["dashboard/download_shared_file"](),
+            #     ),
+            #     parent_align=ptg.HorizontalAlignment.CENTER,
+            # ),
         ),
         "",
         "My files",
@@ -104,6 +104,7 @@ def DashBoard() -> None:
                             handleButtonClick,
                             fileName=file["name"],
                         ),
+                        parent_align=ptg.HorizontalAlignment.LEFT,
                     )
                     for file in files[dates]
                 ],
@@ -112,7 +113,7 @@ def DashBoard() -> None:
                 # FIXME: Don't hardcode this width
                 width=14,  # Total size for date is 14 blocks
             )
-            for dates in files.keys()
+            for dates in sorted(files.keys(), reverse=True)
         ],
     )
     navBar.is_static = True
