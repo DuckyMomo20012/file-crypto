@@ -9,7 +9,7 @@ import config
 from src.helpers.file import readFile
 
 from src.api.auth.service import getOneUser
-from src.api.file_crypto.service import uploadFile
+from src.api.file_crypto.service import uploadFileNoDuplicate
 
 from src.helpers.cryptography import encryptData
 
@@ -39,7 +39,7 @@ def UploadFile():
         if encryptedData:
             encryptedSessionKey, nonce, tag, cipherText = encryptedData
 
-            uploadFile(
+            uploadFileNoDuplicate(
                 name=filePath,
                 sessionKey=encryptedSessionKey,
                 nonce=nonce,

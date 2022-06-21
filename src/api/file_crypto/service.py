@@ -21,6 +21,22 @@ def uploadFile(name, sessionKey, nonce, tag, cipher):
     return file
 
 
+def uploadFileNoDuplicate(name, sessionKey, nonce, tag, cipher):
+
+    from src.helpers.file import generateRandomFileName
+
+    checkDup = FileCrypto.objects(name=name).first()
+
+    if checkDup is None:
+        return uploadFile(name, sessionKey, nonce, tag, cipher)
+
+    else:
+
+        newFileName = generateRandomFileName(name)
+
+        return uploadFile(newFileName, sessionKey, nonce, tag, cipher)
+
+
 def deleteFile(filename):
     file = getOneFile(filename)
     file.delete()
