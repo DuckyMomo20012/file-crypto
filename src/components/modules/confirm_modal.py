@@ -36,5 +36,6 @@ def ConfirmModal(
     confirmModal.styles["corner_focused"] = "[window__corner--warning]{item}"
     confirmModal.set_title("[window__title--warning]Confirm")
     confirmModal.overflow = ptg.Overflow.RESIZE
+    confirmModal.is_noresize = True
 
     return None

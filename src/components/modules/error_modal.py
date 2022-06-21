@@ -27,5 +27,6 @@ def ErrorModal(
     errorModal.styles["corner_focused"] = "[window__corner--error]{item}"
     errorModal.set_title("[window__title--error]Error")
     errorModal.overflow = ptg.Overflow.RESIZE
+    errorModal.is_noresize = True
 
     return None
