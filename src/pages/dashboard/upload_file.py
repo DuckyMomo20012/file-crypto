@@ -55,7 +55,7 @@ def UploadFile():
         # Close the upload file window
         goToPrevPage(window.manager)
         # Clear nav bar window
-        switchCurrPageWindowSlot(window.manager, "nav_bar")
+        switchCurrPageWindowSlot(window.manager, "nav_bar", clear=True)
         # And redraw the dashboard page
         drawPage(window.manager, window.manager.routes["dashboard"]())
 
