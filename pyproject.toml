@@ -6,6 +6,8 @@ authors = ["Your Name <you@example.com>"]
 
 [tool.poe.tasks]
 dev = "python app.py"
+lint = "flake8"
+pretty = "isort ."
 
 [tool.isort]
 profile = "black"
