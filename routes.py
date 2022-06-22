@@ -1,4 +1,6 @@
 # flake8: noqa
+from typing import Callable
+
 from src.pages.auth import Login, Logout, Register
 from src.pages.dashboard import (
     ChangePassword,
@@ -19,7 +21,7 @@ from src.pages.dashboard import (
 )
 from src.types.Page import Page
 
-routes: dict[str, Page] = {
+routes: dict[str, Callable[..., Page]] = {
     "auth/login": Login,
     "auth/register": Register,
     "auth/logout": Logout,

@@ -1,5 +1,6 @@
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser
 from src.components import ErrorModal, SuccessModal
@@ -12,7 +13,7 @@ from src.types.Page import Page
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
     modal.close()
-    switchPage(window.manager, window.manager.routes["dashboard"]())
+    switchPage(window.manager, routes.routes["dashboard"]())
 
 
 def Login() -> Page:
@@ -46,7 +47,7 @@ def Login() -> Page:
                 window.manager,
                 "Login successful!",
                 onclick=lambda *_: switchPage(
-                    window.manager, window.manager.routes["dashboard"]()
+                    window.manager, routes.routes["dashboard"]()
                 ),
             )
 
@@ -65,9 +66,7 @@ def Login() -> Page:
             ),
             ptg.Button(
                 "Sign up",
-                lambda *_: switchPage(
-                    window.manager, window.manager.routes["auth/register"]()
-                ),
+                lambda *_: switchPage(window.manager, routes.routes["auth/register"]()),
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
             parent_align=ptg.HorizontalAlignment.CENTER,

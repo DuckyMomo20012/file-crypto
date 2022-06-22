@@ -2,6 +2,7 @@ from functools import partial
 
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import getAllFiles
@@ -47,7 +48,7 @@ def DashBoard() -> Page:
 
     def handleUploadClick():
 
-        drawPage(navBar.manager, navBar.manager.routes["dashboard/upload_file"]())
+        drawPage(navBar.manager, routes.routes["dashboard/upload_file"]())
 
     # NOTE: A little hack to bind the fileName to the switchCurrPageWindowSlot
     # function and to avoid late binding problem, otherwise we will ONLY get the
@@ -57,7 +58,7 @@ def DashBoard() -> Page:
         return switchCurrPageWindowSlot(
             manager=navBar.manager,
             targetAssign="body",
-            newWindow=navBar.manager.routes["dashboard/file_preview/password_prompt"](
+            newWindow=routes.routes["dashboard/file_preview/password_prompt"](
                 fileName=fileName
             ),
         )
@@ -89,7 +90,7 @@ def DashBoard() -> Page:
             #     "Download shared file",
             #     lambda *_: drawPage(
             #         navBar.manager,
-            #         navBar.manager.routes["dashboard/download_shared_file"](),
+            #         routes.routes["dashboard/download_shared_file"](),
             #     ),
             #     parent_align=ptg.HorizontalAlignment.CENTER,
             # ),
@@ -130,13 +131,13 @@ def DashBoard() -> Page:
             ptg.Button(
                 "⚙️ ",
                 lambda *_: drawPage(
-                    hamburger.manager, hamburger.manager.routes["dashboard/settings"]()
+                    hamburger.manager, routes.routes["dashboard/settings"]()
                 ),
             ),
             ptg.Button(
                 "🧰",
                 lambda *_: drawPage(
-                    hamburger.manager, hamburger.manager.routes["dashboard/tools"]()
+                    hamburger.manager, routes.routes["dashboard/tools"]()
                 ),
             ),
         ),

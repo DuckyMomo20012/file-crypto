@@ -1,5 +1,6 @@
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import uploadFileNoDuplicate
@@ -55,7 +56,7 @@ def UploadFile() -> Page:
         # Clear nav bar window
         switchCurrPageWindowSlot(window.manager, "nav_bar", clear=True)
         # And redraw the dashboard page
-        drawPage(window.manager, window.manager.routes["dashboard"]())
+        drawPage(window.manager, routes.routes["dashboard"]())
 
     window = ptg.Window(
         "",

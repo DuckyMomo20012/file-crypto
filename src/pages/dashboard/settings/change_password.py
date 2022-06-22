@@ -1,5 +1,6 @@
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser, updateUserKeys, updateUserPassword
 from src.components import ErrorModal, SuccessModal
@@ -13,7 +14,7 @@ def handleSuccessModalClose(manager: ptg.WindowManager) -> None:
 
     manager.toast("Logging out...")
     clearNavigation(manager)
-    drawPage(manager, manager.routes["auth/login"]())
+    drawPage(manager, routes.routes["auth/login"]())
 
 
 def ChangePassword() -> Page:

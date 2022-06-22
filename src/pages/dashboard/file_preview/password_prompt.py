@@ -1,5 +1,6 @@
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser
 from src.components import ErrorModal
@@ -29,7 +30,7 @@ def PasswordPrompt(fileName: str) -> Page:
         switchCurrPageWindowSlot(
             manager=window.manager,
             targetAssign=("body"),
-            newWindow=window.manager.routes["dashboard/file_preview"](
+            newWindow=routes.routes["dashboard/file_preview"](
                 fileName=fileName, passphrase=password
             ),
         )

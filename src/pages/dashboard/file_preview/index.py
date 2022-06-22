@@ -1,5 +1,6 @@
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
@@ -44,7 +45,7 @@ def FilePreview(fileName: str, passphrase: str) -> Page:
                 # Clear nav bar window
                 switchCurrPageWindowSlot(window.manager, "nav_bar", clear=True)
                 # And redraw the dashboard page
-                drawPage(window.manager, window.manager.routes["dashboard"]())
+                drawPage(window.manager, routes.routes["dashboard"]())
 
         ConfirmModal(
             window.manager,
@@ -109,9 +110,7 @@ def FilePreview(fileName: str, passphrase: str) -> Page:
                 "Download",
                 lambda *_: drawPage(
                     window.manager,
-                    window.manager.routes["dashboard/file_preview/download_file"](
-                        fileName
-                    ),
+                    routes.routes["dashboard/file_preview/download_file"](fileName),
                 ),
             ),
             ptg.Button(
