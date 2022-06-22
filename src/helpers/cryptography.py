@@ -39,7 +39,7 @@ def verify_password(plain_text_password: str, mixed_hashed_password: bytes) -> b
         return False
 
 
-def generateUserKeys(passphrase: str):
+def generateUserKeys(passphrase: str) -> tuple[bytes, bytes]:
 
     # Generate RSA private and public key pair 2048 bits long
     key = RSA.generate(2048)
@@ -66,7 +66,7 @@ def generateUserKeys(passphrase: str):
 
 def updatePassphrase(
     privateKey: bytes, oldPassphrase: str, newPassphrase: str
-) -> tuple[bytes]:
+) -> tuple[bytes, bytes]:
 
     # First, we import the private key with the old passphrase
     key = RSA.import_key(privateKey, passphrase=oldPassphrase)
@@ -100,12 +100,6 @@ def signFile(privateKey: bytes, filePath: str, passphrase: str) -> bytes:
 
 
 def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> bool:
-
-    from Crypto.Hash import SHA256
-    from Crypto.PublicKey import RSA
-    from Crypto.Signature import pss
-
-    from src.helpers.file import readFile
 
     # NOTE: Ref:
     # https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
@@ -246,7 +240,7 @@ def decryptData(
     nonce: bytes,
     tag: bytes,
     cipherText: bytes,
-) -> bytes | None:
+) -> str | None:
 
     # NOTE: Ref:
     # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa
