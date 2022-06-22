@@ -1,7 +1,7 @@
 import pytermgui as ptg
 
 import session
-from src.helpers.index import clearNavigation, drawPage, goToPrevPage
+from src.helpers.page_manager import clearNavigation, drawPage, goToPrevPage
 
 
 def Logout():

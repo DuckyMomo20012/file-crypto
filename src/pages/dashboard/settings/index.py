@@ -1,6 +1,6 @@
 import pytermgui as ptg
 
-from src.helpers.index import drawPage, goToPrevPage
+from src.helpers.page_manager import drawPage, goToPrevPage
 
 
 def Settings():

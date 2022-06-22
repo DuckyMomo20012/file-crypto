@@ -2,7 +2,7 @@ import pytermgui as ptg
 
 import session
 from src.api.auth.service import getOneUser
-from src.helpers.index import drawPage, goToPrevPage
+from src.helpers.page_manager import drawPage, goToPrevPage
 
 
 def YourInformation():

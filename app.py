@@ -2,7 +2,7 @@ import pytermgui as ptg
 from environs import Env
 from mongoengine import connect
 
-from src.helpers.index import drawPage
+from src.helpers.page_manager import drawPage
 from src.pages.routes import routes
 
 env = Env()

@@ -7,7 +7,7 @@ from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import encryptData
 from src.helpers.file import readFile
 from src.helpers.form_validation import fileField, requiredField
-from src.helpers.index import drawPage, goToPrevPage, switchCurrPageWindowSlot
+from src.helpers.page_manager import drawPage, goToPrevPage, switchCurrPageWindowSlot
 
 
 def UploadFile():

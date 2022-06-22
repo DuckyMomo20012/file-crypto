@@ -5,7 +5,7 @@ from src.api.auth.service import getOneUser, updateUserKeys, updateUserPassword
 from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import hash_password, updatePassphrase, verify_password
 from src.helpers.form_validation import requiredField
-from src.helpers.index import clearNavigation, drawPage, goToPrevPage
+from src.helpers.page_manager import clearNavigation, drawPage, goToPrevPage
 
 
 def handleSuccessModalClose(manager: ptg.WindowManager) -> None:

@@ -7,7 +7,7 @@ from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import decryptData, verify_password
 from src.helpers.file import writeFileToFolder
 from src.helpers.form_validation import folderField, requiredField
-from src.helpers.index import goToPrevPage
+from src.helpers.page_manager import goToPrevPage
 
 
 def DownloadFile(fileName: str):

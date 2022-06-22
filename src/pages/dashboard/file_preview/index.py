@@ -5,7 +5,7 @@ from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
 from src.components import ConfirmModal
 from src.helpers.cryptography import decryptData, encryptData
-from src.helpers.index import drawPage, switchCurrPageWindowSlot
+from src.helpers.page_manager import drawPage, switchCurrPageWindowSlot
 
 
 def FilePreview(fileName: str, passphrase: str):

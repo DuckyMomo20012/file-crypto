@@ -6,7 +6,7 @@ import pytermgui as ptg
 import session
 from src.api.auth.service import updateUserOneField
 from src.helpers.form_validation import dateField, requiredField
-from src.helpers.index import goToPrevPage
+from src.helpers.page_manager import goToPrevPage
 
 
 def EditInformation(label: str, oldValue: Any, fieldName: str, validator: str = ""):

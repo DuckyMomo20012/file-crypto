@@ -1,7 +1,7 @@
 import pytermgui as ptg
 
 from src.helpers.form_validation import folderField, requiredField
-from src.helpers.index import goToPrevPage
+from src.helpers.page_manager import goToPrevPage
 
 
 def DownloadSharedFile():

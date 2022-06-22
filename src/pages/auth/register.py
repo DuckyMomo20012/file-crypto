@@ -5,7 +5,7 @@ from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import generateUserKeys, hash_password
 from src.helpers.form_validation import emailField as emailFieldValidator
 from src.helpers.form_validation import requiredField
-from src.helpers.index import exitApp, switchPage
+from src.helpers.page_manager import exitApp, switchPage
 
 
 def Register():
