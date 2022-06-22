@@ -1,6 +1,6 @@
 import pytermgui as ptg
 from environs import Env
-from mongoengine import connect
+from mongoengine import connect  # type: ignore
 
 import routes
 import session

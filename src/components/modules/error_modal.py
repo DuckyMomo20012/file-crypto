@@ -6,7 +6,7 @@ import pytermgui as ptg
 def ErrorModal(
     manager: Optional[ptg.WindowManager],
     msg: str,
-    onclick: Optional[Callable[[ptg.Button], Any]] = None,
+    onclick: Optional[Callable[..., Any]] = None,
 ) -> None:
     if not manager:
         return None

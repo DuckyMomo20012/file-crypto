@@ -6,8 +6,8 @@ import pytermgui as ptg
 def ConfirmModal(
     manager: Optional[ptg.WindowManager],
     msg: str,
-    confirmOnClick: Optional[Callable[[ptg.Button], Any]] = None,
-    cancelOnClick: Optional[Callable[[ptg.Button], Any]] = None,
+    confirmOnClick: Optional[Callable[..., Any]] = None,
+    cancelOnClick: Optional[Callable[..., Any]] = None,
 ) -> None:
     if not manager:
         return None

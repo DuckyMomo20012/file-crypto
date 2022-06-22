@@ -1,8 +1,8 @@
 # flake8: noqa
 from typing import Callable, Optional
 
-from src.pages.auth import Login, Logout, Register
-from src.pages.dashboard import (
+from src.pages.auth import Login, Logout, Register  # type: ignore
+from src.pages.dashboard import (  # type: ignore
     ChangePassword,
     DashBoard,
     DecryptFile,
