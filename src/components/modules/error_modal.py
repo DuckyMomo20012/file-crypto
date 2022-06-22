@@ -1,6 +1,6 @@
-import pytermgui as ptg
-
 from typing import Any, Callable, Optional
+
+import pytermgui as ptg
 
 
 def ErrorModal(
@@ -21,12 +21,13 @@ def ErrorModal(
         "",
         ptg.Button("OK", lambda *_: handleClick()),
     )
-    errorModal.styles["border"] = "[window__border--error]{item}"
-    errorModal.styles["border_focused"] = "[window__border--error]{item}"
-    errorModal.styles["corner"] = "[window__corner--error]{item}"
-    errorModal.styles["corner_focused"] = "[window__corner--error]{item}"
-    errorModal.set_title("[window__title--error]Error")
-    errorModal.overflow = ptg.Overflow.RESIZE
+
     errorModal.is_noresize = True
+    errorModal.overflow = ptg.Overflow.RESIZE
+    errorModal.set_title("[window__title--error]Error")
+    errorModal.styles["border_focused"] = "[window__border--error]{item}"
+    errorModal.styles["border"] = "[window__border--error]{item}"
+    errorModal.styles["corner_focused"] = "[window__corner--error]{item}"
+    errorModal.styles["corner"] = "[window__corner--error]{item}"
 
     return None

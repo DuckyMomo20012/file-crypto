@@ -1,6 +1,6 @@
-from schema import User
-
 import datetime
+
+from schema import User
 
 
 def getOneUser(email):

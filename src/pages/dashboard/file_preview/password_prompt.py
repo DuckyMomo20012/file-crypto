@@ -1,14 +1,11 @@
 import pytermgui as ptg
 
-from src.helpers.index import switchCurrPageWindowSlot
-from src.helpers.form_validation import requiredField
-from src.components import ErrorModal
-
 import session
-
 from src.api.auth.service import getOneUser
-
+from src.components import ErrorModal
 from src.helpers.cryptography import verify_password
+from src.helpers.form_validation import requiredField
+from src.helpers.page_manager import switchCurrPageWindowSlot
 
 
 def PasswordPrompt(fileName: str):
@@ -57,12 +54,12 @@ def PasswordPrompt(fileName: str):
         ),
     )
 
-    window.set_title(f"Open file {fileName}")
-    # window.overflow = ptg.Overflow.RESIZE
-    window.vertical_align = ptg.VerticalAlignment.TOP
     # window.center()
-    window.is_noresize = True
+    # window.overflow = ptg.Overflow.RESIZE
     window.is_modal = True
+    window.is_noresize = True
+    window.set_title(f"Open file {fileName}")
+    window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {
         "layout": None,

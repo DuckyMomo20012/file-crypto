@@ -1,19 +1,17 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField, fileField
-from src.components import SuccessModal, ErrorModal
-
 from src.api.auth.service import getAllUsers
-
+from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import verifySignature
+from src.helpers.form_validation import fileField, requiredField
+from src.helpers.page_manager import goToPrevPage
 
 
 def VerifySignedFile():
     filePathField = ptg.InputField()
     signaturePathField = ptg.InputField()
 
-    # TODO: Implement verify signed file logic
+    # DONE: Implement verify signed file logic
     def handleVerifyClick():
         if not requiredField(window.manager, filePathField, label="File path"):
             return
@@ -70,11 +68,11 @@ def VerifySignedFile():
         ),
     )
 
-    window.set_title("Verify signed file")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title("Verify signed file")
 
     return {
         "layout": None,

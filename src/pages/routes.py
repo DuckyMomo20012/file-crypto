@@ -1,6 +1,6 @@
+# flake8: noqa
 from src.pages.auth import *
 from src.pages.dashboard import *
-
 
 routes = {
     "auth/login": Login,

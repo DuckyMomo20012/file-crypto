@@ -1,6 +1,13 @@
-from Crypto.Protocol.KDF import PBKDF2
+from pathlib import Path
+
+from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.Hash import SHA256
+from Crypto.Protocol.KDF import PBKDF2
+from Crypto.PublicKey import RSA
 from Crypto.Random import get_random_bytes
+from Crypto.Signature import pss
+
+from src.helpers.file import readFile, writeFileToFolder
 
 
 def hash_password(plain_text_password: str) -> bytes:
@@ -33,7 +40,6 @@ def verify_password(plain_text_password: str, mixed_hashed_password: bytes) -> b
 
 
 def generateUserKeys(passphrase: str):
-    from Crypto.PublicKey import RSA
 
     # Generate RSA private and public key pair 2048 bits long
     key = RSA.generate(2048)
@@ -45,7 +51,8 @@ def generateUserKeys(passphrase: str):
 
     # 1. A "16" byte AES key is derived from the passphrase using
     #    Crypto.Protocol.KDF.scrypt() with 8 bytes salt.
-    # READ more: https://github.com/Legrandin/pycryptodome/blob/master/lib/Crypto/IO/_PBES.py#L239
+    # READ more:
+    # https://github.com/Legrandin/pycryptodome/blob/master/lib/Crypto/IO/_PBES.py#L239
     # 2. The private key is encrypted using CBC.
     # 3. The encrypted key is encoded according to PKCS#8.
     privateKey = key.export_key(
@@ -60,7 +67,6 @@ def generateUserKeys(passphrase: str):
 def updatePassphrase(
     privateKey: bytes, oldPassphrase: str, newPassphrase: str
 ) -> tuple[bytes]:
-    from Crypto.PublicKey import RSA
 
     # First, we import the private key with the old passphrase
     key = RSA.import_key(privateKey, passphrase=oldPassphrase)
@@ -78,14 +84,8 @@ def updatePassphrase(
 
 def signFile(privateKey: bytes, filePath: str, passphrase: str) -> bytes:
 
-    from Crypto.Signature import pss
-    from Crypto.Hash import SHA256
-    from Crypto.PublicKey import RSA
-
-    from src.helpers.file import readFile
-
-    # NOTE: Ref: https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
-
+    # NOTE: Ref:
+    # https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
     # Read file
     fileContent = readFile(filePath, mode="rb")
 
@@ -101,14 +101,14 @@ def signFile(privateKey: bytes, filePath: str, passphrase: str) -> bytes:
 
 def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> bool:
 
-    from Crypto.Signature import pss
     from Crypto.Hash import SHA256
     from Crypto.PublicKey import RSA
+    from Crypto.Signature import pss
 
     from src.helpers.file import readFile
 
-    # NOTE: Ref: https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
-
+    # NOTE: Ref:
+    # https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
     # Read file
     fileContent = readFile(filePath, mode="rb")
 
@@ -135,14 +135,6 @@ def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> bool
 def encryptFile(
     publicKey: bytes, filePath: str, folderPath: str = ".", outPutExt: str = ".bin"
 ) -> bool:
-
-    from Crypto.PublicKey import RSA
-    from Crypto.Random import get_random_bytes
-    from Crypto.Cipher import AES, PKCS1_OAEP
-
-    from pathlib import Path
-
-    from src.helpers.file import readFile
 
     # Read file
     fileContent = readFile(filePath, mode="rb")
@@ -187,13 +179,6 @@ def decryptFile(
     outPutExt: str = ".txt",
 ) -> bool:
 
-    from Crypto.PublicKey import RSA
-    from Crypto.Cipher import AES, PKCS1_OAEP
-
-    from src.helpers.file import writeFileToFolder
-
-    from pathlib import Path
-
     # Read file
     fileIn = open(filePath, "rb")
 
@@ -233,13 +218,8 @@ def encryptData(
     publicKey: bytes, content: bytes
 ) -> tuple[bytes, bytes, bytes, bytes] | None:
 
-    from Crypto.PublicKey import RSA
-    from Crypto.Random import get_random_bytes
-    from Crypto.Cipher import AES, PKCS1_OAEP
-
     # NOTE: Ref:
     # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa
-
     # Generate session key
     sessionKey = get_random_bytes(16)
 
@@ -267,9 +247,6 @@ def decryptData(
     tag: bytes,
     cipherText: bytes,
 ) -> bytes | None:
-
-    from Crypto.PublicKey import RSA
-    from Crypto.Cipher import AES, PKCS1_OAEP
 
     # NOTE: Ref:
     # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa

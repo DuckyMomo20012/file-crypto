@@ -1,20 +1,19 @@
+from datetime import datetime
 from typing import Any
-import pytermgui as ptg
-from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import *
 
-from src.api.auth.service import updateUserOneField
+import pytermgui as ptg
 
 import session
-
-from datetime import datetime
+from src.api.auth.service import updateUserOneField
+from src.helpers.form_validation import dateField, requiredField
+from src.helpers.page_manager import goToPrevPage
 
 
 def EditInformation(label: str, oldValue: Any, fieldName: str, validator: str = ""):
 
     inputField = ptg.InputField()
 
-    # TODO: Implement edit functionality
+    # DONE: Implement edit functionality
     def handleConfirmClick():
         if not requiredField(window.manager, inputField, label=f"New {label.lower()}"):
             return
@@ -57,11 +56,11 @@ def EditInformation(label: str, oldValue: Any, fieldName: str, validator: str = 
         ),
     )
 
-    window.set_title(title="Edit Information")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title(title="Edit Information")
 
     return {
         "layout": None,

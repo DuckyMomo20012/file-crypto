@@ -1,9 +1,9 @@
+import pytermgui as ptg
 from environs import Env
 from mongoengine import connect
-import pytermgui as ptg
 
+from src.helpers.page_manager import drawPage
 from src.pages.routes import routes
-from src.helpers.index import drawPage
 
 env = Env()
 # Read .env into os.environ

@@ -6,6 +6,11 @@ authors = ["Your Name <you@example.com>"]
 
 [tool.poe.tasks]
 dev = "python app.py"
+lint = "flake8"
+pretty = "isort ."
+
+[tool.isort]
+profile = "black"
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -18,8 +23,10 @@ pytermgui = "^6.4.0"
 PyYAML = "^6.0"
 
 [tool.poetry.dev-dependencies]
-poethepoet = "^0.13.1"
+poethepoet = "^0.14.0"
 black = {version = "^22.3.0", allow-prereleases = true}
+isort = "^5.10.1"
+flake8 = "^4.0.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

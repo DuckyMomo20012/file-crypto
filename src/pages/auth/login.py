@@ -1,14 +1,12 @@
 import pytermgui as ptg
-from src.helpers.index import switchPage, exitApp
-from src.helpers.form_validation import requiredField
-from src.helpers.form_validation import emailField as emailFieldValidator
-from src.components import SuccessModal, ErrorModal
-
-from src.api.auth.service import getOneUser
-
-from src.helpers.cryptography import verify_password
 
 import session
+from src.api.auth.service import getOneUser
+from src.components import ErrorModal, SuccessModal
+from src.helpers.cryptography import verify_password
+from src.helpers.form_validation import emailField as emailFieldValidator
+from src.helpers.form_validation import requiredField
+from src.helpers.page_manager import exitApp, switchPage
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
@@ -18,8 +16,8 @@ def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
 
 def Login():
 
-    # NOTE: When we use manager.add in app.py, manager it will assign window.manager to
-    # itself, so we can access window.manager here.
+    # NOTE: When we use manager.add in app.py, manager it will assign
+    # window.manager to itself, so we can access window.manager here.
 
     emailField = ptg.InputField()
     passwordField = ptg.InputField()
@@ -35,8 +33,8 @@ def Login():
         if not emailFieldValidator(window.manager, emailField, label="Email"):
             return
 
-        # TODO: Implement login logic
-        # TODO: Validate email and password
+        # DONE: Implement login logic
+        # DONE: Validate email and password
         email = emailField.value
         password = passwordField.value
 
@@ -85,11 +83,11 @@ def Login():
         ),
     )
 
-    window.set_title(title="[window__title]Login")
-    window.overflow = ptg.Overflow.RESIZE
-    window.vertical_align = ptg.VerticalAlignment.TOP
     window.center()
     window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title(title="[window__title]Login")
+    window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {
         "layout": None,

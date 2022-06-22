@@ -1,12 +1,11 @@
 import pytermgui as ptg
-from src.helpers.index import switchPage, exitApp
-from src.helpers.form_validation import requiredField
+
+from src.api.auth.service import addUser, getOneUser
+from src.components import ErrorModal, SuccessModal
+from src.helpers.cryptography import generateUserKeys, hash_password
 from src.helpers.form_validation import emailField as emailFieldValidator
-from src.components import SuccessModal, ErrorModal
-
-from src.api.auth.service import getOneUser, addUser
-
-from src.helpers.cryptography import hash_password, generateUserKeys
+from src.helpers.form_validation import requiredField
+from src.helpers.page_manager import exitApp, switchPage
 
 
 def Register():
@@ -31,8 +30,8 @@ def Register():
         if not emailFieldValidator(window.manager, emailField, label="Email"):
             return
 
-        # TODO: Implement register logic
-        # TODO: Validate email, password and confirm password
+        # DONE: Implement register logic
+        # DONE: Validate email, password and confirm password
         email = emailField.value
         password = passwordField.value
         confirmPassword = confirmPasswordField.value
@@ -94,11 +93,11 @@ def Register():
         ),
     )
 
-    window.set_title(title="Register")
-    window.overflow = ptg.Overflow.RESIZE
-    window.vertical_align = ptg.VerticalAlignment.TOP
     window.center()
     window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title(title="Register")
+    window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {
         "layout": None,

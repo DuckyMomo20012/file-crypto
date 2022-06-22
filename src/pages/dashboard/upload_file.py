@@ -1,17 +1,13 @@
 import pytermgui as ptg
 
-from src.helpers.index import drawPage, goToPrevPage, switchCurrPageWindowSlot
-from src.helpers.form_validation import requiredField, fileField
-from src.components import SuccessModal, ErrorModal
-
 import session
-
-from src.helpers.file import readFile
-
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import uploadFileNoDuplicate
-
+from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import encryptData
+from src.helpers.file import readFile
+from src.helpers.form_validation import fileField, requiredField
+from src.helpers.page_manager import drawPage, goToPrevPage, switchCurrPageWindowSlot
 
 
 def UploadFile():
@@ -28,7 +24,7 @@ def UploadFile():
         filePath = filePathField.value
         window.manager.toast(f"Uploading {filePath}...")
 
-        # TODO: Implement upload logic
+        # DONE: Implement upload logic
 
         user = getOneUser(session.user.email)
 
@@ -74,11 +70,11 @@ def UploadFile():
         ),
     )
 
-    window.set_title(title="Upload file")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title(title="Upload file")
 
     return {
         "layout": None,

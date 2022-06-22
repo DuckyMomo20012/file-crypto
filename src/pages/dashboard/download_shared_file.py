@@ -1,7 +1,7 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField, folderField
+from src.helpers.form_validation import folderField, requiredField
+from src.helpers.page_manager import goToPrevPage
 
 
 def DownloadSharedFile():
@@ -25,11 +25,11 @@ def DownloadSharedFile():
         ):
             return
 
-        ownerEmail = ownerEmailField.value
+        ownerEmail = ownerEmailField.value  # noqa
         fileName = fileNameField.value
 
         # NOTE: Remember to check if this is a valid folder directory
-        saveFolderPath = saveFolderPathField.value
+        saveFolderPath = saveFolderPathField.value  # noqa
 
         window.manager.toast(f"Downloading {fileName}...")
         # ...
@@ -54,11 +54,11 @@ def DownloadSharedFile():
         ),
     )
 
-    window.set_title("Download shared file")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title("Download shared file")
 
     return {
         "layout": None,

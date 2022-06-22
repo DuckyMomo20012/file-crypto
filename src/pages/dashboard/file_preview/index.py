@@ -1,14 +1,11 @@
 import pytermgui as ptg
 
-from src.helpers.index import drawPage, switchCurrPageWindowSlot
-from src.components import ConfirmModal
-
 import session
-
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
-
-from src.helpers.cryptography import encryptData, decryptData
+from src.components import ConfirmModal
+from src.helpers.cryptography import decryptData, encryptData
+from src.helpers.page_manager import drawPage, switchCurrPageWindowSlot
 
 
 def FilePreview(fileName: str, passphrase: str):
@@ -55,7 +52,7 @@ def FilePreview(fileName: str, passphrase: str):
             cancelOnClick=lambda *_: None,
         )
 
-    # TODO: Implement this function to encrypt the file content and then update
+    # DONE: Implement this function to encrypt the file content and then update
     # file on the database
     def handleSaveClick():
 
@@ -72,7 +69,7 @@ def FilePreview(fileName: str, passphrase: str):
 
         if not editedContent == originalContent:
             window.manager.toast("File edited. Saving file...")
-            # TODO: Update file on the database
+            # DONE: Update file on the database
 
             encryptedData = encryptData(
                 user.publicKey, contentField.value.encode("utf-8")

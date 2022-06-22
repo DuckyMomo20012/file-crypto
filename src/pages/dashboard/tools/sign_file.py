@@ -1,15 +1,12 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField, fileField, folderField
-from src.components import ErrorModal
-
 import session
-
 from src.api.auth.service import getOneUser
-
+from src.components import ErrorModal
 from src.helpers.cryptography import signFile, verify_password
 from src.helpers.file import writeFileToFolder
+from src.helpers.form_validation import fileField, folderField, requiredField
+from src.helpers.page_manager import goToPrevPage
 
 
 def SignFile():
@@ -18,7 +15,7 @@ def SignFile():
     passwordField.styles["value"] = "invisible"
     saveFolderPathField = ptg.InputField()
 
-    # TODO: Implement sign file logic
+    # DONE: Implement sign file logic
     def handleSignClick():
         if not requiredField(window.manager, filePathField, label="File path"):
             return
@@ -76,11 +73,11 @@ def SignFile():
         ),
     )
 
-    window.set_title("Sign your file")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title("Sign your file")
 
     return {
         "layout": None,

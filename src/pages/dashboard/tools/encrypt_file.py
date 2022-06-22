@@ -1,12 +1,10 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField, fileField, folderField
-from src.components import SuccessModal, ErrorModal
-
 from src.api.auth.service import getOneUser
-
+from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import encryptFile
+from src.helpers.form_validation import fileField, folderField, requiredField
+from src.helpers.page_manager import goToPrevPage
 
 
 def EncryptFile():
@@ -14,7 +12,7 @@ def EncryptFile():
     receiverEmailField = ptg.InputField()
     saveFolderPathField = ptg.InputField()
 
-    # TODO: Implement sign file logic
+    # DONE: Implement encrypt file logic
     def handleEncryptClick():
         if not requiredField(window.manager, filePathField, label="File path"):
             return
@@ -68,11 +66,11 @@ def EncryptFile():
         ),
     )
 
-    window.set_title("Encrypt your file")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title("Encrypt your file")
 
     return {
         "layout": None,

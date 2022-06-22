@@ -1,6 +1,6 @@
-import pytermgui as ptg
-
 from typing import Any, Callable, Optional
+
+import pytermgui as ptg
 
 
 def ConfirmModal(
@@ -30,12 +30,13 @@ def ConfirmModal(
             ptg.Button("No", lambda *_: handleCancelClick()),
         ),
     )
-    confirmModal.styles["border"] = "[window__border--warning]{item}"
-    confirmModal.styles["border_focused"] = "[window__border--warning]{item}"
-    confirmModal.styles["corner"] = "[window__corner--warning]{item}"
-    confirmModal.styles["corner_focused"] = "[window__corner--warning]{item}"
-    confirmModal.set_title("[window__title--warning]Confirm")
-    confirmModal.overflow = ptg.Overflow.RESIZE
+
     confirmModal.is_noresize = True
+    confirmModal.overflow = ptg.Overflow.RESIZE
+    confirmModal.set_title("[window__title--warning]Confirm")
+    confirmModal.styles["border_focused"] = "[window__border--warning]{item}"
+    confirmModal.styles["border"] = "[window__border--warning]{item}"
+    confirmModal.styles["corner_focused"] = "[window__corner--warning]{item}"
+    confirmModal.styles["corner"] = "[window__corner--warning]{item}"
 
     return None

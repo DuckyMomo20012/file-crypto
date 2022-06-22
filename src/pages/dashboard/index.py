@@ -1,18 +1,16 @@
-import pytermgui as ptg
-
 from functools import partial
 
+import pytermgui as ptg
+
 import session
-
-from src.components.layouts.AppShell import AppShell
-from src.helpers.index import drawPage, exitApp, switchCurrPageWindowSlot
-from src.components import ConfirmModal
-
 from src.api.auth.service import getOneUser
-
 from src.api.file_crypto.service import getAllFiles
+from src.components import ConfirmModal
+from src.components.layouts.AppShell import AppShell
+from src.helpers.page_manager import drawPage, exitApp, switchCurrPageWindowSlot
 
-# TODO: Implement this function to fetch data from the database and return
+
+# DONE: Implement this function to fetch data from the database and return
 # format like this
 # NOTE: Any suggestions for a better way to do this?
 def getFiles():
@@ -120,10 +118,11 @@ def DashBoard() -> None:
             for dates in sorted(files.keys(), reverse=True)
         ],
     )
-    navBar.is_static = True
+
     # navBar.is_noresize = True
-    navBar.vertical_align = ptg.VerticalAlignment.TOP
+    navBar.is_static = True
     navBar.overflow = ptg.Overflow.SCROLL
+    navBar.vertical_align = ptg.VerticalAlignment.TOP
 
     hamburger = ptg.Window(
         ptg.Splitter(

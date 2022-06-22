@@ -1,9 +1,8 @@
 import pytermgui as ptg
-from src.helpers.index import goToPrevPage, drawPage
-
-from src.api.auth.service import getOneUser
 
 import session
+from src.api.auth.service import getOneUser
+from src.helpers.page_manager import drawPage, goToPrevPage
 
 
 def YourInformation():
@@ -84,10 +83,10 @@ def YourInformation():
         ptg.Button("Back", lambda *_: goToPrevPage(window.manager)),
     )
 
-    window.set_title("Your Information")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
     window.is_modal = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title("Your Information")
 
     return {
         "layout": None,

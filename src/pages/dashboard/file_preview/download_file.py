@@ -1,17 +1,13 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField, folderField
-from src.components import SuccessModal, ErrorModal
-
 import session
-
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import getOneFile
-
+from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import decryptData, verify_password
-
 from src.helpers.file import writeFileToFolder
+from src.helpers.form_validation import folderField, requiredField
+from src.helpers.page_manager import goToPrevPage
 
 
 def DownloadFile(fileName: str):
@@ -19,7 +15,7 @@ def DownloadFile(fileName: str):
     passwordField.styles["value"] = "invisible"
     saveFolderPathField = ptg.InputField()
 
-    # TODO: Implement download file logic
+    # DONE: Implement download file logic
     def handleDownloadClick():
         if not requiredField(window.manager, passwordField, label="Your password"):
             return
@@ -85,11 +81,11 @@ def DownloadFile(fileName: str):
         ),
     )
 
-    window.set_title("Download file")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title("Download file")
 
     return {
         "layout": None,

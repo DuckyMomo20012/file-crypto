@@ -1,14 +1,11 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage, clearNavigation, drawPage
-from src.helpers.form_validation import requiredField
-from src.components import SuccessModal, ErrorModal
-
 import session
-
 from src.api.auth.service import getOneUser, updateUserKeys, updateUserPassword
-
-from src.helpers.cryptography import updatePassphrase, verify_password, hash_password
+from src.components import ErrorModal, SuccessModal
+from src.helpers.cryptography import hash_password, updatePassphrase, verify_password
+from src.helpers.form_validation import requiredField
+from src.helpers.page_manager import clearNavigation, drawPage, goToPrevPage
 
 
 def handleSuccessModalClose(manager: ptg.WindowManager) -> None:
@@ -43,7 +40,7 @@ def ChangePassword():
 
         user = getOneUser(session.user.email)
 
-        # TODO: Check if old password is correct and new password is valid and
+        # DONE: Check if old password is correct and new password is valid and
         # match with confirm new password
 
         if newPassword == confirmNewPassword:
@@ -90,19 +87,19 @@ def ChangePassword():
         "",
         ptg.Splitter(
             # NOTE: We don't use window.close() because we want to keep track of
-            # navigation and this is a page not a modal or an alert. We use goToPrevPage to
-            # pop this page from the navigation stack.
+            # navigation and this is a page not a modal or an alert. We use
+            # goToPrevPage to pop this page from the navigation stack.
             ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button("Confirm", lambda *_: handleConfirmClick()),
         ),
     )
 
-    window.set_title(title="Change password")
+    window.center()
+    window.is_modal = True
+    window.is_noresize = True
     # NOTE: overflow RESIZE doesn't play animation when window is opened.
     window.overflow = ptg.Overflow.RESIZE
-    window.center()
-    window.is_noresize = True
-    window.is_modal = True
+    window.set_title(title="Change password")
 
     return {
         "layout": None,

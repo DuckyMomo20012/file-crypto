@@ -1,14 +1,11 @@
 import pytermgui as ptg
 
-from src.helpers.index import goToPrevPage
-from src.helpers.form_validation import requiredField, fileField, folderField
-from src.components import SuccessModal, ErrorModal
-
 import session
-
 from src.api.auth.service import getOneUser
-
-from src.helpers.cryptography import verify_password, decryptFile
+from src.components import ErrorModal, SuccessModal
+from src.helpers.cryptography import decryptFile, verify_password
+from src.helpers.form_validation import fileField, folderField, requiredField
+from src.helpers.page_manager import goToPrevPage
 
 
 def DecryptFile():
@@ -17,7 +14,7 @@ def DecryptFile():
     passwordField.styles["value"] = "invisible"
     saveFolderPathField = ptg.InputField()
 
-    # TODO: Implement sign file logic
+    # DONE: Implement decrypt file logic
     def handleDecryptClick():
         if not requiredField(
             window.manager, filePathField, label="Encrypted file path"
@@ -84,11 +81,11 @@ def DecryptFile():
         ),
     )
 
-    window.set_title("Decrypt your file")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title("Decrypt your file")
 
     return {
         "layout": None,
