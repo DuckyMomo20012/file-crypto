@@ -3,8 +3,7 @@ import pytermgui as ptg
 import session
 from src.api.auth.service import getOneUser, updateUserKeys, updateUserPassword
 from src.components import ErrorModal, SuccessModal
-from src.helpers.cryptography import (hash_password, updatePassphrase,
-                                      verify_password)
+from src.helpers.cryptography import hash_password, updatePassphrase, verify_password
 from src.helpers.form_validation import requiredField
 from src.helpers.index import clearNavigation, drawPage, goToPrevPage
 
@@ -88,8 +87,8 @@ def ChangePassword():
         "",
         ptg.Splitter(
             # NOTE: We don't use window.close() because we want to keep track of
-            # navigation and this is a page not a modal or an alert. We use goToPrevPage to
-            # pop this page from the navigation stack.
+            # navigation and this is a page not a modal or an alert. We use
+            # goToPrevPage to pop this page from the navigation stack.
             ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button("Confirm", lambda *_: handleConfirmClick()),
         ),

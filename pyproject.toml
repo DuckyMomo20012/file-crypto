@@ -7,6 +7,9 @@ authors = ["Your Name <you@example.com>"]
 [tool.poe.tasks]
 dev = "python app.py"
 
+[tool.isort]
+profile = "black"
+
 [tool.poetry.dependencies]
 python = "^3.9"
 environs = "^9.5.0"
@@ -21,6 +24,7 @@ PyYAML = "^6.0"
 poethepoet = "^0.13.1"
 black = {version = "^22.3.0", allow-prereleases = true}
 isort = "^5.10.1"
+flake8 = "^4.0.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

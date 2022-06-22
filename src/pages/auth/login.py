@@ -16,8 +16,8 @@ def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
 
 def Login():
 
-    # NOTE: When we use manager.add in app.py, manager it will assign window.manager to
-    # itself, so we can access window.manager here.
+    # NOTE: When we use manager.add in app.py, manager it will assign
+    # window.manager to itself, so we can access window.manager here.
 
     emailField = ptg.InputField()
     passwordField = ptg.InputField()
