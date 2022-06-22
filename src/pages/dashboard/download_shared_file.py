@@ -25,11 +25,11 @@ def DownloadSharedFile():
         ):
             return
 
-        ownerEmail = ownerEmailField.value
+        ownerEmail = ownerEmailField.value  # noqa
         fileName = fileNameField.value
 
         # NOTE: Remember to check if this is a valid folder directory
-        saveFolderPath = saveFolderPathField.value
+        saveFolderPath = saveFolderPathField.value  # noqa
 
         window.manager.toast(f"Downloading {fileName}...")
         # ...
