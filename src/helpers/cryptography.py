@@ -45,7 +45,8 @@ def generateUserKeys(passphrase: str):
 
     # 1. A "16" byte AES key is derived from the passphrase using
     #    Crypto.Protocol.KDF.scrypt() with 8 bytes salt.
-    # READ more: https://github.com/Legrandin/pycryptodome/blob/master/lib/Crypto/IO/_PBES.py#L239
+    # READ more:
+    # https://github.com/Legrandin/pycryptodome/blob/master/lib/Crypto/IO/_PBES.py#L239
     # 2. The private key is encrypted using CBC.
     # 3. The encrypted key is encoded according to PKCS#8.
     privateKey = key.export_key(
@@ -84,7 +85,8 @@ def signFile(privateKey: bytes, filePath: str, passphrase: str) -> bytes:
 
     from src.helpers.file import readFile
 
-    # NOTE: Ref: https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
+    # NOTE: Ref:
+    # https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
     # Read file
     fileContent = readFile(filePath, mode="rb")
 
@@ -106,7 +108,8 @@ def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> bool
 
     from src.helpers.file import readFile
 
-    # NOTE: Ref: https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
+    # NOTE: Ref:
+    # https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
     # Read file
     fileContent = readFile(filePath, mode="rb")
 

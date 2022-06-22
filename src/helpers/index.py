@@ -15,7 +15,8 @@ def switchCurrPageWindowSlot(
     clear=True,
     isAdd=False,
 ):
-    # NOTE: Temporary set "clear" default to True and isAdd to False due to bug in pytermgui
+    # NOTE: Temporary set "clear" default to True and isAdd to False due to bug
+    # in pytermgui
     # BUG: pytermgui doesn't close window completely. Need more research
 
     if len(manager.navigation) > 0:
@@ -30,13 +31,13 @@ def switchCurrPageWindowSlot(
         ]
 
         # Then we remove all windows assigned to the this slot if clear is True
-        if clear == True:
+        if clear is True:
             for slot in swapSlots:
                 # Close window
                 manager.remove(window=slot["window"], autostop=False)
                 newPage["windows"].remove(slot)
 
-        elif isAdd == False:
+        elif isAdd is False:
             # If clear is False, we just remove the last window in the list
             manager.remove(window=swapSlots[-1]["window"], autostop=False)
             newPage["windows"].remove(swapSlots[-1])
