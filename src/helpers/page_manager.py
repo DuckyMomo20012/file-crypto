@@ -2,6 +2,8 @@ from typing import Any
 
 import pytermgui as ptg
 
+import session
+
 
 def switchPage(manager, newPage: Any) -> None:
     goToPrevPage(manager)
@@ -19,10 +21,10 @@ def switchCurrPageWindowSlot(
     # in pytermgui
     # BUG: pytermgui doesn't close window completely. Need more research
 
-    if len(manager.navigation) > 0:
+    if len(session.navigation) > 0:
         # We build new page based on previous page, then we remove assigned slots
         # which are match with currAssign
-        newPage = manager.navigation[-1]
+        newPage = session.navigation[-1]
 
         # Loop to find the "slot" to replace, maybe many windows are
         # assigned to the same slot
@@ -53,14 +55,14 @@ def switchCurrPageWindowSlot(
             for window in newWindow["windows"]:
                 manager.add(window=window["window"], assign=window["assign"])
 
-        manager.navigation[-1] = newPage
+        session.navigation[-1] = newPage
 
 
 def drawPage(manager: ptg.WindowManager, newPage: Any | None) -> None:
 
     if newPage is not None:
         # Append new page to navigation stack
-        manager.navigation.append(newPage)
+        session.navigation.append(newPage)
 
         if newPage["layout"] is not None:
             manager.layout = newPage["layout"]
@@ -70,9 +72,9 @@ def drawPage(manager: ptg.WindowManager, newPage: Any | None) -> None:
 
 def goToPrevPage(manager: ptg.WindowManager) -> None:
 
-    if len(manager.navigation) > 0:
+    if len(session.navigation) > 0:
         # Remove last page from navigation stack
-        currWindow = manager.navigation.pop()
+        currWindow = session.navigation.pop()
 
         if currWindow["layout"] is not None:
             manager.layout = currWindow["layout"]
@@ -82,7 +84,7 @@ def goToPrevPage(manager: ptg.WindowManager) -> None:
 
 def clearNavigation(manager: ptg.WindowManager):
 
-    for _ in range(len(manager.navigation)):
+    for _ in range(len(session.navigation)):
         goToPrevPage(manager)
 
 

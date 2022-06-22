@@ -3,6 +3,7 @@ from environs import Env
 from mongoengine import connect
 
 import routes
+import session
 from src.helpers.page_manager import drawPage
 
 env = Env()
@@ -16,6 +17,6 @@ with ptg.WindowManager() as manager:
     loader = ptg.YamlLoader()
     loader.load(styles)
     # Add navigation history stack
-    manager.navigation = []
+    session.navigation = []
     drawPage(manager, routes.routes["auth/login"]())
     manager.run()
