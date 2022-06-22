@@ -23,7 +23,7 @@ pytermgui = "^6.4.0"
 PyYAML = "^6.0"
 
 [tool.poetry.dev-dependencies]
-poethepoet = "^0.13.1"
+poethepoet = "^0.14.0"
 black = {version = "^22.3.0", allow-prereleases = true}
 isort = "^5.10.1"
 flake8 = "^4.0.1"
