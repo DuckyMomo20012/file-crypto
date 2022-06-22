@@ -5,9 +5,10 @@ from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import encryptFile
 from src.helpers.form_validation import fileField, folderField, requiredField
 from src.helpers.page_manager import goToPrevPage
+from src.types.Page import Page
 
 
-def EncryptFile():
+def EncryptFile() -> Page:
     filePathField = ptg.InputField()
     receiverEmailField = ptg.InputField()
     saveFolderPathField = ptg.InputField()

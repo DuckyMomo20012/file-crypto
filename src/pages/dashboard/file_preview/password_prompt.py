@@ -1,14 +1,16 @@
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser
 from src.components import ErrorModal
 from src.helpers.cryptography import verify_password
 from src.helpers.form_validation import requiredField
 from src.helpers.page_manager import switchCurrPageWindowSlot
+from src.types.Page import Page
 
 
-def PasswordPrompt(fileName: str):
+def PasswordPrompt(fileName: str) -> Page:
     passwordField = ptg.InputField()
     passwordField.styles["value"] = "invisible"
 
@@ -28,7 +30,7 @@ def PasswordPrompt(fileName: str):
         switchCurrPageWindowSlot(
             manager=window.manager,
             targetAssign=("body"),
-            newWindow=window.manager.routes["dashboard/file_preview"](
+            newWindow=routes.routes["dashboard/file_preview"](
                 fileName=fileName, passphrase=password
             ),
         )

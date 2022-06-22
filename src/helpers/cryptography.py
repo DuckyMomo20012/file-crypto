@@ -39,7 +39,7 @@ def verify_password(plain_text_password: str, mixed_hashed_password: bytes) -> b
         return False
 
 
-def generateUserKeys(passphrase: str):
+def generateUserKeys(passphrase: str) -> tuple[bytes, bytes]:
 
     # Generate RSA private and public key pair 2048 bits long
     key = RSA.generate(2048)
@@ -66,7 +66,7 @@ def generateUserKeys(passphrase: str):
 
 def updatePassphrase(
     privateKey: bytes, oldPassphrase: str, newPassphrase: str
-) -> tuple[bytes]:
+) -> tuple[bytes, bytes]:
 
     # First, we import the private key with the old passphrase
     key = RSA.import_key(privateKey, passphrase=oldPassphrase)
@@ -100,12 +100,6 @@ def signFile(privateKey: bytes, filePath: str, passphrase: str) -> bytes:
 
 
 def verifySignature(publicKey: bytes, filePath: str, signaturePath: str) -> bool:
-
-    from Crypto.Hash import SHA256
-    from Crypto.PublicKey import RSA
-    from Crypto.Signature import pss
-
-    from src.helpers.file import readFile
 
     # NOTE: Ref:
     # https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
@@ -153,7 +147,7 @@ def encryptFile(
 
         # Encrypt file content
         cipherAES = AES.new(sessionKey, AES.MODE_EAX)
-        cipherText, tag = cipherAES.encrypt_and_digest(fileContent)
+        cipherText, tag = cipherAES.encrypt_and_digest(fileContent)  # type: ignore
 
         # Write encrypted file
         fileNameOut = Path(filePath + outPutExt).name
@@ -162,7 +156,7 @@ def encryptFile(
         # Combine encrypted session key and encrypted file content
         [
             fileOut.write(x)
-            for x in (encryptedSessionKey, cipherAES.nonce, tag, cipherText)
+            for x in (encryptedSessionKey, cipherAES.nonce, tag, cipherText)  # type: ignore # noqa: E501
         ]
 
         return True
@@ -198,7 +192,7 @@ def decryptFile(
 
         # Decrypt file content
         cipherAES = AES.new(sessionKey, AES.MODE_EAX, nonce)
-        decryptedFileContent = cipherAES.decrypt_and_verify(cipherText, tag)
+        decryptedFileContent = cipherAES.decrypt_and_verify(cipherText, tag)  # type: ignore # noqa: E501
 
         # We remove last (.bin) extension from file path
         realFilePath = filePath.replace(Path(filePath).suffix, "")
@@ -231,9 +225,9 @@ def encryptData(
 
         # Encrypt file content
         cipherAES = AES.new(sessionKey, AES.MODE_EAX)
-        cipherText, tag = cipherAES.encrypt_and_digest(content)
+        cipherText, tag = cipherAES.encrypt_and_digest(content)  # type: ignore
 
-        return (encryptedSessionKey, cipherAES.nonce, tag, cipherText)
+        return (encryptedSessionKey, cipherAES.nonce, tag, cipherText)  # type: ignore
 
     except (ValueError, TypeError):
         return None
@@ -246,7 +240,7 @@ def decryptData(
     nonce: bytes,
     tag: bytes,
     cipherText: bytes,
-) -> bytes | None:
+) -> str | None:
 
     # NOTE: Ref:
     # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa
@@ -260,7 +254,7 @@ def decryptData(
 
         # Decrypt file content
         cipherAES = AES.new(sessionKey, AES.MODE_EAX, nonce)
-        decryptedFileContent = cipherAES.decrypt_and_verify(cipherText, tag)
+        decryptedFileContent = cipherAES.decrypt_and_verify(cipherText, tag)  # type: ignore # noqa: E501
 
         return decryptedFileContent.decode("utf-8")
 

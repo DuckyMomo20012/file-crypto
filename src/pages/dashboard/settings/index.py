@@ -1,9 +1,11 @@
 import pytermgui as ptg
 
+import routes
 from src.helpers.page_manager import drawPage, goToPrevPage
+from src.types.Page import Page
 
 
-def Settings():
+def Settings() -> Page:
 
     window = ptg.Window(
         "",
@@ -11,19 +13,19 @@ def Settings():
             "Your information",
             lambda *_: drawPage(
                 window.manager,
-                window.manager.routes["dashboard/settings/your_information"](),
+                routes.routes["dashboard/settings/your_information"](),
             ),
         ),
         ptg.Button(
             "Change password",
             lambda *_: drawPage(
                 window.manager,
-                window.manager.routes["dashboard/settings/change_password"](),
+                routes.routes["dashboard/settings/change_password"](),
             ),
         ),
         ptg.Button(
             "Logout",
-            lambda *_: drawPage(window.manager, window.manager.routes["auth/logout"]()),
+            lambda *_: drawPage(window.manager, routes.routes["auth/logout"]()),
         ),
         "",
         # NOTE: We don't use window.close() because we want to keep track of

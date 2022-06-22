@@ -1,5 +1,6 @@
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser
 from src.components import ErrorModal, SuccessModal
@@ -7,14 +8,15 @@ from src.helpers.cryptography import verify_password
 from src.helpers.form_validation import emailField as emailFieldValidator
 from src.helpers.form_validation import requiredField
 from src.helpers.page_manager import exitApp, switchPage
+from src.types.Page import Page
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
     modal.close()
-    switchPage(window.manager, window.manager.routes["dashboard"]())
+    switchPage(window.manager, routes.routes["dashboard"]())
 
 
-def Login():
+def Login() -> Page:
 
     # NOTE: When we use manager.add in app.py, manager it will assign
     # window.manager to itself, so we can access window.manager here.
@@ -45,7 +47,7 @@ def Login():
                 window.manager,
                 "Login successful!",
                 onclick=lambda *_: switchPage(
-                    window.manager, window.manager.routes["dashboard"]()
+                    window.manager, routes.routes["dashboard"]()
                 ),
             )
 
@@ -64,9 +66,7 @@ def Login():
             ),
             ptg.Button(
                 "Sign up",
-                lambda *_: switchPage(
-                    window.manager, window.manager.routes["auth/register"]()
-                ),
+                lambda *_: switchPage(window.manager, routes.routes["auth/register"]()),
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
             parent_align=ptg.HorizontalAlignment.CENTER,

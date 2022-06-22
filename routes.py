@@ -1,8 +1,27 @@
 # flake8: noqa
-from src.pages.auth import *
-from src.pages.dashboard import *
+from typing import Callable, Optional
 
-routes = {
+from src.pages.auth import Login, Logout, Register  # type: ignore
+from src.pages.dashboard import (  # type: ignore
+    ChangePassword,
+    DashBoard,
+    DecryptFile,
+    DownloadFile,
+    DownloadSharedFile,
+    EditInformation,
+    EncryptFile,
+    FilePreview,
+    PasswordPrompt,
+    Settings,
+    SignFile,
+    Tools,
+    UploadFile,
+    VerifySignedFile,
+    YourInformation,
+)
+from src.types.Page import Page
+
+routes: dict[str, Callable[..., Optional[Page]]] = {
     "auth/login": Login,
     "auth/register": Register,
     "auth/logout": Logout,

@@ -1,5 +1,6 @@
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import uploadFileNoDuplicate
@@ -8,9 +9,10 @@ from src.helpers.cryptography import encryptData
 from src.helpers.file import readFile
 from src.helpers.form_validation import fileField, requiredField
 from src.helpers.page_manager import drawPage, goToPrevPage, switchCurrPageWindowSlot
+from src.types.Page import Page
 
 
-def UploadFile():
+def UploadFile() -> Page:
 
     filePathField = ptg.InputField()
 
@@ -54,7 +56,7 @@ def UploadFile():
         # Clear nav bar window
         switchCurrPageWindowSlot(window.manager, "nav_bar", clear=True)
         # And redraw the dashboard page
-        drawPage(window.manager, window.manager.routes["dashboard"]())
+        drawPage(window.manager, routes.routes["dashboard"]())
 
     window = ptg.Window(
         "",

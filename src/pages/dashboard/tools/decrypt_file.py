@@ -6,9 +6,10 @@ from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import decryptFile, verify_password
 from src.helpers.form_validation import fileField, folderField, requiredField
 from src.helpers.page_manager import goToPrevPage
+from src.types.Page import Page
 
 
-def DecryptFile():
+def DecryptFile() -> Page:
     filePathField = ptg.InputField()
     passwordField = ptg.InputField()
     passwordField.styles["value"] = "invisible"

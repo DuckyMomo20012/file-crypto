@@ -1,16 +1,18 @@
 import pytermgui as ptg
 
+import routes
 from src.helpers.page_manager import drawPage, goToPrevPage
+from src.types.Page import Page
 
 
-def Tools():
+def Tools() -> Page:
 
     window = ptg.Window(
         "",
         ptg.Button(
             "Sign file",
             lambda *_: drawPage(
-                window.manager, window.manager.routes["dashboard/tools/sign_file"]()
+                window.manager, routes.routes["dashboard/tools/sign_file"]()
             ),
             parent_align=ptg.HorizontalAlignment.CENTER,
         ),
@@ -18,14 +20,14 @@ def Tools():
             "Verify signed file",
             lambda *_: drawPage(
                 window.manager,
-                window.manager.routes["dashboard/tools/verify_signed_file"](),
+                routes.routes["dashboard/tools/verify_signed_file"](),
             ),
             parent_align=ptg.HorizontalAlignment.CENTER,
         ),
         ptg.Button(
             "Encrypt file",
             lambda *_: drawPage(
-                window.manager, window.manager.routes["dashboard/tools/encrypt_file"]()
+                window.manager, routes.routes["dashboard/tools/encrypt_file"]()
             ),
             parent_align=ptg.HorizontalAlignment.CENTER,
         ),
@@ -33,7 +35,7 @@ def Tools():
             "Decrypt file",
             lambda *_: drawPage(
                 window.manager,
-                window.manager.routes["dashboard/tools/decrypt_file"](),
+                routes.routes["dashboard/tools/decrypt_file"](),
             ),
             parent_align=ptg.HorizontalAlignment.CENTER,
         ),

@@ -1,10 +1,12 @@
 import pytermgui as ptg
 
+import routes
 import session
 from src.helpers.page_manager import clearNavigation, drawPage, goToPrevPage
+from src.types.Page import Page
 
 
-def Logout():
+def Logout() -> Page:
     def handleLogoutClick():
         window.manager.toast("Logging out...")
         # DONE: Implement logout logic
@@ -13,7 +15,7 @@ def Logout():
         session.user = None
 
         clearNavigation(window.manager)
-        drawPage(window.manager, window.manager.routes["auth/login"]())
+        drawPage(window.manager, routes.routes["auth/login"]())
 
     window = ptg.Window(
         "",

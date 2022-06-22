@@ -1,11 +1,18 @@
+from typing import Optional
+
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser
 from src.helpers.page_manager import drawPage, goToPrevPage
+from src.types.Page import Page
 
 
-def YourInformation():
+def YourInformation() -> Optional[Page]:
+
+    if session.user is None:
+        return None
 
     user = getOneUser(session.user.email)
 
@@ -26,7 +33,7 @@ def YourInformation():
                 "Edit",
                 lambda *_: drawPage(
                     window.manager,
-                    window.manager.routes["dashboard/settings/your_information/edit"](
+                    routes.routes["dashboard/settings/your_information/edit"](
                         label="Name", oldValue=user.name, fieldName="name"
                     ),
                 ),
@@ -41,7 +48,7 @@ def YourInformation():
                 "Edit",
                 lambda *_: drawPage(
                     window.manager,
-                    window.manager.routes["dashboard/settings/your_information/edit"](
+                    routes.routes["dashboard/settings/your_information/edit"](
                         label="Date of birth",
                         oldValue=dob,
                         fieldName="dateOfBirth",
@@ -59,7 +66,7 @@ def YourInformation():
                 "Edit",
                 lambda *_: drawPage(
                     window.manager,
-                    window.manager.routes["dashboard/settings/your_information/edit"](
+                    routes.routes["dashboard/settings/your_information/edit"](
                         label="Phone number", oldValue=user.phone, fieldName="phone"
                     ),
                 ),
@@ -74,7 +81,7 @@ def YourInformation():
                 "Edit",
                 lambda *_: drawPage(
                     window.manager,
-                    window.manager.routes["dashboard/settings/your_information/edit"](
+                    routes.routes["dashboard/settings/your_information/edit"](
                         label="Address", oldValue=user.address, fieldName="address"
                     ),
                 ),

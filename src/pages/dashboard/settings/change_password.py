@@ -1,21 +1,27 @@
+from typing import Optional
+
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser, updateUserKeys, updateUserPassword
 from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import hash_password, updatePassphrase, verify_password
 from src.helpers.form_validation import requiredField
 from src.helpers.page_manager import clearNavigation, drawPage, goToPrevPage
+from src.types.Page import Page
 
 
-def handleSuccessModalClose(manager: ptg.WindowManager) -> None:
+def handleSuccessModalClose(manager: Optional[ptg.WindowManager]) -> None:
+    if manager is None:
+        return
 
     manager.toast("Logging out...")
     clearNavigation(manager)
-    drawPage(manager, manager.routes["auth/login"]())
+    drawPage(manager, routes.routes["auth/login"]())
 
 
-def ChangePassword():
+def ChangePassword() -> Page:
 
     oldPasswordField = ptg.InputField()
     oldPasswordField.styles["value"] = "invisible"
@@ -37,6 +43,9 @@ def ChangePassword():
         oldPassword = oldPasswordField.value
         newPassword = newPasswordField.value
         confirmNewPassword = confirmNewPasswordField.value
+
+        if session.user is None:
+            return
 
         user = getOneUser(session.user.email)
 

@@ -1,14 +1,21 @@
+from typing import Optional
+
 import pytermgui as ptg
 
+import routes
 import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
 from src.components import ConfirmModal
 from src.helpers.cryptography import decryptData, encryptData
 from src.helpers.page_manager import drawPage, switchCurrPageWindowSlot
+from src.types.Page import Page
 
 
-def FilePreview(fileName: str, passphrase: str):
+def FilePreview(fileName: str, passphrase: str) -> Optional[Page]:
+
+    if session.user is None:
+        return None
 
     user = getOneUser(session.user.email)
 
@@ -43,7 +50,7 @@ def FilePreview(fileName: str, passphrase: str):
                 # Clear nav bar window
                 switchCurrPageWindowSlot(window.manager, "nav_bar", clear=True)
                 # And redraw the dashboard page
-                drawPage(window.manager, window.manager.routes["dashboard"]())
+                drawPage(window.manager, routes.routes["dashboard"]())
 
         ConfirmModal(
             window.manager,
@@ -108,9 +115,7 @@ def FilePreview(fileName: str, passphrase: str):
                 "Download",
                 lambda *_: drawPage(
                     window.manager,
-                    window.manager.routes["dashboard/file_preview/download_file"](
-                        fileName
-                    ),
+                    routes.routes["dashboard/file_preview/download_file"](fileName),
                 ),
             ),
             ptg.Button(

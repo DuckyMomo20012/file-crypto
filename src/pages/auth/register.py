@@ -1,14 +1,16 @@
 import pytermgui as ptg
 
+import routes
 from src.api.auth.service import addUser, getOneUser
 from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import generateUserKeys, hash_password
 from src.helpers.form_validation import emailField as emailFieldValidator
 from src.helpers.form_validation import requiredField
 from src.helpers.page_manager import exitApp, switchPage
+from src.types.Page import Page
 
 
-def Register():
+def Register() -> Page:
 
     emailField = ptg.InputField()
     passwordField = ptg.InputField()
@@ -59,7 +61,7 @@ def Register():
                 window.manager,
                 "Register successful!",
                 onclick=lambda *_: switchPage(
-                    window.manager, window.manager.routes["auth/login"]()
+                    window.manager, routes.routes["auth/login"]()
                 ),
             )
         else:
@@ -72,9 +74,7 @@ def Register():
             ptg.Label("Already have an account?", size_policy=ptg.SizePolicy.STATIC),
             ptg.Button(
                 "Sign in",
-                lambda *_: switchPage(
-                    window.manager, window.manager.routes["auth/login"]()
-                ),
+                lambda *_: switchPage(window.manager, routes.routes["auth/login"]()),
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
             parent_align=ptg.HorizontalAlignment.CENTER,

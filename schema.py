@@ -1,4 +1,4 @@
-import mongoengine as me
+import mongoengine as me  # type: ignore
 
 
 class User(me.Document):
