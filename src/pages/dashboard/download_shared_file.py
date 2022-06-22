@@ -2,9 +2,10 @@ import pytermgui as ptg
 
 from src.helpers.form_validation import folderField, requiredField
 from src.helpers.page_manager import goToPrevPage
+from src.types.Page import Page
 
 
-def DownloadSharedFile():
+def DownloadSharedFile() -> Page:
     ownerEmailField = ptg.InputField()
     fileNameField = ptg.InputField()
     saveFolderPathField = ptg.InputField()

@@ -1,9 +1,10 @@
 import pytermgui as ptg
 
 from src.helpers.page_manager import drawPage, goToPrevPage
+from src.types.Page import Page
 
 
-def Settings():
+def Settings() -> Page:
 
     window = ptg.Window(
         "",

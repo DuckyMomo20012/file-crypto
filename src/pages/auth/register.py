@@ -6,9 +6,10 @@ from src.helpers.cryptography import generateUserKeys, hash_password
 from src.helpers.form_validation import emailField as emailFieldValidator
 from src.helpers.form_validation import requiredField
 from src.helpers.page_manager import exitApp, switchPage
+from src.types.Page import Page
 
 
-def Register():
+def Register() -> Page:
 
     emailField = ptg.InputField()
     passwordField = ptg.InputField()

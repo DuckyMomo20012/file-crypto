@@ -6,9 +6,10 @@ from src.components import ErrorModal
 from src.helpers.cryptography import verify_password
 from src.helpers.form_validation import requiredField
 from src.helpers.page_manager import switchCurrPageWindowSlot
+from src.types.Page import Page
 
 
-def PasswordPrompt(fileName: str):
+def PasswordPrompt(fileName: str) -> Page:
     passwordField = ptg.InputField()
     passwordField.styles["value"] = "invisible"
 

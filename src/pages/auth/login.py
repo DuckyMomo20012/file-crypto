@@ -7,6 +7,7 @@ from src.helpers.cryptography import verify_password
 from src.helpers.form_validation import emailField as emailFieldValidator
 from src.helpers.form_validation import requiredField
 from src.helpers.page_manager import exitApp, switchPage
+from src.types.Page import Page
 
 
 def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
@@ -14,7 +15,7 @@ def handleSuccessModalClose(window: ptg.Window, modal: ptg.Window) -> None:
     switchPage(window.manager, window.manager.routes["dashboard"]())
 
 
-def Login():
+def Login() -> Page:
 
     # NOTE: When we use manager.add in app.py, manager it will assign
     # window.manager to itself, so we can access window.manager here.

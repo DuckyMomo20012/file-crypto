@@ -2,9 +2,10 @@ import pytermgui as ptg
 
 import session
 from src.helpers.page_manager import clearNavigation, drawPage, goToPrevPage
+from src.types.Page import Page
 
 
-def Logout():
+def Logout() -> Page:
     def handleLogoutClick():
         window.manager.toast("Logging out...")
         # DONE: Implement logout logic

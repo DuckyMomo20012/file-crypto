@@ -6,6 +6,7 @@ from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import hash_password, updatePassphrase, verify_password
 from src.helpers.form_validation import requiredField
 from src.helpers.page_manager import clearNavigation, drawPage, goToPrevPage
+from src.types.Page import Page
 
 
 def handleSuccessModalClose(manager: ptg.WindowManager) -> None:
@@ -15,7 +16,7 @@ def handleSuccessModalClose(manager: ptg.WindowManager) -> None:
     drawPage(manager, manager.routes["auth/login"]())
 
 
-def ChangePassword():
+def ChangePassword() -> Page:
 
     oldPasswordField = ptg.InputField()
     oldPasswordField.styles["value"] = "invisible"

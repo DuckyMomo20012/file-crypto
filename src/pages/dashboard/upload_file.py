@@ -8,9 +8,10 @@ from src.helpers.cryptography import encryptData
 from src.helpers.file import readFile
 from src.helpers.form_validation import fileField, requiredField
 from src.helpers.page_manager import drawPage, goToPrevPage, switchCurrPageWindowSlot
+from src.types.Page import Page
 
 
-def UploadFile():
+def UploadFile() -> Page:
 
     filePathField = ptg.InputField()
 

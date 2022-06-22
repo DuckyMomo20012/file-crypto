@@ -8,6 +8,7 @@ from src.api.file_crypto.service import getAllFiles
 from src.components import ConfirmModal
 from src.components.layouts.AppShell import AppShell
 from src.helpers.page_manager import drawPage, exitApp, switchCurrPageWindowSlot
+from src.types.Page import Page
 
 
 # DONE: Implement this function to fetch data from the database and return
@@ -41,7 +42,7 @@ def getFiles():
     return returnedFiles
 
 
-def DashBoard() -> None:
+def DashBoard() -> Page:
     # from app import manager as super_manager
 
     def handleUploadClick():

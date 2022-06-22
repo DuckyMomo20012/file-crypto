@@ -1,8 +1,25 @@
 # flake8: noqa
-from src.pages.auth import *
-from src.pages.dashboard import *
+from src.pages.auth import Login, Logout, Register
+from src.pages.dashboard import (
+    ChangePassword,
+    DashBoard,
+    DecryptFile,
+    DownloadFile,
+    DownloadSharedFile,
+    EditInformation,
+    EncryptFile,
+    FilePreview,
+    PasswordPrompt,
+    Settings,
+    SignFile,
+    Tools,
+    UploadFile,
+    VerifySignedFile,
+    YourInformation,
+)
+from src.types.Page import Page
 
-routes = {
+routes: dict[str, Page] = {
     "auth/login": Login,
     "auth/register": Register,
     "auth/logout": Logout,

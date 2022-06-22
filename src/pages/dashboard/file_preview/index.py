@@ -6,9 +6,10 @@ from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
 from src.components import ConfirmModal
 from src.helpers.cryptography import decryptData, encryptData
 from src.helpers.page_manager import drawPage, switchCurrPageWindowSlot
+from src.types.Page import Page
 
 
-def FilePreview(fileName: str, passphrase: str):
+def FilePreview(fileName: str, passphrase: str) -> Page:
 
     user = getOneUser(session.user.email)
 

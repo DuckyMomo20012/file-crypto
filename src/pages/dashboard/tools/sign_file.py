@@ -7,9 +7,10 @@ from src.helpers.cryptography import signFile, verify_password
 from src.helpers.file import writeFileToFolder
 from src.helpers.form_validation import fileField, folderField, requiredField
 from src.helpers.page_manager import goToPrevPage
+from src.types.Page import Page
 
 
-def SignFile():
+def SignFile() -> Page:
     filePathField = ptg.InputField()
     passwordField = ptg.InputField()
     passwordField.styles["value"] = "invisible"

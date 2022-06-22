@@ -5,9 +5,10 @@ from src.components import ErrorModal, SuccessModal
 from src.helpers.cryptography import verifySignature
 from src.helpers.form_validation import fileField, requiredField
 from src.helpers.page_manager import goToPrevPage
+from src.types.Page import Page
 
 
-def VerifySignedFile():
+def VerifySignedFile() -> Page:
     filePathField = ptg.InputField()
     signaturePathField = ptg.InputField()
 

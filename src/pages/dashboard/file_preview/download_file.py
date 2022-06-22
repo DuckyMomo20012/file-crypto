@@ -8,9 +8,10 @@ from src.helpers.cryptography import decryptData, verify_password
 from src.helpers.file import writeFileToFolder
 from src.helpers.form_validation import folderField, requiredField
 from src.helpers.page_manager import goToPrevPage
+from src.types.Page import Page
 
 
-def DownloadFile(fileName: str):
+def DownloadFile(fileName: str) -> Page:
     passwordField = ptg.InputField()
     passwordField.styles["value"] = "invisible"
     saveFolderPathField = ptg.InputField()
