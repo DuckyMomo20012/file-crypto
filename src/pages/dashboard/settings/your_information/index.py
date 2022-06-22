@@ -1,3 +1,5 @@
+from typing import Optional
+
 import pytermgui as ptg
 
 import routes
@@ -7,7 +9,10 @@ from src.helpers.page_manager import drawPage, goToPrevPage
 from src.types.Page import Page
 
 
-def YourInformation() -> Page:
+def YourInformation() -> Optional[Page]:
+
+    if session.user is None:
+        return None
 
     user = getOneUser(session.user.email)
 

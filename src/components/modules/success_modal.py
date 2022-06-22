@@ -4,10 +4,13 @@ import pytermgui as ptg
 
 
 def SuccessModal(
-    manager: ptg.WindowManager,
+    manager: Optional[ptg.WindowManager],
     msg: str,
     onclick: Optional[Callable[[ptg.Button], Any]] = None,
 ) -> None:
+    if not manager:
+        return None
+
     def handleClick() -> None:
         if onclick is not None:
             onclick()

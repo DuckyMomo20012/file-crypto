@@ -1,13 +1,19 @@
 import re
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
 import pytermgui as ptg
 
 from src.components.modules import ErrorModal
 
 
-def requiredField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
+def requiredField(
+    manager: Optional[ptg.WindowManager], field: ptg.InputField, label: str
+):
+    if not manager:
+        return False
+
     if len(field.value) == 0:
         errorMsg = f"{label} field is required"
         ErrorModal(manager, errorMsg)
@@ -16,7 +22,9 @@ def requiredField(manager: ptg.WindowManager, field: ptg.InputField, label: str)
     return True
 
 
-def fileField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
+def fileField(manager: Optional[ptg.WindowManager], field: ptg.InputField, label: str):
+    if not manager:
+        return False
 
     filePath = Path(field.value)
 
@@ -33,7 +41,11 @@ def fileField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
     return True
 
 
-def folderField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
+def folderField(
+    manager: Optional[ptg.WindowManager], field: ptg.InputField, label: str
+):
+    if not manager:
+        return False
 
     filePath = Path(field.value)
 
@@ -53,8 +65,10 @@ def folderField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
     return True
 
 
-def emailField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
+def emailField(manager: Optional[ptg.WindowManager], field: ptg.InputField, label: str):
     # NOTE: Ref: https://stackoverflow.com/a/66809700/12512981
+    if not manager:
+        return False
 
     email_format = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
     email = field.value
@@ -67,8 +81,11 @@ def emailField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
     return True
 
 
-def dateField(manager: ptg.WindowManager, field: ptg.InputField, label: str):
+def dateField(manager: Optional[ptg.WindowManager], field: ptg.InputField, label: str):
     # NOTE: Ref: https://stackoverflow.com/a/37045601/12512981
+
+    if not manager:
+        return False
 
     try:
         dateString = field.value

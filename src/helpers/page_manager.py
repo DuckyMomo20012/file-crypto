@@ -1,17 +1,17 @@
-from typing import Any
+from typing import Any, Optional
 
 import pytermgui as ptg
 
 import session
 
 
-def switchPage(manager, newPage: Any) -> None:
+def switchPage(manager: Optional[ptg.WindowManager], newPage: Any) -> None:
     goToPrevPage(manager)
     drawPage(manager, newPage)
 
 
 def switchCurrPageWindowSlot(
-    manager: ptg.WindowManager,
+    manager: Optional[ptg.WindowManager],
     targetAssign: str,
     newWindow: ptg.Window | Any | None = None,
     clear=True,
@@ -21,7 +21,7 @@ def switchCurrPageWindowSlot(
     # in pytermgui
     # BUG: pytermgui doesn't close window completely. Need more research
 
-    if len(session.navigation) > 0:
+    if manager and len(session.navigation) > 0:
         # We build new page based on previous page, then we remove assigned slots
         # which are match with currAssign
         newPage = session.navigation[-1]
@@ -58,9 +58,9 @@ def switchCurrPageWindowSlot(
         session.navigation[-1] = newPage
 
 
-def drawPage(manager: ptg.WindowManager, newPage: Any | None) -> None:
+def drawPage(manager: Optional[ptg.WindowManager], newPage: Any | None) -> None:
 
-    if newPage is not None:
+    if manager and newPage is not None:
         # Append new page to navigation stack
         session.navigation.append(newPage)
 
@@ -70,9 +70,9 @@ def drawPage(manager: ptg.WindowManager, newPage: Any | None) -> None:
             manager.add(window=window["window"], assign=window["assign"])
 
 
-def goToPrevPage(manager: ptg.WindowManager) -> None:
+def goToPrevPage(manager: Optional[ptg.WindowManager]) -> None:
 
-    if len(session.navigation) > 0:
+    if manager and len(session.navigation) > 0:
         # Remove last page from navigation stack
         currWindow = session.navigation.pop()
 
@@ -82,12 +82,14 @@ def goToPrevPage(manager: ptg.WindowManager) -> None:
             manager.remove(window=window["window"], autostop=False)
 
 
-def clearNavigation(manager: ptg.WindowManager):
+def clearNavigation(manager: Optional[ptg.WindowManager]):
 
-    for _ in range(len(session.navigation)):
-        goToPrevPage(manager)
+    if manager is not None:
+        for _ in range(len(session.navigation)):
+            goToPrevPage(manager)
 
 
-def exitApp(manager: ptg.WindowManager):
+def exitApp(manager: Optional[ptg.WindowManager]):
 
-    manager.stop()
+    if manager is not None:
+        manager.stop()

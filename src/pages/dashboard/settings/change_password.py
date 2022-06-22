@@ -1,3 +1,5 @@
+from typing import Optional
+
 import pytermgui as ptg
 
 import routes
@@ -10,7 +12,9 @@ from src.helpers.page_manager import clearNavigation, drawPage, goToPrevPage
 from src.types.Page import Page
 
 
-def handleSuccessModalClose(manager: ptg.WindowManager) -> None:
+def handleSuccessModalClose(manager: Optional[ptg.WindowManager]) -> None:
+    if manager is None:
+        return
 
     manager.toast("Logging out...")
     clearNavigation(manager)
@@ -39,6 +43,9 @@ def ChangePassword() -> Page:
         oldPassword = oldPasswordField.value
         newPassword = newPasswordField.value
         confirmNewPassword = confirmNewPasswordField.value
+
+        if session.user is None:
+            return
 
         user = getOneUser(session.user.email)
 

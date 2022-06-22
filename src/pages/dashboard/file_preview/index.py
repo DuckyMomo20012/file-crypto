@@ -1,3 +1,5 @@
+from typing import Optional
+
 import pytermgui as ptg
 
 import routes
@@ -10,7 +12,10 @@ from src.helpers.page_manager import drawPage, switchCurrPageWindowSlot
 from src.types.Page import Page
 
 
-def FilePreview(fileName: str, passphrase: str) -> Page:
+def FilePreview(fileName: str, passphrase: str) -> Optional[Page]:
+
+    if session.user is None:
+        return None
 
     user = getOneUser(session.user.email)
 
