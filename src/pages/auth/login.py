@@ -33,8 +33,8 @@ def Login():
         if not emailFieldValidator(window.manager, emailField, label="Email"):
             return
 
-        # TODO: Implement login logic
-        # TODO: Validate email and password
+        # DONE: Implement login logic
+        # DONE: Validate email and password
         email = emailField.value
         password = passwordField.value
 

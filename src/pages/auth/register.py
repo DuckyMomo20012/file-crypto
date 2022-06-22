@@ -30,8 +30,8 @@ def Register():
         if not emailFieldValidator(window.manager, emailField, label="Email"):
             return
 
-        # TODO: Implement register logic
-        # TODO: Validate email, password and confirm password
+        # DONE: Implement register logic
+        # DONE: Validate email, password and confirm password
         email = emailField.value
         password = passwordField.value
         confirmPassword = confirmPasswordField.value

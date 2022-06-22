@@ -15,7 +15,7 @@ def DownloadFile(fileName: str):
     passwordField.styles["value"] = "invisible"
     saveFolderPathField = ptg.InputField()
 
-    # TODO: Implement download file logic
+    # DONE: Implement download file logic
     def handleDownloadClick():
         if not requiredField(window.manager, passwordField, label="Your password"):
             return

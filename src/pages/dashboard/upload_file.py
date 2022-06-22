@@ -24,7 +24,7 @@ def UploadFile():
         filePath = filePathField.value
         window.manager.toast(f"Uploading {filePath}...")
 
-        # TODO: Implement upload logic
+        # DONE: Implement upload logic
 
         user = getOneUser(session.user.email)
 

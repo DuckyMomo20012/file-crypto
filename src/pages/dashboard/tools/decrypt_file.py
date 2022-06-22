@@ -14,7 +14,7 @@ def DecryptFile():
     passwordField.styles["value"] = "invisible"
     saveFolderPathField = ptg.InputField()
 
-    # TODO: Implement sign file logic
+    # DONE: Implement decrypt file logic
     def handleDecryptClick():
         if not requiredField(
             window.manager, filePathField, label="Encrypted file path"

@@ -11,7 +11,7 @@ def VerifySignedFile():
     filePathField = ptg.InputField()
     signaturePathField = ptg.InputField()
 
-    # TODO: Implement verify signed file logic
+    # DONE: Implement verify signed file logic
     def handleVerifyClick():
         if not requiredField(window.manager, filePathField, label="File path"):
             return

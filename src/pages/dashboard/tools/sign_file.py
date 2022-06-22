@@ -15,7 +15,7 @@ def SignFile():
     passwordField.styles["value"] = "invisible"
     saveFolderPathField = ptg.InputField()
 
-    # TODO: Implement sign file logic
+    # DONE: Implement sign file logic
     def handleSignClick():
         if not requiredField(window.manager, filePathField, label="File path"):
             return

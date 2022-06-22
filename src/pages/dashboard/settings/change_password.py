@@ -40,7 +40,7 @@ def ChangePassword():
 
         user = getOneUser(session.user.email)
 
-        # TODO: Check if old password is correct and new password is valid and
+        # DONE: Check if old password is correct and new password is valid and
         # match with confirm new password
 
         if newPassword == confirmNewPassword:

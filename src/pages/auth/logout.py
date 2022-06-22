@@ -7,7 +7,7 @@ from src.helpers.page_manager import clearNavigation, drawPage, goToPrevPage
 def Logout():
     def handleLogoutClick():
         window.manager.toast("Logging out...")
-        # TODO: Implement logout logic
+        # DONE: Implement logout logic
 
         # We simply reset the current session and go back to the login page
         session.user = None

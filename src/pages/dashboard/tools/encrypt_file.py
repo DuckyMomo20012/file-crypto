@@ -12,7 +12,7 @@ def EncryptFile():
     receiverEmailField = ptg.InputField()
     saveFolderPathField = ptg.InputField()
 
-    # TODO: Implement sign file logic
+    # DONE: Implement encrypt file logic
     def handleEncryptClick():
         if not requiredField(window.manager, filePathField, label="File path"):
             return

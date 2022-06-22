@@ -52,7 +52,7 @@ def FilePreview(fileName: str, passphrase: str):
             cancelOnClick=lambda *_: None,
         )
 
-    # TODO: Implement this function to encrypt the file content and then update
+    # DONE: Implement this function to encrypt the file content and then update
     # file on the database
     def handleSaveClick():
 
@@ -69,7 +69,7 @@ def FilePreview(fileName: str, passphrase: str):
 
         if not editedContent == originalContent:
             window.manager.toast("File edited. Saving file...")
-            # TODO: Update file on the database
+            # DONE: Update file on the database
 
             encryptedData = encryptData(
                 user.publicKey, contentField.value.encode("utf-8")

@@ -10,7 +10,7 @@ from src.components.layouts.AppShell import AppShell
 from src.helpers.page_manager import drawPage, exitApp, switchCurrPageWindowSlot
 
 
-# TODO: Implement this function to fetch data from the database and return
+# DONE: Implement this function to fetch data from the database and return
 # format like this
 # NOTE: Any suggestions for a better way to do this?
 def getFiles():

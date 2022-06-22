@@ -13,7 +13,7 @@ def EditInformation(label: str, oldValue: Any, fieldName: str, validator: str = 
 
     inputField = ptg.InputField()
 
-    # TODO: Implement edit functionality
+    # DONE: Implement edit functionality
     def handleConfirmClick():
         if not requiredField(window.manager, inputField, label=f"New {label.lower()}"):
             return
