@@ -44,10 +44,10 @@ def Tools():
         ptg.Button("Close", lambda *_: goToPrevPage(window.manager)),
     )
 
-    window.set_title(title="Tools")
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.set_title(title="Tools")
 
     return {
         "layout": None,

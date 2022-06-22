@@ -54,12 +54,12 @@ def PasswordPrompt(fileName: str):
         ),
     )
 
-    window.set_title(f"Open file {fileName}")
-    # window.overflow = ptg.Overflow.RESIZE
-    window.vertical_align = ptg.VerticalAlignment.TOP
     # window.center()
-    window.is_noresize = True
+    # window.overflow = ptg.Overflow.RESIZE
     window.is_modal = True
+    window.is_noresize = True
+    window.set_title(f"Open file {fileName}")
+    window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {
         "layout": None,

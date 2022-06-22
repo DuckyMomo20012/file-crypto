@@ -94,12 +94,12 @@ def ChangePassword():
         ),
     )
 
-    window.set_title(title="Change password")
+    window.center()
+    window.is_modal = True
+    window.is_noresize = True
     # NOTE: overflow RESIZE doesn't play animation when window is opened.
     window.overflow = ptg.Overflow.RESIZE
-    window.center()
-    window.is_noresize = True
-    window.is_modal = True
+    window.set_title(title="Change password")
 
     return {
         "layout": None,

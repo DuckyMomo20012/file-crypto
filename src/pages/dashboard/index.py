@@ -118,10 +118,11 @@ def DashBoard() -> None:
             for dates in sorted(files.keys(), reverse=True)
         ],
     )
-    navBar.is_static = True
+
     # navBar.is_noresize = True
-    navBar.vertical_align = ptg.VerticalAlignment.TOP
+    navBar.is_static = True
     navBar.overflow = ptg.Overflow.SCROLL
+    navBar.vertical_align = ptg.VerticalAlignment.TOP
 
     hamburger = ptg.Window(
         ptg.Splitter(

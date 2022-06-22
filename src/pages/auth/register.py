@@ -93,11 +93,11 @@ def Register():
         ),
     )
 
-    window.set_title(title="Register")
-    window.overflow = ptg.Overflow.RESIZE
-    window.vertical_align = ptg.VerticalAlignment.TOP
     window.center()
     window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title(title="Register")
+    window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {
         "layout": None,

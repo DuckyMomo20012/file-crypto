@@ -56,11 +56,11 @@ def EditInformation(label: str, oldValue: Any, fieldName: str, validator: str = 
         ),
     )
 
-    window.set_title(title="Edit Information")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title(title="Edit Information")
 
     return {
         "layout": None,

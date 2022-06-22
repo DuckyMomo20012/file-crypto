@@ -81,11 +81,11 @@ def DecryptFile():
         ),
     )
 
-    window.set_title("Decrypt your file")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title("Decrypt your file")
 
     return {
         "layout": None,

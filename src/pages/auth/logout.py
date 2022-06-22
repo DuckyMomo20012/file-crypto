@@ -28,10 +28,10 @@ def Logout():
         ),
     )
 
-    window.set_title(title="Logout")
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.set_title(title="Logout")
 
     return {
         "layout": None,

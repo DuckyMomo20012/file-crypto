@@ -81,11 +81,11 @@ def DownloadFile(fileName: str):
         ),
     )
 
-    window.set_title("Download file")
-    window.overflow = ptg.Overflow.RESIZE
     window.center()
-    window.is_noresize = True
     window.is_modal = True
+    window.is_noresize = True
+    window.overflow = ptg.Overflow.RESIZE
+    window.set_title("Download file")
 
     return {
         "layout": None,
