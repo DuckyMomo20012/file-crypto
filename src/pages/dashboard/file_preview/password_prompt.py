@@ -27,11 +27,13 @@ def PasswordPrompt(fileName: str) -> Page:
             ErrorModal(window.manager, "Invalid password")
             return
 
+        # Swap the body slot with the file preview window, default opening file
+        # with preview mode
         switchCurrPageWindowSlot(
             manager=window.manager,
             targetAssign=("body"),
             newWindow=routes.routes["dashboard/file_preview"](
-                fileName=fileName, passphrase=password
+                fileName=fileName, passphrase=password, preview=True
             ),
         )
 
