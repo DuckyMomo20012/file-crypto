@@ -45,10 +45,10 @@ config:
 
   Button:
     styles:
-      label: "[button]{item}"
+      label: "[@#4c566a button]{item}"
       highlight: "[button--highlight]{item}"
     chars:
-      delimiter: ["[ ", " ]"]
+      delimiter: [" ", " "]
 
   Splitter:
     chars:

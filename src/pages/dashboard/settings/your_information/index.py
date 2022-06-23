@@ -49,7 +49,7 @@ def YourInformation() -> Optional[Page]:
                 lambda *_: drawPage(
                     window.manager,
                     routes.routes["dashboard/settings/your_information/edit"](
-                        label="Date of birth",
+                        label="Date of birth (YYYY-MM-DD)",
                         oldValue=dob,
                         fieldName="dateOfBirth",
                         validator="dateField",

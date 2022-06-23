@@ -44,7 +44,11 @@ def EditInformation(
     window = ptg.Window(
         "",
         ptg.Label(
-            f"Old {label.lower()}: {oldValue}",
+            f"Old {label.lower()}:",
+            parent_align=ptg.HorizontalAlignment.LEFT,
+        ),
+        ptg.Label(
+            oldValue,
             parent_align=ptg.HorizontalAlignment.LEFT,
         ),
         ptg.Label(
