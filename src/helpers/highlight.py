@@ -5,11 +5,11 @@ from pygments.formatters import TerminalTrueColorFormatter  # type: ignore
 from pygments.lexers import get_lexer_for_filename  # type: ignore
 
 
-def syntaxHighlight(fileName: str, code: str) -> str:
+def syntaxHighlight(fileName: str, code: str, theme: str = "dracula") -> str:
 
     lexer = get_lexer_for_filename(fileName)
-    # FIXME: We should check if the terminal supports 256 colors
-    formatter = TerminalTrueColorFormatter(style="monokai")
+    # FIXME: We should check if the terminal supports TRUE color system
+    formatter = TerminalTrueColorFormatter(style=theme)
 
     highlightedCode = highlight(code, lexer, formatter)
 

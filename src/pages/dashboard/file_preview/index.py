@@ -1,6 +1,8 @@
+from functools import partial
 from typing import Optional
 
 import pytermgui as ptg
+from pygments.styles import STYLE_MAP  # type: ignore
 
 import routes
 import session
@@ -18,7 +20,7 @@ from src.types.Page import Page
 # InputField, we CAN'T edit the highlighted content, it will throw errors on
 # edit.
 def FilePreview(
-    fileName: str, passphrase: str, preview: bool = False
+    fileName: str, passphrase: str, preview: bool = False, theme: str = "dracula"
 ) -> Optional[Page]:
 
     if session.user is None:
@@ -44,8 +46,13 @@ def FilePreview(
     fileContent = decryptedData if decryptedData is not None else ""
 
     editContentField = ptg.InputField(fileContent, multiline=True)
+    # NOTE: We can use this way to add syntax highlight to the code when
+    # editing. But the performance is EXTREMELY slow.
+    # editContentField.styles.value = lambda _, text: ptg.tim.parse(
+    #     syntaxHighlight(fileName, text, theme)
+    # )
 
-    previewContentField = ptg.Label(syntaxHighlight(fileName, fileContent))
+    previewContentField = ptg.Label(syntaxHighlight(fileName, fileContent, theme))
     previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
 
     def handleDeleteClick():
@@ -127,13 +134,56 @@ def FilePreview(
             clear=True,
         ),
 
+    # NOTE: onclick function will pass Button itself as a first argument and we
+    # don't care about it, so we add a dummy argument "args" to the function to
+    # "absorb" it.
+    def handleThemeButtonClick(*args, theme: str):
+
+        switchCurrPageWindowSlot(
+            manager=window.manager,
+            targetAssign=("body"),
+            newWindow=routes.routes["dashboard/file_preview"](
+                fileName=fileName, passphrase=passphrase, preview=preview, theme=theme
+            ),
+        )
+
+    # Some themes cause error on printing the content, so we have blacklist them
+    themes = [
+        theme
+        for theme in list(STYLE_MAP.keys())
+        if theme not in ("borland", "lilypond", "trac", "bw", "algol", "algol_nu")
+    ]
+
+    # NOTE: We CAN'T pass function correctly when we are in loop. Instead, we
+    # use partial to "bind" the arguments to the function.
+    themeButtons = [
+        ptg.Button(theme, partial(handleThemeButtonClick, theme=theme))
+        for theme in themes
+    ]
+
+    # NOTE: We can swap between Save button and ThemeMenu to save space
+
+    # We only show the theme buttons if we are in preview mode
+    themeMenu = (
+        ptg.Collapsible(
+            "theme",
+            ptg.Container(
+                *themeButtons,
+                height=5,
+                overflow=ptg.Overflow.SCROLL,
+            ),
+        )
+        if preview
+        else ""
+    )
+
     # In preview mode, we don't show the save button
     saveButton = ptg.Button("Save", lambda *_: handleSaveClick()) if not preview else ""
 
     # File content window slot will dynamically change depending on the mode
     fileContentSlot = editContentField if not preview else previewContentField
 
-    # Also the mode button
+    # Also, the mode button will change between "Preview" and "Edit"
     modeButton = ptg.Button(
         "Preview" if not preview else "Edit", lambda *_: handleModeButtonClick()
     )
@@ -144,6 +194,7 @@ def FilePreview(
             ptg.Button("Delete", lambda *_: handleDeleteClick()),
             saveButton,
             modeButton,
+            themeMenu,
             ptg.Button(
                 "Download",
                 lambda *_: drawPage(
