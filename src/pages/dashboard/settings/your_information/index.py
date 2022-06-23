@@ -49,7 +49,7 @@ def YourInformation() -> Optional[Page]:
                 lambda *_: drawPage(
                     window.manager,
                     routes.routes["dashboard/settings/your_information/edit"](
-                        label="Date of birth",
+                        label="Date of birth (YYYY-MM-DD)",
                         oldValue=dob,
                         fieldName="dateOfBirth",
                         validator="dateField",
@@ -93,7 +93,7 @@ def YourInformation() -> Optional[Page]:
     window.center()
     window.is_modal = True
     window.overflow = ptg.Overflow.RESIZE
-    window.set_title("Your Information")
+    window.set_title("[window__title]Your Information")
 
     return {
         "layout": None,

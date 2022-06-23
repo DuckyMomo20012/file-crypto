@@ -78,7 +78,7 @@ def SignFile() -> Page:
     window.is_modal = True
     window.is_noresize = True
     window.overflow = ptg.Overflow.RESIZE
-    window.set_title("Sign your file")
+    window.set_title("[window__title]Sign your file")
 
     return {
         "layout": None,

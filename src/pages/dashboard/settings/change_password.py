@@ -108,7 +108,7 @@ def ChangePassword() -> Page:
     window.is_noresize = True
     # NOTE: overflow RESIZE doesn't play animation when window is opened.
     window.overflow = ptg.Overflow.RESIZE
-    window.set_title(title="Change password")
+    window.set_title(title="[window__title]Change password")
 
     return {
         "layout": None,

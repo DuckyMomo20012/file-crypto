@@ -44,7 +44,11 @@ def EditInformation(
     window = ptg.Window(
         "",
         ptg.Label(
-            f"Old {label.lower()}: {oldValue}",
+            f"Old {label.lower()}:",
+            parent_align=ptg.HorizontalAlignment.LEFT,
+        ),
+        ptg.Label(
+            oldValue,
             parent_align=ptg.HorizontalAlignment.LEFT,
         ),
         ptg.Label(
@@ -63,7 +67,7 @@ def EditInformation(
     window.is_modal = True
     window.is_noresize = True
     window.overflow = ptg.Overflow.RESIZE
-    window.set_title(title="Edit Information")
+    window.set_title(title="[window__title]Edit Information")
 
     return {
         "layout": None,

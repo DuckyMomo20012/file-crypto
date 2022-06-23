@@ -53,6 +53,9 @@ def DashBoard() -> Page:
     # NOTE: A little hack to bind the fileName to the switchCurrPageWindowSlot
     # function and to avoid late binding problem, otherwise we will ONLY get the
     # last fileName in the list. E.g: file3, file6, file9,...
+    # NOTE: onclick function will pass Button itself as a first argument and we
+    # don't care about it, so we add a dummy argument "args" to the function to
+    # "absorb" it.
     def handleButtonClick(*args, fileName):
 
         return switchCurrPageWindowSlot(
@@ -75,9 +78,10 @@ def DashBoard() -> Page:
     files = getFiles()
 
     header = ptg.Window(
-        "Dashboard",
+        "[#81a1c1 bold]Dashboard",
         box="EMPTY",
     )
+    # header.styles.fill = "[@#81a1c1]{item}"
 
     navBar = ptg.Window(
         ptg.Splitter(
@@ -96,7 +100,7 @@ def DashBoard() -> Page:
             # ),
         ),
         "",
-        "My files",
+        "[nord11 bold italic underline]My files",
         "",
         *[
             ptg.Collapsible(

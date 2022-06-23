@@ -27,11 +27,13 @@ def PasswordPrompt(fileName: str) -> Page:
             ErrorModal(window.manager, "Invalid password")
             return
 
+        # Swap the body slot with the file preview window, default opening file
+        # with preview mode
         switchCurrPageWindowSlot(
             manager=window.manager,
             targetAssign=("body"),
             newWindow=routes.routes["dashboard/file_preview"](
-                fileName=fileName, passphrase=password
+                fileName=fileName, passphrase=password, preview=True
             ),
         )
 
@@ -60,7 +62,7 @@ def PasswordPrompt(fileName: str) -> Page:
     # window.overflow = ptg.Overflow.RESIZE
     window.is_modal = True
     window.is_noresize = True
-    window.set_title(f"Open file {fileName}")
+    window.set_title(f"[window__title]Open file {fileName}")
     window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {

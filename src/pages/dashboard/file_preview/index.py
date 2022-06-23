@@ -1,6 +1,8 @@
+from functools import partial
 from typing import Optional
 
 import pytermgui as ptg
+from pygments.styles import STYLE_MAP  # type: ignore
 
 import routes
 import session
@@ -8,11 +10,18 @@ from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
 from src.components import ConfirmModal
 from src.helpers.cryptography import decryptData, encryptData
+from src.helpers.highlight import syntaxHighlight
 from src.helpers.page_manager import drawPage, switchCurrPageWindowSlot
 from src.types.Page import Page
 
 
-def FilePreview(fileName: str, passphrase: str) -> Optional[Page]:
+# NOTE: Currently we just can switch between "edit" mode and "preview" mode.
+# I added a function to remove highlight from the code, it works but in the
+# InputField, we CAN'T edit the highlighted content, it will throw errors on
+# edit.
+def FilePreview(
+    fileName: str, passphrase: str, preview: bool = False, theme: str = "dracula"
+) -> Optional[Page]:
 
     if session.user is None:
         return None
@@ -36,7 +45,15 @@ def FilePreview(fileName: str, passphrase: str) -> Optional[Page]:
 
     fileContent = decryptedData if decryptedData is not None else ""
 
-    contentField = ptg.InputField(fileContent, multiline=True)
+    editContentField = ptg.InputField(fileContent, multiline=True)
+    # NOTE: We can use this way to add syntax highlight to the code when
+    # editing. But the performance is EXTREMELY slow.
+    # editContentField.styles.value = lambda _, text: ptg.tim.parse(
+    #     syntaxHighlight(fileName, text, theme)
+    # )
+
+    previewContentField = ptg.Label(syntaxHighlight(fileName, fileContent, theme))
+    previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
 
     def handleDeleteClick():
         def handleConfirmDeleteClick():
@@ -72,14 +89,14 @@ def FilePreview(fileName: str, passphrase: str) -> Optional[Page]:
         # the original content.
         originalContent = "".join(fileContent.split())
 
-        editedContent = "".join(contentField.value.split())
+        editedContent = "".join(editContentField.value.split())
 
         if not editedContent == originalContent:
             window.manager.toast("File edited. Saving file...")
             # DONE: Update file on the database
 
             encryptedData = encryptData(
-                user.publicKey, contentField.value.encode("utf-8")
+                user.publicKey, editContentField.value.encode("utf-8")
             )
 
             if encryptedData:
@@ -98,6 +115,17 @@ def FilePreview(fileName: str, passphrase: str) -> Optional[Page]:
         else:
             window.manager.toast("No changes made.")
 
+    def handleModeButtonClick():
+
+        # Toggle between edit and preview mode
+        switchCurrPageWindowSlot(
+            manager=window.manager,
+            targetAssign=("body"),
+            newWindow=routes.routes["dashboard/file_preview"](
+                fileName=fileName, passphrase=passphrase, preview=not preview
+            ),
+        )
+
     def handleCloseClick():
 
         switchCurrPageWindowSlot(
@@ -106,11 +134,66 @@ def FilePreview(fileName: str, passphrase: str) -> Optional[Page]:
             clear=True,
         ),
 
+    # NOTE: onclick function will pass Button itself as a first argument and we
+    # don't care about it, so we add a dummy argument "args" to the function to
+    # "absorb" it.
+    def handleThemeButtonClick(*args, theme: str):
+
+        switchCurrPageWindowSlot(
+            manager=window.manager,
+            targetAssign=("body"),
+            newWindow=routes.routes["dashboard/file_preview"](
+                fileName=fileName, passphrase=passphrase, preview=preview, theme=theme
+            ),
+        )
+
+    # Some themes cause error on printing the content, so we have blacklist them
+    themes = [
+        theme
+        for theme in list(STYLE_MAP.keys())
+        if theme not in ("borland", "lilypond", "trac", "bw", "algol", "algol_nu")
+    ]
+
+    # NOTE: We CAN'T pass function correctly when we are in loop. Instead, we
+    # use partial to "bind" the arguments to the function.
+    themeButtons = [
+        ptg.Button(theme, partial(handleThemeButtonClick, theme=theme))
+        for theme in themes
+    ]
+
+    # NOTE: We can swap between Save button and ThemeMenu to save space
+
+    # We only show the theme buttons if we are in preview mode
+    themeMenu = (
+        ptg.Collapsible(
+            "theme",
+            ptg.Container(
+                *themeButtons,
+                height=5,
+                overflow=ptg.Overflow.SCROLL,
+            ),
+        )
+        if preview
+        else ""
+    )
+
+    # In preview mode, we don't show the save button
+    saveButton = ptg.Button("Save", lambda *_: handleSaveClick()) if not preview else ""
+
+    # File content window slot will dynamically change depending on the mode
+    fileContentSlot = editContentField if not preview else previewContentField
+
+    # Also, the mode button will change between "Preview" and "Edit"
+    modeButton = ptg.Button(
+        "Preview" if not preview else "Edit", lambda *_: handleModeButtonClick()
+    )
+
     window = ptg.Window(
         ptg.Splitter(
-            ptg.Label(fileName, parent_align=ptg.HorizontalAlignment.LEFT),
             ptg.Button("Delete", lambda *_: handleDeleteClick()),
-            ptg.Button("Save", lambda *_: handleSaveClick()),
+            saveButton,
+            modeButton,
+            themeMenu,
             ptg.Button(
                 "Download",
                 lambda *_: drawPage(
@@ -125,10 +208,11 @@ def FilePreview(fileName: str, passphrase: str) -> Optional[Page]:
             ),
         ),
         "",
-        contentField,
+        fileContentSlot,
     )
 
     window.overflow = ptg.Overflow.SCROLL
+    window.set_title(f"[window__title]{fileName}")
     window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {

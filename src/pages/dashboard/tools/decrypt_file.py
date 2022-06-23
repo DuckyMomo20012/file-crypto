@@ -86,7 +86,7 @@ def DecryptFile() -> Page:
     window.is_modal = True
     window.is_noresize = True
     window.overflow = ptg.Overflow.RESIZE
-    window.set_title("Decrypt your file")
+    window.set_title("[window__title]Decrypt your file")
 
     return {
         "layout": None,

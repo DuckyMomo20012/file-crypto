@@ -49,7 +49,7 @@ def Tools() -> Page:
     window.center()
     window.is_modal = True
     window.is_noresize = True
-    window.set_title(title="Tools")
+    window.set_title(title="[window__title]Tools")
 
     return {
         "layout": None,

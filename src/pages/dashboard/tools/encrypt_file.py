@@ -71,7 +71,7 @@ def EncryptFile() -> Page:
     window.is_modal = True
     window.is_noresize = True
     window.overflow = ptg.Overflow.RESIZE
-    window.set_title("Encrypt your file")
+    window.set_title("[window__title]Encrypt your file")
 
     return {
         "layout": None,
