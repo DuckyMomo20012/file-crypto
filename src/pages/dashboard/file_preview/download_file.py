@@ -86,7 +86,7 @@ def DownloadFile(fileName: str) -> Page:
     window.is_modal = True
     window.is_noresize = True
     window.overflow = ptg.Overflow.RESIZE
-    window.set_title("Download file")
+    window.set_title("[window__title]Download file")
 
     return {
         "layout": None,

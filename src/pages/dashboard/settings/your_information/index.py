@@ -93,7 +93,7 @@ def YourInformation() -> Optional[Page]:
     window.center()
     window.is_modal = True
     window.overflow = ptg.Overflow.RESIZE
-    window.set_title("Your Information")
+    window.set_title("[window__title]Your Information")
 
     return {
         "layout": None,

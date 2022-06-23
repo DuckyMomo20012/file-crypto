@@ -78,9 +78,10 @@ def DashBoard() -> Page:
     files = getFiles()
 
     header = ptg.Window(
-        "Dashboard",
+        "[#81a1c1 bold]Dashboard",
         box="EMPTY",
     )
+    # header.styles.fill = "[@#81a1c1]{item}"
 
     navBar = ptg.Window(
         ptg.Splitter(
@@ -99,7 +100,7 @@ def DashBoard() -> Page:
             # ),
         ),
         "",
-        "My files",
+        "[nord11 bold italic underline]My files",
         "",
         *[
             ptg.Collapsible(

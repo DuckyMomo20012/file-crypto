@@ -190,7 +190,6 @@ def FilePreview(
 
     window = ptg.Window(
         ptg.Splitter(
-            ptg.Label(fileName, parent_align=ptg.HorizontalAlignment.LEFT),
             ptg.Button("Delete", lambda *_: handleDeleteClick()),
             saveButton,
             modeButton,
@@ -213,6 +212,7 @@ def FilePreview(
     )
 
     window.overflow = ptg.Overflow.SCROLL
+    window.set_title(f"[window__title]{fileName}")
     window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {

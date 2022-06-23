@@ -33,7 +33,7 @@ def Logout() -> Page:
     window.center()
     window.is_modal = True
     window.is_noresize = True
-    window.set_title(title="Logout")
+    window.set_title(title="[window__title]Logout")
 
     return {
         "layout": None,

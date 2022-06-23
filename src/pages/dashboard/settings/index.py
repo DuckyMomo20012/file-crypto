@@ -37,7 +37,7 @@ def Settings() -> Page:
     window.center()
     window.is_modal = True
     window.is_noresize = True
-    window.set_title(title="Settings")
+    window.set_title(title="[window__title]Settings")
 
     return {
         "layout": None,

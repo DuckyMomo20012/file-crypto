@@ -73,7 +73,7 @@ def VerifySignedFile() -> Page:
     window.is_modal = True
     window.is_noresize = True
     window.overflow = ptg.Overflow.RESIZE
-    window.set_title("Verify signed file")
+    window.set_title("[window__title]Verify signed file")
 
     return {
         "layout": None,

@@ -62,7 +62,7 @@ def PasswordPrompt(fileName: str) -> Page:
     # window.overflow = ptg.Overflow.RESIZE
     window.is_modal = True
     window.is_noresize = True
-    window.set_title(f"Open file {fileName}")
+    window.set_title(f"[window__title]Open file {fileName}")
     window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {
