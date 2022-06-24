@@ -44,7 +44,7 @@ def PasswordPrompt(fileName: str) -> Page:
         "",
         ptg.Splitter(
             ptg.Button(
-                "OK",
+                "Open",
                 lambda *_: handleButtonClick(),
             ),
             ptg.Button(
