@@ -73,8 +73,12 @@
 
 ### :camera: Screenshots
 
+<!-- How to record: asciinema rec demo.cast -c "poe dev" -i 0.1 -->
+
+<!-- Then compress gif using this site: https://ezgif.com/optimize -->
+
 <div align="center">
-  <img src="assets/demo.gif" alt="screenshot"/>
+  <img src="https://user-images.githubusercontent.com/64480713/175549661-d0c4f7f7-c82b-4dfa-9fbf-69ef072218eb.gif" alt="screenshot"/>
 </div>
 
 <!-- TechStack -->
@@ -218,13 +222,7 @@ python3 app.py
 
 Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
 
-```javascript
-import Component from "my-project";
-
-function App() {
-  return <Component />;
-}
-```
+TODO
 
 <!-- Roadmap -->
 
