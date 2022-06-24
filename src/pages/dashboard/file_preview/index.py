@@ -169,7 +169,7 @@ def FilePreview(
         ptg.Container(
             *themeButtons,
             height=5,
-            static_width=25,
+            width=20,
             overflow=ptg.Overflow.SCROLL,
             parent_align=ptg.HorizontalAlignment.LEFT,
         ),
