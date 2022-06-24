@@ -74,11 +74,11 @@ def DownloadFile(fileName: str) -> Page:
         ptg.Container(saveFolderPathField),
         "",
         ptg.Splitter(
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button(
                 "Download",
                 lambda *_: handleDownloadClick(),
             ),
+            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
         ),
     )
 

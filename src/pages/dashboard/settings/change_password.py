@@ -98,8 +98,8 @@ def ChangePassword() -> Page:
             # NOTE: We don't use window.close() because we want to keep track of
             # navigation and this is a page not a modal or an alert. We use
             # goToPrevPage to pop this page from the navigation stack.
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button("Confirm", lambda *_: handleConfirmClick()),
+            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
         ),
     )
 

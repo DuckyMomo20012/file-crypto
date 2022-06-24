@@ -166,11 +166,13 @@ def FilePreview(
     # We only show the theme buttons if we are in preview mode
     themeMenu = (
         ptg.Collapsible(
-            "theme",
+            "Theme",
             ptg.Container(
                 *themeButtons,
                 height=5,
+                static_width=25,
                 overflow=ptg.Overflow.SCROLL,
+                parent_align=ptg.HorizontalAlignment.LEFT,
             ),
         )
         if preview

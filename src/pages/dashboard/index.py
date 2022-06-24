@@ -117,9 +117,8 @@ def DashBoard() -> Page:
                     for file in files[dates]
                 ],
                 parent_align=ptg.HorizontalAlignment.LEFT,
-                size_policy=ptg.SizePolicy.STATIC,
                 # FIXME: Don't hardcode this width
-                width=14,  # Total size for date is 14 blocks
+                static_width=14,
             )
             for dates in sorted(files.keys(), reverse=True)
         ],

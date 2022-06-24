@@ -58,8 +58,8 @@ def EditInformation(
         ptg.Container(inputField),
         "",
         ptg.Splitter(
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button("Confirm", lambda *_: handleConfirmClick()),
+            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
         ),
     )
 

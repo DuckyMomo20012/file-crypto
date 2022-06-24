@@ -17,6 +17,7 @@ def ErrorModal(
         errorModal.close()
 
     errorModal = manager.alert(
+        "",
         ptg.Label(
             msg,
             size_policy=ptg.SizePolicy.STATIC,

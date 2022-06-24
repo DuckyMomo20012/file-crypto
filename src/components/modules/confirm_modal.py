@@ -23,6 +23,7 @@ def ConfirmModal(
         confirmModal.close()
 
     confirmModal = manager.alert(
+        "",
         ptg.Label(
             msg,
             size_policy=ptg.SizePolicy.STATIC,
