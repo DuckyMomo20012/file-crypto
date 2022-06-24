@@ -23,4 +23,13 @@ def writeFileToFolder(
 
 def generateRandomFileName(fileName: str):
 
-    return f"{fileName}_%s" % (datetime.now().strftime("%Y%m%d%H%M%S"))
+    fileNamePath = Path(fileName)
+    # First, we get all the suffixes of the file name
+    suffixes = fileNamePath.suffixes
+
+    # Then, we "inject" the timestamp before the first suffix
+    newFileName = str(fileNamePath).replace(
+        suffixes[0], f'_{datetime.now().strftime("%Y%m%d%H%M%S")}{suffixes[0]}'
+    )
+
+    return newFileName
