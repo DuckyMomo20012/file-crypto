@@ -48,7 +48,7 @@ def EditInformation(
             parent_align=ptg.HorizontalAlignment.LEFT,
         ),
         ptg.Label(
-            oldValue,
+            f"[nord8]{oldValue}" if oldValue else "[dim]Not set",
             parent_align=ptg.HorizontalAlignment.LEFT,
         ),
         ptg.Label(
