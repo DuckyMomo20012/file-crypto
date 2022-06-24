@@ -17,6 +17,7 @@ def SuccessModal(
         successModal.close()
 
     successModal = manager.alert(
+        "",
         ptg.Label(
             msg,
             size_policy=ptg.SizePolicy.STATIC,

@@ -44,16 +44,16 @@ def PasswordPrompt(fileName: str) -> Page:
         "",
         ptg.Splitter(
             ptg.Button(
+                "Open",
+                lambda *_: handleButtonClick(),
+            ),
+            ptg.Button(
                 "Cancel",
                 lambda *_: switchCurrPageWindowSlot(
                     window.manager,
                     "body",
                     clear=True,
                 ),
-            ),
-            ptg.Button(
-                "OK",
-                lambda *_: handleButtonClick(),
             ),
         ),
     )

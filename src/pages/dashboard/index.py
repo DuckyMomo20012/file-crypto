@@ -83,6 +83,29 @@ def DashBoard() -> Page:
     )
     # header.styles.fill = "[@#81a1c1]{item}"
 
+    def getCollapsibleList():
+        for dates in sorted(files.keys(), reverse=True):
+            dateCollapsible = ptg.Collapsible(
+                dates,
+                *[
+                    ptg.Button(
+                        f'{"└─" if file == files[dates][-1] else "├─"} {file["name"]}',
+                        onclick=partial(
+                            handleButtonClick,
+                            fileName=file["name"],
+                        ),
+                        parent_align=ptg.HorizontalAlignment.LEFT,
+                    )
+                    for file in files[dates]
+                ],
+                parent_align=ptg.HorizontalAlignment.LEFT,
+            )
+            # This is why I have to create this function, I need to access
+            # "trigger" attribute from the collapsible to left align the
+            # collapsible label
+            dateCollapsible.trigger.parent_align = ptg.HorizontalAlignment.LEFT
+            yield dateCollapsible
+
     navBar = ptg.Window(
         ptg.Splitter(
             ptg.Button(
@@ -102,27 +125,7 @@ def DashBoard() -> Page:
         "",
         "[nord11 bold italic underline]My files",
         "",
-        *[
-            ptg.Collapsible(
-                dates,
-                *[
-                    ptg.Button(
-                        label=file["name"],
-                        onclick=partial(
-                            handleButtonClick,
-                            fileName=file["name"],
-                        ),
-                        parent_align=ptg.HorizontalAlignment.LEFT,
-                    )
-                    for file in files[dates]
-                ],
-                parent_align=ptg.HorizontalAlignment.LEFT,
-                size_policy=ptg.SizePolicy.STATIC,
-                # FIXME: Don't hardcode this width
-                width=14,  # Total size for date is 14 blocks
-            )
-            for dates in sorted(files.keys(), reverse=True)
-        ],
+        *getCollapsibleList(),
     )
 
     # navBar.is_noresize = True

@@ -21,12 +21,13 @@ def YourInformation() -> Optional[Page]:
     window = ptg.Window(
         "",
         ptg.Label(
-            f"Email: {user.email}",
+            f"[italic]Email:[/] [nord8]{user.email}",
             parent_align=ptg.HorizontalAlignment.LEFT,
         ),
+        "",
         ptg.Splitter(
             ptg.Label(
-                f"Name: {user.name}",
+                f"[italic]Name:[/] [nord8]{user.name}",
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
             ptg.Button(
@@ -39,9 +40,10 @@ def YourInformation() -> Optional[Page]:
                 ),
             ),
         ),
+        "",
         ptg.Splitter(
             ptg.Label(
-                f"Date of birth: {dob}",
+                f"[italic]Date of birth:[/] [nord8]{dob}",
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
             ptg.Button(
@@ -57,9 +59,10 @@ def YourInformation() -> Optional[Page]:
                 ),
             ),
         ),
+        "",
         ptg.Splitter(
             ptg.Label(
-                f"Phone number: {user.phone}",
+                f"[italic]Phone number:[/] [nord8]{user.phone}",
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
             ptg.Button(
@@ -72,9 +75,10 @@ def YourInformation() -> Optional[Page]:
                 ),
             ),
         ),
+        "",
         ptg.Splitter(
             ptg.Label(
-                f"Address: {user.address}",
+                f"[italic]Address:[/] [nord8]{user.address}",
                 parent_align=ptg.HorizontalAlignment.LEFT,
             ),
             ptg.Button(
@@ -87,7 +91,8 @@ def YourInformation() -> Optional[Page]:
                 ),
             ),
         ),
-        ptg.Button("Back", lambda *_: goToPrevPage(window.manager)),
+        "",
+        ptg.Button("Close", lambda *_: goToPrevPage(window.manager)),
     )
 
     window.center()

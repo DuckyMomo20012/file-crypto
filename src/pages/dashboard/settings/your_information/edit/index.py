@@ -48,7 +48,7 @@ def EditInformation(
             parent_align=ptg.HorizontalAlignment.LEFT,
         ),
         ptg.Label(
-            oldValue,
+            f"[nord8]{oldValue}" if oldValue else "[dim]Not set",
             parent_align=ptg.HorizontalAlignment.LEFT,
         ),
         ptg.Label(
@@ -58,8 +58,8 @@ def EditInformation(
         ptg.Container(inputField),
         "",
         ptg.Splitter(
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button("Confirm", lambda *_: handleConfirmClick()),
+            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
         ),
     )
 

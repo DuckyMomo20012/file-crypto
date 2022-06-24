@@ -64,11 +64,11 @@ def UploadFile() -> Page:
         ptg.Container(filePathField),
         "",
         ptg.Splitter(
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
             ptg.Button(
                 "Upload",
                 lambda *_: handleUploadClick(),
             ),
+            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
         ),
     )
 

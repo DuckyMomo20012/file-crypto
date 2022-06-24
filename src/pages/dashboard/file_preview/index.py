@@ -164,36 +164,37 @@ def FilePreview(
     # NOTE: We can swap between Save button and ThemeMenu to save space
 
     # We only show the theme buttons if we are in preview mode
-    themeMenu = (
-        ptg.Collapsible(
-            "theme",
-            ptg.Container(
-                *themeButtons,
-                height=5,
-                overflow=ptg.Overflow.SCROLL,
-            ),
-        )
-        if preview
-        else ""
+    themeMenu = ptg.Collapsible(
+        "Theme",
+        ptg.Container(
+            *themeButtons,
+            height=5,
+            static_width=25,
+            overflow=ptg.Overflow.SCROLL,
+            parent_align=ptg.HorizontalAlignment.LEFT,
+        ),
     )
 
     # In preview mode, we don't show the save button
-    saveButton = ptg.Button("Save", lambda *_: handleSaveClick()) if not preview else ""
+    saveButton = ptg.Button("Save", lambda *_: handleSaveClick())
+
+    functionButton = themeMenu if preview else saveButton
 
     # File content window slot will dynamically change depending on the mode
     fileContentSlot = editContentField if not preview else previewContentField
 
     # Also, the mode button will change between "Preview" and "Edit"
     modeButton = ptg.Button(
-        "Preview" if not preview else "Edit", lambda *_: handleModeButtonClick()
+        "Preview mode" if not preview else "Edit mode",
+        lambda *_: handleModeButtonClick(),
     )
 
     window = ptg.Window(
+        "",
         ptg.Splitter(
-            ptg.Button("Delete", lambda *_: handleDeleteClick()),
-            saveButton,
             modeButton,
-            themeMenu,
+            functionButton,
+            ptg.Button("Delete", lambda *_: handleDeleteClick()),
             ptg.Button(
                 "Download",
                 lambda *_: drawPage(
