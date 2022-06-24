@@ -142,9 +142,10 @@ E.g: MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongo
 
 ### :goberserk: System Requirements
 
-> This app only supports Linux and macOS. Currently not supporting Windows
+> This app only supports Linux and macOS. Currently not supporting Windows.
 
-Python: 3.9 and above
+- Python: `>= 3.9`
+- OS: `Linux` and `macOS`
 
 <!-- Prerequisites -->
 
@@ -230,7 +231,13 @@ function App() {
 ## :compass: Roadmap
 
 - [ ] Share images with other users
+  - [ ] Download shared images
+  - [ ] "Shared with me" tab to view shared files
+  - [ ] Permission level. E.g: read-only, write,...
+  - [ ] Edit shared files
 - [ ] Apply themes for editing mode
+- [ ] Trash can to store temporary deleted files
+- [ ] Preview mode for images
 
 <!-- Contributing -->
 
@@ -242,8 +249,6 @@ function App() {
 
 Contributions are always welcome!
 
-See `contributing.md` for ways to get started.
-
 <!-- Code of Conduct -->
 
 ### :scroll: Code of Conduct
@@ -254,13 +259,15 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
 
 ## :grey_question: FAQ
 
-- Question 1
+- Is this project still maintained?
 
-  - Answer 1
+  - Yes, but I will only update UI, docs, or dependencies. New features won't be
+    added frequently.
 
-- Question 2
+- Is this project ready for production?
 
-  - Answer 2
+  - No, this is a small project for practicing cryptographic systems or flows.
+    This wasn't meant for production.
 
 <!-- License -->
 
