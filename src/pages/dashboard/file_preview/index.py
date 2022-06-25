@@ -1,6 +1,7 @@
 from functools import partial
 from typing import Optional
 
+import magic
 import pytermgui as ptg
 from pygments.styles import STYLE_MAP  # type: ignore
 
@@ -227,10 +228,26 @@ def FilePreview(
                 ),
             )
 
-    if preview:
-        windowWidgets.append(previewContentField)
+    isNonBinaryContent = True
+
+    if "text" not in magic.from_buffer(fileContent):
+        isNonBinaryContent = False
+
+    if isNonBinaryContent:
+        if preview:
+            windowWidgets.append(previewContentField)
+        else:
+            windowWidgets.append(editContentField)
     else:
-        windowWidgets.append(editContentField)
+        windowWidgets.insert(
+            0,
+            ptg.Label(
+                "[window__title--warning]Warning: The file is not displayed"
+                " because it is either binary or uses an unsupported text"
+                " encoding.",
+                parent_align=ptg.HorizontalAlignment.LEFT,
+            ),
+        )
 
     # NOTE: We spread those widgets here, so we can dynamically insert widget to
     # this window
