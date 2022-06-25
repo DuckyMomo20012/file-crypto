@@ -52,9 +52,6 @@ def FilePreview(
     #     syntaxHighlight(fileName, text, theme)
     # )
 
-    previewContentField = ptg.Label(syntaxHighlight(fileName, fileContent, theme))
-    previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
-
     def handleDeleteClick():
         def handleConfirmDeleteClick():
             try:
@@ -149,10 +146,12 @@ def FilePreview(
 
     # Some themes cause error on printing the content, so we have blacklist them
     themes = [
-        theme
+        theme.capitalize()
         for theme in list(STYLE_MAP.keys())
         if theme not in ("borland", "lilypond", "trac", "bw", "algol", "algol_nu")
     ]
+
+    themes.insert(0, "No theme")
 
     # NOTE: We CAN'T pass function correctly when we are in loop. Instead, we
     # use partial to "bind" the arguments to the function.
@@ -179,17 +178,13 @@ def FilePreview(
     saveButton = ptg.Button("Save", lambda *_: handleSaveClick())
 
     functionButton = themeMenu if preview else saveButton
-
-    # File content window slot will dynamically change depending on the mode
-    fileContentSlot = editContentField if not preview else previewContentField
-
     # Also, the mode button will change between "Preview" and "Edit"
     modeButton = ptg.Button(
         "Preview mode" if not preview else "Edit mode",
         lambda *_: handleModeButtonClick(),
     )
 
-    window = ptg.Window(
+    windowWidgets = [
         "",
         ptg.Splitter(
             modeButton,
@@ -209,8 +204,37 @@ def FilePreview(
             ),
         ),
         "",
-        fileContentSlot,
-    )
+    ]
+
+    # Plain text preview content
+    previewContentField = ptg.Label(fileContent)
+    previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
+    if theme != "No theme":
+        highlightPreviewContent = syntaxHighlight(fileName, fileContent, theme)
+        if highlightPreviewContent is not None:
+            previewContentField = ptg.Label(highlightPreviewContent)
+            previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
+        # NOTE: We can add a button label "OK" here, after the error message to
+        # switch to 'No theme' theme.
+        else:
+            windowWidgets.insert(
+                0,
+                ptg.Label(
+                    "[window__title--error]Error: Syntax highlight is not"
+                    " supported for this file type. Please switch to 'No theme'"
+                    " theme to remove this line.",
+                    parent_align=ptg.HorizontalAlignment.LEFT,
+                ),
+            )
+
+    if preview:
+        windowWidgets.append(previewContentField)
+    else:
+        windowWidgets.append(editContentField)
+
+    # NOTE: We spread those widgets here, so we can dynamically insert widget to
+    # this window
+    window = ptg.Window(*windowWidgets)
 
     window.overflow = ptg.Overflow.SCROLL
     window.set_title(f"[window__title]{fileName}")
