@@ -5,7 +5,7 @@ def AppShell():
     layout = ptg.Layout()
 
     # A header slot with a height of 1
-    layout.add_slot("Hamburger", width=0.1, height=1)
+    layout.add_slot("Hamburger", width=0.2, height=1)
     layout.add_slot("Header", height=1)
     layout.add_slot("Exit", width=0.1, height=1)
     layout.add_break()

@@ -199,7 +199,17 @@ def decryptFile(
 
         # Write decrypted file
         writeFileToFolder(
-            realFilePath + outPutExt, folderPath, decryptedFileContent.decode("utf-8")
+            realFilePath + outPutExt,
+            folderPath,
+            decryptedFileContent.decode("utf-8").replace("\r", ""),
+        )
+
+        return True
+
+    except UnicodeDecodeError:
+        # Write decrypted file
+        writeFileToFolder(
+            realFilePath + outPutExt, folderPath, decryptedFileContent, mode="wb"
         )
 
         return True
@@ -240,7 +250,7 @@ def decryptData(
     nonce: bytes,
     tag: bytes,
     cipherText: bytes,
-) -> str | None:
+) -> str | bytes | None:
 
     # NOTE: Ref:
     # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa
@@ -256,7 +266,12 @@ def decryptData(
         cipherAES = AES.new(sessionKey, AES.MODE_EAX, nonce)
         decryptedFileContent = cipherAES.decrypt_and_verify(cipherText, tag)  # type: ignore # noqa: E501
 
-        return decryptedFileContent.decode("utf-8")
+        # NOTE: After decryption, decrypted data has unwanted \r characters.
+        # Which leads to incorrect printed file content.
+        result = decryptedFileContent.decode("utf-8").replace("\r", "")
+        return result
 
+    except UnicodeDecodeError:
+        return decryptedFileContent
     except (ValueError, TypeError):
         return None

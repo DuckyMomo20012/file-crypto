@@ -136,13 +136,13 @@ def DashBoard() -> Page:
     hamburger = ptg.Window(
         ptg.Splitter(
             ptg.Button(
-                "⚙️ ",
+                "Settings",
                 lambda *_: drawPage(
                     hamburger.manager, routes.routes["dashboard/settings"]()
                 ),
             ),
             ptg.Button(
-                "🧰",
+                "Tools",
                 lambda *_: drawPage(
                     hamburger.manager, routes.routes["dashboard/tools"]()
                 ),
