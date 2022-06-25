@@ -206,6 +206,14 @@ def decryptFile(
 
         return True
 
+    except UnicodeDecodeError:
+        # Write decrypted file
+        writeFileToFolder(
+            realFilePath + outPutExt, folderPath, decryptedFileContent, mode="wb"
+        )
+
+        return True
+
     except (ValueError, TypeError):
         return False
 
