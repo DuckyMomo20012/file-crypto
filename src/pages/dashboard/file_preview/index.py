@@ -46,13 +46,6 @@ def FilePreview(
 
     fileContent = decryptedData if decryptedData is not None else ""
 
-    editContentField = ptg.InputField(fileContent, multiline=True)
-    # NOTE: We can use this way to add syntax highlight to the code when
-    # editing. But the performance is EXTREMELY slow.
-    # editContentField.styles.value = lambda _, text: ptg.tim.parse(
-    #     syntaxHighlight(fileName, text, theme)
-    # )
-
     def handleDeleteClick():
         def handleConfirmDeleteClick():
             try:
@@ -207,36 +200,45 @@ def FilePreview(
         "",
     ]
 
-    # Plain text preview content
-    previewContentField = ptg.Label(fileContent)
-    previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
-    if theme != "No theme":
-        highlightPreviewContent = syntaxHighlight(fileName, fileContent, theme)
-        if highlightPreviewContent is not None:
-            previewContentField = ptg.Label(highlightPreviewContent)
-            previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
-        # NOTE: We can add a button label "OK" here, after the error message to
-        # switch to 'No theme' theme.
-        else:
-            windowWidgets.insert(
-                0,
-                ptg.Label(
-                    "[window__title--error]Error: Syntax highlight is not"
-                    " supported for this file type. Please switch to 'No theme'"
-                    " theme to remove this line.",
-                    parent_align=ptg.HorizontalAlignment.LEFT,
-                ),
-            )
+    def getPreviewField():
+        # Plain text preview content
+        previewContentField = ptg.Label(fileContent)
+        previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
+        if theme != "No theme":
+            highlightPreviewContent = syntaxHighlight(fileName, fileContent, theme)
+            if highlightPreviewContent is not None:
+                previewContentField = ptg.Label(highlightPreviewContent)
+                previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
+            # NOTE: We can add a button label "OK" here, after the error message to
+            # switch to 'No theme' theme.
+            else:
+                windowWidgets.insert(
+                    0,
+                    ptg.Label(
+                        "[window__title--error]Error: Syntax highlight is not"
+                        " supported for this file type. Please switch to 'No theme'"
+                        " theme to remove this line.",
+                        parent_align=ptg.HorizontalAlignment.LEFT,
+                    ),
+                )
+        return previewContentField
 
     isNonBinaryContent = True
 
-    if "text" not in magic.from_buffer(fileContent):
+    if "text" not in magic.from_buffer(fileContent) or isinstance(fileContent, bytes):
         isNonBinaryContent = False
 
     if isNonBinaryContent:
         if preview:
+            previewContentField = getPreviewField()
             windowWidgets.append(previewContentField)
         else:
+            editContentField = ptg.InputField(str(fileContent), multiline=True)
+            # NOTE: We can use this way to add syntax highlight to the code when
+            # editing. But the performance is EXTREMELY slow.
+            # editContentField.styles.value = lambda _, text: ptg.tim.parse(
+            #     syntaxHighlight(fileName, text, theme)
+            # )
             windowWidgets.append(editContentField)
     else:
         windowWidgets.insert(

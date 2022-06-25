@@ -51,12 +51,22 @@ def DownloadFile(fileName: str) -> Page:
             cipherText=file.cipher.read(),
         )
 
-        if decryptedData:
+        if isinstance(decryptedData, str):
 
             writeFileToFolder(
                 filePath=fileName,
                 folderPath=saveFolderPath,
                 content=decryptedData,
+            )
+
+            SuccessModal(window.manager, "File downloaded successfully!")
+        elif isinstance(decryptedData, bytes):
+
+            writeFileToFolder(
+                filePath=fileName,
+                folderPath=saveFolderPath,
+                content=decryptedData,
+                mode="wb",
             )
 
             SuccessModal(window.manager, "File downloaded successfully!")

@@ -242,7 +242,7 @@ def decryptData(
     nonce: bytes,
     tag: bytes,
     cipherText: bytes,
-) -> str | None:
+) -> str | bytes | None:
 
     # NOTE: Ref:
     # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa
@@ -263,5 +263,7 @@ def decryptData(
         result = decryptedFileContent.decode("utf-8").replace("\r", "")
         return result
 
+    except UnicodeDecodeError:
+        return decryptedFileContent
     except (ValueError, TypeError):
         return None
