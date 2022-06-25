@@ -199,7 +199,9 @@ def decryptFile(
 
         # Write decrypted file
         writeFileToFolder(
-            realFilePath + outPutExt, folderPath, decryptedFileContent.decode("utf-8")
+            realFilePath + outPutExt,
+            folderPath,
+            decryptedFileContent.decode("utf-8").replace("\r", ""),
         )
 
         return True
@@ -256,7 +258,10 @@ def decryptData(
         cipherAES = AES.new(sessionKey, AES.MODE_EAX, nonce)
         decryptedFileContent = cipherAES.decrypt_and_verify(cipherText, tag)  # type: ignore # noqa: E501
 
-        return decryptedFileContent.decode("utf-8")
+        # NOTE: After decryption, decrypted data has unwanted \r characters.
+        # Which leads to incorrect printed file content.
+        result = decryptedFileContent.decode("utf-8").replace("\r", "")
+        return result
 
     except (ValueError, TypeError):
         return None
