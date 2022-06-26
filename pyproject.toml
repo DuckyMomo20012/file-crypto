@@ -12,6 +12,9 @@ pretty = "isort ."
 [tool.isort]
 profile = "black"
 
+[tool.mypy]
+python_version = "3.9"
+
 [tool.poetry.dependencies]
 python = "^3.9"
 environs = "^9.5.0"

@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import TypedDict, Union
 
 import pytermgui as ptg
 
@@ -9,5 +9,5 @@ class PageWindows(TypedDict):
 
 
 class Page(TypedDict):
-    layout: ptg.Layout | None
+    layout: Union[ptg.Layout, None]
     windows: list[PageWindows]

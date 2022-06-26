@@ -1,11 +1,14 @@
 import re
+from typing import Union
 
 from pygments import highlight  # type: ignore
 from pygments.formatters import TerminalTrueColorFormatter  # type: ignore
 from pygments.lexers import get_lexer_for_filename  # type: ignore
 
 
-def syntaxHighlight(fileName: str, code: str, theme: str = "dracula") -> str | None:
+def syntaxHighlight(
+    fileName: str, code: str, theme: str = "dracula"
+) -> Union[str, None]:
 
     try:
         lexer = get_lexer_for_filename(fileName)

@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Any, Optional, Union
 
 import pytermgui as ptg
 
@@ -13,7 +13,7 @@ def switchPage(manager: Optional[ptg.WindowManager], newPage: Any) -> None:
 def switchCurrPageWindowSlot(
     manager: Optional[ptg.WindowManager],
     targetAssign: str,
-    newWindow: ptg.Window | Any | None = None,
+    newWindow: Union[ptg.Window, Any, None] = None,
     clear=True,
     isAdd=False,
 ):
@@ -58,7 +58,7 @@ def switchCurrPageWindowSlot(
         session.navigation[-1] = newPage
 
 
-def drawPage(manager: Optional[ptg.WindowManager], newPage: Any | None) -> None:
+def drawPage(manager: Optional[ptg.WindowManager], newPage: Union[Any, None]) -> None:
 
     if manager and newPage is not None:
         # Append new page to navigation stack

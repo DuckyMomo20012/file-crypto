@@ -1,5 +1,6 @@
 from datetime import datetime
 from pathlib import Path
+from typing import Union
 
 
 def readFile(fileName: str, mode: str = "r"):
@@ -7,13 +8,13 @@ def readFile(fileName: str, mode: str = "r"):
         return file.read()
 
 
-def writeFile(fileName: str, content: str | bytes, mode: str = "w"):
+def writeFile(fileName: str, content: Union[str, bytes], mode: str = "w"):
     with open(fileName, mode) as file:
         file.write(content)
 
 
 def writeFileToFolder(
-    filePath: str, folderPath: str, content: str | bytes, mode: str = "w"
+    filePath: str, folderPath: str, content: Union[str, bytes], mode: str = "w"
 ):
 
     fileName = Path(filePath).name
