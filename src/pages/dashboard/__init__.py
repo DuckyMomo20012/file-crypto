@@ -7,7 +7,7 @@ from .file_preview.password_prompt import PasswordPrompt
 from .index import DashBoard
 from .settings.change_password import ChangePassword
 from .settings.index import Settings
-from .settings.your_information.edit.index import EditInformation
+from .settings.your_information.edit.index import EditUserInformation
 from .settings.your_information.index import YourInformation
 from .tools.decrypt_file import DecryptFile
 from .tools.encrypt_file import EncryptFile
@@ -21,7 +21,7 @@ __all__ = [
     "Settings",
     "ChangePassword",
     "YourInformation",
-    "EditInformation",
+    "EditUserInformation",
     "UploadFile",
     "FilePreview",
     "DownloadFile",

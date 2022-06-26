@@ -10,7 +10,7 @@ from src.helpers.page_manager import goToPrevPage
 from src.types.Page import Page
 
 
-def EditInformation(
+def EditUserInformation(
     label: str, oldValue: Any, fieldName: str, validator: str = ""
 ) -> Page:
 
