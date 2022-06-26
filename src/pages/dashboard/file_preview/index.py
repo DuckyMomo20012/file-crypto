@@ -148,12 +148,12 @@ def FilePreview(
 
     # Some themes cause error on printing the content, so we have blacklist them
     themes = [
-        theme.capitalize()
+        theme
         for theme in list(STYLE_MAP.keys())
         if theme not in ("borland", "lilypond", "trac", "bw", "algol", "algol_nu")
     ]
 
-    themes.insert(0, "No theme")
+    themes.insert(0, "no theme")
 
     # NOTE: We CAN'T pass function correctly when we are in loop. Instead, we
     # use partial to "bind" the arguments to the function.
@@ -212,19 +212,19 @@ def FilePreview(
         # Plain text preview content
         previewContentField = ptg.Label(fileContent)
         previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
-        if theme != "No theme":
+        if theme != "no theme":
             highlightPreviewContent = syntaxHighlight(fileName, fileContent, theme)
             if highlightPreviewContent is not None:
                 previewContentField = ptg.Label(highlightPreviewContent)
                 previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
             # NOTE: We can add a button label "OK" here, after the error message to
-            # switch to 'No theme' theme.
+            # switch to 'no theme' theme.
             else:
                 windowWidgets.insert(
                     0,
                     ptg.Label(
                         "[window__title--error]Error: Syntax highlight is not"
-                        " supported for this file type. Please switch to 'No theme'"
+                        " supported for this file type. Please switch to 'no theme'"
                         " theme to remove this line.",
                         parent_align=ptg.HorizontalAlignment.LEFT,
                     ),
