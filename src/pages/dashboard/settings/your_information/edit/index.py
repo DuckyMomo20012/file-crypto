@@ -43,7 +43,7 @@ def EditUserInformation(
         goToPrevPage(window.manager)
         goToPrevPage(window.manager)
 
-    window = ptg.Window(
+    window: ptg.Window = ptg.Window(
         "",
         ptg.Label(
             f"Old {label.lower()}:",

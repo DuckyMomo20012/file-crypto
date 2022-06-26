@@ -21,7 +21,7 @@ def FileInformation(fileName: str) -> Union[Page, None]:
 
     file = getOneFile(user.email, fileName)
 
-    window = ptg.Window(
+    window: ptg.Window = ptg.Window(
         "",
         ptg.Splitter(
             ptg.Label(

@@ -78,7 +78,8 @@ def DownloadFile(fileName: str) -> Page:
 
         goToPrevPage(window.manager)
 
-    window = ptg.Window(
+    # NOTE: This fix mypy error: Cannot determine type of "window"
+    window: ptg.Window = ptg.Window(
         "",
         ptg.Label("Your password", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(passwordField),

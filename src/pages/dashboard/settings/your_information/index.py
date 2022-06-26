@@ -20,7 +20,7 @@ def YourInformation() -> Optional[Page]:
 
     dob = user.dateOfBirth.strftime("%Y-%m-%d")
 
-    window = ptg.Window(
+    window: ptg.Window = ptg.Window(
         "",
         ptg.Label(
             f"[italic]Email:[/] [nord8]{user.email}",

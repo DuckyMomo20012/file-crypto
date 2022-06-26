@@ -62,7 +62,7 @@ def SignFile() -> Page:
         # Go to previous page
         goToPrevPage(window.manager)
 
-    window = ptg.Window(
+    window: ptg.Window = ptg.Window(
         "",
         ptg.Label("File path", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(filePathField),

@@ -87,7 +87,7 @@ def ChangePassword() -> Page:
                 window.manager, "New password and confirm new password do not match"
             )
 
-    window = ptg.Window(
+    window: ptg.Window = ptg.Window(
         "",
         ptg.Label("Old password", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(oldPasswordField),

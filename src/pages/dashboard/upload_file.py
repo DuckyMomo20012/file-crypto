@@ -67,7 +67,7 @@ def UploadFile() -> Page:
         # And redraw the dashboard page
         drawPage(window.manager, routes.routes["dashboard"]())
 
-    window = ptg.Window(
+    window: ptg.Window = ptg.Window(
         "",
         ptg.Label("File path", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(filePathField),
