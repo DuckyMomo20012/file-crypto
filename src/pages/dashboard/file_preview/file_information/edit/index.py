@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Any
 
 import pytermgui as ptg
+from pydash import debounce
 
 import routes
 import session
@@ -70,7 +71,9 @@ def EditFileInformation(
         "",
         ptg.Splitter(
             ptg.Button("Confirm", lambda *_: handleConfirmClick()),
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
+            ptg.Button(
+                "Cancel", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+            ),
         ),
     )
 

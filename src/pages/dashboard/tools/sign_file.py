@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pytermgui as ptg
+from pydash import debounce
 
 import session
 from src.api.auth.service import getOneUser
@@ -76,7 +77,9 @@ def SignFile() -> Page:
                 "Sign file",
                 lambda *_: handleSignClick(),
             ),
-            ptg.Button("Close", lambda *_: goToPrevPage(window.manager)),
+            ptg.Button(
+                "Close", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+            ),
         ),
     )
 

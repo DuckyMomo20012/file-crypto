@@ -1,6 +1,7 @@
 from typing import Optional
 
 import pytermgui as ptg
+from pydash import debounce
 
 import routes
 import session
@@ -92,7 +93,7 @@ def YourInformation() -> Optional[Page]:
             ),
         ),
         "",
-        ptg.Button("Close", lambda *_: goToPrevPage(window.manager)),
+        ptg.Button("Close", debounce(lambda *_: goToPrevPage(window.manager), 1000)),
     )
 
     window.center()

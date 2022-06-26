@@ -1,4 +1,5 @@
 import pytermgui as ptg
+from pydash import debounce
 
 import session
 from src.api.auth.service import getOneUser
@@ -88,7 +89,9 @@ def DownloadFile(fileName: str) -> Page:
                 "Download",
                 lambda *_: handleDownloadClick(),
             ),
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
+            ptg.Button(
+                "Cancel", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+            ),
         ),
     )
 

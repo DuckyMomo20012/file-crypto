@@ -1,4 +1,5 @@
 import pytermgui as ptg
+from pydash import debounce
 
 from src.api.auth.service import getAllUsers
 from src.components import ErrorModal, SuccessModal
@@ -65,7 +66,9 @@ def VerifySignedFile() -> Page:
                 "Verify",
                 lambda *_: handleVerifyClick(),
             ),
-            ptg.Button("Close", lambda *_: goToPrevPage(window.manager)),
+            ptg.Button(
+                "Close", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+            ),
         ),
     )
 

@@ -1,6 +1,7 @@
 from typing import Optional
 
 import pytermgui as ptg
+from pydash import debounce
 
 import routes
 import session
@@ -99,7 +100,9 @@ def ChangePassword() -> Page:
             # navigation and this is a page not a modal or an alert. We use
             # goToPrevPage to pop this page from the navigation stack.
             ptg.Button("Confirm", lambda *_: handleConfirmClick()),
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
+            ptg.Button(
+                "Cancel", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+            ),
         ),
     )
 

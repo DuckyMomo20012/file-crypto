@@ -1,6 +1,7 @@
 from typing import Union
 
 import pytermgui as ptg
+from pydash import debounce
 
 import routes
 import session
@@ -49,7 +50,7 @@ def FileInformation(fileName: str) -> Union[Page, None]:
             parent_align=ptg.HorizontalAlignment.LEFT,
         ),
         "",
-        ptg.Button("Close", lambda *_: goToPrevPage(window.manager)),
+        ptg.Button("Close", debounce(lambda *_: goToPrevPage(window.manager), 1000)),
     )
 
     window.center()
