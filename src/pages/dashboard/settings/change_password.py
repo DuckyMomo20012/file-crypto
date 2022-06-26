@@ -1,12 +1,13 @@
 from typing import Optional
 
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
 
 import routes
 import session
 from src.api.auth.service import getOneUser, updateUserKeys, updateUserPassword
 from src.components import ErrorModal, SuccessModal
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.cryptography import hash_password, updatePassphrase, verify_password
 from src.helpers.form_validation import requiredField
 from src.helpers.page_manager import clearNavigation, drawPage, goToPrevPage
@@ -101,7 +102,8 @@ def ChangePassword() -> Page:
             # goToPrevPage to pop this page from the navigation stack.
             ptg.Button("Confirm", lambda *_: handleConfirmClick()),
             ptg.Button(
-                "Cancel", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+                "Cancel",
+                debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
             ),
         ),
     )

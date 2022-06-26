@@ -1,7 +1,9 @@
 from typing import Any, Callable, Optional
 
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
+
+from src.constants import BUTTON_DEBOUNCE_TIME
 
 
 # NOTE: Only window which doesn't animate when closing NEEDS to be set debounce
@@ -34,8 +36,12 @@ def ConfirmModal(
         ),
         "",
         ptg.Splitter(
-            ptg.Button("Yes", debounce(lambda *_: handleConfirmClick(), 1000)),
-            ptg.Button("No", debounce(lambda *_: handleCancelClick(), 1000)),
+            ptg.Button(
+                "Yes", debounce(lambda *_: handleConfirmClick(), BUTTON_DEBOUNCE_TIME)
+            ),
+            ptg.Button(
+                "No", debounce(lambda *_: handleCancelClick(), BUTTON_DEBOUNCE_TIME)
+            ),
         ),
     )
 

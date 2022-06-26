@@ -1,11 +1,12 @@
 from typing import Optional
 
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
 
 import routes
 import session
 from src.api.auth.service import getOneUser
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.page_manager import drawPage, goToPrevPage
 from src.types.Page import Page
 
@@ -93,7 +94,10 @@ def YourInformation() -> Optional[Page]:
             ),
         ),
         "",
-        ptg.Button("Close", debounce(lambda *_: goToPrevPage(window.manager), 1000)),
+        ptg.Button(
+            "Close",
+            debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
+        ),
     )
 
     window.center()

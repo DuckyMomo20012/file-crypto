@@ -1,7 +1,9 @@
 from typing import Any, Callable, Optional
 
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
+
+from src.constants import BUTTON_DEBOUNCE_TIME
 
 
 def SuccessModal(
@@ -24,7 +26,7 @@ def SuccessModal(
             size_policy=ptg.SizePolicy.STATIC,
         ),
         "",
-        ptg.Button("OK", debounce(lambda *_: handleClick(), 1000)),
+        ptg.Button("OK", debounce(lambda *_: handleClick(), BUTTON_DEBOUNCE_TIME)),
     )
 
     successModal.is_noresize = True

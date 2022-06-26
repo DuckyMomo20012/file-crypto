@@ -1,13 +1,14 @@
 from pathlib import Path
 
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
 
 import routes
 import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import uploadFileNoDuplicate
 from src.components import ErrorModal, SuccessModal
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.cryptography import encryptData
 from src.helpers.file import readFile
 from src.helpers.form_validation import fileField, requiredField
@@ -77,7 +78,8 @@ def UploadFile() -> Page:
                 lambda *_: handleUploadClick(),
             ),
             ptg.Button(
-                "Cancel", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+                "Cancel",
+                debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
             ),
         ),
     )

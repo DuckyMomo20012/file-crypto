@@ -2,11 +2,12 @@ from datetime import datetime
 from typing import Any
 
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
 
 import routes
 import session
 from src.api.file_crypto.service import updateFileOneField
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.form_validation import dateField, requiredField
 from src.helpers.page_manager import drawPage, goToPrevPage, switchCurrPageWindowSlot
 from src.types.Page import Page
@@ -72,7 +73,8 @@ def EditFileInformation(
         ptg.Splitter(
             ptg.Button("Confirm", lambda *_: handleConfirmClick()),
             ptg.Button(
-                "Cancel", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+                "Cancel",
+                debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
             ),
         ),
     )

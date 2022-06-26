@@ -1,8 +1,9 @@
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
 
 from src.api.auth.service import getOneUser
 from src.components import ErrorModal, SuccessModal
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.cryptography import encryptFile
 from src.helpers.form_validation import fileField, folderField, requiredField
 from src.helpers.page_manager import goToPrevPage
@@ -65,7 +66,8 @@ def EncryptFile() -> Page:
                 lambda *_: handleEncryptClick(),
             ),
             ptg.Button(
-                "Close", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+                "Close",
+                debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
             ),
         ),
     )

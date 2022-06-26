@@ -1,8 +1,9 @@
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
 
 from src.api.auth.service import getAllUsers
 from src.components import ErrorModal, SuccessModal
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.cryptography import verifySignature
 from src.helpers.form_validation import fileField, requiredField
 from src.helpers.page_manager import goToPrevPage
@@ -67,7 +68,8 @@ def VerifySignedFile() -> Page:
                 lambda *_: handleVerifyClick(),
             ),
             ptg.Button(
-                "Close", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+                "Close",
+                debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
             ),
         ),
     )

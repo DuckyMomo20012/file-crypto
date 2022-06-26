@@ -1,11 +1,12 @@
 from pathlib import Path
 
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
 
 import session
 from src.api.auth.service import getOneUser
 from src.components import ErrorModal
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.cryptography import signFile, verify_password
 from src.helpers.file import writeFileToFolder
 from src.helpers.form_validation import fileField, folderField, requiredField
@@ -78,7 +79,8 @@ def SignFile() -> Page:
                 lambda *_: handleSignClick(),
             ),
             ptg.Button(
-                "Close", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+                "Close",
+                debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
             ),
         ),
     )

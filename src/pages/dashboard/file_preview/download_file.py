@@ -1,10 +1,11 @@
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
 
 import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import getOneFile
 from src.components import ErrorModal, SuccessModal
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.cryptography import decryptData, verify_password
 from src.helpers.file import writeFileToFolder
 from src.helpers.form_validation import folderField, requiredField
@@ -90,7 +91,8 @@ def DownloadFile(fileName: str) -> Page:
                 lambda *_: handleDownloadClick(),
             ),
             ptg.Button(
-                "Cancel", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+                "Cancel",
+                debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
             ),
         ),
     )

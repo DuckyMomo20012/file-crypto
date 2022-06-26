@@ -1,12 +1,13 @@
 from typing import Union
 
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
 
 import routes
 import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import getOneFile
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.page_manager import drawPage, goToPrevPage
 from src.types.Page import Page
 
@@ -50,7 +51,10 @@ def FileInformation(fileName: str) -> Union[Page, None]:
             parent_align=ptg.HorizontalAlignment.LEFT,
         ),
         "",
-        ptg.Button("Close", debounce(lambda *_: goToPrevPage(window.manager), 1000)),
+        ptg.Button(
+            "Close",
+            debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
+        ),
     )
 
     window.center()

@@ -2,10 +2,11 @@ from datetime import datetime
 from typing import Any
 
 import pytermgui as ptg
-from pydash import debounce
+from pydash import debounce  # type: ignore
 
 import session
 from src.api.auth.service import updateUserOneField
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.form_validation import dateField, requiredField
 from src.helpers.page_manager import goToPrevPage
 from src.types.Page import Page
@@ -61,7 +62,8 @@ def EditUserInformation(
         ptg.Splitter(
             ptg.Button("Confirm", lambda *_: handleConfirmClick()),
             ptg.Button(
-                "Cancel", debounce(lambda *_: goToPrevPage(window.manager), 1000)
+                "Cancel",
+                debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
             ),
         ),
     )
