@@ -307,7 +307,10 @@ def FilePreview(
         window.min_width = IMAGE_PREVIEW_WIDTH + IMAGE_PREVIEW_PADDING * 2
 
     window.overflow = ptg.Overflow.SCROLL
-    window.set_title(f"[window__title]{fileName}")
+    window.set_title(
+        f"[window__title]{fileName}[/window__title]"
+        f' [italic nord15]{"(Preview mode)" if preview else "(Edit mode)"}'
+    )
     window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {
