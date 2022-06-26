@@ -3,7 +3,7 @@ from typing import Optional, Union
 import pytermgui as ptg
 
 import session
-from src.types import Page
+from src.types.Page import Page
 
 
 def switchPage(
