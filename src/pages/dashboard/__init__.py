@@ -1,5 +1,7 @@
 from .download_shared_file import DownloadSharedFile
 from .file_preview.download_file import DownloadFile
+from .file_preview.file_information.edit.index import EditFileInformation
+from .file_preview.file_information.index import FileInformation
 from .file_preview.index import FilePreview
 from .file_preview.password_prompt import PasswordPrompt
 from .index import DashBoard
@@ -24,6 +26,8 @@ __all__ = [
     "FilePreview",
     "DownloadFile",
     "PasswordPrompt",
+    "FileInformation",
+    "EditFileInformation",
     "DownloadSharedFile",
     "Tools",
     "SignFile",

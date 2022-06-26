@@ -210,6 +210,13 @@ def FilePreview(
     windowWidgets = [
         "",
         ptg.Splitter(
+            ptg.Button(
+                "i",
+                lambda *_: drawPage(
+                    window.manager,
+                    routes.routes["dashboard/file_preview/file_information"](fileName),
+                ),
+            ),
             modeButton,
             functionButton,
             ptg.Button("Delete", lambda *_: handleDeleteClick()),

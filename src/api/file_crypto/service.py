@@ -54,3 +54,27 @@ def updateFile(emailUser, filename, sessionKey, nonce, tag, cipher):
     file.cipher.replace(cipher)
     file.save()
     return file
+
+
+def updateFileOneField(
+    emailUser: str,
+    fileName: str,
+    fieldName: str,
+    newValue: str,
+):
+    file = getOneFile(emailUser, fileName)
+    file[fieldName] = newValue
+    file.save()
+    return file
+
+
+def updateFileMetadataOneField(
+    emailUser: str,
+    fileName: str,
+    fieldName: str,
+    newValue: str,
+):
+    file = getOneFile(emailUser, fileName)
+    file.cipher[fieldName] = newValue
+    file.save()
+    return file
