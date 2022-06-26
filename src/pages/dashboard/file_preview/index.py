@@ -19,6 +19,28 @@ from src.types.Page import Page
 IMAGE_PREVIEW_WIDTH = 60
 IMAGE_PREVIEW_PADDING = 2
 
+UNSUPPORTED_ENCODING = (
+    ptg.Label(
+        "[window__title--warning]Warning: The file is not displayed"
+        " because it is either binary or uses an unsupported text"
+        " encoding.",
+    ),
+)
+
+UNSUPPORTED_SYNTAX_HIGHLIGHTING = (
+    ptg.Label(
+        "[window__title--error]Error: Syntax highlight is not"
+        " supported for this file type. Please switch to 'no theme'"
+        " theme to remove this line.",
+        parent_align=ptg.HorizontalAlignment.LEFT,
+    ),
+)
+
+PREVIEW_FEATURE_WARNING = (
+    "[window__title--warning]Warning: Image preview in ANSI is"
+    " preview feature. It may downgrade the performance."
+)
+
 
 # NOTE: Currently we just can switch between "edit" mode and "preview" mode.
 # I added a function to remove highlight from the code, it works but in the
@@ -162,8 +184,6 @@ def FilePreview(
         for theme in themes
     ]
 
-    # NOTE: We can swap between Save button and ThemeMenu to save space
-
     # We only show the theme buttons if we are in preview mode
     themeMenu = ptg.Collapsible(
         "Theme",
@@ -180,6 +200,7 @@ def FilePreview(
     saveButton = ptg.Button("Save", lambda *_: handleSaveClick())
 
     functionButton = themeMenu if preview else saveButton
+
     # Also, the mode button will change between "Preview" and "Edit"
     modeButton = ptg.Button(
         "Preview mode" if not preview else "Edit mode",
@@ -220,22 +241,16 @@ def FilePreview(
             # NOTE: We can add a button label "OK" here, after the error message to
             # switch to 'no theme' theme.
             else:
-                windowWidgets.insert(
-                    0,
-                    ptg.Label(
-                        "[window__title--error]Error: Syntax highlight is not"
-                        " supported for this file type. Please switch to 'no theme'"
-                        " theme to remove this line.",
-                        parent_align=ptg.HorizontalAlignment.LEFT,
-                    ),
-                )
+                windowWidgets.insert(0, UNSUPPORTED_SYNTAX_HIGHLIGHTING)
         return previewContentField
-
-    fileType = magic.from_buffer(fileContent)
 
     # A flag to check image preview is opened. If it is, we set min width to
     # reserve image preview space.
     imageForcePreview = False
+
+    # NOTE: You can use command "file app.py" (libmagic) on Unix OS to check
+    # file type.
+    fileType = magic.from_buffer(fileContent)
 
     if "text" in fileType and isinstance(fileContent, str):
         if preview:
@@ -252,6 +267,7 @@ def FilePreview(
     elif "image" in fileType and isinstance(fileContent, bytes):
         if preview:
             if forcePreview:
+                # NOTE: ANSI image preview feature is extremely slow.
                 imageForcePreview = True
                 previewContentField = (
                     ptg.Label(
@@ -266,9 +282,10 @@ def FilePreview(
                 )
                 windowWidgets.append(previewContentField)
             else:
+                # We print a warning message to warn the user about the preview
+                # (beta) feature
                 previewContentField = [
-                    "[window__title--warning]Warning: Image preview in ANSI is"
-                    " preview feature. It may downgrade the performance.",
+                    PREVIEW_FEATURE_WARNING,
                     "",
                     ptg.Button(
                         "Preview anyway",
@@ -287,21 +304,13 @@ def FilePreview(
                 ]
                 windowWidgets.extend(previewContentField)
     else:
-        windowWidgets.insert(
-            0,
-            ptg.Label(
-                "[window__title--warning]Warning: The file is not displayed"
-                " because it is either binary or uses an unsupported text"
-                " encoding.",
-                parent_align=ptg.HorizontalAlignment.LEFT,
-            ),
-        )
+        windowWidgets.append(UNSUPPORTED_ENCODING)
 
     # NOTE: We spread those widgets here, so we can dynamically insert widget to
     # this window
     window = ptg.Window(*windowWidgets)
 
-    # Set window min width so when user resize window, the image won't be
+    # NOTE: Set window min width so when user resize window, the image won't be
     # broken. Except the terminal size is too small.
     if imageForcePreview:
         window.min_width = IMAGE_PREVIEW_WIDTH + IMAGE_PREVIEW_PADDING * 2
