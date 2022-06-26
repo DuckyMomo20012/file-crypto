@@ -10,10 +10,14 @@ import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
 from src.components import ConfirmModal
+from src.helpers.climage import convert_frombytes
 from src.helpers.cryptography import decryptData, encryptData
 from src.helpers.highlight import syntaxHighlight
 from src.helpers.page_manager import drawPage, switchCurrPageWindowSlot
 from src.types.Page import Page
+
+IMAGE_PREVIEW_WIDTH = 60
+IMAGE_PREVIEW_PADDING = 2
 
 
 # NOTE: Currently we just can switch between "edit" mode and "preview" mode.
@@ -21,7 +25,11 @@ from src.types.Page import Page
 # InputField, we CAN'T edit the highlighted content, it will throw errors on
 # edit.
 def FilePreview(
-    fileName: str, passphrase: str, preview: bool = False, theme: str = "dracula"
+    fileName: str,
+    passphrase: str,
+    preview: bool = False,
+    theme: str = "dracula",
+    forcePreview: bool = False,
 ) -> Optional[Page]:
 
     if session.user is None:
@@ -223,12 +231,13 @@ def FilePreview(
                 )
         return previewContentField
 
-    isNonBinaryContent = True
+    fileType = magic.from_buffer(fileContent)
 
-    if "text" not in magic.from_buffer(fileContent) or isinstance(fileContent, bytes):
-        isNonBinaryContent = False
+    # A flag to check image preview is opened. If it is, we set min width to
+    # reserve image preview space.
+    imageForcePreview = False
 
-    if isNonBinaryContent:
+    if "text" in fileType and isinstance(fileContent, str):
         if preview:
             previewContentField = getPreviewField()
             windowWidgets.append(previewContentField)
@@ -240,6 +249,43 @@ def FilePreview(
             #     syntaxHighlight(fileName, text, theme)
             # )
             windowWidgets.append(editContentField)
+    elif "image" in fileType and isinstance(fileContent, bytes):
+        if preview:
+            if forcePreview:
+                imageForcePreview = True
+                previewContentField = (
+                    ptg.Label(
+                        convert_frombytes(
+                            fileContent,
+                            is_truecolor=True,
+                            is_256color=False,
+                            is_unicode=True,
+                            width=IMAGE_PREVIEW_WIDTH,
+                        ),
+                    ),
+                )
+                windowWidgets.append(previewContentField)
+            else:
+                previewContentField = [
+                    "[window__title--warning]Warning: Image preview in ANSI is"
+                    " preview feature. It may downgrade the performance.",
+                    "",
+                    ptg.Button(
+                        "Preview anyway",
+                        lambda *_: switchCurrPageWindowSlot(
+                            manager=window.manager,
+                            targetAssign=("body"),
+                            newWindow=routes.routes["dashboard/file_preview"](
+                                fileName=fileName,
+                                passphrase=passphrase,
+                                preview=preview,
+                                theme=theme,
+                                forcePreview=True,
+                            ),
+                        ),
+                    ),
+                ]
+                windowWidgets.extend(previewContentField)
     else:
         windowWidgets.insert(
             0,
@@ -254,6 +300,11 @@ def FilePreview(
     # NOTE: We spread those widgets here, so we can dynamically insert widget to
     # this window
     window = ptg.Window(*windowWidgets)
+
+    # Set window min width so when user resize window, the image won't be
+    # broken. Except the terminal size is too small.
+    if imageForcePreview:
+        window.min_width = IMAGE_PREVIEW_WIDTH + IMAGE_PREVIEW_PADDING * 2
 
     window.overflow = ptg.Overflow.SCROLL
     window.set_title(f"[window__title]{fileName}")
