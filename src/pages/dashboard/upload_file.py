@@ -1,12 +1,14 @@
 from pathlib import Path
 
 import pytermgui as ptg
+from pydash import debounce  # type: ignore
 
 import routes
 import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import uploadFileNoDuplicate
 from src.components import ErrorModal, SuccessModal
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.cryptography import encryptData
 from src.helpers.file import readFile
 from src.helpers.form_validation import fileField, requiredField
@@ -65,7 +67,7 @@ def UploadFile() -> Page:
         # And redraw the dashboard page
         drawPage(window.manager, routes.routes["dashboard"]())
 
-    window = ptg.Window(
+    window: ptg.Window = ptg.Window(
         "",
         ptg.Label("File path", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(filePathField),
@@ -75,7 +77,10 @@ def UploadFile() -> Page:
                 "Upload",
                 lambda *_: handleUploadClick(),
             ),
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
+            ptg.Button(
+                "Cancel",
+                debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
+            ),
         ),
     )
 

@@ -1,11 +1,13 @@
 from typing import Optional
 
 import pytermgui as ptg
+from pydash import debounce  # type: ignore
 
 import routes
 import session
 from src.api.auth.service import getOneUser, updateUserKeys, updateUserPassword
 from src.components import ErrorModal, SuccessModal
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.cryptography import hash_password, updatePassphrase, verify_password
 from src.helpers.form_validation import requiredField
 from src.helpers.page_manager import clearNavigation, drawPage, goToPrevPage
@@ -85,7 +87,7 @@ def ChangePassword() -> Page:
                 window.manager, "New password and confirm new password do not match"
             )
 
-    window = ptg.Window(
+    window: ptg.Window = ptg.Window(
         "",
         ptg.Label("Old password", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(oldPasswordField),
@@ -99,7 +101,10 @@ def ChangePassword() -> Page:
             # navigation and this is a page not a modal or an alert. We use
             # goToPrevPage to pop this page from the navigation stack.
             ptg.Button("Confirm", lambda *_: handleConfirmClick()),
-            ptg.Button("Cancel", lambda *_: goToPrevPage(window.manager)),
+            ptg.Button(
+                "Cancel",
+                debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
+            ),
         ),
     )
 

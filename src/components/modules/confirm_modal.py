@@ -1,8 +1,14 @@
 from typing import Any, Callable, Optional
 
 import pytermgui as ptg
+from pydash import debounce  # type: ignore
+
+from src.constants import BUTTON_DEBOUNCE_TIME
 
 
+# NOTE: Only window which doesn't animate when closing NEEDS to be set debounce
+# for "Close" button. Usually form or modal windows, which is set overflow:
+# RESIZE
 def ConfirmModal(
     manager: Optional[ptg.WindowManager],
     msg: str,
@@ -30,8 +36,12 @@ def ConfirmModal(
         ),
         "",
         ptg.Splitter(
-            ptg.Button("Yes", lambda *_: handleConfirmClick()),
-            ptg.Button("No", lambda *_: handleCancelClick()),
+            ptg.Button(
+                "Yes", debounce(lambda *_: handleConfirmClick(), BUTTON_DEBOUNCE_TIME)
+            ),
+            ptg.Button(
+                "No", debounce(lambda *_: handleCancelClick(), BUTTON_DEBOUNCE_TIME)
+            ),
         ),
     )
 

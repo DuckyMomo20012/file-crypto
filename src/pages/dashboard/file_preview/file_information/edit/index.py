@@ -4,21 +4,25 @@ from typing import Any
 import pytermgui as ptg
 from pydash import debounce  # type: ignore
 
+import routes
 import session
-from src.api.auth.service import updateUserOneField
+from src.api.file_crypto.service import updateFileOneField
 from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.form_validation import dateField, requiredField
-from src.helpers.page_manager import goToPrevPage
+from src.helpers.page_manager import drawPage, goToPrevPage, switchCurrPageWindowSlot
 from src.types.Page import Page
 
 
-def EditUserInformation(
-    label: str, oldValue: Any, fieldName: str, validator: str = ""
+# NOTE: This merely copy pastes the code from
+# dashboard/settings/your_information/edit/index.py
+# Should we create a component for this page?
+# NOTE: We also need fileName parameter to be passed to this function
+def EditFileInformation(
+    label: str, oldValue: Any, fileName: str, fieldName: str, validator: str = ""
 ) -> Page:
 
     inputField = ptg.InputField()
 
-    # DONE: Implement edit functionality
     def handleConfirmClick():
         if not requiredField(window.manager, inputField, label=f"New {label.lower()}"):
             return
@@ -36,12 +40,19 @@ def EditUserInformation(
 
         window.manager.toast("Updating information...")
 
-        updateUserOneField(session.user.email, fieldName, newValue)
+        updateFileOneField(session.user.email, fileName, fieldName, newValue)
 
-        # NOTE: We go back to two pages, close settings page, so when user open
-        # settings again, it will show the updated information.
+        # NOTE: Remember to go back to previous page TWICE, so we close edit
+        # page AND information page! Just like edit user information page.
+
+        # Close the file information window
         goToPrevPage(window.manager)
         goToPrevPage(window.manager)
+        # Clear nav bar window AND file preview window (body)
+        switchCurrPageWindowSlot(window.manager, "nav_bar", clear=True)
+        switchCurrPageWindowSlot(window.manager, "body", clear=True)
+        # And redraw the dashboard page
+        drawPage(window.manager, routes.routes["dashboard"]())
 
     window: ptg.Window = ptg.Window(
         "",

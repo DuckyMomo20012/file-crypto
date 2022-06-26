@@ -1,7 +1,9 @@
 import pytermgui as ptg
+from pydash import debounce  # type: ignore
 
 from src.api.auth.service import getOneUser
 from src.components import ErrorModal, SuccessModal
+from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.cryptography import encryptFile
 from src.helpers.form_validation import fileField, folderField, requiredField
 from src.helpers.page_manager import goToPrevPage
@@ -47,7 +49,7 @@ def EncryptFile() -> Page:
         # Go to previous page
         goToPrevPage(window.manager)
 
-    window = ptg.Window(
+    window: ptg.Window = ptg.Window(
         "",
         ptg.Label("File path", parent_align=ptg.HorizontalAlignment.LEFT),
         ptg.Container(filePathField),
@@ -63,7 +65,10 @@ def EncryptFile() -> Page:
                 "Encrypt file",
                 lambda *_: handleEncryptClick(),
             ),
-            ptg.Button("Close", lambda *_: goToPrevPage(window.manager)),
+            ptg.Button(
+                "Close",
+                debounce(lambda *_: goToPrevPage(window.manager), BUTTON_DEBOUNCE_TIME),
+            ),
         ),
     )
 
