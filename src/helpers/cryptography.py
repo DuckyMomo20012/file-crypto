@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Union
 
 from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.Hash import SHA256
@@ -220,7 +221,7 @@ def decryptFile(
 
 def encryptData(
     publicKey: bytes, content: bytes
-) -> tuple[bytes, bytes, bytes, bytes] | None:
+) -> Union[tuple[bytes, bytes, bytes, bytes], None]:
 
     # NOTE: Ref:
     # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa
@@ -250,7 +251,7 @@ def decryptData(
     nonce: bytes,
     tag: bytes,
     cipherText: bytes,
-) -> str | bytes | None:
+) -> Union[str, bytes, None]:
 
     # NOTE: Ref:
     # https://pycryptodome.readthedocs.io/en/latest/src/examples.html?#encrypt-data-with-rsa

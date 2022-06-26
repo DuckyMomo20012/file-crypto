@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytermgui as ptg
 
 import session
@@ -43,13 +45,17 @@ def SignFile() -> Page:
             ErrorModal(window.manager, "Invalid password")
             return
 
-        window.manager.toast(f"Signing file {filePath}...")
+        # NOTE: Because writeFileToFolder will extract file name for us, so we
+        # are just doing extras here :v. But we need file name to display toast
+        # message correctly.
+        fileName = Path(filePath).name
+        window.manager.toast(f"Signing file {fileName}...")
 
         # Sign file
         signature = signFile(user.privateKey, filePath, passphrase=password)
 
         # Write signature to file
-        writeFileToFolder(filePath + ".sig", saveFolderPath, signature, mode="wb")
+        writeFileToFolder(fileName + ".sig", saveFolderPath, signature, mode="wb")
 
         # Go to previous page
         goToPrevPage(window.manager)

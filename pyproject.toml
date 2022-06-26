@@ -12,6 +12,9 @@ pretty = "isort ."
 [tool.isort]
 profile = "black"
 
+[tool.mypy]
+python_version = "3.9"
+
 [tool.poetry.dependencies]
 python = "^3.9"
 environs = "^9.5.0"
@@ -23,6 +26,7 @@ pytermgui = "^6.4.0"
 PyYAML = "^6.0"
 Pygments = "^2.12.0"
 python-magic = "^0.4.27"
+climage = "^0.1.3"
 
 [tool.poetry.dev-dependencies]
 poethepoet = "^0.14.0"

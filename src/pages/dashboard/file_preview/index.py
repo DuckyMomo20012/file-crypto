@@ -10,10 +10,36 @@ import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
 from src.components import ConfirmModal
+from src.helpers.climage import convert_frombytes
 from src.helpers.cryptography import decryptData, encryptData
 from src.helpers.highlight import syntaxHighlight
 from src.helpers.page_manager import drawPage, switchCurrPageWindowSlot
 from src.types.Page import Page
+
+IMAGE_PREVIEW_WIDTH = 60
+IMAGE_PREVIEW_PADDING = 2
+
+UNSUPPORTED_ENCODING = (
+    ptg.Label(
+        "[window__title--warning]Warning: The file is not displayed"
+        " because it is either binary or uses an unsupported text"
+        " encoding.",
+    ),
+)
+
+UNSUPPORTED_SYNTAX_HIGHLIGHTING = (
+    ptg.Label(
+        "[window__title--error]Error: Syntax highlight is not"
+        " supported for this file type. Please switch to 'no theme'"
+        " theme to remove this line.",
+        parent_align=ptg.HorizontalAlignment.LEFT,
+    ),
+)
+
+PREVIEW_FEATURE_WARNING = (
+    "[window__title--warning]Warning: Image preview in ANSI is"
+    " preview feature. It may downgrade the performance."
+)
 
 
 # NOTE: Currently we just can switch between "edit" mode and "preview" mode.
@@ -21,7 +47,11 @@ from src.types.Page import Page
 # InputField, we CAN'T edit the highlighted content, it will throw errors on
 # edit.
 def FilePreview(
-    fileName: str, passphrase: str, preview: bool = False, theme: str = "dracula"
+    fileName: str,
+    passphrase: str,
+    preview: bool = False,
+    theme: str = "dracula",
+    forcePreview: bool = False,
 ) -> Optional[Page]:
 
     if session.user is None:
@@ -140,12 +170,12 @@ def FilePreview(
 
     # Some themes cause error on printing the content, so we have blacklist them
     themes = [
-        theme.capitalize()
+        theme
         for theme in list(STYLE_MAP.keys())
         if theme not in ("borland", "lilypond", "trac", "bw", "algol", "algol_nu")
     ]
 
-    themes.insert(0, "No theme")
+    themes.insert(0, "no theme")
 
     # NOTE: We CAN'T pass function correctly when we are in loop. Instead, we
     # use partial to "bind" the arguments to the function.
@@ -153,8 +183,6 @@ def FilePreview(
         ptg.Button(theme, partial(handleThemeButtonClick, theme=theme))
         for theme in themes
     ]
-
-    # NOTE: We can swap between Save button and ThemeMenu to save space
 
     # We only show the theme buttons if we are in preview mode
     themeMenu = ptg.Collapsible(
@@ -172,6 +200,7 @@ def FilePreview(
     saveButton = ptg.Button("Save", lambda *_: handleSaveClick())
 
     functionButton = themeMenu if preview else saveButton
+
     # Also, the mode button will change between "Preview" and "Edit"
     modeButton = ptg.Button(
         "Preview mode" if not preview else "Edit mode",
@@ -204,31 +233,26 @@ def FilePreview(
         # Plain text preview content
         previewContentField = ptg.Label(fileContent)
         previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
-        if theme != "No theme":
+        if theme != "no theme":
             highlightPreviewContent = syntaxHighlight(fileName, fileContent, theme)
             if highlightPreviewContent is not None:
                 previewContentField = ptg.Label(highlightPreviewContent)
                 previewContentField.parent_align = ptg.HorizontalAlignment.LEFT
             # NOTE: We can add a button label "OK" here, after the error message to
-            # switch to 'No theme' theme.
+            # switch to 'no theme' theme.
             else:
-                windowWidgets.insert(
-                    0,
-                    ptg.Label(
-                        "[window__title--error]Error: Syntax highlight is not"
-                        " supported for this file type. Please switch to 'No theme'"
-                        " theme to remove this line.",
-                        parent_align=ptg.HorizontalAlignment.LEFT,
-                    ),
-                )
+                windowWidgets.insert(0, UNSUPPORTED_SYNTAX_HIGHLIGHTING)
         return previewContentField
 
-    isNonBinaryContent = True
+    # A flag to check image preview is opened. If it is, we set min width to
+    # reserve image preview space.
+    imageForcePreview = False
 
-    if "text" not in magic.from_buffer(fileContent) or isinstance(fileContent, bytes):
-        isNonBinaryContent = False
+    # NOTE: You can use command "file app.py" (libmagic) on Unix OS to check
+    # file type.
+    fileType = magic.from_buffer(fileContent)
 
-    if isNonBinaryContent:
+    if "text" in fileType and isinstance(fileContent, str):
         if preview:
             previewContentField = getPreviewField()
             windowWidgets.append(previewContentField)
@@ -240,23 +264,62 @@ def FilePreview(
             #     syntaxHighlight(fileName, text, theme)
             # )
             windowWidgets.append(editContentField)
+    elif "image" in fileType and isinstance(fileContent, bytes):
+        if preview:
+            if forcePreview:
+                # NOTE: ANSI image preview feature is extremely slow.
+                imageForcePreview = True
+                previewContentField = (
+                    ptg.Label(
+                        convert_frombytes(
+                            fileContent,
+                            is_truecolor=True,
+                            is_256color=False,
+                            is_unicode=True,
+                            width=IMAGE_PREVIEW_WIDTH,
+                        ),
+                    ),
+                )
+                windowWidgets.append(previewContentField)
+            else:
+                # We print a warning message to warn the user about the preview
+                # (beta) feature
+                previewContentField = [
+                    PREVIEW_FEATURE_WARNING,
+                    "",
+                    ptg.Button(
+                        "Preview anyway",
+                        lambda *_: switchCurrPageWindowSlot(
+                            manager=window.manager,
+                            targetAssign=("body"),
+                            newWindow=routes.routes["dashboard/file_preview"](
+                                fileName=fileName,
+                                passphrase=passphrase,
+                                preview=preview,
+                                theme=theme,
+                                forcePreview=True,
+                            ),
+                        ),
+                    ),
+                ]
+                windowWidgets.extend(previewContentField)
     else:
-        windowWidgets.insert(
-            0,
-            ptg.Label(
-                "[window__title--warning]Warning: The file is not displayed"
-                " because it is either binary or uses an unsupported text"
-                " encoding.",
-                parent_align=ptg.HorizontalAlignment.LEFT,
-            ),
-        )
+        windowWidgets.append(UNSUPPORTED_ENCODING)
 
     # NOTE: We spread those widgets here, so we can dynamically insert widget to
     # this window
     window = ptg.Window(*windowWidgets)
 
+    # NOTE: Set window min width so when user resize window, the image won't be
+    # broken. Except the terminal size is too small.
+    if imageForcePreview:
+        window.min_width = IMAGE_PREVIEW_WIDTH + IMAGE_PREVIEW_PADDING * 2
+
     window.overflow = ptg.Overflow.SCROLL
-    window.set_title(f"[window__title]{fileName}")
+    window.set_title(
+        f"[window__title]{fileName}[/window__title]"
+        f' [italic nord15]{"(Preview mode)" if preview else "(Edit mode)"}'
+    )
     window.vertical_align = ptg.VerticalAlignment.TOP
 
     return {

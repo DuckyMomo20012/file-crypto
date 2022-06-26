@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytermgui as ptg
 
 import routes
@@ -24,7 +26,6 @@ def UploadFile() -> Page:
             return
 
         filePath = filePathField.value
-        window.manager.toast(f"Uploading {filePath}...")
 
         # DONE: Implement upload logic
 
@@ -37,8 +38,14 @@ def UploadFile() -> Page:
         if encryptedData:
             encryptedSessionKey, nonce, tag, cipherText = encryptedData
 
+            # Because we have already checked if this is a valid file name, not
+            # a folder path, so we don't have to check if this is an empty
+            # string '' here (Path.name will return empty string if folder path)
+            fileName = Path(filePath).name
+            window.manager.toast(f"Uploading {fileName}...")
+
             uploadFileNoDuplicate(
-                name=filePath,
+                name=fileName,
                 sessionKey=encryptedSessionKey,
                 nonce=nonce,
                 tag=tag,
