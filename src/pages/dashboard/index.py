@@ -8,6 +8,8 @@ from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import getAllFiles
 from src.components import ConfirmModal
 from src.components.layouts.AppShell import AppShell
+
+# from src.components.modules.footer import Footer
 from src.helpers.page_manager import drawPage, exitApp, switchCurrPageWindowSlot
 from src.types.Page import Page
 
@@ -156,6 +158,8 @@ def DashBoard() -> Page:
         box="EMPTY",
     )
 
+    # footer = Footer()
+
     return {
         "layout": AppShell(),
         "windows": [
@@ -163,5 +167,6 @@ def DashBoard() -> Page:
             {"window": hamburger, "assign": "hamburger"},
             {"window": exitBar, "assign": "exit"},
             {"window": navBar, "assign": "nav_bar"},
+            # {"window": footer, "assign": "footer"},
         ],
     }

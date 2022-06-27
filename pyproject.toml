@@ -28,6 +28,7 @@ Pygments = "^2.12.0"
 python-magic = "^0.4.27"
 climage = "^0.1.3"
 pydash = "^5.1.0"
+psutil = "^5.9.1"
 
 [tool.poetry.dev-dependencies]
 poethepoet = "^0.14.0"
