@@ -539,7 +539,10 @@ Project Link: [https://github.com/DuckyMomo20012/file-crypto](https://github.com
 
 Here are useful resources and libraries that I have used in my projects.
 
-- [PyTermGUI](https://ptg.bczsalba.com/pytermgui.html)
-- [Pygments](https://pygments.org/)
-- [Climage](https://github.com/pnappa/CLImage)
-- [Awesome ReadmeTemplate](https://github.com/Louis3797/awesome-readme-template)
+- [PyTermGUI](https://ptg.bczsalba.com/pytermgui.html): A wonderful and fully
+  documented TUI framework to make your terminal becomes beautiful.
+- [Pygments](https://pygments.org/): A good library to bring colors to your code.
+- [Climage](https://github.com/pnappa/CLImage): Create beautiful pictures in
+  your terminal using ANSI codes.
+- [Awesome ReadmeTemplate](https://github.com/Louis3797/awesome-readme-template): A
+  beautiful template to bootstrap your README file.
