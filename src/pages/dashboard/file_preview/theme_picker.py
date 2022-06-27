@@ -13,11 +13,8 @@ def ThemePicker(
     preview: str,
     currTheme: str,
 ):
-    # NOTE: onclick function will pass Button itself as a first argument and we
-    # don't care about it, so we add a dummy argument "args" to the function to
-    # "absorb" it.
     def handleThemeClick(
-        *args, fileName: str, passphrase: str, preview: str, theme: str
+        _button, fileName: str, passphrase: str, preview: str, theme: str
     ):
         # Close the theme picker window
         goToPrevPage(window.manager)
