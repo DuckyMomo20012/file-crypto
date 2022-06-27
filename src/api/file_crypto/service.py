@@ -1,4 +1,4 @@
-from mongoengine.queryset.visitor import Q  # type: ignore
+from mongoengine.queryset.visitor import Q
 
 from schema import FileCrypto
 

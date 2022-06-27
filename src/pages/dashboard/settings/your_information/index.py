@@ -1,7 +1,7 @@
 from typing import Optional
 
 import pytermgui as ptg
-from pydash import debounce  # type: ignore
+from pydash import debounce
 
 import routes
 import session

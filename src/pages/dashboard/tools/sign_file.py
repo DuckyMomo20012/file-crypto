@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytermgui as ptg
-from pydash import debounce  # type: ignore
+from pydash import debounce
 
 import session
 from src.api.auth.service import getOneUser

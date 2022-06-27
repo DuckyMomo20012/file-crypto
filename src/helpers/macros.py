@@ -1,4 +1,4 @@
-import psutil  # type: ignore
+import psutil
 import pytermgui as ptg
 
 

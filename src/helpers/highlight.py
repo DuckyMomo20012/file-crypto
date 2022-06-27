@@ -1,9 +1,9 @@
 import re
 from typing import Union
 
-from pygments import highlight  # type: ignore
-from pygments.formatters import TerminalTrueColorFormatter  # type: ignore
-from pygments.lexers import get_lexer_for_filename  # type: ignore
+from pygments import highlight
+from pygments.formatters import TerminalTrueColorFormatter
+from pygments.lexers import get_lexer_for_filename
 
 
 def syntaxHighlight(

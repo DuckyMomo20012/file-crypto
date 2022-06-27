@@ -1,5 +1,5 @@
 import pytermgui as ptg
-from pydash import debounce  # type: ignore
+from pydash import debounce
 
 from src.api.auth.service import getAllUsers
 from src.components import ErrorModal, SuccessModal
