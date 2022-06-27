@@ -108,7 +108,7 @@
 ### :dart: Features
 
 - 🔒️ Uploaded files are encrypted
-- 🔑 Password protecting for file
+- 🔑 Password protection for file
 - 🔍️ Preview text file in terminal
 - ✏️ File editor in the terminal
 - 🎨 Syntax highlight for supporting formats
@@ -146,7 +146,8 @@
 
 ### :key: Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to
+your .env file
 
 `MONGODB_HOST`: An URI to connect to your database
 
@@ -232,7 +233,7 @@ python3 app.py
 
 ## :eyes: Usage
 
-First, you have to login to your account in Login page:
+First, you have to log in to your account on the **Login** page:
 
 <details>
 <summary>Screenshot</summary>
@@ -241,7 +242,7 @@ First, you have to login to your account in Login page:
 
 </details>
 
-OR, you can create your new account in Register page:
+OR, you can create your new account on the **Register** page:
 
 <details>
 <summary>Screenshot</summary>
@@ -250,16 +251,16 @@ OR, you can create your new account in Register page:
 
 </details>
 
-> NOTE: Email field must be a valid email address
+> **NOTE**: The email field must be a valid email address.
 
-After login, you will see Dashboard page:
+After login, you will see the **Dashboard** page:
 
 ![dashboard page](https://user-images.githubusercontent.com/64480713/175863076-068a2be8-d892-423f-9a19-736c6fc712ae.png)
 
 - Your files will be grouped into dates.
 
-- Settings: You can see and edit your account information or change password
-  here
+- **Settings**: You can see and edit your account information or change your
+  password here.
 
   <details>
   <summary>Screenshot</summary>
@@ -268,7 +269,7 @@ After login, you will see Dashboard page:
 
   </details>
 
-  - Your information: This page will show you brief information about your
+  - **Your information**: This page will show you brief information about your
     account. You can edit your information here.
 
     <details>
@@ -278,7 +279,7 @@ After login, you will see Dashboard page:
 
     </details>
 
-  - Edit your information page:
+  - **Edit your information** page:
 
     <details>
     <summary>Screenshot</summary>
@@ -287,7 +288,7 @@ After login, you will see Dashboard page:
 
     </details>
 
-  - Change password page:
+  - **Change password** page:
 
     <details>
     <summary>Screenshot</summary>
@@ -296,12 +297,12 @@ After login, you will see Dashboard page:
 
     </details>
 
-  - Logout: This will log you out and redirect you to Login page.
+  - Logout: This will log you out and redirect you to the Login page.
 
-  > NOTE: To edit your date of birth, your new value has to follow this format:
-  > `YYYY-MM-DD`. E.g: 2022-01-01
+  > **NOTE**: To edit your date of birth, your new value has to follow this format:
+  > `YYYY-MM-DD`. E.g: 2022-01-01.
 
-- Tools: This consists of multiple helpful tools:
+- **Tools**: This consists of multiple helpful tools:
 
   <details>
   <summary>Screenshot</summary>
@@ -310,8 +311,9 @@ After login, you will see Dashboard page:
 
   </details>
 
-  - Sign file: This tool will create a file with `.sig` extension in your save folder
-    path, which is your file's signature. Later, another user can use `Verify signed file` tool to check who has signed that file.
+  - **Sign file**: This tool will create a file with the `.sig` extension in
+    your save folder path, which is your file's signature. Later, another user
+    can use the `Verify signed file` tool to check who has signed that file.
 
     <details>
     <summary>Screenshot</summary>
@@ -320,8 +322,8 @@ After login, you will see Dashboard page:
 
     </details>
 
-  - Verify signed file: This tool will check all available users to verify that file
-    was signed by a valid user.
+  - **Verify signed file**: This tool will check all available users to verify
+    that file was signed by a valid user.
 
     <details>
     <summary>Screenshot</summary>
@@ -330,10 +332,11 @@ After login, you will see Dashboard page:
 
     </details>
 
-  - Encrypt file: This tool will create a file with `.bin` extension in your save
-    folder path. Only targeted receiver can decrypt that file using `Decrypt file` tool.
+  - **Encrypt file**: This tool will create a file with `.bin` extension in your
+    save folder path. The only targeted receiver can decrypt that file using the
+    `Decrypt file` tool.
 
-    > NOTE: You can target yourself as receiver.
+    > **NOTE**: You can target yourself as the receiver.
 
     <details>
     <summary>Screenshot</summary>
@@ -342,8 +345,8 @@ After login, you will see Dashboard page:
 
     </details>
 
-  - Decrypt file: This tool will try to decrypt your encrypted and encode it if
-    possible and save it to your save folder path.
+  - **Decrypt file**: This tool will try to decrypt your encrypted and encode it
+    if possible and save it to your save folder path.
 
     <details>
     <summary>Screenshot</summary>
@@ -352,7 +355,7 @@ After login, you will see Dashboard page:
 
     </details>
 
-> NOTE: File path and folder path can be an absolute path or relative path.
+> **NOTE**: File path and folder path can be an absolute path or relative path.
 > E.g:
 >
 > ```
@@ -364,9 +367,9 @@ After login, you will see Dashboard page:
 > /home/alice/Desktop/file-crypto/
 > ```
 
-> NOTE: Other fields without `(optional)` is required.
+> **NOTE**: Other fields without `(optional)` is required.
 
-- Upload: You can upload your file here. After uploading, your file will be
+- **Upload**: You can upload your file here. After uploading, your file will be
   encrypted
 
   <details>
@@ -376,16 +379,18 @@ After login, you will see Dashboard page:
 
   </details>
 
-  > NOTE: If you upload file with the same file name, new file will be appended
-  > with a timestamp. E.g: `app_20220626221134.py`
+  > **NOTE**: If you upload a file with the same file name, the new file will be appended
+  > with a timestamp. E.g: `app_20220626221134.py`.
 
-- File preview: After you type your password to unlock file, file will be opened
-  in a window, in preview mode and using `dracula` theme by default.
+- **File preview**: After you type your password to unlock the file, the file
+  will be opened in a window, **in preview mode**, and **using the `dracula`
+  theme by default**.
 
   ![file preview page](https://user-images.githubusercontent.com/64480713/175871319-e8cd5fca-bc42-4c33-831f-73630bdcbede.png)
 
-  - In preview mode, you can change many themes if file type is supported since
-    we use [Pygments](https://pygments.org/) to enable syntax highlighting:
+  - In **Preview mode**, you can change many themes if file type is supported
+    since we use [Pygments](https://pygments.org/) to enable syntax
+    highlighting:
 
     <details>
     <summary>Screenshot</summary>
@@ -396,24 +401,24 @@ After login, you will see Dashboard page:
 
     - All supported file types: https://pygments.org/docs/lexers/
 
-    > NOTE: If your file type is not supported, you should change to `no theme`
-    > theme.
+    > **NOTE**: If your file type is not supported, you should change it to `no theme` theme.
 
     - All available themes: https://pygments.org/styles/
 
-    > NOTE: Some themes will be removed due to incompatible: `borland`,
+    > **NOTE**: Some themes will be removed due to incompatible: `borland`,
     > `lilypond`, `trac`, `bw`, `algol`, `algol_nu`.
 
-  - You can optionally switch to edit mode with `Edit mode` button:
+  - You can optionally switch to **Edit mode** with the `Edit mode` button:
 
     ![edit mode page](https://user-images.githubusercontent.com/64480713/175871596-612e8420-de73-4226-914e-3e0d3ec23917.png)
 
-    > NOTE: Any changes with "newlines" `(\n)`, "tabs" `(\t)` or "whitespace"
-    > `(" ")` will be consider as "No changes", and won't be saved.
+    > **NOTE**: Any changes with "newlines" `("\n")`, "tabs" `("\t")` or
+    > "whitespace" `(" ")` will be consider as "No changes", and won't be saved.
 
-  - You can also can download this file to your computer or delete this file.
+  - You can also can **Download** this file to your computer or **Delete** this
+    file.
 
-  - File information: You can see brief information about your file and edit
+  - **File information**: You can see brief information about your file and edit
     file name.
 
     <details>
@@ -423,7 +428,7 @@ After login, you will see Dashboard page:
 
     </details>
 
-  - Edit file information:
+  - **Edit file information**:
 
     <details>
     <summary>Screenshot</summary>
@@ -432,13 +437,13 @@ After login, you will see Dashboard page:
 
     </details>
 
-  - (Preview feature) Preview your image in editor: Using
+  - **(Preview feature) Preview image file**: Using
     [climage](https://github.com/pnappa/CLImage) to display beautiful pictures
-    using ANSI codes
+    using ANSI codes.
 
     ![image preview page](https://user-images.githubusercontent.com/64480713/175874258-5b9f63cd-5bfc-4d1a-8182-f85c07956337.png)
 
-    > NOTE: This is a preview feature. This may reduce your computer
+    > **NOTE**: This is a preview feature. This may reduce your computer
     > performance.
 
 <!-- Roadmap -->
