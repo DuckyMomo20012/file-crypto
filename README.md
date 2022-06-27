@@ -78,12 +78,16 @@
 <!-- Then compress the gif using this site: https://ezgif.com/optimize -->
 
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/64480713/175859655-3aac9d18-fe16-431c-9b65-5e8988c9cd0f.png" alt="screenshot"/>
+  <img src="https://user-images.githubusercontent.com/64480713/175859655-3aac9d18-fe16-431c-9b65-5e8988c9cd0f.png" alt="screenshot" width="1024"/>
 </div>
 
+_Last updated: Jun 27, 2022_
+
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/64480713/175549661-d0c4f7f7-c82b-4dfa-9fbf-69ef072218eb.gif" alt="screenshot"/>
+  <img src="https://user-images.githubusercontent.com/64480713/175549661-d0c4f7f7-c82b-4dfa-9fbf-69ef072218eb.gif" alt="screenshot" width="1024"/>
 </div>
+
+_Last updated: Jun 24, 2022_
 
 <!-- TechStack -->
 
