@@ -6,7 +6,7 @@ from pydash import debounce
 
 import routes
 import session
-from src.api.file_crypto.service import updateFileOneField
+from src.api.file_crypto.service import getOneFile, updateFileOneField
 from src.constants import BUTTON_DEBOUNCE_TIME
 from src.helpers.form_validation import dateField, requiredField
 from src.helpers.page_manager import drawPage, goToPrevPage, switchCurrPageWindowSlot
@@ -39,6 +39,13 @@ def EditFileInformation(
             newValue = datetime.strptime(inputField.value, "%Y-%m-%d")
 
         window.manager.toast("Updating information...")
+
+        if fieldName == "name":
+            file = getOneFile(session.user.email, newValue)
+
+            if file:
+                window.manager.toast("File name is already exists.")
+                return
 
         updateFileOneField(session.user.email, fileName, fieldName, newValue)
 
