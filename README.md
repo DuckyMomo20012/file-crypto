@@ -359,7 +359,8 @@ After login, you will see the **Dashboard** page:
 
     </details>
 
-> **NOTE**: File path and folder path can be an absolute path or relative path.
+> **NOTE**: The file path and folder path can be an absolute path or relative
+> path.
 > E.g:
 >
 > ```
@@ -392,7 +393,7 @@ After login, you will see the **Dashboard** page:
 
   ![file preview page](https://user-images.githubusercontent.com/64480713/175871319-e8cd5fca-bc42-4c33-831f-73630bdcbede.png)
 
-  - In **Preview mode**, you can change many themes if file type is supported
+  - In **Preview mode**, you can change many themes if the file type is supported
     since we use [Pygments](https://pygments.org/) to enable syntax
     highlighting:
 
@@ -492,6 +493,23 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
 
   - No, this is a small project for practicing cryptographic systems or schemes.
     This wasn't meant for production.
+
+- Error: `IndexError: list index out of range`:
+
+  - This issue is already submitted on Github. You can check it on
+    [#72](https://github.com/bczsalba/pytermgui/issues/72). For now, you
+    shouldn't use your mouse while typing to prevent this bug.
+
+- Error: `assert self._drag_start is not None`:
+
+  - I will submit this issue real soon and will update the status here. For now,
+    you shouldn't also use your mouse while typing to prevent this bug
+
+- In preview mode, my image is broken:
+
+  - That is because your **terminal width size is too small**. Image has a
+    default width size is `60` block. Then terminal should be larger than that
+    size (navbar wasn't counted).
 
 <!-- License -->
 
