@@ -155,7 +155,10 @@ your .env file
 
 `MONGODB_HOST`: An URI to connect to your database
 
-E.g: `MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"`
+E.g:
+`MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"`
+
+To see all required environment variables, you can checkout file `.env.example`.
 
 <!-- Getting Started -->
 
@@ -163,10 +166,10 @@ E.g: `MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mong
 
 ### :goberserk: System Requirements
 
-> This app only supports Linux and macOS. Currently not supporting Windows.
+> **NOTE**: This app only supports `Linux` and `macOS`. Currently not supporting `Windows`.
 
-- Python: `>= 3.9`
-- OS: `Linux` and `macOS`
+- Python: `>= 3.9`.
+- OS: `Linux` and `macOS`.
 
 <!-- Prerequisites -->
 
@@ -180,7 +183,8 @@ Linux, macOS, Windows (WSL)
 curl -sSL https://install.python-poetry.org | python3 -
 ```
 
-Read more on [documentation](https://python-poetry.org/docs/master/#installation)
+Read more about installation on
+[documentation](https://python-poetry.org/docs/master/#installation).
 
 <!-- Installation -->
 
