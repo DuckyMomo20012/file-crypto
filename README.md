@@ -113,11 +113,11 @@
 - ✏️ File editor in the terminal
 - 🎨 Syntax highlight for supporting formats
 - 🧰 Toolbox:
-  - Encrypt file
-  - Decrypt file
   - Sign file
   - Verify file signature
-- 👀 Preview feature: Preview image in terminal using ANSI codes
+  - Encrypt file
+  - Decrypt file
+- 👀 (Preview feature) Preview image in terminal using ANSI codes
 
 <!-- Color Reference -->
 
@@ -232,9 +232,214 @@ python3 app.py
 
 ## :eyes: Usage
 
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
+First, you have to login to your account in Login page:
 
-TODO
+<details>
+<summary>Screenshot</summary>
+
+![login page](https://user-images.githubusercontent.com/64480713/175862816-cf2deeab-6c8b-4147-9da1-1992c9652334.png)
+
+</details>
+
+OR, you can create your new account in Register page:
+
+<details>
+<summary>Screenshot</summary>
+
+![register page](https://user-images.githubusercontent.com/64480713/175869157-6b3d5a96-21c8-4641-a7fc-69f3a5ab3c1f.png)
+
+</details>
+
+> NOTE: Email field must be a valid email address
+
+After login, you will see Dashboard page:
+
+![dashboard page](https://user-images.githubusercontent.com/64480713/175863076-068a2be8-d892-423f-9a19-736c6fc712ae.png)
+
+- Your files will be grouped into dates.
+
+- Settings: You can see and edit your account information or change password
+  here
+
+  <details>
+  <summary>Screenshot</summary>
+
+  ![settings page](https://user-images.githubusercontent.com/64480713/175869328-43ed970e-0f93-4c39-92c7-c32d55e396f9.png)
+
+  </details>
+
+  - Your information: This page will show you brief information about your
+    account. You can edit your information here.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![your information page](https://user-images.githubusercontent.com/64480713/175869525-52fbfdc6-5cd4-4adc-a6d3-f1dfd8d7fe46.png)
+
+    </details>
+
+  - Edit your information page:
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![edit your information page](https://user-images.githubusercontent.com/64480713/175869992-bac292ae-209c-467a-b6be-ad420cb7ebdc.png)
+
+    </details>
+
+  - Change password page:
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![change password page](https://user-images.githubusercontent.com/64480713/175870196-2a19e74e-075a-4713-9dc4-f1e1e6e371d7.png)
+
+    </details>
+
+  - Logout: This will log you out and redirect you to Login page.
+
+  > NOTE: To edit your date of birth, your new value has to follow this format:
+  > `YYYY-MM-DD`. E.g: 2022-01-01
+
+- Tools: This consists of multiple helpful tools:
+
+  <details>
+  <summary>Screenshot</summary>
+
+  ![tools](https://user-images.githubusercontent.com/64480713/175871157-c16080ec-05cc-4d22-a3fb-ad21dcf25213.png)
+
+  </details>
+
+  - Sign file: This tool will create a file with `.sig` extension in your save folder
+    path, which is your file's signature. Later, another user can use `Verify signed file` tool to check who has signed that file.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![sign file page](https://user-images.githubusercontent.com/64480713/175870557-db8c9a59-8042-4b83-99ed-4f985c4f3f60.png)
+
+    </details>
+
+  - Verify signed file: This tool will check all available users to verify that file
+    was signed by a valid user.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![verify signed file page](https://user-images.githubusercontent.com/64480713/175870750-2128f1a2-3f3e-4491-be6e-74dc5143e03e.png)
+
+    </details>
+
+  - Encrypt file: This tool will create a file with `.bin` extension in your save
+    folder path. Only targeted receiver can decrypt that file using `Decrypt file` tool.
+
+    > NOTE: You can target yourself as receiver.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![encrypt file page](https://user-images.githubusercontent.com/64480713/175870830-ef7b1171-7a56-48a4-8848-7f710d63e266.png)
+
+    </details>
+
+  - Decrypt file: This tool will try to decrypt your encrypted and encode it if
+    possible and save it to your save folder path.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![decrypt file page](https://user-images.githubusercontent.com/64480713/175870887-a2d6ff23-73c6-4e3e-bf5b-fc2a955cd7d5.png)
+
+    </details>
+
+> NOTE: File path and folder path can be an absolute path or relative path.
+> E.g:
+>
+> ```
+> ./src/pages/
+> ./
+> ../
+> ./../
+> /home/alice/Desktop/file-crypto
+> /home/alice/Desktop/file-crypto/
+> ```
+
+> NOTE: Other fields without `(optional)` is required.
+
+- Upload: You can upload your file here. After uploading, your file will be
+  encrypted
+
+  <details>
+  <summary>Screenshot</summary>
+
+  ![upload file page](https://user-images.githubusercontent.com/64480713/175871068-3a874b63-070b-43a4-98b9-61dcb36566dc.png)
+
+  </details>
+
+  > NOTE: If you upload file with the same file name, new file will be appended
+  > with a timestamp. E.g: `app_20220626221134.py`
+
+- File preview: After you type your password to unlock file, file will be opened
+  in a window, in preview mode and using `dracula` theme by default.
+
+  ![file preview page](https://user-images.githubusercontent.com/64480713/175871319-e8cd5fca-bc42-4c33-831f-73630bdcbede.png)
+
+  - In preview mode, you can change many themes if file type is supported since
+    we use [Pygments](https://pygments.org/) to enable syntax highlighting:
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![theme picker page](https://user-images.githubusercontent.com/64480713/175872466-ac7558e1-82e9-48f4-aeac-df3472e68b04.png)
+
+    </details>
+
+    - All supported file types: https://pygments.org/docs/lexers/
+
+    > NOTE: If your file type is not supported, you should change to `no theme`
+    > theme.
+
+    - All available themes: https://pygments.org/styles/
+
+    > NOTE: Some themes will be removed due to incompatible: `borland`,
+    > `lilypond`, `trac`, `bw`, `algol`, `algol_nu`.
+
+  - You can optionally switch to edit mode with `Edit mode` button:
+
+    ![edit mode page](https://user-images.githubusercontent.com/64480713/175871596-612e8420-de73-4226-914e-3e0d3ec23917.png)
+
+    > NOTE: Any changes with "newlines" `(\n)`, "tabs" `(\t)` or "whitespace"
+    > `(" ")` will be consider as "No changes", and won't be saved.
+
+  - You can also can download this file to your computer or delete this file.
+
+  - File information: You can see brief information about your file and edit
+    file name.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![file information page](https://user-images.githubusercontent.com/64480713/175871882-0524d9b3-b803-4228-a1d8-d888b1fd71ff.png)
+
+    </details>
+
+  - Edit file information:
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![edit file information page](https://user-images.githubusercontent.com/64480713/175872134-241423fc-ca75-4428-951f-69f166ce07f6.png)
+
+    </details>
+
+  - (Preview feature) Preview your image in editor: Using
+    [climage](https://github.com/pnappa/CLImage) to display beautiful pictures
+    using ANSI codes
+
+    ![image preview page](https://user-images.githubusercontent.com/64480713/175874258-5b9f63cd-5bfc-4d1a-8182-f85c07956337.png)
+
+    > NOTE: This is a preview feature. This may reduce your computer
+    > performance.
 
 <!-- Roadmap -->
 
@@ -301,4 +506,5 @@ Here are useful resources and libraries that I have used in my projects.
 
 - [PyTermGUI](https://ptg.bczsalba.com/pytermgui.html)
 - [Pygments](https://pygments.org/)
-- [Awesome Readme Template](https://github.com/Louis3797/awesome-readme-template)
+- [Climage](https://github.com/pnappa/CLImage)
+- [Awesome ReadmeTemplate](https://github.com/Louis3797/awesome-readme-template)
