@@ -21,19 +21,3 @@ class FileCrypto(me.Document):
     cipher = me.FileField()
     emailUser = me.StringField()
     meta = {"collection": "files"}
-
-
-class SignedFile(me.Document):
-    name = me.StringField()
-    path = me.StringField()
-    content = me.FileField()
-    size = me.IntField()
-    meta = {"collection": "signed_files"}
-
-
-class SignFile(me.Document):
-    name = me.StringField()
-    path = me.StringField()
-    content = me.FileField()
-    size = me.IntField()
-    meta = {"collection": "sign_files"}
