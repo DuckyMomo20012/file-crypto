@@ -155,7 +155,10 @@ your .env file
 
 `MONGODB_HOST`: An URI to connect to your database
 
-E.g: `MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"`
+E.g:
+`MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"`
+
+To see all required environment variables, you can checkout file `.env.example`.
 
 <!-- Getting Started -->
 
@@ -163,10 +166,10 @@ E.g: `MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mong
 
 ### :goberserk: System Requirements
 
-> This app only supports Linux and macOS. Currently not supporting Windows.
+> **NOTE**: This app only supports `Linux` and `macOS`. Currently not supporting `Windows`.
 
-- Python: `>= 3.9`
-- OS: `Linux` and `macOS`
+- Python: `>= 3.9`.
+- OS: `Linux` and `macOS`.
 
 <!-- Prerequisites -->
 
@@ -180,7 +183,8 @@ Linux, macOS, Windows (WSL)
 curl -sSL https://install.python-poetry.org | python3 -
 ```
 
-Read more on [documentation](https://python-poetry.org/docs/master/#installation)
+Read more about installation on
+[documentation](https://python-poetry.org/docs/master/#installation).
 
 <!-- Installation -->
 
@@ -274,7 +278,7 @@ After login, you will see the **Dashboard** page:
   </details>
 
   - **Your information**: This page will show you brief information about your
-    account. You can edit your information here.
+    account.
 
     <details>
     <summary>Screenshot</summary>
@@ -283,7 +287,7 @@ After login, you will see the **Dashboard** page:
 
     </details>
 
-  - **Edit your information** page:
+  - **Edit your information** page: You can edit your information here.
 
     <details>
     <summary>Screenshot</summary>
@@ -291,6 +295,9 @@ After login, you will see the **Dashboard** page:
     ![edit your information page](https://user-images.githubusercontent.com/64480713/175869992-bac292ae-209c-467a-b6be-ad420cb7ebdc.png)
 
     </details>
+
+    > **NOTE**: To edit your date of birth, your new value has to follow this format:
+    > `YYYY-MM-DD`. E.g: 2022-01-01.
 
   - **Change password** page:
 
@@ -301,10 +308,7 @@ After login, you will see the **Dashboard** page:
 
     </details>
 
-  - Logout: This will log you out and redirect you to the Login page.
-
-  > **NOTE**: To edit your date of birth, your new value has to follow this format:
-  > `YYYY-MM-DD`. E.g: 2022-01-01.
+  - **Logout**: This will log you out and redirect you to the Login page.
 
 - **Tools**: This consists of multiple helpful tools:
 
@@ -359,6 +363,8 @@ After login, you will see the **Dashboard** page:
 
     </details>
 
+    > **NOTE**: Encrypted file name **MUST** have `.bin` extension.
+
 > **NOTE**: The file path and folder path can be an absolute path or relative
 > path.
 > E.g:
@@ -384,8 +390,8 @@ After login, you will see the **Dashboard** page:
 
   </details>
 
-  > **NOTE**: If you upload a file with the same file name, the new file will be appended
-  > with a timestamp. E.g: `app_20220626221134.py`.
+  > **NOTE**: If you upload a file with the same name, the new file will be
+  > appended with a timestamp. E.g: `app_20220626221134.py`.
 
 - **File preview**: After you type your password to unlock the file, the file
   will be opened in a window, **in preview mode**, and **using the `dracula`
@@ -393,9 +399,12 @@ After login, you will see the **Dashboard** page:
 
   ![file preview page](https://user-images.githubusercontent.com/64480713/175871319-e8cd5fca-bc42-4c33-831f-73630bdcbede.png)
 
+  > **NOTE**: **Preview mode** and **Edit mode** supports **only text files**. Image
+  > files only support **Preview mode**.
+
   - In **Preview mode**, you can change many themes if the file type is supported
     since we use [Pygments](https://pygments.org/) to enable syntax
-    highlighting:
+    highlighting.
 
     <details>
     <summary>Screenshot</summary>
@@ -403,6 +412,9 @@ After login, you will see the **Dashboard** page:
     ![theme picker page](https://user-images.githubusercontent.com/64480713/175872466-ac7558e1-82e9-48f4-aeac-df3472e68b04.png)
 
     </details>
+
+    - You can turn off syntax highlighting by choosing `no theme` in the theme
+      picker.
 
     - All supported file types: https://pygments.org/docs/lexers/
 
@@ -418,13 +430,13 @@ After login, you will see the **Dashboard** page:
     ![edit mode page](https://user-images.githubusercontent.com/64480713/175871596-612e8420-de73-4226-914e-3e0d3ec23917.png)
 
     > **NOTE**: Any changes with "newlines" `("\n")`, "tabs" `("\t")` or
-    > "whitespace" `(" ")` will be consider as "No changes", and won't be saved.
+    > "whitespace" `(" ")` will be consider as **"no changes"**, and won't be
+    > saved.
 
   - You can also can **Download** this file to your computer or **Delete** this
     file.
 
-  - **File information**: You can see brief information about your file and edit
-    file name.
+  - **File information**: You can see brief information about your file.
 
     <details>
     <summary>Screenshot</summary>
@@ -433,7 +445,7 @@ After login, you will see the **Dashboard** page:
 
     </details>
 
-  - **Edit file information**:
+  - **Edit file information**: You can edit your file name here.
 
     <details>
     <summary>Screenshot</summary>
@@ -505,11 +517,11 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
   - I will submit this issue real soon and will update the status here. For now,
     you shouldn't also use your mouse while typing to prevent this bug
 
-- In preview mode, my image is broken:
+- In image preview mode, my image is broken:
 
   - That is because your **terminal width size is too small**. Image has a
     default width size is `60` block. Then terminal should be larger than that
-    size (navbar wasn't counted).
+    size (the nav bar wasn't counted).
 
 <!-- License -->
 
@@ -531,7 +543,10 @@ Project Link: [https://github.com/DuckyMomo20012/file-crypto](https://github.com
 
 Here are useful resources and libraries that I have used in my projects.
 
-- [PyTermGUI](https://ptg.bczsalba.com/pytermgui.html)
-- [Pygments](https://pygments.org/)
-- [Climage](https://github.com/pnappa/CLImage)
-- [Awesome ReadmeTemplate](https://github.com/Louis3797/awesome-readme-template)
+- [PyTermGUI](https://ptg.bczsalba.com/pytermgui.html): A wonderful and fully
+  documented TUI framework to make your terminal becomes beautiful.
+- [Pygments](https://pygments.org/): A good library to bring colors to your code.
+- [Climage](https://github.com/pnappa/CLImage): Create beautiful pictures in
+  your terminal using ANSI codes.
+- [Awesome ReadmeTemplate](https://github.com/Louis3797/awesome-readme-template): A
+  beautiful template to bootstrap your README file.
