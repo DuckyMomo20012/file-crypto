@@ -1,13 +1,14 @@
 [tool.poetry]
 name = "file-crypto"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "A simple file storage console"
+authors = ["Duong Vinh <tienvinh.duong4@gmail.com>"]
 
 [tool.poe.tasks]
 dev = "python app.py"
 lint = "flake8"
-pretty = "isort ."
+"sort_import" = "isort ."
+pretty = "black ."
 
 [tool.isort]
 profile = "black"
