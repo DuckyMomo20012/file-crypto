@@ -7,12 +7,12 @@ import routes
 import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
-from src.components import ConfirmModal
+from src.components import ConfirmModal, Footer
 from src.helpers.climage import convert_frombytes
 from src.helpers.cryptography import decryptData, encryptData
 from src.helpers.highlight import syntaxHighlight
 from src.helpers.page_manager import drawPage, switchCurrPageWindowSlot
-from src.types.Page import Page
+from src.types.Page import Page, PageWindows
 
 IMAGE_PREVIEW_WIDTH = 60
 IMAGE_PREVIEW_PADDING = 2
@@ -51,6 +51,9 @@ def FilePreview(
     theme: str = "dracula",
     forcePreview: bool = False,
 ) -> Optional[Page]:
+
+    # NOTE: We create empty window slots so we can dynamically insert footer
+    windowSlots = []
 
     if session.user is None:
         return None
@@ -146,10 +149,16 @@ def FilePreview(
         )
 
     def handleCloseClick():
-
+        # Clear file preview windows
         switchCurrPageWindowSlot(
             window.manager,
             "body",
+            clear=True,
+        ),
+        # Clear footer windows
+        switchCurrPageWindowSlot(
+            window.manager,
+            "footer",
             clear=True,
         ),
 
@@ -242,7 +251,16 @@ def FilePreview(
             # editContentField.styles.value = lambda _, text: ptg.tim.parse(
             #     syntaxHighlight(fileName, text, theme)
             # )
+
+            # We create a footer to track cursor and selection length
+            footer = Footer(inputField=editContentField)
+
+            # NOTE: We dynamically add the footer to the window slots
+            windowSlots.append(PageWindows(window=footer, assign="footer"))
+
+            # Append edit content field to the window widgets
             windowWidgets.append(editContentField)
+
     elif "image" in fileType and isinstance(fileContent, bytes):
         if preview:
             if forcePreview:
@@ -301,7 +319,9 @@ def FilePreview(
     )
     window.vertical_align = ptg.VerticalAlignment.TOP
 
+    windowSlots.append(PageWindows(window=window, assign="body"))
+
     return {
         "layout": None,
-        "windows": [{"window": window, "assign": "body"}],
+        "windows": windowSlots,
     }

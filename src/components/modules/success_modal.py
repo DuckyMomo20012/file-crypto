@@ -1,7 +1,7 @@
 from typing import Any, Callable, Optional
 
 import pytermgui as ptg
-from pydash import debounce  # type: ignore
+from pydash import debounce
 
 from src.constants import BUTTON_DEBOUNCE_TIME
 

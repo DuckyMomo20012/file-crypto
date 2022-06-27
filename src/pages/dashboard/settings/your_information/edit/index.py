@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Any
 
 import pytermgui as ptg
-from pydash import debounce  # type: ignore
+from pydash import debounce
 
 import session
 from src.api.auth.service import updateUserOneField

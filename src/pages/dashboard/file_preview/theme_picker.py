@@ -1,7 +1,7 @@
 from functools import partial
 
 import pytermgui as ptg
-from pygments.styles import STYLE_MAP  # type: ignore
+from pygments.styles import STYLE_MAP
 
 import routes
 from src.helpers.page_manager import goToPrevPage, switchCurrPageWindowSlot

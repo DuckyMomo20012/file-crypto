@@ -1,7 +1,7 @@
 import io
 
-from climage.__main__ import _get_color_type, _toAnsi  # type: ignore
-from PIL import Image  # type: ignore
+from climage.__main__ import _get_color_type, _toAnsi
+from PIL import Image
 
 
 def convert_frombytes(
