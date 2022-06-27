@@ -75,11 +75,19 @@
 
 <!-- How to record: asciinema rec demo.cast -c "poe dev" -i 0.1 -->
 
-<!-- Then compress gif using this site: https://ezgif.com/optimize -->
+<!-- Then compress the gif using this site: https://ezgif.com/optimize -->
 
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/64480713/175549661-d0c4f7f7-c82b-4dfa-9fbf-69ef072218eb.gif" alt="screenshot"/>
+  <img src="https://user-images.githubusercontent.com/64480713/175859655-3aac9d18-fe16-431c-9b65-5e8988c9cd0f.png" alt="screenshot" width="1024"/>
 </div>
+
+_Last updated: Jun 27, 2022_
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/64480713/175549661-d0c4f7f7-c82b-4dfa-9fbf-69ef072218eb.gif" alt="screenshot" width="1024"/>
+</div>
+
+_Last updated: Jun 24, 2022_
 
 <!-- TechStack -->
 
@@ -103,9 +111,17 @@
 
 ### :dart: Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- 🔒️ Uploaded files are encrypted
+- 🔑 Password protection for file
+- 🔍️ Preview text file in terminal
+- ✏️ File editor in the terminal
+- 🎨 Syntax highlight for supporting formats
+- 🧰 Toolbox:
+  - Sign file
+  - Verify file signature
+  - Encrypt file
+  - Decrypt file
+- 👀 (Preview feature) Preview image in terminal using ANSI codes
 
 <!-- Color Reference -->
 
@@ -134,11 +150,12 @@
 
 ### :key: Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to
+your .env file
 
 `MONGODB_HOST`: An URI to connect to your database
 
-E.g: MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"
+E.g: `MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"`
 
 <!-- Getting Started -->
 
@@ -220,9 +237,219 @@ python3 app.py
 
 ## :eyes: Usage
 
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
+First, you have to log in to your account on the **Login** page:
 
-TODO
+<details>
+<summary>Screenshot</summary>
+
+![login page](https://user-images.githubusercontent.com/64480713/175862816-cf2deeab-6c8b-4147-9da1-1992c9652334.png)
+
+</details>
+
+OR, you can create your new account on the **Register** page:
+
+<details>
+<summary>Screenshot</summary>
+
+![register page](https://user-images.githubusercontent.com/64480713/175869157-6b3d5a96-21c8-4641-a7fc-69f3a5ab3c1f.png)
+
+</details>
+
+> **NOTE**: The email field must be a valid email address.
+
+After login, you will see the **Dashboard** page:
+
+![dashboard page](https://user-images.githubusercontent.com/64480713/175863076-068a2be8-d892-423f-9a19-736c6fc712ae.png)
+
+- Your files will be grouped into dates.
+
+- **Settings**: You can see and edit your account information or change your
+  password here.
+
+  <details>
+  <summary>Screenshot</summary>
+
+  ![settings page](https://user-images.githubusercontent.com/64480713/175869328-43ed970e-0f93-4c39-92c7-c32d55e396f9.png)
+
+  </details>
+
+  - **Your information**: This page will show you brief information about your
+    account. You can edit your information here.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![your information page](https://user-images.githubusercontent.com/64480713/175869525-52fbfdc6-5cd4-4adc-a6d3-f1dfd8d7fe46.png)
+
+    </details>
+
+  - **Edit your information** page:
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![edit your information page](https://user-images.githubusercontent.com/64480713/175869992-bac292ae-209c-467a-b6be-ad420cb7ebdc.png)
+
+    </details>
+
+  - **Change password** page:
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![change password page](https://user-images.githubusercontent.com/64480713/175870196-2a19e74e-075a-4713-9dc4-f1e1e6e371d7.png)
+
+    </details>
+
+  - Logout: This will log you out and redirect you to the Login page.
+
+  > **NOTE**: To edit your date of birth, your new value has to follow this format:
+  > `YYYY-MM-DD`. E.g: 2022-01-01.
+
+- **Tools**: This consists of multiple helpful tools:
+
+  <details>
+  <summary>Screenshot</summary>
+
+  ![tools](https://user-images.githubusercontent.com/64480713/175871157-c16080ec-05cc-4d22-a3fb-ad21dcf25213.png)
+
+  </details>
+
+  - **Sign file**: This tool will create a file with the `.sig` extension in
+    your save folder path, which is your file's signature. Later, another user
+    can use the `Verify signed file` tool to check who has signed that file.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![sign file page](https://user-images.githubusercontent.com/64480713/175870557-db8c9a59-8042-4b83-99ed-4f985c4f3f60.png)
+
+    </details>
+
+  - **Verify signed file**: This tool will check all available users to verify
+    that file was signed by a valid user.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![verify signed file page](https://user-images.githubusercontent.com/64480713/175870750-2128f1a2-3f3e-4491-be6e-74dc5143e03e.png)
+
+    </details>
+
+  - **Encrypt file**: This tool will create a file with `.bin` extension in your
+    save folder path. The only targeted receiver can decrypt that file using the
+    `Decrypt file` tool.
+
+    > **NOTE**: You can target yourself as the receiver.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![encrypt file page](https://user-images.githubusercontent.com/64480713/175870830-ef7b1171-7a56-48a4-8848-7f710d63e266.png)
+
+    </details>
+
+  - **Decrypt file**: This tool will try to decrypt your encrypted and encode it
+    if possible and save it to your save folder path.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![decrypt file page](https://user-images.githubusercontent.com/64480713/175870887-a2d6ff23-73c6-4e3e-bf5b-fc2a955cd7d5.png)
+
+    </details>
+
+> **NOTE**: The file path and folder path can be an absolute path or relative
+> path.
+> E.g:
+>
+> ```
+> ./src/pages/
+> ./
+> ../
+> ./../
+> /home/alice/Desktop/file-crypto
+> /home/alice/Desktop/file-crypto/
+> ```
+
+> **NOTE**: Other fields without `(optional)` is required.
+
+- **Upload**: You can upload your file here. After uploading, your file will be
+  encrypted
+
+  <details>
+  <summary>Screenshot</summary>
+
+  ![upload file page](https://user-images.githubusercontent.com/64480713/175871068-3a874b63-070b-43a4-98b9-61dcb36566dc.png)
+
+  </details>
+
+  > **NOTE**: If you upload a file with the same file name, the new file will be appended
+  > with a timestamp. E.g: `app_20220626221134.py`.
+
+- **File preview**: After you type your password to unlock the file, the file
+  will be opened in a window, **in preview mode**, and **using the `dracula`
+  theme by default**.
+
+  ![file preview page](https://user-images.githubusercontent.com/64480713/175871319-e8cd5fca-bc42-4c33-831f-73630bdcbede.png)
+
+  - In **Preview mode**, you can change many themes if the file type is supported
+    since we use [Pygments](https://pygments.org/) to enable syntax
+    highlighting:
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![theme picker page](https://user-images.githubusercontent.com/64480713/175872466-ac7558e1-82e9-48f4-aeac-df3472e68b04.png)
+
+    </details>
+
+    - All supported file types: https://pygments.org/docs/lexers/
+
+    > **NOTE**: If your file type is not supported, you should change it to `no theme` theme.
+
+    - All available themes: https://pygments.org/styles/
+
+    > **NOTE**: Some themes will be removed due to incompatible: `borland`,
+    > `lilypond`, `trac`, `bw`, `algol`, `algol_nu`.
+
+  - You can optionally switch to **Edit mode** with the `Edit mode` button:
+
+    ![edit mode page](https://user-images.githubusercontent.com/64480713/175871596-612e8420-de73-4226-914e-3e0d3ec23917.png)
+
+    > **NOTE**: Any changes with "newlines" `("\n")`, "tabs" `("\t")` or
+    > "whitespace" `(" ")` will be consider as "No changes", and won't be saved.
+
+  - You can also can **Download** this file to your computer or **Delete** this
+    file.
+
+  - **File information**: You can see brief information about your file and edit
+    file name.
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![file information page](https://user-images.githubusercontent.com/64480713/175871882-0524d9b3-b803-4228-a1d8-d888b1fd71ff.png)
+
+    </details>
+
+  - **Edit file information**:
+
+    <details>
+    <summary>Screenshot</summary>
+
+    ![edit file information page](https://user-images.githubusercontent.com/64480713/175872134-241423fc-ca75-4428-951f-69f166ce07f6.png)
+
+    </details>
+
+  - **(Preview feature) Preview image file**: Using
+    [climage](https://github.com/pnappa/CLImage) to display beautiful pictures
+    using ANSI codes.
+
+    ![image preview page](https://user-images.githubusercontent.com/64480713/175874258-5b9f63cd-5bfc-4d1a-8182-f85c07956337.png)
+
+    > **NOTE**: This is a preview feature. This may reduce your computer
+    > performance.
 
 <!-- Roadmap -->
 
@@ -235,7 +462,7 @@ TODO
   - [ ] Edit shared files
 - [ ] Apply themes for editing mode
 - [ ] Trash can to store temporary deleted files
-- [ ] Preview mode for images
+- [x] Preview mode for images
 
 <!-- Contributing -->
 
@@ -264,8 +491,25 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
 
 - Is this project ready for production?
 
-  - No, this is a small project for practicing cryptographic systems or flows.
+  - No, this is a small project for practicing cryptographic systems or schemes.
     This wasn't meant for production.
+
+- Error: `IndexError: list index out of range`:
+
+  - This issue is already submitted on Github. You can check it on
+    [#72](https://github.com/bczsalba/pytermgui/issues/72). For now, you
+    shouldn't use your mouse while typing to prevent this bug.
+
+- Error: `assert self._drag_start is not None`:
+
+  - I will submit this issue real soon and will update the status here. For now,
+    you shouldn't also use your mouse while typing to prevent this bug
+
+- In preview mode, my image is broken:
+
+  - That is because your **terminal width size is too small**. Image has a
+    default width size is `60` block. Then terminal should be larger than that
+    size (navbar wasn't counted).
 
 <!-- License -->
 
@@ -289,4 +533,5 @@ Here are useful resources and libraries that I have used in my projects.
 
 - [PyTermGUI](https://ptg.bczsalba.com/pytermgui.html)
 - [Pygments](https://pygments.org/)
-- [Awesome Readme Template](https://github.com/Louis3797/awesome-readme-template)
+- [Climage](https://github.com/pnappa/CLImage)
+- [Awesome ReadmeTemplate](https://github.com/Louis3797/awesome-readme-template)
