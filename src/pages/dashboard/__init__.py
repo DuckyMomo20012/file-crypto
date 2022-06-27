@@ -4,6 +4,7 @@ from .file_preview.file_information.edit.index import EditFileInformation
 from .file_preview.file_information.index import FileInformation
 from .file_preview.index import FilePreview
 from .file_preview.password_prompt import PasswordPrompt
+from .file_preview.theme_picker import ThemePicker
 from .index import DashBoard
 from .settings.change_password import ChangePassword
 from .settings.index import Settings
@@ -26,6 +27,7 @@ __all__ = [
     "FilePreview",
     "DownloadFile",
     "PasswordPrompt",
+    "ThemePicker",
     "FileInformation",
     "EditFileInformation",
     "DownloadSharedFile",

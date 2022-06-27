@@ -1,9 +1,7 @@
-from functools import partial
 from typing import Optional
 
 import magic
 import pytermgui as ptg
-from pygments.styles import STYLE_MAP  # type: ignore
 
 import routes
 import session
@@ -155,46 +153,20 @@ def FilePreview(
             clear=True,
         ),
 
-    # NOTE: onclick function will pass Button itself as a first argument and we
-    # don't care about it, so we add a dummy argument "args" to the function to
-    # "absorb" it.
-    def handleThemeButtonClick(*args, theme: str):
+    def handleThemeButtonClick():
 
-        switchCurrPageWindowSlot(
-            manager=window.manager,
-            targetAssign=("body"),
-            newWindow=routes.routes["dashboard/file_preview"](
-                fileName=fileName, passphrase=passphrase, preview=preview, theme=theme
+        drawPage(
+            window.manager,
+            routes.routes["dashboard/file_preview/theme_picker"](
+                fileName=fileName,
+                passphrase=passphrase,
+                preview=preview,
+                currTheme=theme,
             ),
         )
 
-    # Some themes cause error on printing the content, so we have blacklist them
-    themes = [
-        theme
-        for theme in list(STYLE_MAP.keys())
-        if theme not in ("borland", "lilypond", "trac", "bw", "algol", "algol_nu")
-    ]
-
-    themes.insert(0, "no theme")
-
-    # NOTE: We CAN'T pass function correctly when we are in loop. Instead, we
-    # use partial to "bind" the arguments to the function.
-    themeButtons = [
-        ptg.Button(theme, partial(handleThemeButtonClick, theme=theme))
-        for theme in themes
-    ]
-
     # We only show the theme buttons if we are in preview mode
-    themeMenu = ptg.Collapsible(
-        "Theme",
-        ptg.Container(
-            *themeButtons,
-            height=5,
-            width=20,
-            overflow=ptg.Overflow.SCROLL,
-            parent_align=ptg.HorizontalAlignment.LEFT,
-        ),
-    )
+    themeMenu = ptg.Button("Theme", lambda *_: handleThemeButtonClick())
 
     # In preview mode, we don't show the save button
     saveButton = ptg.Button("Save", lambda *_: handleSaveClick())
