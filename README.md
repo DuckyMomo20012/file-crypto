@@ -75,7 +75,11 @@
 
 <!-- How to record: asciinema rec demo.cast -c "poe dev" -i 0.1 -->
 
-<!-- Then compress gif using this site: https://ezgif.com/optimize -->
+<!-- Then compress the gif using this site: https://ezgif.com/optimize -->
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/64480713/175859655-3aac9d18-fe16-431c-9b65-5e8988c9cd0f.png" alt="screenshot"/>
+</div>
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/64480713/175549661-d0c4f7f7-c82b-4dfa-9fbf-69ef072218eb.gif" alt="screenshot"/>
@@ -103,9 +107,17 @@
 
 ### :dart: Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- 🔒️ Uploaded files are encrypted
+- 🔑 Password protecting for file
+- 🔍️ Preview text file in terminal
+- ✏️ File editor in the terminal
+- 🎨 Syntax highlight for supporting formats
+- 🧰 Toolbox:
+  - Encrypt file
+  - Decrypt file
+  - Sign file
+  - Verify file signature
+- 👀 Preview feature: Preview image in terminal using ANSI codes
 
 <!-- Color Reference -->
 
@@ -138,7 +150,7 @@ To run this project, you will need to add the following environment variables to
 
 `MONGODB_HOST`: An URI to connect to your database
 
-E.g: MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"
+E.g: `MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"`
 
 <!-- Getting Started -->
 
@@ -235,7 +247,7 @@ TODO
   - [ ] Edit shared files
 - [ ] Apply themes for editing mode
 - [ ] Trash can to store temporary deleted files
-- [ ] Preview mode for images
+- [x] Preview mode for images
 
 <!-- Contributing -->
 
@@ -264,7 +276,7 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
 
 - Is this project ready for production?
 
-  - No, this is a small project for practicing cryptographic systems or flows.
+  - No, this is a small project for practicing cryptographic systems or schemes.
     This wasn't meant for production.
 
 <!-- License -->
