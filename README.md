@@ -97,6 +97,7 @@ _Last updated: Jun 24, 2022_
   <summary>Client</summary>
   <ul>
     <li><a href="https://www.python.org/">Python</a></li>
+    <li><a href="https://ptg.bczsalba.com/pytermgui.html">PyTermGUI</a></li>
   </ul>
 </details>
 
@@ -127,6 +128,8 @@ _Last updated: Jun 24, 2022_
 
 ### :art: Color Reference
 
+This color palette is based on [Nord](https://www.nordtheme.com/) theme.
+
 | Color  | Hex                                                             |
 | ------ | --------------------------------------------------------------- |
 | nord0  | ![#2E3440](http://via.placeholder.com/10/2e3440?text=+) #2E3440 |
@@ -156,9 +159,12 @@ your .env file
 `MONGODB_HOST`: An URI to connect to your database
 
 E.g:
-`MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"`
 
-To see all required environment variables, you can checkout file `.env.example`.
+```
+MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"
+```
+
+You can also checkout file `.env.example` to see all required environment variables.
 
 <!-- Getting Started -->
 
@@ -169,7 +175,7 @@ To see all required environment variables, you can checkout file `.env.example`.
 > **NOTE**: This app only supports `Linux` and `macOS`. Currently not supporting `Windows`.
 
 - Python: `>= 3.9`.
-- OS: `Linux` and `macOS`.
+- Operating system: `Linux` and `macOS`.
 
 <!-- Prerequisites -->
 
@@ -259,7 +265,7 @@ OR, you can create your new account on the **Register** page:
 
 </details>
 
-> **NOTE**: The email field must be a valid email address.
+> **NOTE**: The email field must have a valid email format.
 
 After login, you will see the **Dashboard** page:
 
@@ -381,7 +387,7 @@ After login, you will see the **Dashboard** page:
 > **NOTE**: Other fields without `(optional)` is required.
 
 - **Upload**: You can upload your file here. After uploading, your file will be
-  encrypted
+  encrypted.
 
   <details>
   <summary>Screenshot</summary>
@@ -390,20 +396,20 @@ After login, you will see the **Dashboard** page:
 
   </details>
 
-  > **NOTE**: If you upload a file with the same name, the new file will be
+  > **NOTE**: If you upload a file with the same name, the new file name will be
   > appended with a timestamp. E.g: `app_20220626221134.py`.
 
 - **File preview**: After you type your password to unlock the file, the file
   will be opened in a window, **in preview mode**, and **using the `dracula`
-  theme by default**.
+  theme by default** (only available for text files).
 
   ![file preview page](https://user-images.githubusercontent.com/64480713/175871319-e8cd5fca-bc42-4c33-831f-73630bdcbede.png)
 
-  > **NOTE**: **Preview mode** and **Edit mode** supports **only text files**. Image
-  > files only support **Preview mode**.
+  > **NOTE**: **Preview mode** supports **text files** and **images files**.
+  > **Edit mode** only supports **text files**.
 
-  - In **Preview mode**, you can change many themes if the file type is supported
-    since we use [Pygments](https://pygments.org/) to enable syntax
+  - In **Preview mode**, you can change many themes if the file extension is
+    supported since we use [Pygments](https://pygments.org/) to enable syntax
     highlighting.
 
     <details>
@@ -418,7 +424,8 @@ After login, you will see the **Dashboard** page:
 
     - All supported file types: https://pygments.org/docs/lexers/
 
-    > **NOTE**: If your file type is not supported, you should change it to `no theme` theme.
+    > **NOTE**: If your file type is not supported, you should change it to the
+    > `no theme` theme.
 
     - All available themes: https://pygments.org/styles/
 
@@ -455,7 +462,7 @@ After login, you will see the **Dashboard** page:
     </details>
 
   - **(Preview feature) Preview image file**: Using
-    [climage](https://github.com/pnappa/CLImage) to display beautiful pictures
+    [CLImage](https://github.com/pnappa/CLImage) to display beautiful pictures
     using ANSI codes.
 
     ![image preview page](https://user-images.githubusercontent.com/64480713/175874258-5b9f63cd-5bfc-4d1a-8182-f85c07956337.png)
@@ -467,15 +474,17 @@ After login, you will see the **Dashboard** page:
 
 ## :compass: Roadmap
 
-- [ ] Share images with other users
-  - [ ] Download shared images
+- [ ] Share files with other users
+  - [ ] Download shared files
   - [ ] "Shared with me" tab to view shared files
-  - [ ] Permission level. E.g: read-only, write,...
+  - [ ] File permission level. E.g: read-only, write,...
   - [ ] Edit shared files
 - [ ] Apply themes for editing mode
 - [ ] Trash can to store temporary deleted files
 - [x] Preview mode for images
-
+- [ ] Image size automatically resize on window resize in preview mode
+- [ ] Config default theme in user settings
+- [ ] Config testing
 <!-- Contributing -->
 
 ## :wave: Contributing
@@ -498,7 +507,7 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
 
 - Is this project still maintained?
 
-  - Yes, but I will only update UI, docs, or dependencies. New features won't be
+  - Yes, but we will only update UI, docs, or dependencies. New features won't be
     added frequently.
 
 - Is this project ready for production?
@@ -506,22 +515,49 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
   - No, this is a small project for practicing cryptographic systems or schemes.
     This wasn't meant for production.
 
+- Are you planning to support Windows OS in the future?
+
+  - No, we are not adding support for Windows any time soon (and most likely
+    never).
+
 - Error: `IndexError: list index out of range`:
 
   - This issue is already submitted on Github. You can check it on
-    [#72](https://github.com/bczsalba/pytermgui/issues/72). For now, you
-    shouldn't use your mouse while typing to prevent this bug.
+    [#72](https://github.com/bczsalba/pytermgui/issues/72). For now,
+    you shouldn't use your mouse near the input field while typing to prevent
+    this bug.
 
 - Error: `assert self._drag_start is not None`:
 
-  - I will submit this issue real soon and will update the status here. For now,
-    you shouldn't also use your mouse while typing to prevent this bug
+  - We will submit this issue real soon and update the status here. For now,
+    you shouldn't use your mouse near the input field while typing to prevent
+    this bug.
+
+- Error: `ValueError: list.remove(x): x not in list`:
+
+  - You are **clicking the button too fast** before the modal or window is fully
+    closed. You should click the button **once** and wait for the modal or
+    window is fully closed.
 
 - In image preview mode, my image is broken:
 
   - That is because your **terminal width size is too small**. Image has a
     default width size is `60` block. Then terminal should be larger than that
     size (the nav bar wasn't counted).
+
+- I can't decrypt my file using the `Decrypt file` tool:
+
+  - Maybe the encrypted file is broken. You should ask the owner to resend
+    the file.
+
+- In preview mode for large text files, the app becomes very laggy:
+
+  - Then you should change to the `no theme` theme.
+
+- I have accidentally deleted the file, how can I restore it?
+
+  - No, you can't. If the file is deleted, it will be **completely deleted** from
+    our database and **can't be restored**.
 
 <!-- License -->
 
@@ -541,12 +577,13 @@ Project Link: [https://github.com/DuckyMomo20012/file-crypto](https://github.com
 
 ## :gem: Acknowledgements
 
-Here are useful resources and libraries that I have used in my projects.
+Here are useful resources and libraries that we have used in our projects.
 
 - [PyTermGUI](https://ptg.bczsalba.com/pytermgui.html): A wonderful and fully
-  documented TUI framework to make your terminal becomes beautiful.
-- [Pygments](https://pygments.org/): A good library to bring colors to your code.
-- [Climage](https://github.com/pnappa/CLImage): Create beautiful pictures in
-  your terminal using ANSI codes.
-- [Awesome ReadmeTemplate](https://github.com/Louis3797/awesome-readme-template): A
-  beautiful template to bootstrap your README file.
+  documented TUI framework to make your terminal rocks.
+- [Pygments](https://pygments.org/): A useful utility to add your favorite theme
+  to your code.
+- [CLImage](https://github.com/pnappa/CLImage): Print out magnificent pictures
+  in your terminal using ANSI codes.
+- [Awesome Readme Template](https://github.com/Louis3797/awesome-readme-template):
+  A detailed template to bootstrap your README file quickly.
