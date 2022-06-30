@@ -8,7 +8,11 @@ import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
 from src.components import ConfirmModal, Footer
-from src.constants import DEFAULT_PREVIEW_THEME
+from src.constants import (
+    DEFAULT_PREVIEW_THEME,
+    IMAGE_PREVIEW_PADDING,
+    IMAGE_PREVIEW_WIDTH,
+)
 from src.helpers.climage import convert_frombytes
 from src.helpers.cryptography import decryptData, encryptData
 from src.helpers.file import getSettingField
@@ -16,10 +20,7 @@ from src.helpers.highlight import syntaxHighlight
 from src.helpers.page_manager import drawPage, switchCurrPageWindowSlot
 from src.types.Page import Page, PageWindows
 
-IMAGE_PREVIEW_WIDTH = 60
-IMAGE_PREVIEW_PADDING = 2
-
-UNSUPPORTED_ENCODING = (
+unsupportedEncoding = (
     ptg.Label(
         "[window__title--warning]Warning: The file is not displayed"
         " because it is either binary or uses an unsupported text"
@@ -27,7 +28,7 @@ UNSUPPORTED_ENCODING = (
     ),
 )
 
-UNSUPPORTED_SYNTAX_HIGHLIGHTING = (
+unsupportedSyntaxHighlighting = (
     ptg.Label(
         "[window__title--error]Error: Syntax highlight is not"
         " supported for this file type. Please switch to 'no theme'"
@@ -36,7 +37,7 @@ UNSUPPORTED_SYNTAX_HIGHLIGHTING = (
     ),
 )
 
-PREVIEW_FEATURE_WARNING = (
+previewFeatureWarning = (
     "[window__title--warning]Warning: Image preview in ANSI is"
     " preview feature. It may downgrade the performance."
 )
@@ -235,7 +236,7 @@ def FilePreview(
             # NOTE: We can add a button label "OK" here, after the error message to
             # switch to 'no theme' theme.
             else:
-                windowWidgets.insert(0, UNSUPPORTED_SYNTAX_HIGHLIGHTING)
+                windowWidgets.insert(0, unsupportedSyntaxHighlighting)
         return previewContentField
 
     # A flag to check image preview is opened. If it is, we set min width to
@@ -288,7 +289,7 @@ def FilePreview(
                 # We print a warning message to warn the user about the preview
                 # (beta) feature
                 previewContentField = [
-                    PREVIEW_FEATURE_WARNING,
+                    previewFeatureWarning,
                     "",
                     ptg.Button(
                         "Preview anyway",
@@ -307,7 +308,7 @@ def FilePreview(
                 ]
                 windowWidgets.extend(previewContentField)
     else:
-        windowWidgets.append(UNSUPPORTED_ENCODING)
+        windowWidgets.append(unsupportedEncoding)
 
     # NOTE: We spread those widgets here, so we can dynamically insert widget to
     # this window
