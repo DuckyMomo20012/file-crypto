@@ -488,12 +488,21 @@ You can override default behaviors by configuring the `settings.json` file.
     </thead>
     <tbody>
         <tr>
-            <td><code>workbench.colorTheme</code></td>
+            <td><code>workbench.preview.colorTheme</code></td>
             <td>
                 Default theme for file preview mode
             </td>
             <td>
                 <code>'dracula'</code>
+            </td>
+        </tr>
+        <tr>
+            <td><code>workbench.preview.imageWidth</code></td>
+            <td>
+                Default image width for image preview mode
+            </td>
+            <td>
+                <code>60</code>
             </td>
         </tr>
         <tr>

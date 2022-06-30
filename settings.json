@@ -1,5 +1,6 @@
 {
-  "workbench.colorTheme": "material",
+  "workbench.preview.colorTheme": "dracula",
+  "workbench.preview.imageWidth": 60,
   "workbench.reduceAnimation": true,
   "workbench.styles": {
     "config": {

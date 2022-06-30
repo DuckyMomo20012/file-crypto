@@ -55,9 +55,15 @@ def FilePreview(
     forcePreview: bool = False,
 ) -> Optional[Page]:
 
-    defaultTheme = getSettingField("workbench.colorTheme")
+    defaultTheme = getSettingField("workbench.preview.colorTheme")
     if defaultTheme is not None:
         theme = defaultTheme
+
+    imageWidth = IMAGE_PREVIEW_WIDTH
+
+    defaultImageWidth = getSettingField("workbench.preview.imageWidth")
+    if defaultImageWidth is not None:
+        imageWidth = defaultImageWidth
 
     # NOTE: We create empty window slots so we can dynamically insert footer
     windowSlots = []
@@ -280,7 +286,7 @@ def FilePreview(
                             is_truecolor=True,
                             is_256color=False,
                             is_unicode=True,
-                            width=IMAGE_PREVIEW_WIDTH,
+                            width=imageWidth,
                         ),
                     ),
                 )
@@ -317,7 +323,7 @@ def FilePreview(
     # NOTE: Set window min width so when user resize window, the image won't be
     # broken. Except the terminal size is too small.
     if imageForcePreview:
-        window.min_width = IMAGE_PREVIEW_WIDTH + IMAGE_PREVIEW_PADDING * 2
+        window.min_width = imageWidth + IMAGE_PREVIEW_PADDING * 2
 
     window.overflow = ptg.Overflow.SCROLL
     window.set_title(
