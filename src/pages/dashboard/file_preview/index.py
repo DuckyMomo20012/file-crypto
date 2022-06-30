@@ -10,6 +10,7 @@ from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
 from src.components import ConfirmModal, Footer
 from src.helpers.climage import convert_frombytes
 from src.helpers.cryptography import decryptData, encryptData
+from src.helpers.file import getSettingField
 from src.helpers.highlight import syntaxHighlight
 from src.helpers.page_manager import drawPage, switchCurrPageWindowSlot
 from src.types.Page import Page, PageWindows
@@ -51,6 +52,10 @@ def FilePreview(
     theme: str = "dracula",
     forcePreview: bool = False,
 ) -> Optional[Page]:
+
+    defaultTheme = getSettingField("workbench.colorTheme")
+    if defaultTheme is not None:
+        theme = defaultTheme
 
     # NOTE: We create empty window slots so we can dynamically insert footer
     windowSlots = []

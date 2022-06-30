@@ -3,6 +3,7 @@ from typing import Optional, Union
 import pytermgui as ptg
 
 import session
+from src.helpers.file import getSettingField
 from src.types.Page import Page
 
 
@@ -13,6 +14,9 @@ def switchPage(
     drawPage(manager, newPage)
 
 
+# NOTE: Temporary set "clear" default to True and isAdd to False due to bug
+# in pytermgui
+# BUG: pytermgui doesn't close window completely. Need more research
 def switchCurrPageWindowSlot(
     manager: Optional[ptg.WindowManager],
     targetAssign: str,
@@ -20,9 +24,12 @@ def switchCurrPageWindowSlot(
     clear=True,
     isAdd=False,
 ):
-    # NOTE: Temporary set "clear" default to True and isAdd to False due to bug
-    # in pytermgui
-    # BUG: pytermgui doesn't close window completely. Need more research
+
+    animate = True
+
+    defaultAnimate = getSettingField("workbench.reduceAnimation")
+    if defaultAnimate is not None:
+        animate = defaultAnimate
 
     if manager and len(session.navigation) > 0:
         # We build new page based on previous page, then we remove assigned slots
@@ -39,29 +46,39 @@ def switchCurrPageWindowSlot(
         if clear is True:
             for slot in swapSlots:
                 # Close window
-                manager.remove(window=slot["window"], autostop=False)
+                manager.remove(window=slot["window"], autostop=False, animate=animate)
                 newPage["windows"].remove(slot)
 
         elif isAdd is False:
             # If clear is False, we just remove the last window in the list
-            manager.remove(window=swapSlots[-1]["window"], autostop=False)
+            manager.remove(
+                window=swapSlots[-1]["window"], autostop=False, animate=animate
+            )
             newPage["windows"].remove(swapSlots[-1])
 
         # Then we add the new window to the slot
         if isinstance(newWindow, ptg.Window):
             newPage["windows"].append({"window": newWindow, "assign": targetAssign})
 
-            manager.add(window=newWindow, assign=targetAssign)
+            manager.add(window=newWindow, assign=targetAssign, animate=animate)
         elif newWindow is not None:
             newPage["windows"].extend(newWindow["windows"])
 
             for window in newWindow["windows"]:
-                manager.add(window=window["window"], assign=window["assign"])
+                manager.add(
+                    window=window["window"], assign=window["assign"], animate=animate
+                )
 
         session.navigation[-1] = newPage
 
 
 def drawPage(manager: Optional[ptg.WindowManager], newPage: Union[Page, None]) -> None:
+
+    animate = True
+
+    defaultAnimate = getSettingField("workbench.reduceAnimation")
+    if defaultAnimate is not None:
+        animate = defaultAnimate
 
     if manager and newPage is not None:
         # Append new page to navigation stack
@@ -70,10 +87,18 @@ def drawPage(manager: Optional[ptg.WindowManager], newPage: Union[Page, None]) -
         if newPage["layout"] is not None:
             manager.layout = newPage["layout"]
         for window in newPage["windows"]:
-            manager.add(window=window["window"], assign=window["assign"])
+            manager.add(
+                window=window["window"], assign=window["assign"], animate=animate
+            )
 
 
 def goToPrevPage(manager: Optional[ptg.WindowManager]) -> None:
+
+    animate = True
+
+    defaultAnimate = getSettingField("workbench.reduceAnimation")
+    if defaultAnimate is not None:
+        animate = defaultAnimate
 
     if manager and len(session.navigation) > 0:
         # Remove last page from navigation stack
@@ -82,7 +107,7 @@ def goToPrevPage(manager: Optional[ptg.WindowManager]) -> None:
         if currWindow["layout"] is not None:
             manager.layout = currWindow["layout"]
         for window in currWindow["windows"]:
-            manager.remove(window=window["window"], autostop=False)
+            manager.remove(window=window["window"], autostop=False, animate=animate)
 
 
 def clearNavigation(manager: Optional[ptg.WindowManager]):
