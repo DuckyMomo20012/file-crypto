@@ -3,6 +3,7 @@ from typing import Optional, Union
 import pytermgui as ptg
 
 import session
+from src.constants import WINDOW_ANIMATE
 from src.helpers.file import getSettingField
 from src.types.Page import Page
 
@@ -25,7 +26,7 @@ def switchCurrPageWindowSlot(
     isAdd=False,
 ):
 
-    animate = True
+    animate = WINDOW_ANIMATE
 
     defaultAnimate = getSettingField("workbench.reduceAnimation")
     if defaultAnimate is not None:
@@ -74,7 +75,7 @@ def switchCurrPageWindowSlot(
 
 def drawPage(manager: Optional[ptg.WindowManager], newPage: Union[Page, None]) -> None:
 
-    animate = True
+    animate = WINDOW_ANIMATE
 
     defaultAnimate = getSettingField("workbench.reduceAnimation")
     if defaultAnimate is not None:
@@ -94,7 +95,7 @@ def drawPage(manager: Optional[ptg.WindowManager], newPage: Union[Page, None]) -
 
 def goToPrevPage(manager: Optional[ptg.WindowManager]) -> None:
 
-    animate = True
+    animate = WINDOW_ANIMATE
 
     defaultAnimate = getSettingField("workbench.reduceAnimation")
     if defaultAnimate is not None:

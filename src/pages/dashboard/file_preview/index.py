@@ -8,6 +8,7 @@ import session
 from src.api.auth.service import getOneUser
 from src.api.file_crypto.service import deleteFile, getOneFile, updateFile
 from src.components import ConfirmModal, Footer
+from src.constants import DEFAULT_PREVIEW_THEME
 from src.helpers.climage import convert_frombytes
 from src.helpers.cryptography import decryptData, encryptData
 from src.helpers.file import getSettingField
@@ -49,7 +50,7 @@ def FilePreview(
     fileName: str,
     passphrase: str,
     preview: bool = False,
-    theme: str = "dracula",
+    theme: str = DEFAULT_PREVIEW_THEME,
     forcePreview: bool = False,
 ) -> Optional[Page]:
 
