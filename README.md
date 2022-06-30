@@ -57,6 +57,8 @@
   - [Installation](#gear-installation)
   - [Run Locally](#running-run-locally)
 - [Usage](#eyes-usage)
+- [Settings](#wrench-settings)
+- [Application Styles](#peach-application-styles)
 - [Roadmap](#compass-roadmap)
 - [Contributing](#wave-contributing)
   - [Code of Conduct](#scroll-code-of-conduct)
@@ -190,7 +192,7 @@ curl -sSL https://install.python-poetry.org | python3 -
 ```
 
 Read more about installation on
-[documentation](https://python-poetry.org/docs/master/#installation).
+[Poetry documentation](https://python-poetry.org/docs/master/#installation).
 
 <!-- Installation -->
 
@@ -470,6 +472,55 @@ After login, you will see the **Dashboard** page:
     > **NOTE**: This is a preview feature. This may reduce your computer
     > performance.
 
+<!-- Settings -->
+
+## :wrench: Settings
+
+You can override default behaviors by configure `settings.json` file.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>workbench.colorTheme</code></td>
+            <td>
+                Default theme for file preview mode
+            </td>
+            <td>
+                <code>'dracula'</code>
+            </td>
+        </tr>
+        <tr>
+            <td><code>workbench.reduceAnimation</code></td>
+            <td>
+                Controls if animation is played when adding or remove windows
+            </td>
+            <td>
+                <code>true</code>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+> NOTE: `workbench.reduceAnimation` setting not apply to **modals**: error,
+> success, warning or **toast** messages.
+
+<!-- Styles -->
+
+## :peach: Application Styles
+
+You can customizing your application (text colors, border chars,...) by changing
+default styles in file `styles.yaml`.
+
+Read more about customizing on
+[PyTermGUI documentation](https://ptg.bczsalba.com/pytermgui.html#how-to-configure-your-application-using-yaml).
+
 <!-- Roadmap -->
 
 ## :compass: Roadmap
@@ -483,7 +534,7 @@ After login, you will see the **Dashboard** page:
 - [ ] Trash can to store temporary deleted files
 - [x] Preview mode for images
 - [ ] Image size automatically resize on window resize in preview mode
-- [ ] Config default theme in user settings
+- [x] Config default theme in user settings
 - [ ] Config testing
 <!-- Contributing -->
 
