@@ -476,7 +476,7 @@ After login, you will see the **Dashboard** page:
 
 ## :wrench: Settings
 
-You can override default behaviors by configure `settings.json` file.
+You can override default behaviors by configuring the `settings.json` file.
 
 <table>
     <thead>
@@ -505,17 +505,29 @@ You can override default behaviors by configure `settings.json` file.
                 <code>true</code>
             </td>
         </tr>
+        <tr>
+            <td><code>workbench.styles</code></td>
+            <td>
+                Load defaults to application
+            </td>
+            <td>
+                <code>...</code>
+            </td>
+        </tr>
     </tbody>
 </table>
 
 > NOTE: `workbench.reduceAnimation` setting not apply to **modals**: error,
 > success, warning or **toast** messages.
 
+> NOTE: `workbench.styles` will simply dump JSON to YAML and load them to
+> application.
+
 <!-- Styles -->
 
 ## :peach: Application Styles
 
-You can customizing your application (text colors, border chars,...) by changing
+You can customize your application (text colors, border chars,...) by changing
 default styles in file `styles.yaml`.
 
 Read more about customizing on
