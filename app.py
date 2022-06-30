@@ -1,9 +1,11 @@
 import pytermgui as ptg
+import yaml
 from environs import Env
 from mongoengine import connect
 
 import routes
 import session
+from src.helpers.file import getSettingField
 from src.helpers.page_manager import drawPage
 
 env = Env()
@@ -14,6 +16,12 @@ connect(host=env.str("MONGODB_HOST"))
 
 with ptg.WindowManager() as manager:
     styles = open("styles.yaml").read()
+
+    defaultStyles = getSettingField("styles")
+
+    if defaultStyles is not None:
+        styles = yaml.dump(defaultStyles, allow_unicode=True)
+
     loader = ptg.YamlLoader()
     loader.load(styles)
     # Add navigation history stack

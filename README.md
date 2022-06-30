@@ -426,8 +426,7 @@ After login, you will see the **Dashboard** page:
 
     - All supported file types: https://pygments.org/docs/lexers/
 
-    > **NOTE**: If your file type is not supported, you should change it to the
-    > `no theme` theme.
+    > **NOTE**: If your file type is not supported, you should change to the `no theme` theme.
 
     - All available themes: https://pygments.org/styles/
 
@@ -476,7 +475,7 @@ After login, you will see the **Dashboard** page:
 
 ## :wrench: Settings
 
-You can override default behaviors by configure `settings.json` file.
+You can override default behaviors by configuring the `settings.json` file.
 
 <table>
     <thead>
@@ -488,12 +487,21 @@ You can override default behaviors by configure `settings.json` file.
     </thead>
     <tbody>
         <tr>
-            <td><code>workbench.colorTheme</code></td>
+            <td><code>workbench.preview.colorTheme</code></td>
             <td>
                 Default theme for file preview mode
             </td>
             <td>
                 <code>'dracula'</code>
+            </td>
+        </tr>
+        <tr>
+            <td><code>workbench.preview.imageWidth</code></td>
+            <td>
+                Default image width for image preview mode
+            </td>
+            <td>
+                <code>60</code>
             </td>
         </tr>
         <tr>
@@ -505,18 +513,30 @@ You can override default behaviors by configure `settings.json` file.
                 <code>true</code>
             </td>
         </tr>
+        <tr>
+            <td><code>workbench.styles</code></td>
+            <td>
+                Load default styles to the application
+            </td>
+            <td>
+                <code>[object Object]</code>
+            </td>
+        </tr>
     </tbody>
 </table>
 
-> NOTE: `workbench.reduceAnimation` setting not apply to **modals**: error,
-> success, warning or **toast** messages.
+> NOTE: `workbench.reduceAnimation` setting not apply to **modals** (error,
+> success, warning) or **toast** messages.
+
+> NOTE: `workbench.styles` will simply dump JSON to YAML and load them to the
+> application.
 
 <!-- Styles -->
 
 ## :peach: Application Styles
 
-You can customizing your application (text colors, border chars,...) by changing
-default styles in file `styles.yaml`.
+You can customize your application looks (text colors, border chars,...) by
+changing default styles in file `styles.yaml`.
 
 Read more about customizing on
 [PyTermGUI documentation](https://ptg.bczsalba.com/pytermgui.html#how-to-configure-your-application-using-yaml).
@@ -609,6 +629,13 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
 
   - No, you can't. If the file is deleted, it will be **completely deleted** from
     our database and **can't be restored**.
+
+- I can't load settings using the `settings.json` file:
+
+  - Ensure your JSON format is correct. Notice that comment is not allowed in
+    JSON files.
+
+  - For application styles, make sure those styles are supported.
 
 <!-- License -->
 
