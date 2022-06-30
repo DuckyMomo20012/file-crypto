@@ -58,6 +58,10 @@ def ChangePassword() -> Page:
 
             if verify_password(oldPassword, user.password):
 
+                if oldPassword == newPassword:
+                    ErrorModal(window.manager, "Old and new passwords are the same")
+                    return
+
                 # Update privateKey and publicKey
                 newPrivateKey, newPublicKey = updatePassphrase(
                     user.privateKey, oldPassword, newPassword
