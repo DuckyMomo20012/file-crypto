@@ -4,7 +4,9 @@ import routes
 import session
 from src.api.auth.service import getOneUser
 from src.components import ErrorModal
+from src.constants import DEFAULT_PREVIEW_MODE
 from src.helpers.cryptography import verify_password
+from src.helpers.file import getSettingField
 from src.helpers.form_validation import requiredField
 from src.helpers.page_manager import switchCurrPageWindowSlot
 from src.types.Page import Page
@@ -27,13 +29,24 @@ def PasswordPrompt(fileName: str) -> Page:
             ErrorModal(window.manager, "Invalid password")
             return
 
+        preview = True
+
+        defaultMode = getSettingField(
+            "workbench.preview.defaultMode", DEFAULT_PREVIEW_MODE
+        )
+
+        if defaultMode == "preview":
+            preview = True
+        elif defaultMode == "edit":
+            preview = False
+
         # Swap the body slot with the file preview window, default opening file
         # with preview mode
         switchCurrPageWindowSlot(
             manager=window.manager,
             targetAssign=("body"),
             newWindow=routes.routes["dashboard/file_preview"](
-                fileName=fileName, passphrase=password, preview=True
+                fileName=fileName, passphrase=password, preview=preview
             ),
         )
 

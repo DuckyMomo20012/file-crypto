@@ -1,6 +1,7 @@
 {
   "workbench.preview.colorTheme": "dracula",
   "workbench.preview.imageWidth": 60,
+  "workbench.preview.defaultMode": "preview",
   "workbench.reduceAnimation": true,
   "workbench.styles": {
     "config": {
