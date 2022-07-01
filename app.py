@@ -17,9 +17,10 @@ connect(host=env.str("MONGODB_HOST"))
 with ptg.WindowManager() as manager:
     styles = open("styles.yaml").read()
 
-    defaultStyles = getSettingField("styles")
+    defaultStyles: dict = getSettingField("workbench.styles", {})
 
-    if defaultStyles is not None:
+    # If defaultStyles is not an empty dict
+    if defaultStyles:
         styles = yaml.dump(defaultStyles, allow_unicode=True)
 
     loader = ptg.YamlLoader()

@@ -505,6 +505,15 @@ You can override default behaviors by configuring the `settings.json` file.
             </td>
         </tr>
         <tr>
+            <td><code>workbench.preview.defaultMode</code></td>
+            <td>
+                Default mode for preview page. Options: <code>preview</code>, <code>edit</code>
+            </td>
+            <td>
+                <code>preview</code>
+            </td>
+        </tr>
+        <tr>
             <td><code>workbench.reduceAnimation</code></td>
             <td>
                 Controls if animation is played when adding or remove windows
@@ -529,7 +538,7 @@ You can override default behaviors by configuring the `settings.json` file.
 > success, warning) or **toast** messages.
 
 > NOTE: `workbench.styles` will simply dump JSON to YAML and load them to the
-> application.
+> application. Default value for this setting is loaded from file `styles.yaml`.
 
 <!-- Styles -->
 

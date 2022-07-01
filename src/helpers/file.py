@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Optional, Union
+from typing import TypeVar, Union
 
 
 def readFile(fileName: str, mode: str = "r"):
@@ -37,12 +37,15 @@ def generateRandomFileName(fileName: str):
     return newFileName
 
 
-def getSettingField(setting: str) -> Optional[Any]:
+T = TypeVar("T")
+
+
+def getSettingField(setting: str, default: T) -> T:
 
     try:
         settings = json.loads(open("settings.json").read())
 
-        return settings.get(setting, None)
+        return settings.get(setting, default)
 
     except (FileNotFoundError, json.decoder.JSONDecodeError):
-        return None
+        return default
