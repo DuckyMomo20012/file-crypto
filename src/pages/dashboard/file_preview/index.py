@@ -55,15 +55,9 @@ def FilePreview(
     forcePreview: bool = False,
 ) -> Optional[Page]:
 
-    defaultTheme = getSettingField("workbench.preview.colorTheme")
-    if defaultTheme is not None:
-        theme = defaultTheme
+    theme = getSettingField("workbench.preview.colorTheme", DEFAULT_PREVIEW_THEME)
 
-    imageWidth = IMAGE_PREVIEW_WIDTH
-
-    defaultImageWidth = getSettingField("workbench.preview.imageWidth")
-    if defaultImageWidth is not None:
-        imageWidth = defaultImageWidth
+    imageWidth = getSettingField("workbench.preview.imageWidth", IMAGE_PREVIEW_WIDTH)
 
     # NOTE: We create empty window slots so we can dynamically insert footer
     windowSlots = []
