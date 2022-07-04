@@ -26,7 +26,7 @@ def switchCurrPageWindowSlot(
     isAdd=False,
 ):
 
-    animate = getSettingField("workbench.reduceAnimation", WINDOW_ANIMATE)
+    animate = getSettingField("workbench.animation", WINDOW_ANIMATE)
 
     if manager and len(session.navigation) > 0:
         # We build new page based on previous page, then we remove assigned slots
@@ -71,7 +71,7 @@ def switchCurrPageWindowSlot(
 
 def drawPage(manager: Optional[ptg.WindowManager], newPage: Union[Page, None]) -> None:
 
-    animate = getSettingField("workbench.reduceAnimation", WINDOW_ANIMATE)
+    animate = getSettingField("workbench.animation", WINDOW_ANIMATE)
 
     if manager and newPage is not None:
         # Append new page to navigation stack
@@ -87,7 +87,7 @@ def drawPage(manager: Optional[ptg.WindowManager], newPage: Union[Page, None]) -
 
 def goToPrevPage(manager: Optional[ptg.WindowManager]) -> None:
 
-    animate = getSettingField("workbench.reduceAnimation", WINDOW_ANIMATE)
+    animate = getSettingField("workbench.animation", WINDOW_ANIMATE)
 
     if manager and len(session.navigation) > 0:
         # Remove last page from navigation stack
