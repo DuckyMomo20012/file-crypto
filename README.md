@@ -52,7 +52,6 @@
   - [Color Reference](#art-color-reference)
   - [Environment Variables](#key-environment-variables)
 - [Getting Started](#toolbox-getting-started)
-  - [System Requirements](#goberserk-system-requirements)
   - [Prerequisites](#bangbang-prerequisites)
   - [Installation](#gear-installation)
   - [Run Locally](#running-run-locally)
@@ -172,27 +171,26 @@ You can also checkout file `.env.example` to see all required environment variab
 
 ## :toolbox: Getting Started
 
-### :goberserk: System Requirements
-
-> **NOTE**: This app only supports `Linux` and `macOS`. Currently not supporting `Windows`.
-
-- Python: `>= 3.9`.
-- Operating system: `Linux` and `macOS`.
-
 <!-- Prerequisites -->
 
 ### :bangbang: Prerequisites
 
-This project uses [Poetry](https://python-poetry.org/) as package manager
+- Python: `>= 3.9`.
 
-Linux, macOS, Windows (WSL)
+- Operating system: `Linux` and `macOS`.
 
-```bash
-curl -sSL https://install.python-poetry.org | python3 -
-```
+  > **NOTE**: This app only supports `Linux` and `macOS`. Currently not supporting `Windows`.
 
-Read more about installation on
-[Poetry documentation](https://python-poetry.org/docs/master/#installation).
+- This project uses [Poetry](https://python-poetry.org/) as package manager
+
+  Linux, macOS, Windows (WSL)
+
+  ```bash
+  curl -sSL https://install.python-poetry.org | python3 -
+  ```
+
+  Read more about installation on
+  [Poetry documentation](https://python-poetry.org/docs/master/#installation).
 
 <!-- Installation -->
 
@@ -203,6 +201,22 @@ Install file-crypto with Poetry
 ```bash
 poetry install
 cd file-crypto
+```
+
+OR:
+
+Export Poetry dependencies to file `requirements.txt`
+
+```bash
+poetry export -f requirements.txt --output requirements.txt
+```
+
+> NOTE: You can add option: `--dev` to include development dependencies.
+
+Then install dependencies with `pip`
+
+```bash
+pip install -r requirements.txt
 ```
 
 <!-- Run Locally -->
@@ -316,7 +330,7 @@ After login, you will see the **Dashboard** page:
 
     </details>
 
-  - **Logout**: This will log you out and redirect you to the Login page.
+  - **Logout**: This will log you out and redirect you to the **Login** page.
 
 - **Tools**: This consists of multiple helpful tools:
 
@@ -444,6 +458,8 @@ After login, you will see the **Dashboard** page:
   - You can also can **Download** this file to your computer or **Delete** this
     file.
 
+    > NOTE: Delete will **completely delete** the file from the server.
+
   - **File information**: You can see brief information about your file.
 
     <details>
@@ -468,7 +484,7 @@ After login, you will see the **Dashboard** page:
 
     ![image preview page](https://user-images.githubusercontent.com/64480713/175874258-5b9f63cd-5bfc-4d1a-8182-f85c07956337.png)
 
-    > **NOTE**: This is a preview feature. This may reduce your computer
+    > **NOTE**: This is a preview feature. This feature may reduce your computer
     > performance.
 
 <!-- Settings -->
@@ -514,7 +530,7 @@ You can override default behaviors by configuring the `settings.json` file.
             </td>
         </tr>
         <tr>
-            <td><code>workbench.reduceAnimation</code></td>
+            <td><code>workbench.animation</code></td>
             <td>
                 Controls if animation is played when adding or remove windows
             </td>
@@ -534,11 +550,12 @@ You can override default behaviors by configuring the `settings.json` file.
     </tbody>
 </table>
 
-> NOTE: `workbench.reduceAnimation` setting not apply to **modals** (error,
+> NOTE: `workbench.animation` setting not apply to **modals** (error,
 > success, warning) or **toast** messages.
 
 > NOTE: `workbench.styles` will simply dump JSON to YAML and load them to the
-> application. Default value for this setting is loaded from file `styles.yaml`.
+> application. The default value for this setting is loaded from file
+> `styles.yaml`.
 
 <!-- Styles -->
 
@@ -587,8 +604,8 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
 
 - Is this project still maintained?
 
-  - Yes, but we will only update UI, docs, or dependencies. New features won't be
-    added frequently.
+  - Yes, but we will only update UI, docs, or dependencies. New features won't
+    be added frequently.
 
 - Is this project ready for production?
 
@@ -636,8 +653,8 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
 
 - I have accidentally deleted the file, how can I restore it?
 
-  - No, you can't. If the file is deleted, it will be **completely deleted** from
-    our database and **can't be restored**.
+  - No, you can't. If the file is deleted, it will be **completely deleted**
+    from our database and **can't be restored**.
 
 - I can't load settings using the `settings.json` file:
 
