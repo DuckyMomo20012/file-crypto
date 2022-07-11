@@ -53,7 +53,6 @@
   - [Environment Variables](#key-environment-variables)
 - [Getting Started](#toolbox-getting-started)
   - [Prerequisites](#bangbang-prerequisites)
-  - [Installation](#gear-installation)
   - [Run Locally](#running-run-locally)
 - [Usage](#eyes-usage)
 - [Settings](#wrench-settings)
@@ -155,7 +154,7 @@ This color palette is based on [Nord](https://www.nordtheme.com/) theme.
 ### :key: Environment Variables
 
 To run this project, you will need to add the following environment variables to
-your .env file
+your .env file.
 
 `MONGODB_HOST`: An URI to connect to your database
 
@@ -181,7 +180,7 @@ You can also checkout file `.env.example` to see all required environment variab
 
   > **NOTE**: This app only supports `Linux` and `macOS`. Currently not supporting `Windows`.
 
-- This project uses [Poetry](https://python-poetry.org/) as package manager
+- This project uses [Poetry](https://python-poetry.org/) as package manager:
 
   Linux, macOS, Windows (WSL)
 
@@ -192,20 +191,31 @@ You can also checkout file `.env.example` to see all required environment variab
   Read more about installation on
   [Poetry documentation](https://python-poetry.org/docs/master/#installation).
 
-<!-- Installation -->
+<!-- Run Locally -->
 
-### :gear: Installation
+### :running: Run Locally
 
-Install file-crypto with Poetry
+Clone the project:
+
+```bash
+git clone https://github.com/DuckyMomo20012/file-crypto.git
+```
+
+Go to the project directory:
+
+```bash
+cd file-crypto
+```
+
+Install dependencies:
 
 ```bash
 poetry install
-cd file-crypto
 ```
 
 OR:
 
-Export Poetry dependencies to file `requirements.txt`
+Export Poetry dependencies to file `requirements.txt`:
 
 ```bash
 poetry export -f requirements.txt --output requirements.txt
@@ -213,41 +223,21 @@ poetry export -f requirements.txt --output requirements.txt
 
 > NOTE: You can add option: `--dev` to include development dependencies.
 
-Then install dependencies with `pip`
+Then install dependencies with `pip`:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-<!-- Run Locally -->
+---
 
-### :running: Run Locally
-
-Clone the project
-
-```bash
-git clone https://github.com/DuckyMomo20012/file-crypto.git
-```
-
-Go to the project directory
-
-```bash
-cd file-crypto
-```
-
-Install dependencies
-
-```bash
-poetry install
-```
-
-Activate virtual environment
+Activate virtual environment:
 
 ```bash
 poetry shell
 ```
 
-Start the program
+Start the program:
 
 ```bash
 poe dev
@@ -596,7 +586,7 @@ Contributions are always welcome!
 
 ### :scroll: Code of Conduct
 
-Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/blob/main/CODE_OF_CONDUCT.md)
+Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/blob/main/CODE_OF_CONDUCT.md).
 
 <!-- FAQ -->
 
@@ -667,7 +657,9 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
 
 ## :warning: License
 
-Distributed under MIT license. See [LICENSE](https://github.com/DuckyMomo20012/file-crypto/blob/main/LICENSE) for more information.
+Distributed under MIT license. See
+[LICENSE](https://github.com/DuckyMomo20012/file-crypto/blob/main/LICENSE) for
+more information.
 
 <!-- Contact -->
 
@@ -675,13 +667,13 @@ Distributed under MIT license. See [LICENSE](https://github.com/DuckyMomo20012/f
 
 Duong Vinh - [@duckymomo20012](https://twitter.com/duckymomo20012) - tienvinh.duong4@gmail.com
 
-Project Link: [https://github.com/DuckyMomo20012/file-crypto](https://github.com/DuckyMomo20012/file-crypto)
+Project Link: [https://github.com/DuckyMomo20012/file-crypto](https://github.com/DuckyMomo20012/file-crypto).
 
 <!-- Acknowledgments -->
 
 ## :gem: Acknowledgements
 
-Here are useful resources and libraries that we have used in our projects.
+Here are useful resources and libraries that we have used in our projects:
 
 - [PyTermGUI](https://ptg.bczsalba.com/pytermgui.html): A wonderful and fully
   documented TUI framework to make your terminal rocks.
