@@ -23,7 +23,7 @@ def ThemePicker(
             manager=window.manager,
             targetAssign=("body"),
             newWindow=routes.routes["dashboard/file_preview"](
-                fileName, passphrase, preview, theme
+                fileName=fileName, passphrase=passphrase, theme=theme, preview=preview
             ),
         )
 
