@@ -43,7 +43,9 @@ T = TypeVar("T")
 def getSettingField(setting: str, default: T) -> T:
 
     try:
-        settings = json.loads(open("settings.json").read())
+
+        with open("settings.json") as file:
+            settings = json.loads(file.read())
 
         return settings.get(setting, default)
 

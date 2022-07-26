@@ -12,8 +12,8 @@ from src.helpers.macros import (
 
 def Footer(inputField: Optional[ptg.InputField]) -> ptg.Window:
 
-    ptg.tim.define("!cpu", getCPUPercent)
-    ptg.tim.define("!ram", getRAMPercent)
+    ptg.tim.define("!cpu", getCPUPercent)  # type: ignore
+    ptg.tim.define("!ram", getRAMPercent)  # type: ignore
 
     windowWidgets = [
         # ptg.Label(

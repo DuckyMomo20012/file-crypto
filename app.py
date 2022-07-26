@@ -12,10 +12,12 @@ env = Env()
 # Read .env into os.environ
 env.read_env()
 
-connect(host=env.str("MONGODB_HOST"))
+connect(host=env.str("MONGODB_HOST"), uuidRepresentation="standard")
 
 with ptg.WindowManager() as manager:
-    styles = open("styles.yaml").read()
+
+    with open("styles.yaml") as file:
+        styles = file.read()
 
     defaultStyles: dict = getSettingField("workbench.styles", {})
 

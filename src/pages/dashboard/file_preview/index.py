@@ -50,12 +50,15 @@ previewFeatureWarning = (
 def FilePreview(
     fileName: str,
     passphrase: str,
+    theme: str,
     preview: bool = False,
-    theme: str = DEFAULT_PREVIEW_THEME,
     forcePreview: bool = False,
 ) -> Optional[Page]:
 
-    theme = getSettingField("workbench.preview.colorTheme", DEFAULT_PREVIEW_THEME)
+    if not theme:
+        theme = getSettingField(
+            "workbench.preview.defaultColorTheme", DEFAULT_PREVIEW_THEME
+        )
 
     imageWidth = getSettingField("workbench.preview.imageWidth", IMAGE_PREVIEW_WIDTH)
 
@@ -146,12 +149,25 @@ def FilePreview(
 
     def handleModeButtonClick():
 
+        # NOTE: We have to clear footer window slot when we change to preview
+        # mode
+        if preview is False:
+            # Clear footer windows
+            switchCurrPageWindowSlot(
+                window.manager,
+                "footer",
+                clear=True,
+            ),
+
         # Toggle between edit and preview mode
         switchCurrPageWindowSlot(
             manager=window.manager,
             targetAssign=("body"),
             newWindow=routes.routes["dashboard/file_preview"](
-                fileName=fileName, passphrase=passphrase, preview=not preview
+                fileName=fileName,
+                passphrase=passphrase,
+                theme=theme,
+                preview=not preview,
             ),
         )
 

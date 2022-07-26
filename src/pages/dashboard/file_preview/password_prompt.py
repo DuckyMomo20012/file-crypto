@@ -46,7 +46,10 @@ def PasswordPrompt(fileName: str) -> Page:
             manager=window.manager,
             targetAssign=("body"),
             newWindow=routes.routes["dashboard/file_preview"](
-                fileName=fileName, passphrase=password, preview=preview
+                fileName=fileName,
+                passphrase=password,
+                theme="",
+                preview=preview,
             ),
         )
 
