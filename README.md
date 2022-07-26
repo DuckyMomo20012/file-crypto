@@ -609,16 +609,11 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
 
 - Error: `IndexError: list index out of range`:
 
-  - This issue is already submitted on Github. You can check it on
-    [#72](https://github.com/bczsalba/pytermgui/issues/72). For now,
-    you shouldn't use your mouse near the input field while typing to prevent
-    this bug.
+  - Please update PyTermGUI to version 7.0.0 or higher to resolve this issue.
 
 - Error: `assert self._drag_start is not None`:
 
-  - We will submit this issue real soon and update the status here. For now,
-    you shouldn't use your mouse near the input field while typing to prevent
-    this bug.
+  - Please update PyTermGUI to version 7.0.0 or higher to resolve this issue.
 
 - Error: `ValueError: list.remove(x): x not in list`:
 
