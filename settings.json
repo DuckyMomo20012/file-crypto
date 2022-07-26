@@ -1,5 +1,5 @@
 {
-  "workbench.preview.colorTheme": "dracula",
+  "workbench.preview.defaultColorTheme": "dracula",
   "workbench.preview.imageWidth": 60,
   "workbench.preview.defaultMode": "preview",
   "workbench.animation": true,

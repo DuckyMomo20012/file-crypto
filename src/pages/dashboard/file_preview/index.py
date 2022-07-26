@@ -56,7 +56,9 @@ def FilePreview(
 ) -> Optional[Page]:
 
     if not theme:
-        theme = getSettingField("workbench.preview.colorTheme", DEFAULT_PREVIEW_THEME)
+        theme = getSettingField(
+            "workbench.preview.defaultColorTheme", DEFAULT_PREVIEW_THEME
+        )
 
     imageWidth = getSettingField("workbench.preview.imageWidth", IMAGE_PREVIEW_WIDTH)
 

@@ -493,7 +493,7 @@ You can override default behaviors by configuring the `settings.json` file.
     </thead>
     <tbody>
         <tr>
-            <td><code>workbench.preview.colorTheme</code></td>
+            <td><code>workbench.preview.defaultColorTheme</code></td>
             <td>
                 Default theme for file preview mode
             </td>
