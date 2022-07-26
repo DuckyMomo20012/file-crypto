@@ -149,6 +149,16 @@ def FilePreview(
 
     def handleModeButtonClick():
 
+        # NOTE: We have to clear footer window slot when we change to preview
+        # mode
+        if preview is False:
+            # Clear footer windows
+            switchCurrPageWindowSlot(
+                window.manager,
+                "footer",
+                clear=True,
+            ),
+
         # Toggle between edit and preview mode
         switchCurrPageWindowSlot(
             manager=window.manager,
