@@ -154,9 +154,11 @@ This color palette is based on [Nord](https://www.nordtheme.com/) theme.
 ### :key: Environment Variables
 
 To run this project, you will need to add the following environment variables to
-your .env file.
+your `.env` file:
 
-`MONGODB_HOST`: An URI to connect to your database
+- **MongoDB configs:**
+
+  `MONGODB_HOST`: An URI to connect to your database.
 
 E.g:
 
@@ -164,7 +166,8 @@ E.g:
 MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"
 ```
 
-You can also checkout file `.env.example` to see all required environment variables.
+You can also checkout file `.env.example` to see all required environment
+variables.
 
 <!-- Getting Started -->
 
@@ -178,7 +181,8 @@ You can also checkout file `.env.example` to see all required environment variab
 
 - Operating system: `Linux` and `macOS`.
 
-  > **NOTE**: This app only supports `Linux` and `macOS`. Currently not supporting `Windows`.
+  > **Note**: This app only supports `Linux` and `macOS`. Currently not
+  > supporting `Windows`.
 
 - This project uses [Poetry](https://python-poetry.org/) as package manager:
 
@@ -221,7 +225,7 @@ Export Poetry dependencies to file `requirements.txt`:
 poetry export -f requirements.txt --output requirements.txt
 ```
 
-> NOTE: You can add option: `--dev` to include development dependencies.
+> **Note**: You can add option: `--dev` to include development dependencies.
 
 Then install dependencies with `pip`:
 
@@ -243,7 +247,7 @@ Start the program:
 poe dev
 ```
 
-OR
+OR:
 
 ```bash
 python3 app.py
@@ -262,7 +266,9 @@ First, you have to log in to your account on the **Login** page:
 
 </details>
 
-OR, you can create your new account on the **Register** page:
+OR:
+
+Create your new account on the **Register** page:
 
 <details>
 <summary>Screenshot</summary>
@@ -271,7 +277,7 @@ OR, you can create your new account on the **Register** page:
 
 </details>
 
-> **NOTE**: The email field must have a valid email format.
+> **Note**: The email field must have a valid email format.
 
 After login, you will see the **Dashboard** page:
 
@@ -308,8 +314,8 @@ After login, you will see the **Dashboard** page:
 
     </details>
 
-    > **NOTE**: To edit your date of birth, your new value has to follow this format:
-    > `YYYY-MM-DD`. E.g: 2022-01-01.
+    > **Note**: To edit your date of birth, your new value has to follow this
+    > format: `YYYY-MM-DD`. E.g: 2022-01-01.
 
   - **Change password** page:
 
@@ -356,7 +362,7 @@ After login, you will see the **Dashboard** page:
     save folder path. The only targeted receiver can decrypt that file using the
     `Decrypt file` tool.
 
-    > **NOTE**: You can target yourself as the receiver.
+    > **Note**: You can target yourself as the receiver.
 
     <details>
     <summary>Screenshot</summary>
@@ -375,9 +381,9 @@ After login, you will see the **Dashboard** page:
 
     </details>
 
-    > **NOTE**: Encrypted file name **MUST** have `.bin` extension.
+    > **Note**: Encrypted file name **MUST** have `.bin` extension.
 
-> **NOTE**: The file path and folder path can be an absolute path or relative
+> **Note**: The file path and folder path can be an absolute path or relative
 > path.
 > E.g:
 >
@@ -390,7 +396,7 @@ After login, you will see the **Dashboard** page:
 > /home/alice/Desktop/file-crypto/
 > ```
 
-> **NOTE**: Other fields without `(optional)` is required.
+> **Note**: Other fields without `(optional)` is required.
 
 - **Upload**: You can upload your file here. After uploading, your file will be
   encrypted.
@@ -402,7 +408,7 @@ After login, you will see the **Dashboard** page:
 
   </details>
 
-  > **NOTE**: If you upload a file with the same name, the new file name will be
+  > **Note**: If you upload a file with the same name, the new file name will be
   > appended with a timestamp. E.g: `app_20220626221134.py`.
 
 - **File preview**: After you type your password to unlock the file, the file
@@ -411,7 +417,7 @@ After login, you will see the **Dashboard** page:
 
   ![file preview page](https://user-images.githubusercontent.com/64480713/175871319-e8cd5fca-bc42-4c33-831f-73630bdcbede.png)
 
-  > **NOTE**: **Preview mode** supports **text files** and **images files**.
+  > **Note**: **Preview mode** supports **text files** and **images files**.
   > **Edit mode** only supports **text files**.
 
   - In **Preview mode**, you can change many themes if the file extension is
@@ -430,25 +436,25 @@ After login, you will see the **Dashboard** page:
 
     - All supported file types: https://pygments.org/docs/lexers/
 
-    > **NOTE**: If your file type is not supported, you should change to the `no theme` theme.
+    > **Note**: If your file type is not supported, you should change to the `no theme` theme.
 
     - All available themes: https://pygments.org/styles/
 
-    > **NOTE**: Some themes will be removed due to incompatible: `borland`,
+    > **Note**: Some themes will be removed due to incompatible: `borland`,
     > `lilypond`, `trac`, `bw`, `algol`, `algol_nu`.
 
   - You can optionally switch to **Edit mode** with the `Edit mode` button:
 
     ![edit mode page](https://user-images.githubusercontent.com/64480713/175871596-612e8420-de73-4226-914e-3e0d3ec23917.png)
 
-    > **NOTE**: Any changes with "newlines" `("\n")`, "tabs" `("\t")` or
+    > **Note**: Any changes with "newlines" `("\n")`, "tabs" `("\t")` or
     > "whitespace" `(" ")` will be consider as **"no changes"**, and won't be
     > saved.
 
   - You can also can **Download** this file to your computer or **Delete** this
     file.
 
-    > NOTE: Delete will **completely delete** the file from the server.
+    > **Note**: Delete will **completely delete** the file from the server.
 
   - **File information**: You can see brief information about your file.
 
@@ -474,7 +480,7 @@ After login, you will see the **Dashboard** page:
 
     ![image preview page](https://user-images.githubusercontent.com/64480713/175874258-5b9f63cd-5bfc-4d1a-8182-f85c07956337.png)
 
-    > **NOTE**: This is a preview feature. This feature may reduce your computer
+    > **Note**: This is a preview feature. This feature may reduce your computer
     > performance.
 
 <!-- Settings -->
@@ -540,11 +546,11 @@ You can override default behaviors by configuring the `settings.json` file.
     </tbody>
 </table>
 
-> NOTE: `workbench.animation` setting not apply to **modals** (error,
+> **Note**: `workbench.animation` setting not apply to **modals** (error,
 > success, warning) or **toast** messages.
 
-> NOTE: `workbench.styles` will simply dump JSON to YAML and load them to the
-> application. The default value for this setting is loaded from file
+> **Note**: `workbench.styles` will simply dump JSON to YAML and load them to
+> the application. The default value for this setting is loaded from file
 > `styles.yaml`.
 
 <!-- Styles -->
