@@ -118,10 +118,10 @@ _Last updated: Jun 24, 2022_
 - ✏️ File editor in the terminal.
 - 🎨 Syntax highlight for supporting formats.
 - 🧰 Toolbox:
-  - Sign file.
-  - Verify file signature.
-  - Encrypt the file.
-  - Decrypt the file.
+  - 📝 Sign file.
+  - ✅ Verify file signature.
+  - 🔒 Encrypt the file.
+  - 🔓 Decrypt the file.
 - 👀 (Preview feature) Preview image in terminal using ANSI codes.
 
 <!-- Color Reference -->
@@ -284,7 +284,8 @@ After login, you will see the **Dashboard** page:
 
 ![dashboard page](https://user-images.githubusercontent.com/64480713/175863076-068a2be8-d892-423f-9a19-736c6fc712ae.png)
 
-- Your files will be grouped into dates.
+- Your files will be grouped into dates and sorted by date from newest to
+  oldest.
 
 - **Settings**: You can see and edit your account information or change your
   password here.
@@ -316,7 +317,7 @@ After login, you will see the **Dashboard** page:
     </details>
 
     > **Note**: To edit your date of birth, your new value has to follow this
-    > format: `YYYY-MM-DD`. E.g: 2022-01-01.
+    > format: `YYYY-MM-DD`. E.g: `2022-01-01`.
 
   - **Change password** page:
 
@@ -384,8 +385,8 @@ After login, you will see the **Dashboard** page:
 
     > **Note**: Encrypted file name **MUST** have `.bin` extension.
 
-> **Note**: The file path and folder path can be an absolute path or relative
-> path.
+> **Note**: The file path and folder path can be an **absolute path** or
+> **relative path**.
 > E.g:
 >
 > ```
@@ -554,7 +555,7 @@ You can override default behaviors by configuring the `settings.json` file.
 > the application. The default value for this setting is loaded from the file
 > `styles.yaml`.
 
-<!-- Styles -->
+<!-- Application Styles -->
 
 ## :peach: Application Styles
 
