@@ -112,17 +112,17 @@ _Last updated: Jun 24, 2022_
 
 ### :dart: Features
 
-- 🔒️ Uploaded files are encrypted
-- 🔑 Password protection for file
-- 🔍️ Preview text file in terminal
-- ✏️ File editor in the terminal
-- 🎨 Syntax highlight for supporting formats
+- 🔒️ Uploaded files are encrypted.
+- 🔑 Password protection for files.
+- 🔍️ Preview text file in terminal.
+- ✏️ File editor in the terminal.
+- 🎨 Syntax highlight for supporting formats.
 - 🧰 Toolbox:
-  - Sign file
-  - Verify file signature
-  - Encrypt file
-  - Decrypt file
-- 👀 (Preview feature) Preview image in terminal using ANSI codes
+  - Sign file.
+  - Verify file signature.
+  - Encrypt the file.
+  - Decrypt the file.
+- 👀 (Preview feature) Preview image in terminal using ANSI codes.
 
 <!-- Color Reference -->
 
@@ -130,24 +130,24 @@ _Last updated: Jun 24, 2022_
 
 This color palette is based on [Nord](https://www.nordtheme.com/) theme.
 
-| Color  | Hex                                                             |
-| ------ | --------------------------------------------------------------- |
-| nord0  | ![#2E3440](http://via.placeholder.com/10/2e3440?text=+) #2E3440 |
-| nord1  | ![#3B4252](http://via.placeholder.com/10/3b4252?text=+) #3B4252 |
-| nord2  | ![#434C5E](http://via.placeholder.com/10/434c5e?text=+) #434C5E |
-| nord3  | ![#4C566A](http://via.placeholder.com/10/4c566a?text=+) #4C566A |
-| nord4  | ![#D8DEE9](http://via.placeholder.com/10/d8dee9?text=+) #D8DEE9 |
-| nord5  | ![#E5E9F0](http://via.placeholder.com/10/e5e9f0?text=+) #E5E9F0 |
-| nord6  | ![#ECEFF4](http://via.placeholder.com/10/eceff4?text=+) #ECEFF4 |
-| nord7  | ![#8FBCBB](http://via.placeholder.com/10/8fbcbb?text=+) #8FBCBB |
-| nord8  | ![#88C0D0](http://via.placeholder.com/10/88c0d0?text=+) #88C0D0 |
-| nord9  | ![#81A1C1](http://via.placeholder.com/10/81a1c1?text=+) #81A1C1 |
-| nord10 | ![#5E81AC](http://via.placeholder.com/10/5e81ac?text=+) #5E81AC |
-| nord11 | ![#BF616A](http://via.placeholder.com/10/bf616a?text=+) #BF616A |
-| nord12 | ![#D08770](http://via.placeholder.com/10/d08770?text=+) #D08770 |
-| nord13 | ![#EBCB8B](http://via.placeholder.com/10/ebcb8b?text=+) #EBCB8B |
-| nord14 | ![#A3BE8C](http://via.placeholder.com/10/a3be8c?text=+) #A3BE8C |
-| nord15 | ![#B48EAD](http://via.placeholder.com/10/b48ead?text=+) #B48EAD |
+| Color  | Hex                                                              |
+| ------ | ---------------------------------------------------------------- |
+| nord0  | ![#2E3440](https://placehold.jp/2E3440/2E3440/10x10.png) #2E3440 |
+| nord1  | ![#3B4252](https://placehold.jp/3B4252/3B4252/10x10.png) #3B4252 |
+| nord2  | ![#434C5E](https://placehold.jp/434C5E/434C5E/10x10.png) #434C5E |
+| nord3  | ![#4C566A](https://placehold.jp/4C566A/4C566A/10x10.png) #4C566A |
+| nord4  | ![#D8DEE9](https://placehold.jp/D8DEE9/D8DEE9/10x10.png) #D8DEE9 |
+| nord5  | ![#E5E9F0](https://placehold.jp/E5E9F0/E5E9F0/10x10.png) #E5E9F0 |
+| nord6  | ![#ECEFF4](https://placehold.jp/ECEFF4/ECEFF4/10x10.png) #ECEFF4 |
+| nord7  | ![#8FBCBB](https://placehold.jp/8FBCBB/8FBCBB/10x10.png) #8FBCBB |
+| nord8  | ![#88C0D0](https://placehold.jp/88C0D0/88C0D0/10x10.png) #88C0D0 |
+| nord9  | ![#81A1C1](https://placehold.jp/81A1C1/81A1C1/10x10.png) #81A1C1 |
+| nord10 | ![#5E81AC](https://placehold.jp/5E81AC/5E81AC/10x10.png) #5E81AC |
+| nord11 | ![#BF616A](https://placehold.jp/BF616A/BF616A/10x10.png) #BF616A |
+| nord12 | ![#D08770](https://placehold.jp/D08770/D08770/10x10.png) #D08770 |
+| nord13 | ![#EBCB8B](https://placehold.jp/EBCB8B/EBCB8B/10x10.png) #EBCB8B |
+| nord14 | ![#A3BE8C](https://placehold.jp/A3BE8C/A3BE8C/10x10.png) #A3BE8C |
+| nord15 | ![#B48EAD](https://placehold.jp/B48EAD/B48EAD/10x10.png) #B48EAD |
 
 <!-- Env Variables -->
 
@@ -163,10 +163,11 @@ your `.env` file:
 E.g:
 
 ```
+# .env
 MONGODB_HOST="mongodb+srv://{username}:{password}@crypto-file.9mziwnd.mongodb.net/test"
 ```
 
-You can also checkout file `.env.example` to see all required environment
+You can also check out the file `.env.example` to see all required environment
 variables.
 
 <!-- Getting Started -->
@@ -225,7 +226,7 @@ Export Poetry dependencies to file `requirements.txt`:
 poetry export -f requirements.txt --output requirements.txt
 ```
 
-> **Note**: You can add option: `--dev` to include development dependencies.
+> **Note**: You can add the option: `--dev` to include development dependencies.
 
 Then install dependencies with `pip`:
 
@@ -235,7 +236,7 @@ pip install -r requirements.txt
 
 ---
 
-Activate virtual environment:
+Activate the virtual environment:
 
 ```bash
 poetry shell
@@ -501,7 +502,7 @@ You can override default behaviors by configuring the `settings.json` file.
         <tr>
             <td><code>workbench.preview.defaultColorTheme</code></td>
             <td>
-                Default theme for file preview mode
+                The default theme for file preview mode
             </td>
             <td>
                 <code>'dracula'</code>
@@ -528,7 +529,7 @@ You can override default behaviors by configuring the `settings.json` file.
         <tr>
             <td><code>workbench.animation</code></td>
             <td>
-                Controls if animation is played when adding or remove windows
+                Controls if animation is played when adding or removing windows
             </td>
             <td>
                 <code>true</code>
@@ -550,7 +551,7 @@ You can override default behaviors by configuring the `settings.json` file.
 > success, warning) or **toast** messages.
 
 > **Note**: `workbench.styles` will simply dump JSON to YAML and load them to
-> the application. The default value for this setting is loaded from file
+> the application. The default value for this setting is loaded from the file
 > `styles.yaml`.
 
 <!-- Styles -->
@@ -567,17 +568,18 @@ Read more about customizing on
 
 ## :compass: Roadmap
 
-- [ ] Share files with other users
-  - [ ] Download shared files
-  - [ ] "Shared with me" tab to view shared files
+- [ ] Share files with other users.
+  - [ ] Download shared files.
+  - [ ] "Shared with me" tab to view shared files.
   - [ ] File permission level. E.g: read-only, write,...
-  - [ ] Edit shared files
-- [ ] Apply themes for editing mode
-- [ ] Trash can to store temporary deleted files
-- [x] Preview mode for images
-- [ ] Image size automatically resize on window resize in preview mode
-- [x] Config default theme in user settings
-- [ ] Config testing
+  - [ ] Edit shared files.
+- [ ] Apply themes for editing mode.
+- [ ] Trash can store temporarily deleted files.
+- [x] Preview mode for images.
+- [ ] Image size automatically resizes on window resize in preview mode.
+- [x] Config default theme in user settings.
+- [ ] Config testing.
+
 <!-- Contributing -->
 
 ## :wave: Contributing
@@ -630,7 +632,7 @@ Please read the [Code of Conduct](https://github.com/DuckyMomo20012/file-crypto/
 - In image preview mode, my image is broken:
 
   - That is because your **terminal width size is too small**. Image has a
-    default width size is `60` block. Then terminal should be larger than that
+    default width size is `60` block. The terminal should be larger than that
     size (the nav bar wasn't counted).
 
 - I can't decrypt my file using the `Decrypt file` tool:
@@ -666,7 +668,8 @@ more information.
 
 ## :handshake: Contact
 
-Duong Vinh - [@duckymomo20012](https://twitter.com/duckymomo20012) - tienvinh.duong4@gmail.com
+Duong Vinh - [@duckymomo20012](https://twitter.com/duckymomo20012) -
+tienvinh.duong4@gmail.com
 
 Project Link: [https://github.com/DuckyMomo20012/file-crypto](https://github.com/DuckyMomo20012/file-crypto).
 
